@@ -1,0 +1,19 @@
+{
+  "typescript.format.enable": true,
+  "javascript.validate.enable": true,
+  "eslint.format.enable": true,
+  "standard.autoFixOnSave": true,
+  "standard.run": "onSave",
+  "standard.engine": "ts-standard",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+}

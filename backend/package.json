@@ -1,0 +1,49 @@
+{
+  "name": "competition-backend",
+  "version": "1.0.0",
+  "description": "Backend for the competition system",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "fix": "eslint . --fix",
+    "start": "ts-node server.ts",
+    "dev": "nodemon server.ts",
+    "test": "jest"
+  },
+  "author": "Andi Neck",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^27.5.1",
+    "@types/koa": "^2.13.4",
+    "@types/koa__cors": "^3.3.0",
+    "@types/koa-bodyparser": "^4.3.7",
+    "@types/koa-router": "^7.4.4",
+    "@types/lodash-es": "^4.17.6",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3",
+    "ts-jest": "^28.0.2",
+    "ts-node": "^10.7.0",
+    "ts-standard": "^11.0.0",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "@koa/cors": "^3.3.0",
+    "date-fns": "^2.28.0",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.1.1",
+    "lodash-es": "^4.17.21",
+    "openapi-validator-middleware": "^3.2.6"
+  }
+}
