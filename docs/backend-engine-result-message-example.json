@@ -1,0 +1,47 @@
+{
+    "result": {
+        "code": "OK",
+        "score": 34
+    },
+    "inputs": [
+        {
+            "judge": "corine müller",
+            "athlete": "selina hugentobler",
+            "category": "u-12",
+            "type": "speed",
+            "discipline": "speed-double-dutch",
+            "parameters": [
+                {
+                    "name": "count",
+                    "value": 32
+                }
+            ]
+        },
+        {
+            "judge": "albert müller",
+            "athlete": "selina hugentobler",
+            "category": "u-12",
+            "type": "speed",
+            "discipline": "speed-double-dutch",
+            "parameters": [
+                {
+                    "name": "count",
+                    "value": 35
+                }
+            ]
+        },
+        {
+            "judge": "nicole hauser",
+            "athlete": "selina hugentobler",
+            "category": "u-12",
+            "type": "speed",
+            "discipline": "speed-double-dutch",
+            "parameters": [
+                {
+                    "name": "count",
+                    "value": 29
+                }
+            ]
+        },
+    ]
+}
