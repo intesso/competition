@@ -1,10 +1,8 @@
+import axios from 'axios'
 import { CalculationInput, CalculationOutput } from './types'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function calculate (_input: CalculationInput): CalculationOutput {
-  return {
-    complete: true,
-    calculationType: 'FIXME',
-    result: 123
-  }
+export async function calculate (input: CalculationInput): Promise<CalculationOutput> {
+  const { data } = await axios.post('http://localhost:8000/api/engine/calculations', input)
+  return data
 }

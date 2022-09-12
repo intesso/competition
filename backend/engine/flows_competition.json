@@ -1,0 +1,361 @@
+[
+    {
+        "id": "b79a946966637772",
+        "type": "tab",
+        "label": "REST-server",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7de4f37a8c88b963",
+        "type": "tab",
+        "label": "single-u12-speed-double-dutch",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2302e75a80ce82b5",
+        "type": "group",
+        "z": "b79a946966637772",
+        "name": "REST API Request/Response",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "bd45edf318a2751c",
+            "6d9acaead57c3790",
+            "7d2a7c1108ebedc2",
+            "84da80740c41553b",
+            "8fea72b89e0a03cf",
+            "2946de5e71bd1ccc",
+            "ce10b3db872ebd6c",
+            "dc7585f452cba8b7",
+            "49c59d47537cbaaf"
+        ],
+        "x": 94,
+        "y": 59,
+        "w": 1472,
+        "h": 242
+    },
+    {
+        "id": "bd45edf318a2751c",
+        "type": "http response",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "statuscode-ok",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1400,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "6d9acaead57c3790",
+        "type": "http in",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "/engine/calculations",
+        "url": "/engine/calculations",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "7d2a7c1108ebedc2",
+                "84da80740c41553b"
+            ]
+        ]
+    },
+    {
+        "id": "7d2a7c1108ebedc2",
+        "type": "debug",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "debug-request",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "84da80740c41553b",
+        "type": "change",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "set-request-target",
+        "rules": [
+            {
+                "t": "set",
+                "p": "request",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "target",
+                "pt": "msg",
+                "to": "payload.calculationType",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "ce10b3db872ebd6c"
+            ]
+        ]
+    },
+    {
+        "id": "8fea72b89e0a03cf",
+        "type": "switch",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "$exists([msg.payload.code=\"OK\"])\t",
+                "vt": "jsonata"
+            },
+            {
+                "t": "jsonata_exp",
+                "v": "$exists([msg.payload.code!=\"OK\"])",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1150,
+        "y": 140,
+        "wires": [
+            [
+                "bd45edf318a2751c"
+            ],
+            [
+                "2946de5e71bd1ccc"
+            ]
+        ]
+    },
+    {
+        "id": "2946de5e71bd1ccc",
+        "type": "http response",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "statuscode-bad-request",
+        "statusCode": "400",
+        "headers": {},
+        "x": 1430,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ce10b3db872ebd6c",
+        "type": "link call",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "calculation-selector",
+        "links": [],
+        "linkType": "dynamic",
+        "timeout": "3",
+        "x": 710,
+        "y": 140,
+        "wires": [
+            [
+                "dc7585f452cba8b7"
+            ]
+        ]
+    },
+    {
+        "id": "dc7585f452cba8b7",
+        "type": "function",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "set-response",
+        "func": "msg.payload = {\n    result: {\n        code: msg.code,\n        score: msg.score\n    },\n    inputs: msg.req.body\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 140,
+        "wires": [
+            [
+                "8fea72b89e0a03cf",
+                "49c59d47537cbaaf"
+            ]
+        ]
+    },
+    {
+        "id": "49c59d47537cbaaf",
+        "type": "debug",
+        "z": "b79a946966637772",
+        "g": "2302e75a80ce82b5",
+        "name": "debug-response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "10c1e58221269922",
+        "type": "link in",
+        "z": "7de4f37a8c88b963",
+        "name": "single-u12-speed-double-dutch",
+        "links": [],
+        "x": 325,
+        "y": 240,
+        "wires": [
+            [
+                "f35350c3b7ea242c"
+            ]
+        ]
+    },
+    {
+        "id": "b5a09ef399189914",
+        "type": "link out",
+        "z": "7de4f37a8c88b963",
+        "name": "link-out",
+        "mode": "return",
+        "links": [],
+        "x": 1365,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "871ca6f3989371db",
+        "type": "change",
+        "z": "7de4f37a8c88b963",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "code",
+                "pt": "msg",
+                "to": "OK",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "score",
+                "pt": "msg",
+                "to": "calc.avg",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1070,
+        "y": 320,
+        "wires": [
+            [
+                "b5a09ef399189914"
+            ]
+        ]
+    },
+    {
+        "id": "f35350c3b7ea242c",
+        "type": "function",
+        "z": "7de4f37a8c88b963",
+        "name": "mapValues (count)",
+        "func": "const inputs = msg.payload.inputs;\n\nconst values = []\nconst counts = inputs\n    .forEach((input) => {\n        input.parameters.forEach((param) => {\n            if (param.name === \"count\") {\n                values.push(param.value)\n            }\n        })\n    })\n\nmsg.calc = msg.calc || {};\nmsg.calc.values = values;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "e9fa92201df297b4",
+                "0b8347f773cf671c"
+            ]
+        ]
+    },
+    {
+        "id": "e9fa92201df297b4",
+        "type": "debug",
+        "z": "7de4f37a8c88b963",
+        "name": "debug-calc",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "calc",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "0b8347f773cf671c",
+        "type": "function",
+        "z": "7de4f37a8c88b963",
+        "name": "calcMinMaxDiff",
+        "func": "msg.calc = msg.calc || {};\nconst calc = msg.calc;\nmsg.calc.valuesSorted = [...msg.calc.values || []].sort((a, b) => a - b)\nconst elements = msg.calc.valuesSorted.length\n\ncalc.min = calc.valuesSorted[0];\ncalc.max = calc.valuesSorted[elements - 1];\ncalc.diff = Math.abs(calc.max - calc.min);\ncalc.avg = calc.valuesSorted.reduce((memo, value) => memo += value, 0) / elements\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 320,
+        "wires": [
+            [
+                "b99de8c34b491e98",
+                "871ca6f3989371db"
+            ]
+        ]
+    },
+    {
+        "id": "b99de8c34b491e98",
+        "type": "debug",
+        "z": "7de4f37a8c88b963",
+        "name": "debug-all",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 440,
+        "wires": []
+    }
+]

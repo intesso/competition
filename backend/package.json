@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint .",
     "fix": "eslint . --fix",
-    "start": "ts-node server.ts",
+    "start": "concurrently 'npm:start:*'",
+    "start:server": "ts-node server.ts",
+    "start:nodered": "ts-node node-red.ts",
     "dev": "nodemon server.ts",
     "test": "jest"
   },
@@ -19,9 +21,11 @@
     "@types/koa-bodyparser": "^4.3.7",
     "@types/koa-router": "^7.4.4",
     "@types/lodash-es": "^4.17.6",
+    "@types/node-red": "^1.2.1",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
+    "concurrently": "^7.4.0",
     "eslint": "^8.15.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
@@ -39,11 +43,14 @@
   },
   "dependencies": {
     "@koa/cors": "^3.3.0",
+    "axios": "^0.27.2",
     "date-fns": "^2.28.0",
+    "express": "^4.18.1",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
     "lodash-es": "^4.17.21",
+    "node-red": "^3.0.2",
     "openapi-validator-middleware": "^3.2.6"
   }
 }

@@ -1,9 +1,10 @@
 {
     "judge": "corine müller",
     "athlete": "selina hugentobler",
-    "category": "u-12",
+    "competition": "single",
+    "category": "u12",
     "type": "speed",
-    "discipline": "speed-double-dutch",
+    "discipline": "double-dutch",
     "parameters": [
         {
             "name": "count",
