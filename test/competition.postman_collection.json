@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "a0988513-c60e-439d-8caf-cab6ced64ccd",
+		"name": "competition",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9273620"
+	},
+	"item": [
+		{
+			"name": "/api/calculations",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"calculationType\": \"single-u12-speed-double-dutch\",\n    \"inputs\": [\n        {\n            \"judge\": \"corine müller\",\n            \"athlete\": \"selina hugentobler\",\n            \"competition\": \"single\",\n            \"category\": \"u-12\",\n            \"type\": \"speed\",\n            \"discipline\": \"double-dutch\",\n            \"parameters\": [\n                {\n                    \"name\": \"count\",\n                    \"value\": 32\n                }\n            ]\n        },\n        {\n            \"judge\": \"albert müller\",\n            \"athlete\": \"selina hugentobler\",\n            \"competition\": \"single\",\n            \"category\": \"u-12\",\n            \"type\": \"speed\",\n            \"discipline\": \"double-dutch\",\n            \"parameters\": [\n                {\n                    \"name\": \"count\",\n                    \"value\": 35\n                }\n            ]\n        },\n        {\n            \"judge\": \"nicole hauser\",\n            \"athlete\": \"selina hugentobler\",\n            \"competition\": \"single\",\n            \"category\": \"u-12\",\n            \"type\": \"speed\",\n            \"discipline\": \"double-dutch\",\n            \"parameters\": [\n                {\n                    \"name\": \"count\",\n                    \"value\": 29\n                }\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/engine/calculations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"engine",
+						"calculations"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+    "tournament": "2023-sm-single",
+    "competition": "single",
+    "group": "u12",
+    "type": "speed",
+    "discipline": "double-dutch",
+    "category": "single-u12-speed-double-duch",
+    "athleteOrTeam": "selina hugentobler",
+    "run": "?",
+    "location": "?",
+    "judgeCriteria": "count",
+    "judge": "corine müller",
+    "subCriteriaPoints": {
+        "count": 32,
+        "earlyStart": true
+    }
+}

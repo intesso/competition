@@ -5,15 +5,88 @@
         "label": "REST-server",
         "disabled": false,
         "info": "",
-        "env": []
+        "env": [
+            {
+                "name": "version",
+                "value": "0.0.1",
+                "type": "str"
+            }
+        ]
     },
     {
-        "id": "7de4f37a8c88b963",
+        "id": "d5b708b9aa215a10",
         "type": "tab",
-        "label": "single-u12-speed-double-dutch",
+        "label": "flow-single-u12-speed-double-dutch",
         "disabled": false,
         "info": "",
         "env": []
+    },
+    {
+        "id": "088f1c8f9d228725",
+        "type": "subflow",
+        "name": "prepare-calc",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "99e74a7c62587047",
+        "type": "subflow",
+        "name": "mapParam",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "809f072675aa7ae8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 450,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "809f072675aa7ae8",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "paramName",
+                "type": "str",
+                "value": "count",
+                "ui": {
+                    "icon": "font-awesome/fa-paragraph",
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "str",
+                            "env"
+                        ]
+                    }
+                }
+            }
+        ],
+        "meta": {},
+        "color": "#D8BFD8",
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
     },
     {
         "id": "2302e75a80ce82b5",
@@ -38,6 +111,24 @@
         "y": 59,
         "w": 1472,
         "h": 242
+    },
+    {
+        "id": "809f072675aa7ae8",
+        "type": "function",
+        "z": "99e74a7c62587047",
+        "name": "mapValues (count)",
+        "func": "const inputs = msg.payload.inputs;\n\nconst values = []\nconst counts = inputs\n    .forEach((input) => {\n        input.parameters.forEach((param) => {\n            if (param.name === env.get('paramName')) {\n                values.push(param.value)\n            }\n        })\n    })\n\nmsg.calc = msg.calc || {};\nmsg.calc.values = values;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "info": "map parameter values\n\nit maps the parameter value with the name ${parameterName} to the `msg.calc.values` array."
     },
     {
         "id": "bd45edf318a2751c",
@@ -192,7 +283,7 @@
         "z": "b79a946966637772",
         "g": "2302e75a80ce82b5",
         "name": "set-response",
-        "func": "msg.payload = {\n    result: {\n        code: msg.code,\n        score: msg.score\n    },\n    inputs: msg.req.body\n}\nreturn msg;",
+        "func": "msg.payload = {\n    result: {\n        code: msg.code,\n        score: msg.score\n    },\n    meta: {\n        version: env.version,\n        time: Date.now(),\n        target: msg.target\n    },\n    inputs: msg.req.body\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -226,34 +317,34 @@
         "wires": []
     },
     {
-        "id": "10c1e58221269922",
+        "id": "660a082c2b8d5fe6",
         "type": "link in",
-        "z": "7de4f37a8c88b963",
+        "z": "d5b708b9aa215a10",
         "name": "single-u12-speed-double-dutch",
         "links": [],
-        "x": 325,
-        "y": 240,
+        "x": 65,
+        "y": 80,
         "wires": [
             [
-                "f35350c3b7ea242c"
+                "79efcbceccb2657c"
             ]
         ]
     },
     {
-        "id": "b5a09ef399189914",
+        "id": "60a8cb787b6fbfc5",
         "type": "link out",
-        "z": "7de4f37a8c88b963",
+        "z": "d5b708b9aa215a10",
         "name": "link-out",
         "mode": "return",
         "links": [],
-        "x": 1365,
-        "y": 240,
+        "x": 1105,
+        "y": 80,
         "wires": []
     },
     {
-        "id": "871ca6f3989371db",
+        "id": "c2dcd89c4e761772",
         "type": "change",
-        "z": "7de4f37a8c88b963",
+        "z": "d5b708b9aa215a10",
         "name": "",
         "rules": [
             {
@@ -276,38 +367,18 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1070,
-        "y": 320,
+        "x": 810,
+        "y": 160,
         "wires": [
             [
-                "b5a09ef399189914"
+                "60a8cb787b6fbfc5"
             ]
         ]
     },
     {
-        "id": "f35350c3b7ea242c",
-        "type": "function",
-        "z": "7de4f37a8c88b963",
-        "name": "mapValues (count)",
-        "func": "const inputs = msg.payload.inputs;\n\nconst values = []\nconst counts = inputs\n    .forEach((input) => {\n        input.parameters.forEach((param) => {\n            if (param.name === \"count\") {\n                values.push(param.value)\n            }\n        })\n    })\n\nmsg.calc = msg.calc || {};\nmsg.calc.values = values;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 550,
-        "y": 320,
-        "wires": [
-            [
-                "e9fa92201df297b4",
-                "0b8347f773cf671c"
-            ]
-        ]
-    },
-    {
-        "id": "e9fa92201df297b4",
+        "id": "f405fcf68d9c87f5",
         "type": "debug",
-        "z": "7de4f37a8c88b963",
+        "z": "d5b708b9aa215a10",
         "name": "debug-calc",
         "active": true,
         "tosidebar": true,
@@ -317,14 +388,14 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 790,
-        "y": 440,
+        "x": 530,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "0b8347f773cf671c",
+        "id": "8c5d5b9070c95879",
         "type": "function",
-        "z": "7de4f37a8c88b963",
+        "z": "d5b708b9aa215a10",
         "name": "calcMinMaxDiff",
         "func": "msg.calc = msg.calc || {};\nconst calc = msg.calc;\nmsg.calc.valuesSorted = [...msg.calc.values || []].sort((a, b) => a - b)\nconst elements = msg.calc.valuesSorted.length\n\ncalc.min = calc.valuesSorted[0];\ncalc.max = calc.valuesSorted[elements - 1];\ncalc.diff = Math.abs(calc.max - calc.min);\ncalc.avg = calc.valuesSorted.reduce((memo, value) => memo += value, 0) / elements\n\nreturn msg;",
         "outputs": 1,
@@ -332,19 +403,19 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
-        "y": 320,
+        "x": 540,
+        "y": 160,
         "wires": [
             [
-                "b99de8c34b491e98",
-                "871ca6f3989371db"
+                "334598baf98d7235",
+                "c2dcd89c4e761772"
             ]
         ]
     },
     {
-        "id": "b99de8c34b491e98",
+        "id": "334598baf98d7235",
         "type": "debug",
-        "z": "7de4f37a8c88b963",
+        "z": "d5b708b9aa215a10",
         "name": "debug-all",
         "active": true,
         "tosidebar": true,
@@ -354,8 +425,22 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1020,
-        "y": 440,
+        "x": 760,
+        "y": 280,
         "wires": []
+    },
+    {
+        "id": "79efcbceccb2657c",
+        "type": "subflow:99e74a7c62587047",
+        "z": "d5b708b9aa215a10",
+        "name": "",
+        "x": 250,
+        "y": 160,
+        "wires": [
+            [
+                "f405fcf68d9c87f5",
+                "8c5d5b9070c95879"
+            ]
+        ]
     }
 ]
