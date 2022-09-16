@@ -6,8 +6,10 @@
     "discipline": "double-dutch",
     "category": "single-u12-speed-double-duch",
     "athleteOrTeam": "selina hugentobler",
-    "run": "?",
+    "startNumber": "12",
     "location": "?",
+    "run": "?",
+    "timestamp": 1663101730410,
     "judgeCriteria": "count",
     "judge": "corine müller",
     "subCriteriaPoints": {
