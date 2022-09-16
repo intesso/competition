@@ -1,4 +1,5 @@
 module.exports = {
+  testEnvironment: 'jest-environment-node',
   moduleFileExtensions: [
     'js',
     'jsx',
@@ -14,7 +15,8 @@ module.exports = {
     '!**/coverage/**'
   ],
   transform: {
-    '\\.ts$': 'ts-jest'
+    '\\.ts$': 'ts-jest',
+    '\\.js$': 'ts-jest'
   },
   coverageThreshold: {
     global: {
@@ -33,5 +35,9 @@ module.exports = {
     '/node_modules/',
     '/build/',
     '/coverage/'
-  ]
+  ],
+  moduleNameMapper: {
+    '^lodash-es$': 'lodash'
+  },
+  setupFiles: ['dotenv/config']
 }

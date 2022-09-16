@@ -6,6 +6,9 @@
   "scripts": {
     "lint": "eslint .",
     "fix": "eslint . --fix",
+    "generate": "concurrently 'npm:generate:*'",
+    "generate:dbddl": "pg-migrations apply --database postgres://competition:comp1234@localhost:5432/competition --directory src/lib/db-migrations",
+    "generate:dbtypes": "npx @databases/pg-schema-cli --database postgres://competition:comp1234@localhost:5432/competition --directory src/lib/db/__generated__",
     "start": "concurrently 'npm:start:*'",
     "start:server": "ts-node server.ts",
     "start:nodered": "ts-node node-red.ts",
@@ -15,6 +18,8 @@
   "author": "Andi Neck",
   "license": "MIT",
   "devDependencies": {
+    "@databases/pg-migrations": "^5.0.1",
+    "@databases/pg-schema-cli": "^4.3.0",
     "@types/jest": "^27.5.1",
     "@types/koa": "^2.13.4",
     "@types/koa__cors": "^3.3.0",
@@ -23,6 +28,7 @@
     "@types/lodash-es": "^4.17.6",
     "@types/node-red": "^1.2.1",
     "@types/supertest": "^2.0.12",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
     "concurrently": "^7.4.0",
@@ -43,6 +49,7 @@
   },
   "dependencies": {
     "@databases/pg": "^5.4.1",
+    "@databases/pg-typed": "^4.3.0",
     "@koa/cors": "^3.3.0",
     "axios": "^0.27.2",
     "date-fns": "^2.28.0",
@@ -51,8 +58,10 @@
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
+    "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "node-red": "^3.0.2",
-    "openapi-validator-middleware": "^3.2.6"
+    "openapi-validator-middleware": "^3.2.6",
+    "uuid": "^9.0.0"
   }
 }
