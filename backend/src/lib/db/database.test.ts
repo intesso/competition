@@ -1,17 +1,19 @@
 
-import { insertAddress } from '../../points/repository'
 import dotenv from 'dotenv'
-import { omit } from 'lodash-es'
+import { db, sql } from './database'
 dotenv.config()
 
-test('should work', async () => {
-  const result = await insertAddress({
-    street: 'Bahnhofstrasse',
-    houseNumber: '5',
-    zipCode: '8447',
-    city: 'Dachsen',
-    country: 'Schweiz'
-  })
-  const resultWithoutId = omit(result[0], 'id')
-  expect(resultWithoutId).toEqual({ city: 'Dachsen', country: 'Schweiz', houseNumber: '5', street: 'Bahnhofstrasse', zipCode: '8447' })
+test('should read db columns', async () => {
+  const result = await db.query(sql`
+   SELECT 
+  table_name, 
+  column_name, 
+  data_type 
+FROM 
+  information_schema.columns
+`)
+  expect(result).toBeDefined()
+  expect(Object.keys(result[0])).toEqual(['table_name', 'column_name', 'data_type'])
 })
+
+afterAll(() => db.dispose())

@@ -47,7 +47,16 @@ process.once('SIGTERM', () => {
 export { db, sql }
 
 // TODO when changing db tables, apply these changes here too.
-const { address } = tables<DatabaseSchema>({
+const { Address, ContactInformation, Athlete, Judge, Person, Club } = tables<DatabaseSchema>({
   databaseSchema: require('../../lib/db/__generated__/schema.json')
 })
-export { address }
+export { Address, ContactInformation, Athlete, Judge, Person, Club }
+
+// Utility functions
+export function formatTimestamp (timestamp: Date) {
+  return timestamp.toISOString()
+}
+
+export function parseTimestamp (timestamp: string) {
+  return new Date(timestamp)
+}
