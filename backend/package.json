@@ -13,7 +13,8 @@
     "start:server": "ts-node server.ts",
     "start:nodered": "ts-node node-red.ts",
     "dev": "nodemon server.ts",
-    "test": "jest"
+    "test": "jest",
+    "test:unit": "jest --coverage=false"
   },
   "author": "Andi Neck",
   "license": "MIT",
