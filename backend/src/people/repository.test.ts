@@ -127,8 +127,9 @@ test('should insert/find person & contactInformation & address & club', async ()
 
   expect(person.clubId).toBeTruthy()
   expect(person.contactInformationId).toBeTruthy()
+  expect(person.addressId).toBeTruthy()
 
-  expect(omit(person, 'id', 'createdAt', 'updatedAt', 'clubId', 'contactInformationId'))
+  expect(omit(person, 'id', 'createdAt', 'updatedAt', 'clubId', 'contactInformationId', 'addressId'))
     .toEqual({
       ...personInformation,
       createdBy: null,

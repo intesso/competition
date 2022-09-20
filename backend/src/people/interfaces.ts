@@ -1,7 +1,7 @@
+import { Id } from '../lib/common'
 import { Club as ClubDAO, Address as AddressDAO, Person as PersonDAO, ContactInformation as ContactInformationDAO } from '../lib/db/__generated__'
 
 // Domain Types
-export type Id = {id: string}
 export type Club = Omit<ClubDAO & AddressDAO, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' | 'addressId'>
 export type Person = Omit<PersonDAO & AddressDAO & ContactInformationDAO, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' | 'addressId' | 'clubId'| 'contactInformationId'> & Pick<Club, 'clubName'>
 export type Athlete = Person

@@ -152,6 +152,7 @@ export async function insertPerson (p: PersonCombinedInsert) {
     clubId: club?.id,
     clubHead: p.clubHead,
     contactInformationId: contactInformation?.id,
+    addressId: address.id,
     birthDate: p.birthDate,
     firstName: p.firstName,
     gender: p.gender,

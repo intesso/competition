@@ -40,6 +40,7 @@ CREATE TABLE "Club" (
 CREATE TABLE "Person" (
   id uuid NOT NULL,
   "contactInformationId" uuid NULL,
+  "addressId" uuid NULL,
   "clubId" uuid NULL,
   "clubHead" boolean NULL,
   "firstName" text NOT NULL,
@@ -103,14 +104,14 @@ CREATE TABLE "Tournament" (
   "addressId" uuid NULL,
   "tournamentName" text NOT NULL,
   "competition" text NULL,
-  "type" text NULL,
-  "startTime" timestamp NOT NULL,
-  "endTime" timestamp NOT NULL,
+  "tournamentStartTime" timestamp NOT NULL,
+  "tournamentEndTime" timestamp NOT NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "TournamentPK" PRIMARY KEY (id),
+  CONSTRAINT "TournamentNameUnique" UNIQUE ("tournamentName"),
   FOREIGN KEY ("addressId") REFERENCES "Address"(id)
 );
 CREATE TABLE "Location" (
@@ -123,18 +124,19 @@ CREATE TABLE "Location" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "LocationPK" PRIMARY KEY (id),
-  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id)
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
+  CONSTRAINT "LocationTournamentNameUnique" UNIQUE ("tournamentId", "locationName")
 );
 CREATE TABLE "Slot" (
-  id int NOT NULL,
+  "slotNumber" int NOT NULL,
   "tournamentId" uuid NOT NULL,
   "slotNname" text NULL,
-  "startTime" timestamp NULL,
+  "slotStartTime" timestamp NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
-  CONSTRAINT "SlotPK" PRIMARY KEY (id, "tournamentId"),
+  CONSTRAINT "SlotPK" PRIMARY KEY ("slotNumber", "tournamentId"),
   FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id)
 );
 CREATE TABLE "Category" (
@@ -152,18 +154,31 @@ CREATE TABLE "Category" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "CategoryPK" PRIMARY KEY (id),
-  CONSTRAINT "CategoryNameUnique" UNIQUE ("categoryName") -- JudgingRule is not yet created, therefore add the CONSTRAINT after JudgingRule is created
+  CONSTRAINT "CategoryNameUnique" UNIQUE ("categoryName") --
+  -- JudgingRule is not yet created, therefore add the CONSTRAINT after JudgingRule is created
   -- FOREIGN KEY ("judgingRuleId") REFERENCES "JudgingRule"(id)
 );
 CREATE TABLE "Combination" (
   id uuid NOT NULL,
-  "categories" jsonb NOT NULL,
   "combinationName" text NOT NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
-  CONSTRAINT "CombinationPK" PRIMARY KEY (id)
+  CONSTRAINT "CombinationPK" PRIMARY KEY (id),
+  CONSTRAINT "CombinationNameUnique" UNIQUE ("combinationName")
+);
+CREATE TABLE "CategoryCombination" (
+  "categoryId" uuid NOT NULL,
+  "combinationId" uuid NOT NULL,
+  "categoryWeight" int NOT NULL,
+  "createdAt" timestamp NULL,
+  "createdBy" text NULL,
+  "updatedAt" timestamp NULL,
+  "updatedBy" text NULL,
+  CONSTRAINT "CategoryCombinationPK" PRIMARY KEY ("categoryId", "combinationId"),
+  FOREIGN KEY ("categoryId") REFERENCES "Category"(id),
+  FOREIGN KEY ("combinationId") REFERENCES "Combination"(id)
 );
 CREATE TABLE "Performance" (
   id uuid NOT NULL,
@@ -171,12 +186,12 @@ CREATE TABLE "Performance" (
   "locationId" uuid NOT NULL,
   "clubId" uuid NOT NULL,
   "categoryId" uuid NOT NULL,
-  "slotId" int NOT NULL,
+  "slotNumber" int NOT NULL,
   "athletes" jsonb NOT NULL,
   "judgesCriteria" jsonb NOT NULL,
   "performanceName" text NOT NULL,
   "performanceNumber" int NULL,
-  "startTime" timestamp NULL,
+  "performanceStartTime" timestamp NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
@@ -186,7 +201,7 @@ CREATE TABLE "Performance" (
   FOREIGN KEY ("locationId") REFERENCES "Location"(id),
   FOREIGN KEY ("clubId") REFERENCES "Club"(id),
   FOREIGN KEY ("categoryId") REFERENCES "Category"(id),
-  FOREIGN KEY ("slotId", "tournamentId") REFERENCES "Slot"(id, "tournamentId")
+  FOREIGN KEY ("slotNumber", "tournamentId") REFERENCES "Slot"("slotNumber", "tournamentId")
 );
 -----------------------------------
 -- Judging Contect ----------------

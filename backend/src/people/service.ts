@@ -1,4 +1,5 @@
-import { Club, Id, PeopleContext, Person } from './interfaces'
+import { Id } from '../lib/common'
+import { Club, PeopleContext, Person } from './interfaces'
 import { insertAddress, insertAthlete, insertClub, insertJudge, insertPerson } from './repository'
 
 export class PeopleService implements PeopleContext {
