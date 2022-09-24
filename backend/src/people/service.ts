@@ -1,8 +1,8 @@
 import { Id } from '../lib/common'
-import { Club, PeopleContext, Person } from './interfaces'
+import { Club, IPeopleContext, Person } from './interfaces'
 import { insertAddress, insertAthlete, insertClub, insertJudge, insertPerson } from './repository'
 
-export class PeopleService implements PeopleContext {
+export class PeopleService implements IPeopleContext {
   async addClub (club: Club): Promise<Club & Id> {
     const address = await insertAddress({ street: club.street, houseNumber: club.houseNumber, zipCode: club.zipCode, city: club.city, country: club.country })
     const insertedClub = await insertClub({ addressId: address.id, clubName: club.clubName, associationId: club.associationId })

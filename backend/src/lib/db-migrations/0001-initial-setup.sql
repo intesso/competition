@@ -130,7 +130,7 @@ CREATE TABLE "Location" (
 CREATE TABLE "Slot" (
   "slotNumber" int NOT NULL,
   "tournamentId" uuid NOT NULL,
-  "slotNname" text NULL,
+  "slotName" text NULL,
   "slotStartTime" timestamp NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
@@ -186,7 +186,7 @@ CREATE TABLE "Performance" (
   "locationId" uuid NOT NULL,
   "clubId" uuid NOT NULL,
   "categoryId" uuid NOT NULL,
-  "slotNumber" int NOT NULL,
+  "slotNumber" int NULL,
   "athletes" jsonb NOT NULL,
   "judgesCriteria" jsonb NOT NULL,
   "performanceName" text NOT NULL,

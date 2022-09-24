@@ -8,7 +8,7 @@ export type Athlete = Person
 export type Judge = Person
 
 // Interfaces (Ports)
-export interface PeopleContext {
+export interface IPeopleContext {
   addClub: (club: Club) => Promise<Club & Id>
   addAthlete: <P extends Person>(athlete: P) => Promise<P & Id>
   addJudge: <P extends Person>(judge: P) => Promise<P & Id>

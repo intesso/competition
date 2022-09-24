@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Address, Athlete, Club, ContactInformation, db, Person } from '../lib/db/database'
+import { Address, Athlete, Club, ContactInformation, db, Judge, Person } from '../lib/db/database'
 import { v4 as uuidv4 } from 'uuid'
 import { Address_InsertParameters, Athlete_InsertParameters, Club_InsertParameters, ContactInformation_InsertParameters, Judge_InsertParameters, Person_InsertParameters } from '../lib/db/__generated__'
 import { newRecordAttributes } from '../lib/common'
@@ -170,6 +170,6 @@ export async function insertAthlete (athlete: Omit<Athlete_InsertParameters, 'id
 }
 
 export async function insertJudge (judge: Omit<Judge_InsertParameters, 'id'>) {
-  const [insertedAthlete] = await Athlete(db).insert({ ...judge, ...newRecordAttributes() })
+  const [insertedAthlete] = await Judge(db).insert({ ...judge, ...newRecordAttributes() })
   return insertedAthlete
 }

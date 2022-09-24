@@ -1,142 +1,162 @@
 // /* eslint-disable camelcase */
 
-// // TODO
+import { findCategoryByCategoryName, findLocationByLocationName, findSlotByTorunamentNameAndSlotNumber, findTournamentByTournamentName, insertCategory, insertLocation, insertSlot, insertTournament } from './repository'
 
-// import { findAddress, findClubByName, insertAddress, insertClub, insertOrUpdateClub, insertPerson } from './repository'
-// import dotenv from 'dotenv'
-// import { omit } from 'lodash-es'
-// import { db } from '../lib/db/database'
-// import { Person_InsertParameters } from '../lib/db/__generated__'
-// dotenv.config()
+import { DateTime } from 'luxon'
+import { dateTimeFormat } from '../lib/common'
+import { db } from '../lib/db/database'
+import { omit } from 'lodash'
+import { Category, Location, Slot, Tournament } from '../lib/db/__generated__'
+import { insertJudgingRule } from '../judging/repository'
 
-// test('should insert/find address & club', async () => {
-//   const address = await insertAddress({
-//     street: 'Bahnhofstrasse',
-//     houseNumber: '5',
-//     zipCode: '8447',
-//     city: 'Dachsen',
-//     country: 'Schweiz'
-//   })
-//   expect(omit(address, 'id', 'createdAt'))
-//     .toEqual({
-//       city: 'Dachsen',
-//       country: 'Schweiz',
-//       houseNumber: '5',
-//       street: 'Bahnhofstrasse',
-//       zipCode: '8447',
-//       createdBy: null,
-//       updatedAt: null,
-//       updatedBy: null
-//     })
+test('should insert/find tournament', async () => {
+  const tournamentName = 'Team SM 2022 ' + Math.random().toString()
+  const tournament = await insertTournament({
+    tournamentEndTime: DateTime.fromFormat('2022-10-25 10:00', dateTimeFormat).toUTC().toJSDate(),
+    tournamentName,
+    tournamentStartTime: DateTime.fromFormat('2022-10-25 19:00', dateTimeFormat).toUTC().toJSDate()
+  })
 
-//   const foundAddress = await findAddress({
-//     street: 'Bahnhofstrasse',
-//     houseNumber: '5',
-//     zipCode: '8447',
-//     city: 'Dachsen'
-//   })
-//   expect(omit(foundAddress, 'id', 'createdAt'))
-//     .toEqual({
-//       city: 'Dachsen',
-//       country: 'Schweiz',
-//       houseNumber: '5',
-//       street: 'Bahnhofstrasse',
-//       zipCode: '8447',
-//       createdBy: null,
-//       updatedAt: null,
-//       updatedBy: null
-//     })
+  expect(tournament).toBeTruthy()
+  expect(tournament.id).toBeTruthy()
+  expect(tournament.createdAt).toBeTruthy()
 
-//   const clubName = 'SATUS Dachsen ' + Math.random().toString()
-//   const club = await insertOrUpdateClub({
-//     clubName,
-//     addressId: address.id,
-//     associationId: '887766'
-//   })
-//   expect(omit(club, 'id', 'createdAt', 'updatedAt'))
-//     .toEqual({
-//       clubName,
-//       addressId: address.id,
-//       associationId: '887766',
-//       createdBy: null,
-//       updatedBy: null
-//     })
+  const foundTournament = await findTournamentByTournamentName(tournamentName)
 
-//   const foundClub = await findClubByName(clubName)
-//   expect(omit(foundClub, 'id', 'createdAt', 'updatedAt'))
-//     .toEqual({
-//       clubName,
-//       addressId: address.id,
-//       associationId: '887766',
-//       createdBy: null,
-//       updatedBy: null
-//     })
-// })
+  function testTournament (it: Tournament | null) {
+    expect(omit(it, 'id', 'createdAt')).toEqual({
+      addressId: null,
+      competition: null,
+      createdBy: null,
+      tournamentEndTime: new Date('2022-10-25T08:00:00.000Z'),
+      tournamentName,
+      tournamentStartTime: new Date('2022-10-25T17:00:00.000Z'),
+      updatedAt: null,
+      updatedBy: null
+    })
+  }
+  testTournament(tournament)
+  testTournament(foundTournament)
+})
 
-// test('should insert/find person & contactInformation & address & club', async () => {
-//   // insert club with club address first
-//   const clubName = 'SATUS Dachsen ' + Math.random().toString()
-//   const clubAddress = await insertAddress({
-//     street: 'Dorfstrasse',
-//     houseNumber: '3',
-//     zipCode: '8447',
-//     city: 'Dachsen',
-//     country: 'Schweiz'
-//   })
+test('should insert/find location', async () => {
+  const tournamentName = 'Team SM 2022 ' + Math.random().toString()
+  const tournament = await insertTournament({
+    tournamentEndTime: DateTime.fromFormat('2022-10-25 10:00', dateTimeFormat).toUTC().toJSDate(),
+    tournamentName,
+    tournamentStartTime: DateTime.fromFormat('2022-10-25 19:00', dateTimeFormat).toUTC().toJSDate()
+  })
 
-//   const club = await insertClub({
-//     clubName,
-//     addressId: clubAddress.id,
-//     associationId: '12345678'
-//   })
+  const locationName = 'Feld 1' + Math.random().toString()
 
-//   expect(omit(club, 'id', 'createdAt', 'updatedAt'))
-//     .toEqual({
-//       clubName,
-//       addressId: clubAddress.id,
-//       associationId: '12345678',
-//       createdBy: null,
-//       updatedBy: null
-//     })
+  const location = await insertLocation({
+    locationName,
+    tournamentId: tournament.id
+  })
 
-//   // prepare person related information
+  expect(location).toBeTruthy()
+  expect(location.id).toBeTruthy()
+  expect(location.createdAt).toBeTruthy()
 
-//   const addressInformation = {
-//     street: 'Bahnhofstrasse',
-//     houseNumber: '5',
-//     zipCode: '8447',
-//     city: 'Dachsen',
-//     country: 'Schweiz'
-//   }
+  const foundLocation = await findLocationByLocationName(locationName)
 
-//   const contactInformation = {
-//     email: 'andi.neck@intesso.com',
-//     phone: '0796543210'
-//   }
+  function testLocation (it: Location | null) {
+    expect(omit(it, 'id', 'createdAt')).toEqual({
+      locationCoordinates: null,
+      locationName,
+      tournamentId: tournament.id,
+      createdBy: null,
+      updatedAt: null,
+      updatedBy: null
+    })
+  }
+  testLocation(location)
+  testLocation(foundLocation)
+})
 
-//   const personInformation: Omit<Person_InsertParameters, 'id'> = {
-//     clubHead: true,
-//     firstName: 'Iris',
-//     lastName: 'Neck',
-//     gender: 'female',
-//     birthDate: new Date(1980, 1, 1),
-//     licenseNumber: '1234'
-//   }
+test('should insert/find slot', async () => {
+  const tournamentName = 'Team SM 2022 ' + Math.random().toString()
+  const tournament = await insertTournament({
+    tournamentEndTime: DateTime.fromFormat('2022-10-25 10:00', dateTimeFormat).toUTC().toJSDate(),
+    tournamentName,
+    tournamentStartTime: DateTime.fromFormat('2022-10-25 19:00', dateTimeFormat).toUTC().toJSDate()
+  })
 
-//   const person = await insertPerson({
-//     clubName, ...addressInformation, ...contactInformation, ...personInformation
-//   })
+  const slot = await insertSlot({
+    tournamentId: tournament.id,
+    slotStartTime: DateTime.fromFormat('2022-10-25 10:10', dateTimeFormat).toUTC().toJSDate(),
+    slotNumber: 1
+  })
 
-//   expect(person.clubId).toBeTruthy()
-//   expect(person.contactInformationId).toBeTruthy()
-//   expect(person.addressId).toBeTruthy()
+  expect(slot).toBeTruthy()
+  expect(slot.slotNumber).toBeTruthy()
+  expect(slot.createdAt).toBeTruthy()
 
-//   expect(omit(person, 'id', 'createdAt', 'updatedAt', 'clubId', 'contactInformationId', 'addressId'))
-//     .toEqual({
-//       ...personInformation,
-//       createdBy: null,
-//       updatedBy: null
-//     })
-// })
+  const foundSlot = await findSlotByTorunamentNameAndSlotNumber(tournamentName, 1)
 
-// afterAll(() => db.dispose())
+  function testSlot (it: Slot | null) {
+    expect(omit(it, 'id', 'createdAt')).toEqual({
+      slotName: null,
+      slotNumber: 1,
+      slotStartTime: new Date('2022-10-25T08:10:00.000Z'),
+      tournamentId: tournament.id,
+      createdBy: null,
+      updatedAt: null,
+      updatedBy: null
+    })
+  }
+  testSlot(slot)
+  testSlot(foundSlot)
+})
+
+test('should insert/find category', async () => {
+  const judgingRuleName = 'single-speed'
+  const judgingRule = await insertJudgingRule({
+    judgingRuleName
+  })
+
+  expect(judgingRule).toBeTruthy()
+
+  const categoryName = 'team-speed-u15-single-rope-' + Math.random().toString()
+  const category = await insertCategory({
+    competition: 'team',
+    categoryName,
+    discipline: 'speed',
+    group: 'ü15',
+    judgingRuleId: judgingRule.id,
+    level: 'erso',
+    type: 'double-dutch'
+  })
+
+  expect(category).toBeTruthy()
+  expect(category.id).toBeTruthy()
+  expect(category.createdAt).toBeTruthy()
+
+  const foundCategory = await findCategoryByCategoryName(categoryName)
+
+  function testCategory (it: Category | null) {
+    expect(omit(it, 'id', 'createdAt')).toEqual({
+      competition: 'team',
+      categoryName,
+      discipline: 'speed',
+      group: 'ü15',
+      judgingRuleId: judgingRule.id,
+      level: 'erso',
+      type: 'double-dutch',
+      createdBy: null,
+      updatedAt: null,
+      updatedBy: null
+    })
+  }
+  testCategory(category)
+  testCategory(foundCategory)
+})
+
+// TODO Test:
+// Combination
+// CategoryCombination
+// Performance
+// TournamentAthlete
+// TournamentJudge
+
+afterAll(() => db.dispose())
