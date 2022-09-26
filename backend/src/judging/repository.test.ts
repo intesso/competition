@@ -7,6 +7,7 @@ import { db } from '../lib/db/database'
 import { Criteria, JudgingRule, Person_InsertParameters, RawPoint } from '../lib/db/__generated__'
 import { insertJudge, insertPerson } from '../people/repository'
 import { insertTournamentJudge } from '../tournament/repository'
+import { _insertTestPerformance } from '../tournament/repository.test'
 import { findCriteriaByCriteriaJudgingRuleAndCriteriaName, findJudgingRuleByName, findRawPoint, insertCriteria, insertJudgingRule, insertRawPoint } from './repository'
 
 test('should insert/find judgingRule', async () => {
@@ -95,8 +96,8 @@ test('should insert/find rawPoint', async () => {
   })
 
   // insert performance
-  // FIXME insert performance for real
-  const performanceId = uuidv4()
+  const { performance } = await _insertTestPerformance()
+  const performanceId = performance.id
 
   // insert tournamentJudge
   const clubName = 'SATUS Dachsen ' + Math.random().toString()

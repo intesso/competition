@@ -188,7 +188,6 @@ CREATE TABLE "Performance" (
   "categoryId" uuid NOT NULL,
   "slotNumber" int NULL,
   "athletes" jsonb NOT NULL,
-  "judgesCriteria" jsonb NOT NULL,
   "performanceName" text NOT NULL,
   "performanceNumber" int NULL,
   "performanceStartTime" timestamp NULL,

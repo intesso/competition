@@ -132,11 +132,13 @@ export async function findContactInformation (contactInformation: Omit<ContactIn
 }
 
 // Person
-
-type PersonCombinedInsert = Omit<Person_InsertParameters & ContactInformation_InsertParameters & Address_InsertParameters, 'id' | 'contactInformationId' | 'clubId' | 'addressId'> & {clubName: string}
+type PersonCombinedInsert = Omit<Person_InsertParameters & Partial<ContactInformation_InsertParameters> & Partial<Address_InsertParameters>, 'id' | 'contactInformationId' | 'clubId' | 'addressId'> & {clubName?: string}
 
 export async function insertPerson (p: PersonCombinedInsert) {
-  const club = await findClubByName(p.clubName)
+  let club
+  if (p.clubName) {
+    club = await findClubByName(p.clubName)
+  }
   const contactInformationParameters = { email: p.email, phone: p.phone }
   let contactInformation = await findContactInformation(contactInformationParameters)
   if (!contactInformation && (p.email || p.phone)) {
@@ -144,15 +146,18 @@ export async function insertPerson (p: PersonCombinedInsert) {
   }
   const addressParameters = { street: p.street, houseNumber: p.houseNumber, zipCode: p.zipCode, city: p.city, country: p.country }
   let address = await findAddress(addressParameters)
+
   if (!address && (Object.values(addressParameters).filter(it => it)).length) {
-    address = await insertAddress(addressParameters)
+    if (addressParameters.street && addressParameters.zipCode && addressParameters.city && addressParameters.country) {
+      address = await insertAddress(addressParameters as Address_InsertParameters)
+    }
   }
   const person : Person_InsertParameters = {
     id: uuidv4(),
-    clubId: club?.id,
+    clubId: club ? club?.id : null,
     clubHead: p.clubHead,
-    contactInformationId: contactInformation?.id,
-    addressId: address.id,
+    contactInformationId: contactInformation ? contactInformation?.id : null,
+    addressId: address ? address.id : null,
     birthDate: p.birthDate,
     firstName: p.firstName,
     gender: p.gender,
