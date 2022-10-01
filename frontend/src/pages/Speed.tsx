@@ -83,7 +83,7 @@ export default function Speed () {
       <Container maxWidth="xs">
         <Box sx={{ marginTop: '22px' }}></Box>
 
-        <Typography variant={'h4'} sx={{ marginTop: '22px' }}>
+        <Typography variant={'h4'} sx={{ marginTop: '22px', textAlign: 'center' }}>
           Speed
         </Typography>
         <FormControl fullWidth>

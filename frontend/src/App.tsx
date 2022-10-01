@@ -5,6 +5,9 @@ import { darkTheme } from './themes/dark'
 import { lightTheme } from './themes/light'
 import { Outlet } from 'react-router-dom'
 import { ApiContext, provideApiContext } from './contexts/ApiContext'
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon'
+import type {} from '@mui/x-date-pickers/themeAugmentation'
+import { LocalizationProvider } from '@mui/x-date-pickers'
 
 export interface AppProps {
   children?: ReactNode
@@ -17,8 +20,10 @@ export function App ({ children }: AppProps) {
   return (
     <ColorContext.Provider value={colorProviderValue}>
       <ThemeProvider theme={theme}>
+        <LocalizationProvider adapterLocale={'de'} dateAdapter={AdapterLuxon}>
         <CssBaseline enableColorScheme />
         <ThemedApp children={children} />
+        </LocalizationProvider>
       </ThemeProvider>
     </ColorContext.Provider>
   )

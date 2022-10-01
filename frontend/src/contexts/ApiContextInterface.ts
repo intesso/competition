@@ -9,3 +9,10 @@ export interface RawPoints {
 export interface SubCriteria {
   [key: string]: boolean | number | string
 }
+
+export interface Person {
+  firstName: string
+  lastName: string
+  gender: 'male' | 'female' | 'diverse' | 'unknown' | null
+  birthDate: string
+}
