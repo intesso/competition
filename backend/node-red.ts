@@ -1,8 +1,7 @@
+import './dotenv'
 import { createServer } from 'http'
 import express from 'express'
 import { init, httpAdmin, httpNode, start } from 'node-red'
-import dotenv from 'dotenv'
-dotenv.config()
 
 // Create an Express app
 const app = express()

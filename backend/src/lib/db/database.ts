@@ -1,8 +1,6 @@
 import createConnectionPool, { sql, SQLQuery } from '@databases/pg'
 import tables from '@databases/pg-typed'
 import DatabaseSchema from '../../lib/db/__generated__'
-import dotenv from 'dotenv'
-dotenv.config()
 
 let connectionsCount = 0
 const startTimes = new Map<SQLQuery, number>()

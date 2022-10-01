@@ -1,11 +1,9 @@
 /* eslint-disable camelcase */
 
 import { findAddress, findClubByName, insertAddress, insertClub, insertOrUpdateClub, insertPerson } from './repository'
-import dotenv from 'dotenv'
-import { omit } from 'lodash-es'
+import { omit } from 'lodash'
 import { db } from '../lib/db/database'
 import { Person_InsertParameters } from '../lib/db/__generated__'
-dotenv.config()
 
 test('should insert/find address & club', async () => {
   const address = await insertAddress({

@@ -1,7 +1,5 @@
 import { getApplicationContext } from '../../applicationContext'
 import { CalculationService } from './service'
-import dotenv from 'dotenv'
-dotenv.config()
 
 // import childProcess from 'child_process'
 // import { delay } from '../lib/common'

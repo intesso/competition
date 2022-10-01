@@ -1,7 +1,5 @@
 
-import dotenv from 'dotenv'
 import { db, sql } from './database'
-dotenv.config()
 
 test('should read db columns', async () => {
   const result = await db.query(sql`
