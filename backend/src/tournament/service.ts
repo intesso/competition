@@ -1,13 +1,18 @@
-import { omit } from 'lodash-es'
-import { findJudgingRuleByName } from '../judging/repository'
-import { Id, isNotNull, newRecordAttributes } from '../lib/common'
-import { Category as CategoryDAO } from '../lib/db/__generated__'
+import { omit } from 'lodash'
+import { IGetApplicationContext } from '../../applicationContext'
+import { findCategoryByCategoryName } from '../judging/repository'
+import { Id, newRecordAttributes } from '../lib/common'
 import { Person } from '../people/interfaces'
 import { findClubByName, insertAddress, insertAthlete, insertJudge, insertPerson } from '../people/repository'
-import { Category, Combination, Location, Performance, Slot, Tournament, ITournamentContext, WeightedCategory } from './interfaces'
-import { findCategoryByCategoryName, findLocationByLocationName, findTournamentByTournamentName, insertCategory, insertCategoryCombination, insertCombination, insertLocation, insertPerformance, insertSlot, insertTournament, insertTournamentAthlete, insertTournamentJudge } from './repository'
+import { Location, Performance, Slot, Tournament, ITournamentContext } from './interfaces'
+import { findLocationByLocationName, findTournamentByTournamentName, insertLocation, insertPerformance, insertSlot, insertTournament, insertTournamentAthlete, insertTournamentJudge } from './repository'
 
 export class TournamentService implements ITournamentContext {
+  getApplicationContext
+  constructor (getApplicationContext : IGetApplicationContext['getApplicationContext']) {
+    this.getApplicationContext = getApplicationContext
+  }
+
   async addTournament (t: Tournament) : Promise<Tournament & Id> {
     const address = await insertAddress({ street: t.street, houseNumber: t.houseNumber, zipCode: t.zipCode, city: t.city, country: t.country })
 
@@ -27,26 +32,6 @@ export class TournamentService implements ITournamentContext {
     if (!tournament) return null
     const location = await insertLocation({ ...l, tournamentId: tournament.id })
     return { ...l, id: location.id }
-  }
-
-  async addCategory (c: Category) : Promise<Category & Id | null> {
-    const judgingRule = await findJudgingRuleByName(c.judgingRuleName)
-    if (!judgingRule) return null
-    const category = await insertCategory({ ...c, judgingRuleId: judgingRule.id })
-    return { ...c, id: category.id }
-  }
-
-  async addCombination (combinationName: string, weightedCategories: WeightedCategory[]) : Promise<Combination & Id | null> {
-    // first insert the combination
-    const combination = await insertCombination({ combinationName, ...newRecordAttributes() })
-    interface C {category: CategoryDAO, weight: number}
-    // then retrieve the categories with the given categoryNames
-    const categories = await Promise.all(weightedCategories.map(weightedCategory => findCategoryByCategoryName(weightedCategory.categoryName)))
-    const categoryWeightPairs = categories.map((category, i) => ({ category, weight: weightedCategories[i].categoryWeight }))
-    const filteredCategories = categoryWeightPairs.filter((categoryWeightPair): categoryWeightPair is C => isNotNull(categoryWeightPair.category))
-    // then insert the CategoryCombination Objects
-    await Promise.all(filteredCategories.map(category => insertCategoryCombination(combination.combinationName, category.category?.categoryName, category.weight)))
-    return combination
   }
 
   async addPerformance (p: Performance): Promise<Performance & Id | null> {

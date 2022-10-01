@@ -1,3 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const dotenv = require('dotenv')
+dotenv.config()
+
 module.exports = {
   testEnvironment: 'jest-environment-node',
   moduleFileExtensions: [
@@ -36,8 +40,5 @@ module.exports = {
     '/build/',
     '/coverage/'
   ],
-  moduleNameMapper: {
-    '^lodash-es$': 'lodash'
-  },
   setupFiles: ['dotenv/config']
 }

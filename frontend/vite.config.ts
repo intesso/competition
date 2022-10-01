@@ -8,5 +8,18 @@ export default defineConfig({
   plugins: [react()],
   esbuild: {
     // jsxInject: 'import React from \'react\'',
+  },
+  server: {
+    port: 8080,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8081/',
+        changeOrigin: true,
+        rewrite: (path) => {
+          console.log('proxy path:', path)
+          return path
+        }
+      }
+    }
   }
 })

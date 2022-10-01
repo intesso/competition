@@ -1,0 +1,10 @@
+{
+    "performanceId": "uuid",
+    "tournamentJudgeId": "uuid",
+    "criteriaId": "uuid",
+    "subCriteriaPoints": {
+        "count": 32,
+        "earlyStart": true
+    },
+    "timestamp": 1663101730410
+}

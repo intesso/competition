@@ -1,4 +1,8 @@
-import { calculate } from './service'
+import { getApplicationContext } from '../../applicationContext'
+import { CalculationService } from './service'
+import dotenv from 'dotenv'
+dotenv.config()
+
 // import childProcess from 'child_process'
 // import { delay } from '../lib/common'
 
@@ -20,7 +24,8 @@ import { calculate } from './service'
 // })
 
 test('should work', async () => {
-  const result = calculate({
+  const calculation = new CalculationService(getApplicationContext)
+  const result = calculation.calculate({
     calculationType: 'U15 single speed',
     complete: true,
     parameters: [{

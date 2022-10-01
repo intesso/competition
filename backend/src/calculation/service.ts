@@ -1,8 +1,15 @@
 import axios from 'axios'
-import { CalculationInput, CalculationOutput } from './types'
+import { IGetApplicationContext } from '../../applicationContext'
+import { CalculationInput, CalculationOutput, ICalculationContext } from './interfaces'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function calculate (input: CalculationInput): Promise<CalculationOutput> {
-  const { data } = await axios.post('http://localhost:8000/api/engine/calculations', input)
-  return data
+export class CalculationService implements ICalculationContext {
+  getApplicationContext
+  constructor (getApplicationContext : IGetApplicationContext['getApplicationContext']) {
+    this.getApplicationContext = getApplicationContext
+  }
+
+  async calculate (input: CalculationInput): Promise<CalculationOutput> {
+    const { data } = await axios.post(`${process.env.CALCULATION_ENGINE_URL}/api/engine/calculations`, input)
+    return data
+  }
 }

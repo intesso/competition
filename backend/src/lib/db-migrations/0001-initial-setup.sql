@@ -139,10 +139,47 @@ CREATE TABLE "Slot" (
   CONSTRAINT "SlotPK" PRIMARY KEY ("slotNumber", "tournamentId"),
   FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id)
 );
+CREATE TABLE "Performance" (
+  id uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
+  "locationId" uuid NOT NULL,
+  "clubId" uuid NOT NULL,
+  "categoryId" uuid NOT NULL,
+  "slotNumber" int NULL,
+  "athletes" jsonb NOT NULL,
+  "performanceName" text NOT NULL,
+  "performanceNumber" int NULL,
+  "performanceStartTime" timestamp NULL,
+  "createdAt" timestamp NULL,
+  "createdBy" text NULL,
+  "updatedAt" timestamp NULL,
+  "updatedBy" text NULL,
+  CONSTRAINT "PerformancePK" PRIMARY KEY (id),
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
+  FOREIGN KEY ("locationId") REFERENCES "Location"(id),
+  FOREIGN KEY ("clubId") REFERENCES "Club"(id),
+  -- Category is not yet created, therefore add the CONSTRAINT after Category is created
+  -- FOREIGN KEY ("categoryId") REFERENCES "Category"(id),
+  FOREIGN KEY ("slotNumber", "tournamentId") REFERENCES "Slot"("slotNumber", "tournamentId")
+);
+-----------------------------------
+-- Judging Contect ----------------
+-----------------------------------
+CREATE TABLE "JudgingRule" (
+  id uuid NOT NULL,
+  "judgingRuleName" text NOT NULL,
+  "judgingRuleDescription" text NULL,
+  "createdAt" timestamp NULL,
+  "createdBy" text NULL,
+  "updatedAt" timestamp NULL,
+  "updatedBy" text NULL,
+  CONSTRAINT "JudgingRulePK" PRIMARY KEY (id),
+  CONSTRAINT "JudgingRuleNameUnique" UNIQUE ("judgingRuleName")
+);
 CREATE TABLE "Category" (
-  -- combination of own properties
   id uuid NOT NULL,
   "judgingRuleId" uuid NOT NULL,
+  -- categoryName is the combination of the properties: competition-group-level-type-discipline
   "categoryName" text NOT NULL,
   "competition" text NOT NULL,
   "group" text NOT NULL,
@@ -154,10 +191,13 @@ CREATE TABLE "Category" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "CategoryPK" PRIMARY KEY (id),
-  CONSTRAINT "CategoryNameUnique" UNIQUE ("categoryName") --
-  -- JudgingRule is not yet created, therefore add the CONSTRAINT after JudgingRule is created
-  -- FOREIGN KEY ("judgingRuleId") REFERENCES "JudgingRule"(id)
+  CONSTRAINT "CategoryNameUnique" UNIQUE ("categoryName"),
+  FOREIGN KEY ("judgingRuleId") REFERENCES "JudgingRule"(id)
 );
+-- add the yet missing categoryId Foreign key to Performance, because now it's there
+ALTER TABLE "Performance"
+ADD CONSTRAINT "PerformanceCategoryFK" FOREIGN KEY ("categoryId") REFERENCES "Category"(id);
+-- end constraint
 CREATE TABLE "Combination" (
   id uuid NOT NULL,
   "combinationName" text NOT NULL,
@@ -180,46 +220,6 @@ CREATE TABLE "CategoryCombination" (
   FOREIGN KEY ("categoryId") REFERENCES "Category"(id),
   FOREIGN KEY ("combinationId") REFERENCES "Combination"(id)
 );
-CREATE TABLE "Performance" (
-  id uuid NOT NULL,
-  "tournamentId" uuid NOT NULL,
-  "locationId" uuid NOT NULL,
-  "clubId" uuid NOT NULL,
-  "categoryId" uuid NOT NULL,
-  "slotNumber" int NULL,
-  "athletes" jsonb NOT NULL,
-  "performanceName" text NOT NULL,
-  "performanceNumber" int NULL,
-  "performanceStartTime" timestamp NULL,
-  "createdAt" timestamp NULL,
-  "createdBy" text NULL,
-  "updatedAt" timestamp NULL,
-  "updatedBy" text NULL,
-  CONSTRAINT "PerformancePK" PRIMARY KEY (id),
-  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
-  FOREIGN KEY ("locationId") REFERENCES "Location"(id),
-  FOREIGN KEY ("clubId") REFERENCES "Club"(id),
-  FOREIGN KEY ("categoryId") REFERENCES "Category"(id),
-  FOREIGN KEY ("slotNumber", "tournamentId") REFERENCES "Slot"("slotNumber", "tournamentId")
-);
------------------------------------
--- Judging Contect ----------------
------------------------------------
-CREATE TABLE "JudgingRule" (
-  id uuid NOT NULL,
-  "judgingRuleName" text NOT NULL,
-  "judgingRuleDescription" text NULL,
-  "createdAt" timestamp NULL,
-  "createdBy" text NULL,
-  "updatedAt" timestamp NULL,
-  "updatedBy" text NULL,
-  CONSTRAINT "JudgingRulePK" PRIMARY KEY (id),
-  CONSTRAINT "JudgingRuleNameUnique" UNIQUE ("judgingRuleName")
-);
--- add constraint here, because JudgingRule needs to be created first
-ALTER TABLE "Category"
-ADD CONSTRAINT "CategoryJudgingRuleFK" FOREIGN KEY ("judgingRuleId") REFERENCES "JudgingRule"(id);
--- end constraint
 CREATE TABLE "Criteria" (
   id uuid NOT NULL,
   "judgingRuleId" uuid NOT NULL,
@@ -239,6 +239,7 @@ CREATE TABLE "RawPoint" (
   "tournamentJudgeId" uuid NOT NULL,
   "criteriaId" uuid NOT NULL,
   "subCriteriaPoints" jsonb NULL,
+  "timestamp" timestamp NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,

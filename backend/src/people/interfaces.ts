@@ -1,3 +1,4 @@
+import { IGetApplicationContext } from '../../applicationContext'
 import { Id } from '../lib/common'
 import { Club as ClubDAO, Address as AddressDAO, Person as PersonDAO, ContactInformation as ContactInformationDAO } from '../lib/db/__generated__'
 
@@ -8,7 +9,7 @@ export type Athlete = Person
 export type Judge = Person
 
 // Interfaces (Ports)
-export interface IPeopleContext {
+export interface IPeopleContext extends IGetApplicationContext {
   addClub: (club: Club) => Promise<Club & Id>
   addAthlete: <P extends Person>(athlete: P) => Promise<P & Id>
   addJudge: <P extends Person>(judge: P) => Promise<P & Id>

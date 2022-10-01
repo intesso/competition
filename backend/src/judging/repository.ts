@@ -1,7 +1,60 @@
 /* eslint-disable camelcase */
-import { Criteria, db, JudgingRule, RawPoint } from '../lib/db/database'
-import { Criteria_InsertParameters, JudgingRule_InsertParameters, RawPoint_InsertParameters } from '../lib/db/__generated__'
-import { newRecordAttributes } from '../lib/common'
+import { Category, CategoryCombination, Combination, Criteria, db, JudgingRule, RawPoint } from '../lib/db/database'
+import { Category_InsertParameters, Combination_InsertParameters, Criteria_InsertParameters, JudgingRule_InsertParameters, RawPoint_InsertParameters } from '../lib/db/__generated__'
+import { isNotNull, newRecordAttributes } from '../lib/common'
+
+// Category
+export async function insertCategory (category: Omit<Category_InsertParameters, 'id'>) {
+  const [insertedCategory] = await Category(db).insert({ ...category, ...newRecordAttributes() })
+  return insertedCategory
+}
+
+export async function findCategoryByCategoryName (categoryName: string) {
+  return await Category(db).findOne({ categoryName })
+}
+
+export async function findCategoryById (id: string) {
+  return await Category(db).findOne({ id })
+}
+
+export async function findCategoriesByCombinationName (combinationName: string) {
+  const combination = await findCombinationByCombinationName(combinationName)
+  if (!combination) return null
+  const categoryCombinations = await CategoryCombination(db).find({ combinationId: combination.id }).all()
+
+  const categories = await Promise.all(categoryCombinations.map(cc => findCategoryById(cc.categoryId)))
+  return categories.filter(isNotNull)
+}
+
+// Combination
+export async function insertCombination (combination: Omit<Combination_InsertParameters, 'id'>) {
+  const [insertedCombination] = await Combination(db).insert({ ...combination, ...newRecordAttributes() })
+  return insertedCombination
+}
+
+export async function findCombinationByCombinationName (combinationName: string) {
+  return await Combination(db).findOne({ combinationName })
+}
+
+export async function findCombinationById (id: string) {
+  return await Combination(db).findOne({ id })
+}
+
+// CategoryCombination
+export async function insertCategoryCombination (combinationName: string, categoryName: string, categoryWeight: number) {
+  const combination = await findCombinationByCombinationName(combinationName)
+  const category = await findCategoryByCategoryName(categoryName)
+  if (!combination || !category) return null
+  const [insertedCombination] = await CategoryCombination(db).insert({ categoryId: category.id, combinationId: combination.id, categoryWeight, createdAt: new Date() })
+  return insertedCombination
+}
+
+export async function findCategoryCombinationByNames (combinationName: string, categoryName: string) {
+  const combination = await findCombinationByCombinationName(combinationName)
+  const category = await findCategoryByCategoryName(categoryName)
+  if (!combination || !category) return null
+  return await CategoryCombination(db).findOne({ categoryId: category.id, combinationId: combination.id })
+}
 
 // JudgingRule
 export async function insertJudgingRule (judgingRule: Omit<JudgingRule_InsertParameters, 'id'>) {

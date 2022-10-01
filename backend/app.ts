@@ -4,6 +4,8 @@ import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
 import { inputValidation } from './api/inputValidation'
 import { calculationController } from './src/calculation/controller'
+import { judgingController } from './src/judging/controller'
+import './applicationContext'
 
 export const app = new Koa()
 app.use(bodyParser())
@@ -11,14 +13,8 @@ app.use(cors())
 
 const router = new Router()
 
-router.get('/', (ctx: Koa.Context) => {
-  ctx.body = 'Hello Koa'
-})
-
-router.get('/pets', inputValidation.validate, async (ctx) => {
-  ctx.status = 200
-  ctx.body = { result: 'OK' }
-})
+router.use('/api/judging', judgingController.routes())
+router.use('/api/calculations', calculationController.routes())
 
 app.use(async (ctx, next) => {
   try {
@@ -33,4 +29,3 @@ app.use(async (ctx, next) => {
 })
 
 app.use(router.routes())
-app.use(calculationController.routes())

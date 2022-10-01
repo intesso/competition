@@ -4,8 +4,11 @@ import { ColorContext, provideColorContext } from './contexts/ColorContext'
 import { darkTheme } from './themes/dark'
 import { lightTheme } from './themes/light'
 import { Outlet } from 'react-router-dom'
+import { ApiContext, provideApiContext } from './contexts/ApiContext'
 
-export interface AppProps { children?: ReactNode }
+export interface AppProps {
+  children?: ReactNode
+}
 
 export function App ({ children }: AppProps) {
   const { colorMode, colorProviderValue } = provideColorContext()
@@ -15,9 +18,17 @@ export function App ({ children }: AppProps) {
     <ColorContext.Provider value={colorProviderValue}>
       <ThemeProvider theme={theme}>
         <CssBaseline enableColorScheme />
-        {children}
-        <Outlet />
+        <ThemedApp children={children} />
       </ThemeProvider>
     </ColorContext.Provider>
+  )
+}
+
+function ThemedApp ({ children }: AppProps) {
+  return (
+    <ApiContext.Provider value={provideApiContext()}>
+      {children}
+      <Outlet />
+    </ApiContext.Provider>
   )
 }

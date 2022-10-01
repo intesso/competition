@@ -1,6 +1,8 @@
 import { createServer } from 'http'
 import express from 'express'
 import { init, httpAdmin, httpNode, start } from 'node-red'
+import dotenv from 'dotenv'
+dotenv.config()
 
 // Create an Express app
 const app = express()
@@ -13,7 +15,7 @@ const server = createServer(app)
 
 // Create the settings object - see default settings.js file for other options
 const settings = {
-  uiPort: 1880,
+  uiPort: parseInt(process.env.CALCULATION_ENGINE_UI_PORT || '1880'),
   uiHost: '0.0.0.0',
   httpAdminRoot: '/red',
   httpNodeRoot: '/api',
@@ -33,7 +35,7 @@ app.use(settings.httpAdminRoot, httpAdmin)
 // Serve the http nodes UI from /api
 app.use(settings.httpNodeRoot, httpNode)
 
-server.listen(8000)
+server.listen(process.env.CALCULATION_ENGINE_PORT)
 
 // Start the runtime
 start()

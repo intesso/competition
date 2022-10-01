@@ -11,5 +11,5 @@ afterEach(() => {
 test('Server works', async () => {
   require('./server')
   expect(mockListen.mock.calls).toHaveLength(1)
-  expect(mockListen.mock.calls[0][0]).toBe(process.env.PORT || 3000)
+  expect(mockListen.mock.calls[0][0]).toBe(process.env.PORT)
 })
