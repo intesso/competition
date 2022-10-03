@@ -212,7 +212,7 @@ CREATE TABLE "Combination" (
 CREATE TABLE "CategoryCombination" (
   "categoryId" uuid NOT NULL,
   "combinationId" uuid NOT NULL,
-  "categoryWeight" int NOT NULL,
+  "categoryWeight" real NOT NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
