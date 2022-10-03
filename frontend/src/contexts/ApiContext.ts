@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Person, RawPoints } from './ApiContextInterface'
+import { Club, Person, RawPoints, Tournament } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
+  addClub: (club: Club) => Promise<void>
+  addTournament: (tournament: Tournament) => Promise<void>
   sendRawPoints: (points: RawPoints) => Promise<void>
   addTournamentAthlete: (person: Person) => Promise<void>
   addTournamentJudge: (person: Person) => Promise<void>
@@ -16,6 +18,30 @@ export function provideApiContext (): Api {
   const headers = {}
 
   // API REST call methods
+  async function addClub (club: Club) {
+    const data = club
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/people/club`,
+        method: 'POST',
+        data
+      })
+    ).data
+  }
+
+  async function addTournament (tournament: Tournament) {
+    const data = tournament
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournament/tournament`,
+        method: 'POST',
+        data
+      })
+    ).data
+  }
+
   async function sendRawPoints (points: RawPoints) {
     const data = points
     return (
@@ -54,6 +80,8 @@ export function provideApiContext (): Api {
 
   return {
     serverBaseUrl,
+    addClub,
+    addTournament,
     sendRawPoints,
     addTournamentAthlete,
     addTournamentJudge

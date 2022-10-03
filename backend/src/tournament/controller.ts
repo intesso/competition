@@ -4,6 +4,7 @@ import { inputValidation } from '../../api/inputValidation'
 import { applicationContext } from '../../applicationContext'
 import { respondWith } from '../lib/common'
 import { Athlete, Judge } from '../people/interfaces'
+import { Tournament } from './interfaces'
 
 export const tournamentController = new Router()
 
@@ -14,4 +15,7 @@ tournamentController
   })
   .post('/judge', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournamentJudge(ctx.request.body as Judge))
+  })
+  .post('/tournament', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.addTournament(ctx.request.body as Tournament))
   })

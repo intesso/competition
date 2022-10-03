@@ -5,36 +5,57 @@ import { Id, newRecordAttributes } from '../lib/common'
 import { Person } from '../people/interfaces'
 import { findClubByName, insertAddress, insertAthlete, insertJudge, insertPerson } from '../people/repository'
 import { Location, Performance, Slot, Tournament, ITournamentContext } from './interfaces'
-import { findLocationByLocationName, findTournamentByTournamentName, insertLocation, insertPerformance, insertSlot, insertTournament, insertTournamentAthlete, insertTournamentJudge } from './repository'
+import {
+  findLocationByLocationName,
+  findTournamentByTournamentName,
+  insertLocation,
+  insertPerformance,
+  insertSlot,
+  insertTournament,
+  insertTournamentAthlete,
+  insertTournamentJudge
+} from './repository'
 
 export class TournamentService implements ITournamentContext {
   getApplicationContext
-  constructor (getApplicationContext : IGetApplicationContext['getApplicationContext']) {
+  constructor (getApplicationContext: IGetApplicationContext['getApplicationContext']) {
     this.getApplicationContext = getApplicationContext
   }
 
-  async addTournament (t: Tournament) : Promise<Tournament & Id> {
-    const address = await insertAddress({ street: t.street, houseNumber: t.houseNumber, zipCode: t.zipCode, city: t.city, country: t.country })
+  async addTournament (t: Tournament): Promise<Tournament & Id> {
+    const address = await insertAddress({
+      street: t.street,
+      houseNumber: t.houseNumber,
+      zipCode: t.zipCode,
+      city: t.city,
+      country: t.country
+    })
 
-    const tournament = await insertTournament({ ...t, addressId: address.id })
+    const tournament = await insertTournament({
+      addressId: address.id,
+      tournamentName: t.tournamentName,
+      competition: t.competition,
+      tournamentStartTime: t.tournamentStartTime,
+      tournamentEndTime: t.tournamentEndTime
+    })
     return { ...t, id: tournament.id }
   }
 
-  async addSlot (s: Slot) : Promise<Slot | null> {
+  async addSlot (s: Slot): Promise<Slot | null> {
     const tournament = await findTournamentByTournamentName(s.tournamentName)
     if (!tournament) return null
     await insertSlot({ ...s, tournamentId: tournament.id })
     return s
   }
 
-  async addLocation (l: Location) : Promise<Location & Id | null> {
+  async addLocation (l: Location): Promise<(Location & Id) | null> {
     const tournament = await findTournamentByTournamentName(l.tournamentName)
     if (!tournament) return null
     const location = await insertLocation({ ...l, tournamentId: tournament.id })
     return { ...l, id: location.id }
   }
 
-  async addPerformance (p: Performance): Promise<Performance & Id | null> {
+  async addPerformance (p: Performance): Promise<(Performance & Id) | null> {
     // get TournamentName & ClubName & LocationName & CategoryName
     const [tournament, club, location, category] = await Promise.all([
       findTournamentByTournamentName(p.tournamentName),
