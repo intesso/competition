@@ -205,6 +205,13 @@ export async function _insertTestPerformance () {
 
 // TournamentAthlete
 test('should insert/find tournamentAthlete', async () => {
+  const tournamentName = 'Team SM 2022 ' + Math.random().toString()
+  const tournament = await insertTournament({
+    tournamentEndTime: DateTime.fromFormat('2022-10-25 10:00', dateTimeFormat).toUTC().toJSDate(),
+    tournamentName,
+    tournamentStartTime: DateTime.fromFormat('2022-10-25 19:00', dateTimeFormat).toUTC().toJSDate()
+  })
+
   const personInformation: Omit<Person_InsertParameters, 'id'> = {
     addressId: null,
     contactInformationId: null,
@@ -219,12 +226,19 @@ test('should insert/find tournamentAthlete', async () => {
 
   const person = await insertPerson(personInformation)
   const athlete = await insertAthlete({ personId: person.id })
-  const tournamentAthlete = await insertTournamentAthlete({ athleteId: athlete.id })
+  const tournamentAthlete = await insertTournamentAthlete({ tournamentId: tournament.id, athleteId: athlete.id })
   expect(tournamentAthlete.athleteId).toEqual(athlete.id)
 })
 
 // TournamentJudge
 test('should insert/find tournamentJudge', async () => {
+  const tournamentName = 'Team SM 2022 ' + Math.random().toString()
+  const tournament = await insertTournament({
+    tournamentEndTime: DateTime.fromFormat('2022-10-25 10:00', dateTimeFormat).toUTC().toJSDate(),
+    tournamentName,
+    tournamentStartTime: DateTime.fromFormat('2022-10-25 19:00', dateTimeFormat).toUTC().toJSDate()
+  })
+
   const personInformation: Omit<Person_InsertParameters, 'id'> = {
     addressId: null,
     contactInformationId: null,
@@ -239,7 +253,7 @@ test('should insert/find tournamentJudge', async () => {
 
   const person = await insertPerson(personInformation)
   const judge = await insertJudge({ personId: person.id })
-  const tournamentJudge = await insertTournamentJudge({ judgeId: judge.id })
+  const tournamentJudge = await insertTournamentJudge({ tournamentId: tournament.id, judgeId: judge.id })
   expect(tournamentJudge.judgeId).toEqual(judge.id)
 })
 afterAll(() => db.dispose())

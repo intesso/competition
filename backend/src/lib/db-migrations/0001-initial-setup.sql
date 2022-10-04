@@ -82,6 +82,7 @@ CREATE TABLE "Judge" (
 CREATE TABLE "TournamentAthlete" (
   id uuid NOT NULL,
   "athleteId" uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
@@ -92,6 +93,7 @@ CREATE TABLE "TournamentAthlete" (
 CREATE TABLE "TournamentJudge" (
   id uuid NOT NULL,
   "judgeId" uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,

@@ -11,7 +11,7 @@ import { tournamentController } from './src/tournament/controller'
 
 const router = new Router()
   .use('/api/people', peopleController.routes())
-  .use('/api/tournament', tournamentController.routes())
+  .use('/api/tournaments', tournamentController.routes())
   .use('/api/judging', judgingController.routes())
   .use('/api/calculations', calculationController.routes())
 

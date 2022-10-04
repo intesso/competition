@@ -7,7 +7,11 @@ import { RawPoint } from './interfaces'
 
 export const judgingController = new Router()
 
-judgingController.use(bodyParser())
-judgingController.post('/raw-points', inputValidation.validate, (ctx) => {
-  return respondWith(ctx, () => applicationContext.judging.addRawPoint(ctx.request.body as RawPoint))
-})
+judgingController
+  .use(bodyParser())
+  .post('/raw-points', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.judging.addRawPoint(ctx.request.body as RawPoint))
+  })
+  .get('/categories', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.judging.listCategories())
+  })

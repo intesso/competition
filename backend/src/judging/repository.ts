@@ -9,6 +9,10 @@ export async function insertCategory (category: Omit<Category_InsertParameters, 
   return insertedCategory
 }
 
+export async function findCategories () {
+  return await Category(db).find().all()
+}
+
 export async function findCategoryByCategoryName (categoryName: string) {
   return await Category(db).findOne({ categoryName })
 }

@@ -14,6 +14,10 @@ export function newRecordAttributes () {
   return { id: uuidv4(), createdAt: new Date() }
 }
 
+export function updateRecordAttributes () {
+  return { updatedAt: new Date() }
+}
+
 export function isDefined<T> (argument: T | undefined): argument is T {
   return argument !== undefined
 }

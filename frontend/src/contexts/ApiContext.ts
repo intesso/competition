@@ -1,14 +1,21 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Club, Person, RawPoints, Tournament } from './ApiContextInterface'
+import { Category, Club, Location, RawPoints, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
   addClub: (club: Club) => Promise<void>
+  listClubs: () => Promise<Club[]>
+  listTournaments: () => Promise<Tournament[]>
+  listLocations: (tournamentName: string) => Promise<Location[]>
+  listCategories: () => Promise<Category[]>
+  addLocation: (location: Location) => Promise<Location>
+  modifyLocation: (location: Location) => Promise<Location>
+  removeLocation: (location: Location) => Promise<void>
   addTournament: (tournament: Tournament) => Promise<void>
   sendRawPoints: (points: RawPoints) => Promise<void>
-  addTournamentAthlete: (person: Person) => Promise<void>
-  addTournamentJudge: (person: Person) => Promise<void>
+  addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
+  addTournamentJudge: (person: TournamentPerson) => Promise<TournamentPerson>
 }
 
 export function provideApiContext (): Api {
@@ -23,11 +30,21 @@ export function provideApiContext (): Api {
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/people/club`,
+        url: `${serverBaseUrl}/api/people/clubs`,
         method: 'POST',
         data
       })
     ).data
+  }
+
+  async function listClubs () {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/people/clubs`,
+        method: 'GET'
+      })
+    ).data as Club[]
   }
 
   async function addTournament (tournament: Tournament) {
@@ -35,8 +52,88 @@ export function provideApiContext (): Api {
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/tournament/tournament`,
+        url: `${serverBaseUrl}/api/tournaments`,
         method: 'POST',
+        data
+      })
+    ).data
+  }
+
+  async function listTournaments () {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments`,
+        method: 'GET'
+      })
+    ).data as Tournament[]
+  }
+
+  async function addTournamentAthlete (athlete: TorunamentAthlete) {
+    const data = athlete
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${athlete.tournamentId}/athletes`,
+        method: 'POST',
+        data
+      })
+    ).data as TorunamentAthlete
+  }
+
+  async function addTournamentJudge (judge: TorunamentJudge) {
+    const data = judge
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${judge.tournamentId}/judges`,
+        method: 'POST',
+        data
+      })
+    ).data as TorunamentJudge
+  }
+
+  async function listLocations (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/locations`,
+        method: 'GET'
+      })
+    ).data as Location[]
+  }
+
+  async function addLocation (location: Location) {
+    const data = location
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${location.tournamentId}/locations`,
+        method: 'POST',
+        data
+      })
+    ).data
+  }
+
+  async function modifyLocation (location: Location) {
+    const data = location
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${location.tournamentId}/locations/${location.id}`,
+        method: 'PUT',
+        data
+      })
+    ).data
+  }
+
+  async function removeLocation (location: Location) {
+    const data = location
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${location.tournamentId}/locations/${location.id}`,
+        method: 'DELETE',
         data
       })
     ).data
@@ -54,37 +151,30 @@ export function provideApiContext (): Api {
     ).data
   }
 
-  async function addTournamentAthlete (person: Person) {
-    const data = person
+  async function listCategories () {
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/tournament/athlete`,
-        method: 'POST',
-        data
+        url: `${serverBaseUrl}/api/judging/categories`,
+        method: 'GET'
       })
-    ).data
-  }
-
-  async function addTournamentJudge (person: Person) {
-    const data = person
-    return (
-      await axios({
-        headers,
-        url: `${serverBaseUrl}/api/tournament/judge`,
-        method: 'POST',
-        data
-      })
-    ).data
+    ).data as Category[]
   }
 
   return {
     serverBaseUrl,
     addClub,
+    listClubs,
     addTournament,
-    sendRawPoints,
+    listTournaments,
+    listLocations,
+    addLocation,
+    modifyLocation,
+    removeLocation,
     addTournamentAthlete,
-    addTournamentJudge
+    addTournamentJudge,
+    sendRawPoints,
+    listCategories
   }
 }
 

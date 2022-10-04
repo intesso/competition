@@ -2,7 +2,7 @@ import { IGetApplicationContext } from '../../applicationContext'
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { findCategoryByCategoryName, findJudgingRuleByName, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertRawPoint } from './repository'
+import { findCategories, findCategoryByCategoryName, findJudgingRuleByName, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertRawPoint } from './repository'
 
 export class JudgingRuleService implements IJudgingRuleContext {
   getApplicationContext
@@ -10,11 +10,12 @@ export class JudgingRuleService implements IJudgingRuleContext {
     this.getApplicationContext = getApplicationContext
   }
 
-  async addCategory (c: Category) : Promise<Category & Id | null> {
-    const judgingRule = await findJudgingRuleByName(c.judgingRuleName)
-    if (!judgingRule) return null
-    const category = await insertCategory({ ...c, judgingRuleId: judgingRule.id })
-    return { ...c, id: category.id }
+  async addCategory (c: Omit<Category, 'id'>) : Promise<Category | null> {
+    return await insertCategory(c)
+  }
+
+  async listCategories () : Promise<(Category & Id)[] | null> {
+    return await findCategories()
   }
 
   async addCombination (combinationName: string, weightedCategories: WeightedCategory[]) : Promise<Combination & Id | null> {

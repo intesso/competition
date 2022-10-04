@@ -121,6 +121,10 @@ export async function findClubByName (clubName: string) {
   return await Club(db).findOne({ clubName })
 }
 
+export async function findClubs () {
+  return await Club(db).find().all()
+}
+
 // ContactInformation
 export async function insertContactInformation (contactInformation: Omit<ContactInformation_InsertParameters, 'id'>) {
   const [createdContactInformation] = await ContactInformation(db).insert({ ...contactInformation, ...newRecordAttributes() })

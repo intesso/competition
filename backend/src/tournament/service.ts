@@ -2,18 +2,21 @@ import { omit } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import { findCategoryByCategoryName } from '../judging/repository'
 import { Id, newRecordAttributes } from '../lib/common'
-import { Person } from '../people/interfaces'
 import { findClubByName, insertAddress, insertAthlete, insertJudge, insertPerson } from '../people/repository'
-import { Location, Performance, Slot, Tournament, ITournamentContext } from './interfaces'
+import { Location, Performance, Slot, TournamentAndAddress, ITournamentContext, Tournament, TournamentAthlete, TournamentJudge } from './interfaces'
 import {
+  deleteLocation,
+  findAllTournaments,
   findLocationByLocationName,
+  findLocationsByTournamentId,
   findTournamentByTournamentName,
   insertLocation,
   insertPerformance,
   insertSlot,
   insertTournament,
   insertTournamentAthlete,
-  insertTournamentJudge
+  insertTournamentJudge,
+  updateLocation
 } from './repository'
 
 export class TournamentService implements ITournamentContext {
@@ -22,7 +25,17 @@ export class TournamentService implements ITournamentContext {
     this.getApplicationContext = getApplicationContext
   }
 
-  async addTournament (t: Tournament): Promise<Tournament & Id> {
+  async listTournaments (): Promise<(Tournament & Id)[]> {
+    const tournaments = await findAllTournaments()
+    return tournaments
+  }
+
+  async listSlots (tournamentName: string): Promise<(Slot & Id)[]> {
+    // TODO
+    return Promise.resolve([])
+  }
+
+  async addTournament (t: TournamentAndAddress): Promise<TournamentAndAddress & Id> {
     const address = await insertAddress({
       street: t.street,
       houseNumber: t.houseNumber,
@@ -48,11 +61,22 @@ export class TournamentService implements ITournamentContext {
     return s
   }
 
-  async addLocation (l: Location): Promise<(Location & Id) | null> {
-    const tournament = await findTournamentByTournamentName(l.tournamentName)
-    if (!tournament) return null
-    const location = await insertLocation({ ...l, tournamentId: tournament.id })
+  async addLocation (l: Omit<Location, 'id'>): Promise<Location | null> {
+    const location = await insertLocation(l)
     return { ...l, id: location.id }
+  }
+
+  async modifyLocation (l: Location & Id) : Promise<Location | null> {
+    return await updateLocation(l)
+  }
+
+  async removeLocation (l: Location & Id) : Promise<void> {
+    return await deleteLocation(l)
+  }
+
+  async listLocations (tournamentId: string): Promise<Location[]> {
+    const locations = await findLocationsByTournamentId(tournamentId)
+    return locations
   }
 
   async addPerformance (p: Performance): Promise<(Performance & Id) | null> {
@@ -80,17 +104,17 @@ export class TournamentService implements ITournamentContext {
     return { ...p, id: performance.id }
   }
 
-  async addTournamentAthlete<P extends Person> (a: P): Promise<P & Id> {
+  async addTournamentAthlete (a: TournamentAthlete): Promise<TournamentAthlete> {
     const person = await insertPerson(a)
     const athlete = await insertAthlete({ personId: person.id })
-    const tournamentAthlete = await insertTournamentAthlete({ athleteId: athlete.id })
-    return { ...a, id: tournamentAthlete.id }
+    const tournamentAthlete = await insertTournamentAthlete({ tournamentId: a.tournamentId, athleteId: athlete.id })
+    return { ...a, ...tournamentAthlete }
   }
 
-  async addTournamentJudge<P extends Person> (j: P): Promise<P & Id> {
+  async addTournamentJudge (j: TournamentJudge): Promise<TournamentJudge> {
     const person = await insertPerson(j)
     const judge = await insertJudge({ personId: person.id })
-    const tournamentJudge = await insertTournamentJudge({ judgeId: judge.id })
-    return { ...j, id: tournamentJudge.id }
+    const tournamentJudge = await insertTournamentJudge({ tournamentId: j.tournamentId, judgeId: judge.id })
+    return { ...j, ...tournamentJudge }
   }
 }
