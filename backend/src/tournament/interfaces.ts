@@ -15,7 +15,9 @@ export type TournamentAndAddress = Omit<TournamentDAO & AddressDAO, 'id'| 'updat
 export type Tournament = Omit<TournamentDAO, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' | 'addressId'>
 export type Slot = Omit<Omit<SlotDAO & TournamentName, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' | 'tournamentId' | 'slotNumber'> & SlotNumber, 'id'>
 export type Location = LocationDAO
-export type Performance = Omit<Omit<PerformanceDAO & TournamentName & ClubName & LocationName & CategoryName, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' | 'tournamentId' | 'clubId' | 'categoryId' | 'locationId' | 'slotNumber'> & SlotNumber, 'id'>
+// TODO remove
+// export type Performance = Omit<Omit<PerformanceDAO & TournamentName & ClubName & LocationName & CategoryName, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' | 'tournamentId' | 'clubId' | 'categoryId' | 'locationId' | 'slotNumber'> & Partial<SlotNumber>, 'id'>
+export type Performance = Omit<PerformanceDAO, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' >
 export type TournamentAthlete = Person & TournamentId
 export type TournamentJudge = Person & TournamentId
 

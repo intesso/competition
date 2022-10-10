@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Category, Club, Location, RawPoints, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
+import { Category, Club, Location, Performance, RawPoints, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
@@ -16,6 +16,7 @@ export interface Api {
   sendRawPoints: (points: RawPoints) => Promise<void>
   addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
   addTournamentJudge: (person: TournamentPerson) => Promise<TournamentPerson>
+  addPerformance: (performance: Performance) => Promise<Performance>
 }
 
 export function provideApiContext (): Api {
@@ -139,6 +140,18 @@ export function provideApiContext (): Api {
     ).data
   }
 
+  async function addPerformance (performance: Performance) {
+    const data = performance
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${performance.tournamentId}/performances/`,
+        method: 'POST',
+        data
+      })
+    ).data
+  }
+
   async function sendRawPoints (points: RawPoints) {
     const data = points
     return (
@@ -173,6 +186,7 @@ export function provideApiContext (): Api {
     removeLocation,
     addTournamentAthlete,
     addTournamentJudge,
+    addPerformance,
     sendRawPoints,
     listCategories
   }

@@ -1,13 +1,10 @@
-import { omit } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
-import { findCategoryByCategoryName } from '../judging/repository'
 import { Id, newRecordAttributes } from '../lib/common'
-import { findClubByName, insertAddress, insertAthlete, insertJudge, insertPerson } from '../people/repository'
+import { insertAddress, insertAthlete, insertJudge, insertPerson } from '../people/repository'
 import { Location, Performance, Slot, TournamentAndAddress, ITournamentContext, Tournament, TournamentAthlete, TournamentJudge } from './interfaces'
 import {
   deleteLocation,
   findAllTournaments,
-  findLocationByLocationName,
   findLocationsByTournamentId,
   findTournamentByTournamentName,
   insertLocation,
@@ -79,25 +76,35 @@ export class TournamentService implements ITournamentContext {
     return locations
   }
 
-  async addPerformance (p: Performance): Promise<(Performance & Id) | null> {
-    // get TournamentName & ClubName & LocationName & CategoryName
-    const [tournament, club, location, category] = await Promise.all([
-      findTournamentByTournamentName(p.tournamentName),
-      findClubByName(p.clubName),
-      findLocationByLocationName(p.locationName),
-      findCategoryByCategoryName(p.categoryName)
-    ])
-    if (!tournament || !club || !location || !category) {
-      return null
-    }
+  // TODO remove
+  // async addPerformance (p: Performance): Promise<(Performance & Id) | null> {
+  //   // get TournamentName & ClubName & LocationName & CategoryName
+  //   const [tournament, club, location, category] = await Promise.all([
+  //     findTournamentByTournamentName(p.tournamentName),
+  //     findClubByName(p.clubName),
+  //     findLocationByLocationName(p.locationName),
+  //     findCategoryByCategoryName(p.categoryName)
+  //   ])
+  //   if (!tournament || !club || !location || !category) {
+  //     return null
+  //   }
 
-    // insert performance
+  //   // insert performance
+  //   const performance = await insertPerformance({
+  //     ...omit(p, 'tournamentName', 'clubName', 'locationName', 'categoryName'),
+  //     tournamentId: tournament.id,
+  //     clubId: club.id,
+  //     locationId: location.id,
+  //     categoryId: category.id,
+  //     ...newRecordAttributes()
+  //   })
+
+  //   return { ...p, id: performance.id }
+  // }
+
+  async addPerformance (p: Performance): Promise<(Performance & Id) | null> {
     const performance = await insertPerformance({
-      ...omit(p, 'tournamentName', 'clubName', 'locationName', 'categoryName'),
-      tournamentId: tournament.id,
-      clubId: club.id,
-      locationId: location.id,
-      categoryId: category.id,
+      ...p,
       ...newRecordAttributes()
     })
 

@@ -8,7 +8,7 @@ import { Category, Club, Location, Tournament } from '../contexts/ApiContextInte
 import { snakeToPascal } from '../lib/common'
 
 export function AddPerformance () {
-  const { listTournaments, listLocations, listCategories, listClubs } = useContext(ApiContext)
+  const { listTournaments, listLocations, listCategories, listClubs, addPerformance } = useContext(ApiContext)
 
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
@@ -47,8 +47,20 @@ export function AddPerformance () {
     fetchData().catch(console.error)
   }, [tournamentId])
 
-  function handleSend () {
-    // FIXME
+  async function handleSend () {
+    addPerformance({
+      tournamentId,
+      clubId,
+      categoryId,
+      locationId,
+      // TODO add athletes
+      athletes: [],
+      performanceName,
+      // TODO add slotNumber
+      slotNumber: null,
+      performanceNumber,
+      performanceStartTime: performanceStartTime.toISO()
+    })
   }
 
   return (
@@ -103,12 +115,7 @@ export function AddPerformance () {
 
         <FormControl fullWidth margin="normal">
           <InputLabel id="clubId">Club</InputLabel>
-          <Select
-            labelId="clubId"
-            value={clubId}
-            label="Club"
-            onChange={(e) => setClubId(e.target.value)}
-          >
+          <Select labelId="clubId" value={clubId} label="Club" onChange={(e) => setClubId(e.target.value)}>
             {clubs.map((club) => (
               <MenuItem key={club.id} value={club.id}>
                 {club.clubName}
@@ -147,6 +154,10 @@ export function AddPerformance () {
           }}
           renderInput={(params) => <TextField {...params} fullWidth={true} margin="normal" />}
         />
+
+        <FormControl fullWidth margin="normal">
+          <div>Note: Athletes / Slot noch nicht implementiert</div>
+        </FormControl>
 
         <FormControl fullWidth margin="normal">
           <Button variant="contained" fullWidth={true} endIcon={<SendIcon />} onClick={handleSend}>

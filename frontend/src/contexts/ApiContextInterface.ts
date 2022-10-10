@@ -65,3 +65,15 @@ export interface Category {
   level: string
   type: string
 }
+
+export interface Performance {
+  tournamentId: string
+  locationId: string
+  clubId: string
+  categoryId: string
+  slotNumber: number | null
+  athletes: string[]
+  performanceName: string
+  performanceNumber: number | null
+  performanceStartTime: string | null
+}
