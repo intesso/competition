@@ -1,12 +1,23 @@
 import { IGetApplicationContext } from '../../applicationContext'
 import { Id, newRecordAttributes } from '../lib/common'
 import { insertAddress, insertAthlete, insertJudge, insertPerson } from '../people/repository'
-import { Location, Performance, Slot, TournamentAndAddress, ITournamentContext, Tournament, TournamentAthlete, TournamentJudge } from './interfaces'
+import {
+  Location,
+  Performance,
+  Slot,
+  TournamentAndAddress,
+  ITournamentContext,
+  Tournament,
+  TournamentAthlete,
+  TournamentJudge
+} from './interfaces'
 import {
   deleteLocation,
   findAllTournaments,
   findLocationsByTournamentId,
+  findPerformances,
   findTournamentByTournamentName,
+  findTournamentJudgesAndPerson,
   insertLocation,
   insertPerformance,
   insertSlot,
@@ -63,11 +74,11 @@ export class TournamentService implements ITournamentContext {
     return { ...l, id: location.id }
   }
 
-  async modifyLocation (l: Location & Id) : Promise<Location | null> {
+  async modifyLocation (l: Location & Id): Promise<Location | null> {
     return await updateLocation(l)
   }
 
-  async removeLocation (l: Location & Id) : Promise<void> {
+  async removeLocation (l: Location & Id): Promise<void> {
     return await deleteLocation(l)
   }
 
@@ -111,6 +122,10 @@ export class TournamentService implements ITournamentContext {
     return { ...p, id: performance.id }
   }
 
+  async listPerformances (tournamentId: string): Promise<(Performance & Id)[]> {
+    return await findPerformances({ tournamentId })
+  }
+
   async addTournamentAthlete (a: TournamentAthlete): Promise<TournamentAthlete> {
     const person = await insertPerson(a)
     const athlete = await insertAthlete({ personId: person.id })
@@ -123,5 +138,9 @@ export class TournamentService implements ITournamentContext {
     const judge = await insertJudge({ personId: person.id })
     const tournamentJudge = await insertTournamentJudge({ tournamentId: j.tournamentId, judgeId: judge.id })
     return { ...j, ...tournamentJudge }
+  }
+
+  async listTournamentJudges (tournamentId: string): Promise<TournamentJudge[]> {
+    return await findTournamentJudgesAndPerson(tournamentId)
   }
 }

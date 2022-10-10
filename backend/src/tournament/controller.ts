@@ -15,6 +15,9 @@ tournamentController
   .post('/:tournamentId/judges', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournamentJudge(ctx.request.body as TournamentJudge))
   })
+  .get('/:tournamentId/judges', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.listTournamentJudges(ctx.params.tournamentId as string))
+  })
   .post('/', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournament(ctx.request.body as TournamentAndAddress))
   })
@@ -35,4 +38,7 @@ tournamentController
   })
   .post('/:tournamentId/performances', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addPerformance(ctx.request.body as unknown as Performance))
+  })
+  .get('/:tournamentId/performances', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.listPerformances(ctx.params.tournamentId as string))
   })

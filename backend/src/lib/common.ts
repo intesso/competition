@@ -37,3 +37,10 @@ export async function respondWith<T> (ctx: ParameterizedContext<any, Router.IRou
   }
   return ctx
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export async function respondWithError (ctx: ParameterizedContext<any, Router.IRouterParamContext<any, {}>, any>, error: string) {
+  ctx.status = 400
+  ctx.body = { error }
+  return ctx
+}

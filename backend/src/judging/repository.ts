@@ -83,9 +83,23 @@ export async function findCriteriaByCriteriaJudgingRuleAndCriteriaName (judgingR
   return await Criteria(db).findOne({ criteriaName, judgingRuleId: judgingRule.id })
 }
 
+export async function findCriteriaByCategoryId (categoryId: string) {
+  const category = await Category(db).findOne({ id: categoryId })
+  if (!category) return null
+  const judgingRule = await JudgingRule(db).findOne({ id: category.judgingRuleId })
+  if (!judgingRule) return null
+
+  return await Criteria(db).find({ judgingRuleId: judgingRule.id }).all()
+}
+
 // RawPoint
 export async function insertRawPoint (rawPoint: Omit<RawPoint_InsertParameters, 'id'>) {
   const [insertedRawPoint] = await RawPoint(db).insert({ ...rawPoint, ...newRecordAttributes() })
+  return insertedRawPoint
+}
+
+export async function insertOrUpdateRawPoint (rawPoint: Omit<RawPoint_InsertParameters, 'id'>) {
+  const [insertedRawPoint] = await RawPoint(db).insertOrUpdate(['performanceId', 'tournamentJudgeId', 'criteriaId'], { ...rawPoint, ...newRecordAttributes() })
   return insertedRawPoint
 }
 

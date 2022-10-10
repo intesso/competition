@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Category, Club, Location, Performance, RawPoints, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
+import { Category, Club, Criteria, Location, Performance, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
@@ -9,14 +9,17 @@ export interface Api {
   listTournaments: () => Promise<Tournament[]>
   listLocations: (tournamentName: string) => Promise<Location[]>
   listCategories: () => Promise<Category[]>
+  listCriteria: (categoryId: string) => Promise<Criteria[]>
   addLocation: (location: Location) => Promise<Location>
   modifyLocation: (location: Location) => Promise<Location>
   removeLocation: (location: Location) => Promise<void>
   addTournament: (tournament: Tournament) => Promise<void>
-  sendRawPoints: (points: RawPoints) => Promise<void>
   addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
   addTournamentJudge: (person: TournamentPerson) => Promise<TournamentPerson>
+  listTournamentJudges: (tournamentId: string) => Promise<TournamentPerson[]>
   addPerformance: (performance: Performance) => Promise<Performance>
+  listPerformances: (tournamentId: string) => Promise<Performance[]>
+  addRawPoint: (rawPoint: RawPoint) => Promise<RawPoint>
 }
 
 export function provideApiContext (): Api {
@@ -94,6 +97,16 @@ export function provideApiContext (): Api {
     ).data as TorunamentJudge
   }
 
+  async function listTournamentJudges (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/judges`,
+        method: 'GET'
+      })
+    ).data as TorunamentJudge[]
+  }
+
   async function listLocations (tournamentId: string) {
     return (
       await axios({
@@ -152,16 +165,14 @@ export function provideApiContext (): Api {
     ).data
   }
 
-  async function sendRawPoints (points: RawPoints) {
-    const data = points
+  async function listPerformances (tournamentId: string) {
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/judging/raw-points`,
-        method: 'POST',
-        data
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performances/`,
+        method: 'GET'
       })
-    ).data
+    ).data as Performance[]
   }
 
   async function listCategories () {
@@ -172,6 +183,28 @@ export function provideApiContext (): Api {
         method: 'GET'
       })
     ).data as Category[]
+  }
+
+  async function listCriteria (categoryId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/judging/criteria?categoryId=${categoryId}`,
+        method: 'GET'
+      })
+    ).data as Criteria[]
+  }
+
+  async function addRawPoint (points: RawPoint) {
+    const data = points
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/judging/raw-points`,
+        method: 'POST',
+        data
+      })
+    ).data
   }
 
   return {
@@ -186,9 +219,12 @@ export function provideApiContext (): Api {
     removeLocation,
     addTournamentAthlete,
     addTournamentJudge,
+    listTournamentJudges,
     addPerformance,
-    sendRawPoints,
-    listCategories
+    listPerformances,
+    listCategories,
+    listCriteria,
+    addRawPoint
   }
 }
 

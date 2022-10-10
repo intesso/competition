@@ -2,7 +2,7 @@ import Router from 'koa-router'
 import bodyParser from 'koa-bodyparser'
 import { inputValidation } from '../../api/inputValidation'
 import { applicationContext } from '../../applicationContext'
-import { respondWith } from '../lib/common'
+import { respondWith, respondWithError } from '../lib/common'
 import { RawPoint } from './interfaces'
 
 export const judgingController = new Router()
@@ -14,4 +14,10 @@ judgingController
   })
   .get('/categories', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.listCategories())
+  })
+  .get('/criteria', inputValidation.validate, (ctx) => {
+    if (typeof ctx.request.query.categoryId !== 'string') {
+      return respondWithError(ctx, 'categoryId queryParameter must be provided')
+    }
+    return respondWith(ctx, () => applicationContext.judging.listCriteria(ctx.request.query.categoryId as string))
   })

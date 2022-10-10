@@ -7,6 +7,7 @@ import { EditLocation } from './pages/EditLocation'
 import Speed from './pages/Speed'
 import { AddTournamentPerson } from './pages/AddTournamentPerson'
 import { AddPerformance } from './pages/AddPerformance'
+import { AddRawPoint } from './pages/AddRawPoint'
 
 export const Router = () => (
   <Routes>
@@ -19,6 +20,7 @@ export const Router = () => (
       <Route path='add-judge' element={<AddTournamentPerson role='tournamentJudge'/>}/>
       <Route path='add-athlete' element={<AddTournamentPerson role='tournamentAthlete'/>}/>
       <Route path='add-performance' element={<AddPerformance/>}/>
+      <Route path='add-raw-point' element={<AddRawPoint/>}/>
     </Route>
 
   </Routes>

@@ -32,6 +32,8 @@ export interface ITournamentContext extends IGetApplicationContext {
   removeLocation: (location: Location) => Promise<void>
   listLocations: (tournamentId: TournamentDAO['id']) => Promise<(Location)[]>
   addPerformance: (performance: Performance) => Promise<Performance & Id | null>
+  listPerformances: (tournamentId: string) => Promise<(Performance & Id)[]>
   addTournamentAthlete: (athlete: TournamentAthlete) => Promise<TournamentAthlete>
-  addTournamentJudge: (judge: TournamentAthlete) => Promise<TournamentAthlete>
+  addTournamentJudge: (judge: TournamentJudge) => Promise<TournamentJudge>
+  listTournamentJudges: (tournamentId: string) => Promise<TournamentJudge[]>
 }

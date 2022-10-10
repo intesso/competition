@@ -2,7 +2,7 @@ import { IGetApplicationContext } from '../../applicationContext'
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { findCategories, findCategoryByCategoryName, findJudgingRuleByName, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertRawPoint } from './repository'
+import { findCategories, findCategoryByCategoryName, findCriteriaByCategoryId, findJudgingRuleByName, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, insertRawPoint } from './repository'
 
 export class JudgingRuleService implements IJudgingRuleContext {
   getApplicationContext
@@ -37,14 +37,15 @@ export class JudgingRuleService implements IJudgingRuleContext {
   }
 
   async addCriteria (c: Criteria) : Promise<Criteria & Id | null> {
-    const judgingRule = await findJudgingRuleByName(c.judgingRuleName)
-    if (!judgingRule) return null
-    const criteria = await insertCriteria({ ...c, judgingRuleId: judgingRule.id })
-    return { ...c, id: criteria.id }
+    return await insertCriteria(c)
+  }
+
+  async listCriteria (categoryId: string) : Promise<(Criteria & Id)[] | null> {
+    return await findCriteriaByCategoryId(categoryId)
   }
 
   async addRawPoint (rp: RawPoint) : Promise<RawPoint & Id> {
-    const rawPoint = await insertRawPoint(rp)
+    const rawPoint = await insertOrUpdateRawPoint(rp)
     return { ...rp, id: rawPoint.id }
   }
 }

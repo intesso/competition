@@ -16,10 +16,11 @@ import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 import intessoLogo from '../themes/default/assets/intesso.svg'
 import { ApiContext } from '../contexts/ApiContext'
-import { RawPoints } from '../contexts/ApiContextInterface'
+import { RawPoint } from '../contexts/ApiContextInterface'
+import { DateTime } from 'luxon'
 
 export default function Speed () {
-  const { sendRawPoints } = useContext(ApiContext)
+  const { addRawPoint } = useContext(ApiContext)
   const [fullscreen, setfullscreen] = useState(false)
   const [count, setCount] = useState(0)
   const [earlyStart, setEarlyStart] = useState(false)
@@ -46,7 +47,7 @@ export default function Speed () {
   const handleOnSubmit = async () => {
     handleBodyOnClick()
 
-    const rawPoints: RawPoints = {
+    const rawPoint: RawPoint = {
       performanceId: '123',
       tournamentJudgeId: '123',
       criteriaId: '123',
@@ -54,10 +55,10 @@ export default function Speed () {
         earlyStart,
         count
       },
-      timestamp: Date.now()
+      timestamp: DateTime.now().toISO()
     }
 
-    await sendRawPoints(rawPoints)
+    await addRawPoint(rawPoint)
   }
 
   const shouldDisableSubmit = () => {

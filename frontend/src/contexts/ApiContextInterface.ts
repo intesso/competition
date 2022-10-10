@@ -1,9 +1,9 @@
-export interface RawPoints {
+export interface RawPoint {
   performanceId: string
   tournamentJudgeId: string
   criteriaId: string
   subCriteriaPoints: SubCriteria
-  timestamp: number
+  timestamp: string
 }
 
 export interface SubCriteria {
@@ -17,7 +17,7 @@ export interface Person {
   birthDate: string
 }
 
-export type TournamentPerson = Person & {tournamentId: string}
+export type TournamentPerson = Person & {id?: string, tournamentId: string}
 export type TorunamentAthlete = TournamentPerson
 export type TorunamentJudge = TournamentPerson
 
@@ -66,7 +66,16 @@ export interface Category {
   type: string
 }
 
+export interface Criteria {
+  id?: string
+  judgingRuleId: string
+  criteriaName: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  subCriteriaDefinition: any
+}
+
 export interface Performance {
+  id?: string
   tournamentId: string
   locationId: string
   clubId: string
