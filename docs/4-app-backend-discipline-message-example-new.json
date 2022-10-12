@@ -1,14 +1,7 @@
 {
-    "tournament": "2023-sm-single",
-    "competition": "single",
-    "group": "u12",
-    "type": "speed",
-    "discipline": "double-dutch",
-    "category": "single-u12-speed-double-duch",
-    "athleteOrTeam": "selina hugentobler",
-    "startNumber": "12",
-    "location": "?",
-    "run": "?",
+    "performanceId": "b5c02e2a-f9a3-4885-9f21-336804b74bea",
+    "categoryName": "single-u12-speed-double-duch",
+    "athletes": ["selina hugentobler"],
     "timestamp": 1663101730410,
     "calculatedTimestamp" : 1663101745789,
     "judgeCriteria": {

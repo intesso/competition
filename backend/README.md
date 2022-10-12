@@ -24,5 +24,7 @@ npm start
 
 ## edit / test
 
-- node-red (engine) is running at: http://localhost:8000/red
-- backend at http://localhost:3000
+- node-red (engine) is running at: http://localhost:8082/red
+- backend at http://localhost:8081
+
+(frontend runs at) http://localhost:8080

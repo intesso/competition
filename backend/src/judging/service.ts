@@ -2,7 +2,7 @@ import { IGetApplicationContext } from '../../applicationContext'
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { findCategories, findCategoryByCategoryName, findCriteriaByCategoryId, findJudgingRuleByName, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, insertRawPoint } from './repository'
+import { findCategories, findCategoryByCategoryName, findCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint } from './repository'
 
 export class JudgingRuleService implements IJudgingRuleContext {
   getApplicationContext
@@ -16,6 +16,10 @@ export class JudgingRuleService implements IJudgingRuleContext {
 
   async listCategories () : Promise<(Category & Id)[] | null> {
     return await findCategories()
+  }
+
+  async getCategory (id: string): Promise<(Category & Id) | null> {
+    return await findCategoryById(id)
   }
 
   async addCombination (combinationName: string, weightedCategories: WeightedCategory[]) : Promise<Combination & Id | null> {
@@ -36,12 +40,24 @@ export class JudgingRuleService implements IJudgingRuleContext {
     return { ...j, id: judgingRule.id }
   }
 
+  async getJudgingRule (id: string): Promise<(JudgingRule & Id) | null> {
+    return await findJudgingRuleById(id)
+  }
+
+  async getJudgingRuleByCategoryId (categoryId: string): Promise<(JudgingRule & Id) | null> {
+    return await findJudgingRuleByCategoryId(categoryId)
+  }
+
   async addCriteria (c: Criteria) : Promise<Criteria & Id | null> {
     return await insertCriteria(c)
   }
 
   async listCriteria (categoryId: string) : Promise<(Criteria & Id)[] | null> {
     return await findCriteriaByCategoryId(categoryId)
+  }
+
+  async getCriteria (id: string) : Promise<(Criteria & Id) | null> {
+    return await getCriteriaById(id)
   }
 
   async addRawPoint (rp: RawPoint) : Promise<RawPoint & Id> {

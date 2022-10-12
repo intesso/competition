@@ -66,8 +66,18 @@ export async function insertJudgingRule (judgingRule: Omit<JudgingRule_InsertPar
   return insertedJudgingRule
 }
 
+export async function findJudgingRuleById (id: string) {
+  return await JudgingRule(db).findOne({ id })
+}
+
 export async function findJudgingRuleByName (judgingRuleName: string) {
   return await JudgingRule(db).findOne({ judgingRuleName })
+}
+
+export async function findJudgingRuleByCategoryId (categoryId: string) {
+  const category = await Category(db).findOne({ id: categoryId })
+  if (!category) return null
+  return await JudgingRule(db).findOne({ id: category.judgingRuleId })
 }
 
 // Criteria
@@ -90,6 +100,10 @@ export async function findCriteriaByCategoryId (categoryId: string) {
   if (!judgingRule) return null
 
   return await Criteria(db).find({ judgingRuleId: judgingRule.id }).all()
+}
+
+export async function getCriteriaById (id: string) {
+  return await Criteria(db).findOne({ id })
 }
 
 // RawPoint

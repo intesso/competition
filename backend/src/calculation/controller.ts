@@ -8,7 +8,7 @@ export const calculationController = new Router()
 
 calculationController.use(bodyParser())
 
-calculationController.post('', inputValidation.validate, async (ctx) => {
+calculationController.post('/', inputValidation.validate, async (ctx) => {
   const output = await applicationContext.calculation.calculate(ctx.request.body as unknown as CalculationInput)
   ctx.body(output)
 })

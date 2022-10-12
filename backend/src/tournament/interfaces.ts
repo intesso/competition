@@ -24,6 +24,7 @@ export type TournamentJudge = Person & TournamentId
 // Interfaces (Ports)
 export interface ITournamentContext extends IGetApplicationContext {
   addTournament: (tournament: TournamentAndAddress) => Promise<TournamentAndAddress & Id>
+  getTournament: (id: string) => Promise<(Tournament & Id) | null>
   listTournaments: () => Promise<(Tournament & Id)[]>
   addSlot: (slot: Slot) => Promise<Slot | null>
   listSlots: (tournamentName: TournamentName['tournamentName']) => Promise<(Slot & Id)[]>
@@ -33,7 +34,10 @@ export interface ITournamentContext extends IGetApplicationContext {
   listLocations: (tournamentId: TournamentDAO['id']) => Promise<(Location)[]>
   addPerformance: (performance: Performance) => Promise<Performance & Id | null>
   listPerformances: (tournamentId: string) => Promise<(Performance & Id)[]>
+  getPerformance: (id: string) => Promise<(Performance & Id) | null>
   addTournamentAthlete: (athlete: TournamentAthlete) => Promise<TournamentAthlete>
+  getTournamentAthlete: (id: string) => Promise<(TournamentAthlete & Id) | null>
   addTournamentJudge: (judge: TournamentJudge) => Promise<TournamentJudge>
+  getTournamentJudge: (id: string) => Promise<(TournamentJudge & Id) | null>
   listTournamentJudges: (tournamentId: string) => Promise<TournamentJudge[]>
 }

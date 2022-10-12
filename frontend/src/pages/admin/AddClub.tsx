@@ -1,9 +1,9 @@
 import { Button, Container, FormControl, TextField, Typography } from '@mui/material'
 import { useContext, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
-import { ApiContext } from '../contexts/ApiContext'
-import { Address, Club } from '../contexts/ApiContextInterface'
-import { EditAddress } from '../components/EditAddress'
+import { ApiContext } from '../../contexts/ApiContext'
+import { Address, Club } from '../../contexts/ApiContextInterface'
+import { EditAddress } from '../../components/EditAddress'
 
 export function AddClub () {
   const { addClub } = useContext(ApiContext)

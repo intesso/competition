@@ -20,9 +20,13 @@ export type RawPoint = Omit<PerformanceId & TournamentJudgeId & CriteriaId & Omi
 export interface IJudgingRuleContext extends IGetApplicationContext {
   addCategory: (category: Omit<Category, 'id'>) => Promise<Category | null>
   listCategories: () => Promise<(Category & Id)[] | null>
+  getCategory: (id: string) => Promise<(Category & Id) | null>
   addCombination: (combinationName: string, weightedCategories: WeightedCategory[]) => Promise<Combination & Id | null>
   addJudgingRule: (judgingRule: JudgingRule) => Promise<JudgingRule & Id>
+  getJudgingRuleByCategoryId: (categoryId: string) => Promise<(JudgingRule & Id) | null>
+  getJudgingRule: (id: string) => Promise<(JudgingRule & Id) | null>
   addCriteria: (criteria: Criteria) => Promise<Criteria & Id | null>
   listCriteria: (categoryId: string) => Promise<(Criteria & Id)[] | null>
+  getCriteria: (id: string) => Promise<(Criteria & Id) | null>
   addRawPoint: (rawPoint: RawPoint) => Promise<RawPoint & Id | null>
 }

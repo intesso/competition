@@ -16,8 +16,13 @@ import {
   findAllTournaments,
   findLocationsByTournamentId,
   findPerformances,
+  findTournamentAthletesAndPerson,
   findTournamentByTournamentName,
   findTournamentJudgesAndPerson,
+  getPerformanceById,
+  getTournamentAthleteAndPerson,
+  getTournamentById,
+  getTournamentJudgeAndPerson,
   insertLocation,
   insertPerformance,
   insertSlot,
@@ -36,6 +41,10 @@ export class TournamentService implements ITournamentContext {
   async listTournaments (): Promise<(Tournament & Id)[]> {
     const tournaments = await findAllTournaments()
     return tournaments
+  }
+
+  async getTournament (id: string): Promise<((Tournament & Id) | null)> {
+    return await getTournamentById(id)
   }
 
   async listSlots (tournamentName: string): Promise<(Slot & Id)[]> {
@@ -126,6 +135,10 @@ export class TournamentService implements ITournamentContext {
     return await findPerformances({ tournamentId })
   }
 
+  async getPerformance (id: string): Promise<(Performance & Id) | null> {
+    return await getPerformanceById(id)
+  }
+
   async addTournamentAthlete (a: TournamentAthlete): Promise<TournamentAthlete> {
     const person = await insertPerson(a)
     const athlete = await insertAthlete({ personId: person.id })
@@ -133,11 +146,23 @@ export class TournamentService implements ITournamentContext {
     return { ...a, ...tournamentAthlete }
   }
 
+  async getTournamentAthlete (id: string): Promise<(TournamentAthlete & Id) | null> {
+    return await getTournamentAthleteAndPerson(id)
+  }
+
+  async listTournamentAthletes (tournamentId: string): Promise<TournamentJudge[]> {
+    return await findTournamentAthletesAndPerson(tournamentId)
+  }
+
   async addTournamentJudge (j: TournamentJudge): Promise<TournamentJudge> {
     const person = await insertPerson(j)
     const judge = await insertJudge({ personId: person.id })
     const tournamentJudge = await insertTournamentJudge({ tournamentId: j.tournamentId, judgeId: judge.id })
     return { ...j, ...tournamentJudge }
+  }
+
+  async getTournamentJudge (id: string): Promise<(TournamentJudge & Id) | null> {
+    return await getTournamentJudgeAndPerson(id)
   }
 
   async listTournamentJudges (tournamentId: string): Promise<TournamentJudge[]> {

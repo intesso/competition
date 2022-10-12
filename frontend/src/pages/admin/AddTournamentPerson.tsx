@@ -1,30 +1,42 @@
 import { Button, Container, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { DateTime } from 'luxon'
 import SendIcon from '@mui/icons-material/Send'
-import { ApiContext } from '../contexts/ApiContext'
-import { Person } from '../contexts/ApiContextInterface'
+import { ApiContext } from '../../contexts/ApiContext'
+import { Person, Tournament, TournamentPerson } from '../../contexts/ApiContextInterface'
 
-interface AddPersonProps {
+interface AddTournamentPersonProps {
   role: 'tournamentAthlete' | 'tournamentJudge'
 }
 
 type RoleActions = {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any
-  [key in AddPersonProps['role']]: () => any
+  [key in AddTournamentPersonProps['role']]: () => any
 }
 
-export function AddPerson ({ role }: AddPersonProps) {
-  const { addTournamentAthlete, addTournamentJudge } = useContext(ApiContext)
+export function AddTournamentPerson ({ role }: AddTournamentPersonProps) {
+  const { listTournaments, addTournamentAthlete, addTournamentJudge } = useContext(ApiContext)
+
+  const [tournaments, setTournaments] = useState([] as Tournament[])
+  const [tournamentId, setTournamentId] = useState('')
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [gender, setGender] = useState('')
   const [birthDate, setBirthDate] = useState<DateTime>(DateTime.now())
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const t = await listTournaments()
+      setTournaments(t)
+    }
+    fetchData().catch(console.error)
+  }, [])
+
   function handleSend () {
-    const person: Person = {
+    const person: TournamentPerson = {
+      tournamentId,
       firstName,
       lastName,
       gender: gender as Person['gender'],
@@ -43,6 +55,21 @@ export function AddPerson ({ role }: AddPersonProps) {
         <Typography variant={'h4'} sx={{ marginTop: '22px', textAlign: 'center' }}>
           {getRoleName(role)} hinzufügen
         </Typography>
+
+        <FormControl fullWidth margin="normal">
+          <InputLabel id="tournamentId">Wettkampf</InputLabel>
+          <Select
+            labelId="tournamentId"
+            value={tournamentId}
+            label="Wettkampf"
+            onChange={(e) => setTournamentId(e.target.value)}
+          >
+            {tournaments.map((tournament) => (
+              <MenuItem key={tournament.id} value={tournament.id}>{tournament.tournamentName}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <TextField
           fullWidth={true}
           margin="normal"
@@ -98,7 +125,7 @@ export function AddPerson ({ role }: AddPersonProps) {
   )
 }
 
-function getRoleName (role: AddPersonProps['role']) {
+function getRoleName (role: AddTournamentPersonProps['role']) {
   switch (role) {
     case 'tournamentAthlete':
       return 'Athlet'

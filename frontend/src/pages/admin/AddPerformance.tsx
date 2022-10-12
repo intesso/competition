@@ -3,9 +3,9 @@ import { DateTimePicker } from '@mui/x-date-pickers'
 import { useContext, useEffect, useState } from 'react'
 import { DateTime } from 'luxon'
 import SendIcon from '@mui/icons-material/Send'
-import { ApiContext } from '../contexts/ApiContext'
-import { Category, Club, Location, Tournament } from '../contexts/ApiContextInterface'
-import { snakeToPascal } from '../lib/common'
+import { ApiContext } from '../../contexts/ApiContext'
+import { Category, Club, Location, Tournament } from '../../contexts/ApiContextInterface'
+import { snakeToPascal } from '../../lib/common'
 
 export function AddPerformance () {
   const { listTournaments, listLocations, listCategories, listClubs, addPerformance } = useContext(ApiContext)

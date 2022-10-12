@@ -12,8 +12,8 @@ import {
   Typography
 } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
-import { ApiContext } from '../contexts/ApiContext'
-import { Location, Tournament } from '../contexts/ApiContextInterface'
+import { ApiContext } from '../../contexts/ApiContext'
+import { Location, Tournament } from '../../contexts/ApiContextInterface'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import SaveIcon from '@mui/icons-material/Save'

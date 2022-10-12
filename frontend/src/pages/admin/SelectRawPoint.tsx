@@ -1,21 +1,26 @@
 import { Button, Container, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
-import { ApiContext } from '../contexts/ApiContext'
-import { Criteria, Performance, RawPoint, TorunamentJudge, Tournament } from '../contexts/ApiContextInterface'
-import { snakeToPascal } from '../lib/common'
-import { DateTime } from 'luxon'
+import { ApiContext } from '../../contexts/ApiContext'
+import { Criteria, JudgingRule, Performance, TorunamentJudge, Tournament } from '../../contexts/ApiContextInterface'
+import { snakeToPascal } from '../../lib/common'
+import { createSearchParams, useNavigate } from 'react-router-dom'
 
-export function AddRawPoint () {
-  const { listTournaments, listPerformances, listCriteria, listTournamentJudges, addRawPoint } = useContext(ApiContext)
+export function SelectRawPoint () {
+  const { listTournaments, listPerformances, listCriteria, listTournamentJudges, getJudgingRuleByCategoryId: getJudgingRule } = useContext(ApiContext)
+
+  const navigate = useNavigate()
 
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
   const [performances, setPerformances] = useState([] as Performance[])
   const [performanceId, setPerformanceId] = useState('')
+  const [categoryId, setCategoryId] = useState('')
 
   const [criteria, setCriteria] = useState([] as Criteria[])
   const [criteriaId, setCriteriaId] = useState('')
+
+  const [judgingRule, setJudgingRule] = useState(null as JudgingRule | null)
 
   const [tournamentJudges, setTournamentJudges] = useState([] as TorunamentJudge[])
   const [tournamentJudgeId, setTournamentJudgeId] = useState('')
@@ -45,32 +50,40 @@ export function AddRawPoint () {
     const fetchData = async () => {
       const performance = performances.find(p => p.id === performanceId)
       if (performance) {
+        setCategoryId(performance.categoryId)
         const c = await listCriteria(performance.categoryId)
+        c.forEach(it => console.log(it.criteriaName, it.subCriteriaDefinition))
         setCriteria(c)
+        const j = await getJudgingRule(performance.categoryId)
+        setJudgingRule(j)
       }
     }
     fetchData().catch(console.error)
   }, [performanceId])
 
-  async function handleSend () {
-    const rawPoint: RawPoint = {
-      performanceId,
-      tournamentJudgeId,
-      criteriaId,
-      subCriteriaPoints: {
-        earlyStart: false,
-        count: 0
-      },
-      timestamp: DateTime.now().toISO()
-    }
-    addRawPoint(rawPoint)
+  async function handleSelect () {
+    const judgingRuleName = judgingRule?.judgingRuleName || ''
+    const criteriaName = criteria.find(it => it.id === criteriaId)?.criteriaName || ''
+
+    navigate({
+      pathname: '/judging',
+      search: `?${createSearchParams({
+        tournamentId,
+        performanceId,
+        categoryId,
+        criteriaId,
+        tournamentJudgeId,
+        judgingRuleName,
+        criteriaName
+      })}`
+    })
   }
 
   return (
     <Container>
       <form>
         <Typography variant={'h4'} sx={{ marginTop: '22px', textAlign: 'center' }}>
-          Wertung hinzufügen
+          Wertung selektieren
         </Typography>
 
         <FormControl fullWidth margin="normal">
@@ -101,11 +114,11 @@ export function AddRawPoint () {
         </FormControl>
 
         <FormControl fullWidth margin="normal">
-          <InputLabel id="criteriaId">Kriterien</InputLabel>
+          <InputLabel id="criteriaId">Kriterium</InputLabel>
           <Select
             labelId="criteriaId"
             value={criteriaId}
-            label="Kategorie"
+            label="Kriterium"
             onChange={(e) => setCriteriaId(e.target.value)}
           >
             {criteria.map((criteria) => (
@@ -133,8 +146,8 @@ export function AddRawPoint () {
         </FormControl>
 
         <FormControl fullWidth margin="normal">
-          <Button variant="contained" fullWidth={true} endIcon={<SendIcon />} onClick={handleSend}>
-            Senden
+          <Button variant="contained" fullWidth={true} endIcon={<SendIcon />} onClick={handleSelect}>
+            Selektieren
           </Button>
         </FormControl>
       </form>

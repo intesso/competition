@@ -10,13 +10,13 @@ import {
   Typography
 } from '@mui/material'
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import { enterFullscreen } from '../lib/device'
+import { enterFullscreen } from '../../lib/device'
 import SendIcon from '@mui/icons-material/Send'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 
-import intessoLogo from '../themes/default/assets/intesso.svg'
-import { ApiContext } from '../contexts/ApiContext'
-import { RawPoint } from '../contexts/ApiContextInterface'
+import intessoLogo from '../../themes/default/assets/intesso.svg'
+import { ApiContext } from '../../contexts/ApiContext'
+import { RawPoint } from '../../contexts/ApiContextInterface'
 import { DateTime } from 'luxon'
 
 export default function Speed () {

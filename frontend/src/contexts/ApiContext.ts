@@ -1,24 +1,35 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Category, Club, Criteria, Location, Performance, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
+import { Category, Club, Criteria, JudgingRule, Location, Performance, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
+  // person
   addClub: (club: Club) => Promise<void>
   listClubs: () => Promise<Club[]>
+  // tournament
   listTournaments: () => Promise<Tournament[]>
+  addTournament: (tournament: Tournament) => Promise<void>
+  getTournament: (id: string) => Promise<Tournament | null>
+  addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
+  getTournamentAthlete: (tournamentId: string, id: string) => Promise<TournamentPerson | null>
+  addTournamentJudge: (person: TournamentPerson) => Promise<TournamentPerson>
+  getTournamentJudge: (tournamentId: string, id: string) => Promise<TournamentPerson | null>
+  listTournamentJudges: (tournamentId: string) => Promise<TournamentPerson[]>
+  addPerformance: (performance: Performance) => Promise<Performance>
+  getPerformance: (tournamentId: string, id: string) => Promise<Performance | null>
+  listPerformances: (tournamentId: string) => Promise<Performance[]>
   listLocations: (tournamentName: string) => Promise<Location[]>
-  listCategories: () => Promise<Category[]>
-  listCriteria: (categoryId: string) => Promise<Criteria[]>
   addLocation: (location: Location) => Promise<Location>
   modifyLocation: (location: Location) => Promise<Location>
   removeLocation: (location: Location) => Promise<void>
-  addTournament: (tournament: Tournament) => Promise<void>
-  addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
-  addTournamentJudge: (person: TournamentPerson) => Promise<TournamentPerson>
-  listTournamentJudges: (tournamentId: string) => Promise<TournamentPerson[]>
-  addPerformance: (performance: Performance) => Promise<Performance>
-  listPerformances: (tournamentId: string) => Promise<Performance[]>
+  // judging
+  listCategories: () => Promise<Category[]>
+  getCategory: (id: string) => Promise<Category | null>
+  listCriteria: (categoryId: string) => Promise<Criteria[]>
+  getCriteria: (id: string) => Promise<Criteria | null>
+  getJudgingRuleByCategoryId: (categoryId: string) => Promise<JudgingRule | null>
+  getJudgingRule: (id: string) => Promise<JudgingRule | null>
   addRawPoint: (rawPoint: RawPoint) => Promise<RawPoint>
 }
 
@@ -63,6 +74,16 @@ export function provideApiContext (): Api {
     ).data
   }
 
+  async function getTournament (id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${id}`,
+        method: 'GET'
+      })
+    ).data as Tournament | null
+  }
+
   async function listTournaments () {
     return (
       await axios({
@@ -71,6 +92,16 @@ export function provideApiContext (): Api {
         method: 'GET'
       })
     ).data as Tournament[]
+  }
+
+  async function getTournamentAthlete (tournamentId: string, id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/athletes/${id}`,
+        method: 'GET'
+      })
+    ).data as TorunamentAthlete
   }
 
   async function addTournamentAthlete (athlete: TorunamentAthlete) {
@@ -83,6 +114,16 @@ export function provideApiContext (): Api {
         data
       })
     ).data as TorunamentAthlete
+  }
+
+  async function getTournamentJudge (tournamentId: string, id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/judges/${id}`,
+        method: 'GET'
+      })
+    ).data as TorunamentJudge
   }
 
   async function addTournamentJudge (judge: TorunamentJudge) {
@@ -175,6 +216,26 @@ export function provideApiContext (): Api {
     ).data as Performance[]
   }
 
+  async function getPerformance (tournamentId: string, id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performances/${id}`,
+        method: 'GET'
+      })
+    ).data as Performance | null
+  }
+
+  async function getCategory (id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/judging/categories/${id}`,
+        method: 'GET'
+      })
+    ).data as Category | null
+  }
+
   async function listCategories () {
     return (
       await axios({
@@ -185,6 +246,16 @@ export function provideApiContext (): Api {
     ).data as Category[]
   }
 
+  async function getCriteria (id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/judging/criteria/${id}`,
+        method: 'GET'
+      })
+    ).data as Criteria | null
+  }
+
   async function listCriteria (categoryId: string) {
     return (
       await axios({
@@ -193,6 +264,26 @@ export function provideApiContext (): Api {
         method: 'GET'
       })
     ).data as Criteria[]
+  }
+
+  async function getJudgingRule (id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/judging/judging-rule/${id}`,
+        method: 'GET'
+      })
+    ).data as JudgingRule | null
+  }
+
+  async function getJudgingRuleByCategoryId (categoryId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/judging/judging-rule?categoryId=${categoryId}`,
+        method: 'GET'
+      })
+    ).data as JudgingRule | null
   }
 
   async function addRawPoint (points: RawPoint) {
@@ -212,18 +303,26 @@ export function provideApiContext (): Api {
     addClub,
     listClubs,
     addTournament,
+    getTournament,
     listTournaments,
     listLocations,
     addLocation,
     modifyLocation,
     removeLocation,
     addTournamentAthlete,
+    getTournamentAthlete,
     addTournamentJudge,
+    getTournamentJudge,
     listTournamentJudges,
     addPerformance,
+    getPerformance,
     listPerformances,
+    getCategory,
     listCategories,
+    getCriteria,
     listCriteria,
+    getJudgingRule,
+    getJudgingRuleByCategoryId,
     addRawPoint
   }
 }

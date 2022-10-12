@@ -17,9 +17,9 @@ export interface Person {
   birthDate: string
 }
 
-export type TournamentPerson = Person & {id?: string, tournamentId: string}
-export type TorunamentAthlete = TournamentPerson
-export type TorunamentJudge = TournamentPerson
+export type TournamentPerson = Person & { id?: string, tournamentId: string };
+export type TorunamentAthlete = TournamentPerson;
+export type TorunamentJudge = TournamentPerson;
 
 export interface Address {
   street: string
@@ -52,7 +52,7 @@ export interface Location {
   tournamentId: string
   locationName: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  locationCoordinates?:any
+  locationCoordinates?: any
 }
 
 export interface Category {
@@ -72,6 +72,12 @@ export interface Criteria {
   criteriaName: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   subCriteriaDefinition: any
+}
+
+export interface JudgingRule {
+  id?: string
+  judgingRuleDescription: string | null
+  judgingRuleName: string
 }
 
 export interface Performance {
