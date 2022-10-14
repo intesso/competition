@@ -2,7 +2,7 @@ export interface RawPoint {
   performanceId: string
   tournamentJudgeId: string
   criteriaId: string
-  subCriteriaPoints: SubCriteria
+  subCriteriaPoints: SubCriteriaValue
   timestamp: string
 }
 
@@ -70,9 +70,30 @@ export interface Criteria {
   id?: string
   judgingRuleId: string
   criteriaName: string
+  criteriaDescription: string
+  criteriaUiLayout: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  subCriteriaDefinition: any
+  subCriteriaDefinition: SubCriteriaDefinition
 }
+
+export interface SubCriteriaDefinition {
+  [subCriteriaName: string]: SubCriteriaProps
+}
+
+export interface SubCriteriaValue {
+  [subCriteriaName: string]: SubCriteriaValueProps
+}
+
+export interface SubCriteriaProps {
+  rangeEnd: number
+  rangeStart: number
+  subCriteriaName: string
+  subCriteriaDescription: string
+  valueType: 'integer' | 'number' | 'float' | 'boolean'
+  uiPosition: string
+}
+
+export type SubCriteriaValueProps = SubCriteriaProps & { value: number}
 
 export interface JudgingRule {
   id?: string

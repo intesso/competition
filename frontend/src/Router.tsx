@@ -6,24 +6,33 @@ import { EditLocation } from './pages/admin/EditLocation'
 import Speed from './pages/admin/Speed'
 import { AddTournamentPerson } from './pages/admin/AddTournamentPerson'
 import { AddPerformance } from './pages/admin/AddPerformance'
-import { AddRawPoint } from './pages/admin/AddRawPoint'
+import { RawPointInput } from './pages/judging/RawPointInput'
 import { SelectRawPoint } from './pages/admin/SelectRawPoint'
 import { JudgingApp } from './pages/judging/JudgingApp'
+import { AdminApp } from './pages/admin/AdminApp'
+import { Overview } from './pages/admin/Overview'
 
 export const Router = () => (
   <Routes>
-    <Route path='/' element={<App />}>
-      <Route path='speed' element={<Speed />} />
-      <Route path='add-club' element={<AddClub />}/>
-      <Route path='add-tournament' element={<AddTournament />}/>
-      <Route path='edit-location' element={<EditLocation />}/>
-      <Route path='add-judge' element={<AddTournamentPerson role='tournamentJudge'/>}/>
-      <Route path='add-athlete' element={<AddTournamentPerson role='tournamentAthlete'/>}/>
-      <Route path='add-performance' element={<AddPerformance/>}/>
-      <Route path='select-raw-point' element={<SelectRawPoint/>}/>
-      <Route path='add-raw-point' element={<AddRawPoint/>}/>
-      <Route path='/judging' element={<JudgingApp />}>
-        <Route path='' element={<AddRawPoint />} />
+    <Route path="/" element={<App />}>
+
+      <Route path="/admin" element={<AdminApp />}>
+        <Route path="overview" element={<Overview />} />
+        {/* TODO remove */}
+        <Route path="speed" element={<Speed />} />
+        <Route path="add-club" element={<AddClub />} />
+        <Route path="add-tournament" element={<AddTournament />} />
+        <Route path="edit-location" element={<EditLocation />} />
+        <Route path="add-judge" element={<AddTournamentPerson role="tournamentJudge" />} />
+        <Route path="add-athlete" element={<AddTournamentPerson role="tournamentAthlete" />} />
+        <Route path="add-performance" element={<AddPerformance />} />
+        <Route path="select-raw-point" element={<SelectRawPoint />} />
+      </Route>
+
+      <Route path="/judging" element={<JudgingApp />}>
+        <Route path="3x3" element={<RawPointInput layout="3x3" />} />
+        <Route path="3x2" element={<RawPointInput layout="3x2" />} />
+        <Route path="1-3x1" element={<RawPointInput layout="1-3x1" />} />
       </Route>
     </Route>
 
@@ -35,6 +44,5 @@ export const Router = () => (
         </main>
       }
     />
-
   </Routes>
 )

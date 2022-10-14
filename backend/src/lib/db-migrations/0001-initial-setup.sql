@@ -227,6 +227,8 @@ CREATE TABLE "Criteria" (
   id uuid NOT NULL,
   "judgingRuleId" uuid NOT NULL,
   "criteriaName" text NOT NULL,
+  "criteriaDescription" text NOT NULL,
+  "criteriaUiLayout" text NULL,
   "subCriteriaDefinition" jsonb NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,

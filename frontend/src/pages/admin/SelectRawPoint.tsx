@@ -63,20 +63,26 @@ export function SelectRawPoint () {
 
   async function handleSelect () {
     const judgingRuleName = judgingRule?.judgingRuleName || ''
-    const criteriaName = criteria.find(it => it.id === criteriaId)?.criteriaName || ''
+    const foundCriteria = criteria.find(it => it.id === criteriaId)
+    if (foundCriteria) {
+      const criteriaName = foundCriteria.criteriaName
+      const criteriaUiLayout = foundCriteria.criteriaUiLayout
 
-    navigate({
-      pathname: '/judging',
-      search: `?${createSearchParams({
-        tournamentId,
-        performanceId,
-        categoryId,
-        criteriaId,
-        tournamentJudgeId,
-        judgingRuleName,
-        criteriaName
-      })}`
-    })
+      navigate({
+        pathname: `/judging/${criteriaUiLayout}`,
+        search: `?${createSearchParams({
+          tournamentId,
+          performanceId,
+          categoryId,
+          criteriaId,
+          tournamentJudgeId,
+          judgingRuleName,
+          criteriaName
+        })}`
+      })
+    } else {
+      console.error(`no criteria found for criteriaId: ${criteriaId}`)
+    }
   }
 
   return (

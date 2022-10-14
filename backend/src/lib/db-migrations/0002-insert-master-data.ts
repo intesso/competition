@@ -59,19 +59,36 @@ async function insertCriteria () {
     id: rows[0][0] as string,
     judgingRuleId: rows[0][1] as string,
     criteriaName: rows[0][3] as string,
+    criteriaDescription: rows[0][4] as string,
+    criteriaUiLayout: rows[0][10] as string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    subCriteriaDefinition: rows.map((row: any) => ({
-      subCriteriaName: row[4],
-      valueType: row[5],
-      rangeStart: row[6],
-      rangeEnd: row[7]
-    })),
+    subCriteriaDefinition: rows.reduce((memo: any, row: any) => {
+      memo[row[5]] = {
+        subCriteriaName: row[5],
+        subCriteriaDescription: row[6],
+        valueType: row[7],
+        rangeStart: parseInput(row[7], row[8]),
+        rangeEnd: parseInput(row[7], row[9]),
+        uiPosition: row[11]
+      }
+      return memo
+    }, {}),
     createdAt: new Date()
   }))
   console.log('criteria', records)
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function parseInput (valueType: string, input: any) {
+    if (valueType === 'integer' || valueType === 'int') {
+      return parseInt(input)
+    } else if (valueType === 'number' || valueType === 'float') {
+      return parseFloat(input)
+    }
+    return input
+  }
+
   return await Criteria(db).bulkInsert({
-    columnsToInsert: ['subCriteriaDefinition', 'createdAt'],
+    columnsToInsert: ['subCriteriaDefinition', 'criteriaUiLayout', 'createdAt'],
     records
   })
 }

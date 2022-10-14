@@ -3,7 +3,18 @@ import { Outlet, useSearchParams } from 'react-router-dom'
 import type {} from '@mui/x-date-pickers/themeAugmentation'
 import { ApiContext } from '../../contexts/ApiContext'
 import { Category, Criteria, JudgingRule, Performance, TournamentPerson } from '../../contexts/ApiContextInterface'
-import { AppBar, Box, IconButton, List, ListItem, ListItemText, Stack, Toolbar } from '@mui/material'
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  Toolbar,
+  Typography
+} from '@mui/material'
 
 import Logo from '../../themes/default/assets/ropeskipping_swiss_logo.png'
 import { snakeToPascal } from '../../lib/common'
@@ -14,6 +25,8 @@ export interface AppProps {
 
 export function JudgingApp ({ children }: AppProps) {
   const { getTournamentJudge, getPerformance, getCategory, getCriteria, getJudgingRule } = useContext(ApiContext)
+
+  const [showTopDrawer, setShowTopDrawer] = useState(false)
 
   const [searchParams] = useSearchParams()
   const tournamentId = searchParams.get('tournamentId')
@@ -27,9 +40,12 @@ export function JudgingApp ({ children }: AppProps) {
   const judgingRuleId = searchParams.get('judgingRuleId')
   const [judgingRule, setJudgingRule] = useState(null as JudgingRule | null)
 
+  // TODO remove judgingRule if not neeeded
+  console.log('judgingRule', judgingRule)
+
   useEffect(() => {
     const fetchData = async () => {
-      if (tournamentJudgeId && performanceId) {
+      if (tournamentId && performanceId) {
         setPerformance(await getPerformance(tournamentId, performanceId))
       }
       if (criteriaId) {
@@ -54,9 +70,83 @@ export function JudgingApp ({ children }: AppProps) {
     fetchData().catch(console.error)
   }, [performance])
 
+  function Infos () {
+    return (
+      <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'column' }} spacing={{ xs: 0, sm: 0, md: 0 }}>
+        <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
+          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
+            <ListItem>
+              <ListItemText primary="Kriterium" secondary={criteria?.criteriaName} />
+            </ListItem>
+          </List>
+          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
+            <ListItem>
+              <ListItemText primary="PERFORMANCE NAME" secondary={performance?.performanceName} />
+            </ListItem>
+          </List>
+          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
+            <ListItem>
+              <ListItemText primary="PERFORMANCE NUMMER" secondary={performance?.performanceNumber} />
+            </ListItem>
+          </List>
+        </Stack>
+        <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
+          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
+            <ListItem>
+              <ListItemText primary="KATEGORIE" secondary={snakeToPascal(category?.categoryName || '')} />
+            </ListItem>
+          </List>
+          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
+            <ListItem>
+              <ListItemText primary="DISZIPLIN" secondary={category?.discipline} />
+            </ListItem>
+          </List>
+          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
+            <ListItem>
+              <ListItemText
+                primary="WERTUNGSRICHTER"
+                secondary={(tournamentJudge?.firstName || '') + ' ' + (tournamentJudge?.lastName || '')}
+              />
+            </ListItem>
+          </List>
+        </Stack>
+      </Stack>
+    )
+  }
+
   return (
     <>
-      <AppBar position="static">
+      {/* Small Device AppBar */}
+      <AppBar position="static" sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}>
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={() => setShowTopDrawer(!showTopDrawer)}
+          >
+            <Box
+              component="img"
+              sx={{
+                height: 30
+              }}
+              alt="logo"
+              src={Logo}
+            />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {/* Title */}
+          </Typography>
+          <Drawer anchor="top" open={showTopDrawer} onClose={() => setShowTopDrawer(false)}>
+            <Infos />
+          </Drawer>
+        </Toolbar>
+      </AppBar>
+
+      {/* Big Device AppBar */}
+      <AppBar position="static" sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <Box
@@ -64,49 +154,11 @@ export function JudgingApp ({ children }: AppProps) {
               sx={{
                 height: 100
               }}
-              alt="Your logo."
+              alt="logo"
               src={Logo}
             />
           </IconButton>
-          {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            KATEGORIE
-          </Typography> */}
-          <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'column' }} spacing={{ xs: 0, sm: 0, md: 0 }}>
-            <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
-              <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-                <ListItem>
-                  <ListItemText primary="Kriterium" secondary={criteria?.criteriaName} />
-                </ListItem>
-              </List>
-              <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-                <ListItem>
-                  <ListItemText primary="PERFORMANCE NAME" secondary={performance?.performanceName} />
-                </ListItem>
-              </List>
-              <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-                <ListItem>
-                  <ListItemText primary="PERFORMANCE NUMMER" secondary={performance?.performanceNumber} />
-                </ListItem>
-              </List>
-            </Stack>
-            <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
-              <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-                <ListItem>
-                  <ListItemText primary="KATEGORIE" secondary={snakeToPascal(category?.categoryName || '')} />
-                </ListItem>
-              </List>
-              <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-                <ListItem>
-                  <ListItemText primary="DISZIPLIN" secondary={category?.discipline} />
-                </ListItem>
-              </List>
-              <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-                <ListItem>
-                  <ListItemText primary="WERTUNGSRICHTER" secondary={(tournamentJudge?.firstName || '') + ' ' + (tournamentJudge?.lastName || '')} />
-                </ListItem>
-              </List>
-            </Stack>
-          </Stack>
+          <Infos />
         </Toolbar>
       </AppBar>
 
