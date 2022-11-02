@@ -69,7 +69,6 @@ export interface RawPoint {
   performanceId: string
   tournamentJudgeId: string
   criteriaId: string
-  criteriaName: string
   subCriteriaPoints: SubCriteriaValue
   timestamp: string
 }

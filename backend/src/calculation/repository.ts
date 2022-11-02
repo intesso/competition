@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { CategoryPoint, CategoryRank, Combination, CombinationRank, db } from '../lib/db/database'
 import { CategoryPoint_InsertParameters, CategoryRank_InsertParameters, CombinationRank_InsertParameters } from '../lib/db/__generated__'
-import { newRecordAttributes } from '../lib/common'
+import { newRecordAttributes, updateRecordAttributes } from '../lib/common'
 
 // CategoryPoint
 export async function insertCategoryPoint (categoryPoint: Omit<CategoryPoint_InsertParameters, 'id'>) {
@@ -22,18 +22,39 @@ export async function findCategoryPointByPerformanceId (performanceId: string) {
   return await CategoryPoint(db).findOne({ performanceId })
 }
 
+export async function findCategoryPointByCategoryId (tournamentId: string, categoryId: string) {
+  return await CategoryPoint(db).find({ tournamentId, categoryId }).orderByDesc('categoryPoint').all()
+}
+
 // CategoryRank
 export async function insertCategoryRank (categoryRank: Omit<CategoryRank_InsertParameters, 'id'>) {
   const [insertedCategoryRank] = await CategoryRank(db).insert({ ...categoryRank, ...newRecordAttributes() })
   return insertedCategoryRank
 }
 
+export async function insertOrUpdateCategoryRanks (categoryRanks: Omit<CategoryRank_InsertParameters, 'id'>[]) {
+  const records = categoryRanks.map(r => ({
+    tournamentId: r.tournamentId,
+    categoryId: r.categoryId,
+    categoryPointId: r.categoryPointId,
+    categoryRank: r.categoryRank === undefined ? null : r.categoryRank,
+    ...newRecordAttributes(),
+    ...updateRecordAttributes()
+  }))
+  return await CategoryRank(db).bulkInsertOrUpdate({
+    columnsToInsert: ['tournamentId', 'categoryId', 'categoryPointId', 'categoryRank', 'createdAt', 'updatedAt'],
+    columnsThatConflict: ['tournamentId', 'categoryId', 'categoryPointId'],
+    columnsToUpdate: ['categoryRank', 'updatedAt'],
+    records
+  })
+}
+
 export async function findCategoryRankById (id: string) {
   return await CategoryRank(db).findOne({ id })
 }
 
-export async function findCategoryPointByCategoryId (categoryId: string) {
-  return await CategoryRank(db).findOne({ categoryId })
+export async function findCategoryRankByCategoryId (tournamentId: string, categoryId: string) {
+  return await CategoryRank(db).find({ tournamentId, categoryId }).orderByDesc('categoryRank').all()
 }
 
 // CombinationRank

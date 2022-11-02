@@ -9,6 +9,7 @@ test('should insert/find categoryPoint', async () => {
   const categoryPoint = await insertCategoryPoint({
     tournamentId: performance.tournamentId,
     performanceId: performance.id,
+    categoryId: performance.categoryId,
     categoryPoint: 200,
     criteriaPoints: {}
   })

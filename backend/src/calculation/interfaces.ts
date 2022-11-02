@@ -1,5 +1,8 @@
 import { IGetApplicationContext } from '../../applicationContext'
 
+import { CategoryRank as CategoryRankDAO } from '../lib/db/__generated__'
+export type CategoryRank = Omit<CategoryRankDAO, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy'>
+
 export interface CalculationPointsInput {
   tournamentId: string
   performanceId: string
@@ -67,22 +70,12 @@ export interface CalculationPointsOutput {
 }
 
 export interface CalculationCategoryRanksInput {
+  tournamentId: string
   categoryId: string
-  categoryName: string
-  judgingRulId: string
-  competition: string
-  group: string
-  level: string
-  type: string
-  discipline: string
-  timestamp?: string
 }
 
 // TODO create real interfaces
-export interface CalculationCategoryRanksOutput extends CalculationCategoryRanksInput {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any
-}
+export type CalculationCategoryRanksOutput = CategoryRank[]
 export type CalculationCombinationRanksInput = CalculationCategoryRanksInput
 export type CalculationCombinationRanksOutput = CalculationCategoryRanksInput
 

@@ -267,6 +267,7 @@ CREATE TABLE "CategoryPoint" (
   id uuid NOT NULL,
   "tournamentId" uuid NOT NULL,
   "performanceId" uuid NOT NULL,
+  "categoryId" uuid NOT NULL,
   "categoryPoint" int NULL,
   "criteriaPoints" jsonb NULL,
   "createdAt" timestamp NULL,
@@ -276,14 +277,15 @@ CREATE TABLE "CategoryPoint" (
   CONSTRAINT "CategoryPointPK" PRIMARY KEY (id),
   CONSTRAINT "CategoryPointPerformanceIdUnique" UNIQUE ("performanceId"),
   FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
-  FOREIGN KEY ("performanceId") REFERENCES "Performance"(id)
+  FOREIGN KEY ("performanceId") REFERENCES "Performance"(id),
+  FOREIGN KEY ("categoryId") REFERENCES "Category"(id)
 );
 CREATE TABLE "CategoryRank" (
   id uuid NOT NULL,
   "tournamentId" uuid NOT NULL,
   "categoryPointId" uuid NOT NULL,
   "categoryId" uuid NOT NULL,
-  "rank" int NULL,
+  "categoryRank" int NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
@@ -298,7 +300,7 @@ CREATE TABLE "CombinationRank" (
   "tournamentId" uuid NOT NULL,
   "categoryPointId" uuid NOT NULL,
   "combinationId" uuid NOT NULL,
-  "rank" int NULL,
+  "combinationRank" int NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
