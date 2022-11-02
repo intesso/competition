@@ -16,27 +16,15 @@
     {
         "id": "d5b708b9aa215a10",
         "type": "tab",
-        "label": "flow-single-u12-speed-double-dutch",
+        "label": "common",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "088f1c8f9d228725",
-        "type": "subflow",
-        "name": "prepare-calc",
-        "info": "",
-        "category": "",
-        "in": [],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
         "id": "99e74a7c62587047",
         "type": "subflow",
-        "name": "mapParam",
+        "name": "calculate(Sub)CriteriaPoints",
         "info": "",
         "category": "",
         "in": [
@@ -52,7 +40,7 @@
         ],
         "out": [
             {
-                "x": 450,
+                "x": 510,
                 "y": 80,
                 "wires": [
                     {
@@ -62,23 +50,7 @@
                 ]
             }
         ],
-        "env": [
-            {
-                "name": "paramName",
-                "type": "str",
-                "value": "count",
-                "ui": {
-                    "icon": "font-awesome/fa-paragraph",
-                    "type": "input",
-                    "opts": {
-                        "types": [
-                            "str",
-                            "env"
-                        ]
-                    }
-                }
-            }
-        ],
+        "env": [],
         "meta": {},
         "color": "#D8BFD8",
         "inputLabels": [
@@ -89,7 +61,85 @@
         ]
     },
     {
-        "id": "2302e75a80ce82b5",
+        "id": "36dc69b49ec5d9e3",
+        "type": "subflow",
+        "name": "calculateAggregatedCriteriaPoints",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "c771e118e2f5b038"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 590,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "c771e118e2f5b038",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "a84c5aee3cad0e1d",
+        "type": "subflow",
+        "name": "calculateCategoryPoints",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "8cc0a2b8191cee18"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 550,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "8cc0a2b8191cee18",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "inputLabels": [
+            "msg"
+        ],
+        "outputLabels": [
+            "msg"
+        ]
+    },
+    {
+        "id": "bea78bc3996d3b78",
         "type": "group",
         "z": "b79a946966637772",
         "name": "REST API Request/Response",
@@ -97,76 +147,115 @@
             "label": true
         },
         "nodes": [
-            "bd45edf318a2751c",
-            "6d9acaead57c3790",
-            "7d2a7c1108ebedc2",
-            "84da80740c41553b",
-            "8fea72b89e0a03cf",
-            "2946de5e71bd1ccc",
-            "ce10b3db872ebd6c",
-            "dc7585f452cba8b7",
-            "49c59d47537cbaaf"
+            "5eaecf71af59a450",
+            "755ba42d257ee185",
+            "d86f6297fe2e2362",
+            "1aea680b0b9c6684",
+            "542db1030e144e78",
+            "3044e6dd8f5cb2a1",
+            "85c8a41745bce43f",
+            "11ac424b8c510a53",
+            "520b800272c0658f",
+            "5f66ae1a2cf8dbaf",
+            "13d7dba2f124c9c1",
+            "e9fe916615269ced",
+            "7127a0f0abaa8112",
+            "8a53d6ee984076cd"
         ],
-        "x": 94,
-        "y": 59,
-        "w": 1472,
-        "h": 242
+        "x": 54,
+        "y": 39,
+        "w": 1692,
+        "h": 302
     },
     {
         "id": "809f072675aa7ae8",
         "type": "function",
         "z": "99e74a7c62587047",
-        "name": "mapValues (count)",
-        "func": "const inputs = msg.payload.inputs;\n\nconst values = []\nconst counts = inputs\n    .forEach((input) => {\n        input.parameters.forEach((param) => {\n            if (param.name === env.get('paramName')) {\n                values.push(param.value)\n            }\n        })\n    })\n\nmsg.calc = msg.calc || {};\nmsg.calc.values = values;\n\nreturn msg;",
+        "name": "calculate(Sub)CriteriaPoints",
+        "func": "const judgeCriteria = msg.payload.judgeCriteria;\n\nObject.values(judgeCriteria).forEach(criteria => {\n    criteria.judges\n        .forEach((judge) => {\n            let calculatedCriteriaPoints = 0\n            Object.values(judge.subCriteriaPoints).forEach((subCriteria) => {\n                const name = subCriteria.subCriteriaName\n                const weight = subCriteria.subCriteriaWeight\n                const points = Math.ceil(subCriteria.value * parseFloat(weight) / 100)\n                calculatedCriteriaPoints += points\n                subCriteria.calculatedPoints = points\n            })\n            judge.calculatedCriteriaPoints = calculatedCriteriaPoints\n        })\n})\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 250,
+        "x": 280,
         "y": 80,
         "wires": [
             []
-        ],
-        "info": "map parameter values\n\nit maps the parameter value with the name ${parameterName} to the `msg.calc.values` array."
+        ]
     },
     {
-        "id": "bd45edf318a2751c",
+        "id": "c771e118e2f5b038",
+        "type": "function",
+        "z": "36dc69b49ec5d9e3",
+        "name": "calculateAggregatedCriteriaPoints",
+        "func": "const judgeCriteria = msg.payload.judgeCriteria\n\nObject.values(judgeCriteria).forEach(criteria  => {\n    const aggregationMethod = criteria.criteriaName === 'speed' ? 'bandwidth' : 'average'\n    const calculatedCriteriaPoints = criteria.judges\n        .map(judge => judge.calculatedCriteriaPoints)\n        .filter(point => point !== undefined && point !== null)\n\n    const sortedCalculatedCriteriaPoints = [...calculatedCriteriaPoints || []].sort((a, b) => a - b)\n    const elements = sortedCalculatedCriteriaPoints.length\n\n    const stats = {}\n    stats.hint = 'average'\n    stats.sortedValues = sortedCalculatedCriteriaPoints\n    stats.min = sortedCalculatedCriteriaPoints[0]\n    stats.max = sortedCalculatedCriteriaPoints[elements - 1]\n    stats.diff = Math.abs(stats.max - stats.min)\n    stats.avg = sortedCalculatedCriteriaPoints.reduce((memo, value) => memo += value, 0) / elements\n\n    criteria.calculatedAggregatedCriteriaStats = stats\n    criteria.calculatedAggregationMethod = aggregationMethod\n\n\n    if (aggregationMethod === 'average') {\n        criteria.calculatedAggregatedCriteriaPoints = stats.avg\n    } else if (aggregationMethod === 'bandwidth') {\n        if (elements < 3) {\n            if (stats.diff > 5) {\n                stats.hint = 'error'\n                stats.error = `points bandwidth is too high: ${JSON.stringify(stats.sortedValues)}, diff: ${stats.diff}`\n                criteria.calculatedAggregatedCriteriaPoints = null\n            } else {\n                stats.hint = 'lessThan3Results'\n                criteria.calculatedAggregatedCriteriaPoints = stats.avg\n            }\n        } else if (stats.diff === 0) {\n            stats.hint = 'allEqual'\n            criteria.calculatedAggregatedCriteriaPoints = stats.avg\n        } else if (sortedCalculatedCriteriaPoints[0] === sortedCalculatedCriteriaPoints[1]) {\n            stats.hint = '2Equal'\n            criteria.calculatedAggregatedCriteriaPoints = sortedCalculatedCriteriaPoints[0]\n        } else if (sortedCalculatedCriteriaPoints[0] === sortedCalculatedCriteriaPoints[2]) {\n            stats.hint = '2Equal'\n            criteria.calculatedAggregatedCriteriaPoints = sortedCalculatedCriteriaPoints[0]\n        } else if (sortedCalculatedCriteriaPoints[1] === sortedCalculatedCriteriaPoints[2]) {\n            stats.hint = '2Equal'\n            criteria.calculatedAggregatedCriteriaPoints = sortedCalculatedCriteriaPoints[1]\n        } else {\n            const d1 = Math.abs(sortedCalculatedCriteriaPoints[0] - sortedCalculatedCriteriaPoints[1])\n            const d2 = Math.abs(sortedCalculatedCriteriaPoints[1] - sortedCalculatedCriteriaPoints[2])\n            if (d1 <= 5 && d2 <= 5) {\n                stats.hint = 'withinBandwidth'\n                criteria.calculatedAggregatedCriteriaPoints = stats.avg\n            } else if (d1 > 5 && d2 > 5) {\n                stats.hint = 'error'\n                stats.error = `points bandwidth is too high: ${JSON.stringify(stats.sortedValues)}, d1: ${d1}, d2: ${d2}`\n                criteria.calculatedAggregatedCriteriaPoints = null\n            } else if (d1 > 5) {\n                stats.hint = 'd1>5'\n                criteria.calculatedAggregatedCriteriaPoints = (sortedCalculatedCriteriaPoints[1] + sortedCalculatedCriteriaPoints[2]) / 2\n            } else if (d2 > 5) {\n                stats.hint = 'd2>5'\n                criteria.calculatedAggregatedCriteriaPoints = (sortedCalculatedCriteriaPoints[0] + sortedCalculatedCriteriaPoints[1]) / 2\n            } else {\n                stats.hint = 'error'\n                stats.error = `unknown case for values: ${JSON.stringify(stats.sortedValues)}`\n                criteria.calculatedAggregatedCriteriaPoints = null\n            }\n        }\n    } else {\n        stats.hint = 'error'\n        stats.error = `aggregationMethod: ${aggregationMethod} unknown`\n        criteria.calculatedAggregatedCriteriaPoints = null\n    }\n\n    criteria.calculatedAggregatedCriteriaPointsRaw = criteria.calculatedAggregatedCriteriaPoints\n    criteria.calculatedAggregatedCriteriaPoints = Math.ceil(criteria.calculatedAggregatedCriteriaPoints)\n})\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8cc0a2b8191cee18",
+        "type": "function",
+        "z": "a84c5aee3cad0e1d",
+        "name": "calculateCategoryPoints",
+        "func": "const category = msg.payload;\nconst stats = {}\n\ncategory.calculatedCategoryPoints = Object.values(category.judgeCriteria).reduce((memo, criteria) => {\n    const weight = criteria.criteriaWeight\n    const points = Math.ceil((criteria.calculatedAggregatedCriteriaPoints || 0) * weight / 100)\n    stats[criteria.criteriaName] = points\n    return memo + points\n}, 0)\n\ncategory.calculatedCategoryStats = stats\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5eaecf71af59a450",
         "type": "http response",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
+        "g": "bea78bc3996d3b78",
         "name": "statuscode-ok",
         "statusCode": "200",
         "headers": {},
-        "x": 1400,
-        "y": 100,
+        "x": 1580,
+        "y": 200,
         "wires": []
     },
     {
-        "id": "6d9acaead57c3790",
+        "id": "755ba42d257ee185",
         "type": "http in",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
-        "name": "/engine/calculations",
-        "url": "/engine/calculations",
+        "g": "bea78bc3996d3b78",
+        "name": "/engine/calculations/points",
+        "url": "/engine/calculations/points",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 210,
-        "y": 140,
+        "x": 190,
+        "y": 120,
         "wires": [
             [
-                "7d2a7c1108ebedc2",
-                "84da80740c41553b"
+                "d86f6297fe2e2362",
+                "1aea680b0b9c6684",
+                "13d7dba2f124c9c1"
             ]
         ]
     },
     {
-        "id": "7d2a7c1108ebedc2",
+        "id": "d86f6297fe2e2362",
         "type": "debug",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
-        "name": "debug-request",
+        "g": "bea78bc3996d3b78",
+        "name": "debug-request-payload",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -175,15 +264,15 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 460,
-        "y": 260,
+        "x": 470,
+        "y": 240,
         "wires": []
     },
     {
-        "id": "84da80740c41553b",
+        "id": "1aea680b0b9c6684",
         "type": "change",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
+        "g": "bea78bc3996d3b78",
         "name": "set-request-target",
         "rules": [
             {
@@ -197,8 +286,8 @@
                 "t": "set",
                 "p": "target",
                 "pt": "msg",
-                "to": "payload.calculationType",
-                "tot": "msg"
+                "to": "common",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -206,103 +295,103 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 470,
-        "y": 140,
+        "x": 510,
+        "y": 120,
         "wires": [
             [
-                "ce10b3db872ebd6c"
+                "85c8a41745bce43f"
             ]
         ]
     },
     {
-        "id": "8fea72b89e0a03cf",
+        "id": "542db1030e144e78",
         "type": "switch",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
+        "g": "bea78bc3996d3b78",
         "name": "",
         "property": "payload",
         "propertyType": "msg",
         "rules": [
             {
-                "t": "jsonata_exp",
-                "v": "$exists([msg.payload.code=\"OK\"])\t",
-                "vt": "jsonata"
+                "t": "cont",
+                "v": "error",
+                "vt": "msg"
             },
             {
                 "t": "jsonata_exp",
-                "v": "$exists([msg.payload.code!=\"OK\"])",
+                "v": "$exists([msg.payload.code=\"OK\"])\t",
                 "vt": "jsonata"
             }
         ],
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 1150,
-        "y": 140,
+        "x": 1190,
+        "y": 120,
         "wires": [
             [
-                "bd45edf318a2751c"
+                "7127a0f0abaa8112"
             ],
             [
-                "2946de5e71bd1ccc"
+                "5eaecf71af59a450"
             ]
         ]
     },
     {
-        "id": "2946de5e71bd1ccc",
+        "id": "3044e6dd8f5cb2a1",
         "type": "http response",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
+        "g": "bea78bc3996d3b78",
         "name": "statuscode-bad-request",
         "statusCode": "400",
         "headers": {},
-        "x": 1430,
-        "y": 180,
+        "x": 1610,
+        "y": 80,
         "wires": []
     },
     {
-        "id": "ce10b3db872ebd6c",
+        "id": "85c8a41745bce43f",
         "type": "link call",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
+        "g": "bea78bc3996d3b78",
         "name": "calculation-selector",
         "links": [],
         "linkType": "dynamic",
         "timeout": "3",
-        "x": 710,
-        "y": 140,
+        "x": 750,
+        "y": 120,
         "wires": [
             [
-                "dc7585f452cba8b7"
+                "11ac424b8c510a53"
             ]
         ]
     },
     {
-        "id": "dc7585f452cba8b7",
+        "id": "11ac424b8c510a53",
         "type": "function",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
+        "g": "bea78bc3996d3b78",
         "name": "set-response",
-        "func": "msg.payload = {\n    result: {\n        code: msg.code,\n        score: msg.score\n    },\n    meta: {\n        version: env.version,\n        time: Date.now(),\n        target: msg.target\n    },\n    inputs: msg.req.body\n}\nreturn msg;",
+        "func": "msg.payload = {\n    meta: {\n        version: env.version,\n        timestamp: Date.now(),\n        target: msg.target\n    },\n    ...msg.payload,\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 950,
-        "y": 140,
+        "x": 990,
+        "y": 120,
         "wires": [
             [
-                "8fea72b89e0a03cf",
-                "49c59d47537cbaaf"
+                "542db1030e144e78",
+                "520b800272c0658f"
             ]
         ]
     },
     {
-        "id": "49c59d47537cbaaf",
+        "id": "520b800272c0658f",
         "type": "debug",
         "z": "b79a946966637772",
-        "g": "2302e75a80ce82b5",
+        "g": "bea78bc3996d3b78",
         "name": "debug-response",
         "active": true,
         "tosidebar": true,
@@ -312,17 +401,123 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1180,
-        "y": 260,
+        "x": 1220,
+        "y": 220,
         "wires": []
+    },
+    {
+        "id": "5f66ae1a2cf8dbaf",
+        "type": "catch",
+        "z": "b79a946966637772",
+        "g": "bea78bc3996d3b78",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 760,
+        "y": 240,
+        "wires": [
+            [
+                "11ac424b8c510a53"
+            ]
+        ]
+    },
+    {
+        "id": "13d7dba2f124c9c1",
+        "type": "debug",
+        "z": "b79a946966637772",
+        "g": "bea78bc3996d3b78",
+        "name": "debug-request-header",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "req.headers",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e9fe916615269ced",
+        "type": "debug",
+        "z": "b79a946966637772",
+        "g": "bea78bc3996d3b78",
+        "name": "debug-error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "error",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "7127a0f0abaa8112",
+        "type": "function",
+        "z": "b79a946966637772",
+        "g": "bea78bc3996d3b78",
+        "name": "set-response",
+        "func": "msg.payload = {\n    error: msg.error,\n    meta: {\n        version: env.version,\n        time: Date.now(),\n        target: msg.target\n    },\n    inputs: msg.req.body\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 80,
+        "wires": [
+            [
+                "3044e6dd8f5cb2a1",
+                "e9fe916615269ced"
+            ]
+        ]
+    },
+    {
+        "id": "8a53d6ee984076cd",
+        "type": "change",
+        "z": "b79a946966637772",
+        "g": "bea78bc3996d3b78",
+        "name": "set-request-target",
+        "rules": [
+            {
+                "t": "set",
+                "p": "request",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "target",
+                "pt": "msg",
+                "to": "payload.judgingRuleName",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 160,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "660a082c2b8d5fe6",
         "type": "link in",
         "z": "d5b708b9aa215a10",
-        "name": "single-u12-speed-double-dutch",
+        "name": "common",
         "links": [],
-        "x": 65,
+        "x": 35,
         "y": 80,
         "wires": [
             [
@@ -337,109 +532,59 @@
         "name": "link-out",
         "mode": "return",
         "links": [],
-        "x": 1105,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "c2dcd89c4e761772",
-        "type": "change",
-        "z": "d5b708b9aa215a10",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "code",
-                "pt": "msg",
-                "to": "OK",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "score",
-                "pt": "msg",
-                "to": "calc.avg",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 810,
-        "y": 160,
-        "wires": [
-            [
-                "60a8cb787b6fbfc5"
-            ]
-        ]
-    },
-    {
-        "id": "f405fcf68d9c87f5",
-        "type": "debug",
-        "z": "d5b708b9aa215a10",
-        "name": "debug-calc",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "calc",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 530,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "8c5d5b9070c95879",
-        "type": "function",
-        "z": "d5b708b9aa215a10",
-        "name": "calcMinMaxDiff",
-        "func": "msg.calc = msg.calc || {};\nconst calc = msg.calc;\nmsg.calc.valuesSorted = [...msg.calc.values || []].sort((a, b) => a - b)\nconst elements = msg.calc.valuesSorted.length\n\ncalc.min = calc.valuesSorted[0];\ncalc.max = calc.valuesSorted[elements - 1];\ncalc.diff = Math.abs(calc.max - calc.min);\ncalc.avg = calc.valuesSorted.reduce((memo, value) => memo += value, 0) / elements\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 540,
-        "y": 160,
-        "wires": [
-            [
-                "334598baf98d7235",
-                "c2dcd89c4e761772"
-            ]
-        ]
-    },
-    {
-        "id": "334598baf98d7235",
-        "type": "debug",
-        "z": "d5b708b9aa215a10",
-        "name": "debug-all",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 760,
-        "y": 280,
+        "x": 485,
+        "y": 240,
         "wires": []
     },
     {
         "id": "79efcbceccb2657c",
         "type": "subflow:99e74a7c62587047",
         "z": "d5b708b9aa215a10",
+        "name": "calculate(Sub)CriteriaPoints:speed",
+        "x": 260,
+        "y": 80,
+        "wires": [
+            [
+                "ab11aef31dda8b4b"
+            ]
+        ]
+    },
+    {
+        "id": "ab11aef31dda8b4b",
+        "type": "subflow:36dc69b49ec5d9e3",
+        "z": "d5b708b9aa215a10",
         "name": "",
-        "x": 250,
+        "env": [
+            {
+                "name": "criteriaName",
+                "value": "speed",
+                "type": "str"
+            },
+            {
+                "name": "aggregationMethod",
+                "value": "bandwidth",
+                "type": "str"
+            }
+        ],
+        "x": 260,
         "y": 160,
         "wires": [
             [
-                "f405fcf68d9c87f5",
-                "8c5d5b9070c95879"
+                "333af43deeee0642"
+            ]
+        ],
+        "info": "# calculateAggregatedCriteriaPoints\n\ncalculates the aggregated criteria points for a given criteria with the given aggregationMethod.\n\n## parameters\n\n### criteriaName (string)\n\n### aggregationMethod (string)\n\nvalid `aggregationMethod` are: `(average|bandwith)`\n"
+    },
+    {
+        "id": "333af43deeee0642",
+        "type": "subflow:a84c5aee3cad0e1d",
+        "z": "d5b708b9aa215a10",
+        "name": "",
+        "x": 250,
+        "y": 240,
+        "wires": [
+            [
+                "60a8cb787b6fbfc5"
             ]
         ]
     }

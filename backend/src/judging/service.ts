@@ -1,8 +1,12 @@
 import { IGetApplicationContext } from '../../applicationContext'
+import { CalculationPointsInput, CalculationJudgeCriteriaGroup } from '../calculation/interfaces'
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { findCategories, findCategoryByCategoryName, findCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint } from './repository'
+import { listCategories, findCategoryByCategoryName, findCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria } from './repository'
+
+let _categoriesLookup: {[key: string]: (Category & Id)} | null = null
+let _criteriaLookup: {[key: string]: (Criteria & Id)} | null = null
 
 export class JudgingRuleService implements IJudgingRuleContext {
   getApplicationContext
@@ -10,12 +14,26 @@ export class JudgingRuleService implements IJudgingRuleContext {
     this.getApplicationContext = getApplicationContext
   }
 
-  async addCategory (c: Omit<Category, 'id'>) : Promise<Category | null> {
+  async addCategory (c: Omit<Category, 'id'>): Promise<Category | null> {
     return await insertCategory(c)
   }
 
-  async listCategories () : Promise<(Category & Id)[] | null> {
-    return await findCategories()
+  async listCategories (): Promise<(Category & Id)[] | null> {
+    if (_categoriesLookup) {
+      return Object.values(_categoriesLookup)
+    }
+    const c = await listCategories()
+    if (c) {
+      _categoriesLookup = c.reduce((memo, it) => {
+        memo[it.id] = it
+        return memo
+      }, {} as {[key: string]: Category})
+    }
+    return Object.values(_categoriesLookup || {})
+  }
+
+  lookupCategory (id: string): Category & Id | null {
+    return (_categoriesLookup || {})[id]
   }
 
   async getCategory (id: string): Promise<(Category & Id) | null> {
@@ -52,7 +70,7 @@ export class JudgingRuleService implements IJudgingRuleContext {
     return await insertCriteria(c)
   }
 
-  async listCriteria (categoryId: string) : Promise<(Criteria & Id)[] | null> {
+  async getCriteriaByCategoryId (categoryId: string) : Promise<(Criteria & Id)[] | null> {
     return await findCriteriaByCategoryId(categoryId)
   }
 
@@ -60,8 +78,92 @@ export class JudgingRuleService implements IJudgingRuleContext {
     return await getCriteriaById(id)
   }
 
+  async listCriteria (): Promise<(Criteria & Id)[] | null> {
+    if (_criteriaLookup) {
+      return Object.values(_criteriaLookup)
+    }
+    const c = await listCriteria()
+    if (c) {
+      _criteriaLookup = c.reduce((memo, it) => {
+        memo[it.id] = it
+        return memo
+      }, {} as {[key: string]: (Criteria & Id)})
+    }
+    return Object.values((_criteriaLookup || {}))
+  }
+
+  lookupCriteria (id: string): Criteria & Id | null {
+    return (_criteriaLookup || {})[id]
+  }
+
   async addRawPoint (rp: RawPoint) : Promise<RawPoint & Id> {
+    // 1. insert the RawPoint request data
     const rawPoint = await insertOrUpdateRawPoint(rp)
+    // 2. get all rawPoints for this performance
+    const rawPoints = await this.listRawPoints(rawPoint.performanceId)
+    // 3. transform rawPoints for calculation request message
+    const calculationMessage = await this.prepareCalculationMessage(rawPoint.performanceId, rawPoints, rawPoint.timestamp)
+    // 4. do calculation
+    if (calculationMessage) {
+      this.getApplicationContext().calculation.calculatePoints(calculationMessage)
+    } else {
+      // TODO notify about error
+      console.error(`could not prepareCalculationMessage for ${JSON.stringify(rawPoint)}`)
+    }
+    // 5. return rawPoints with id. Note: the calculation result is stored within the calculate method, but not returned there
     return { ...rp, id: rawPoint.id }
+  }
+
+  async listRawPoints (performanceId: string): Promise<(RawPoint & Id)[]> {
+    return await findRawPoints({ performanceId })
+  }
+
+  async prepareCalculationMessage (performanceId: string, rawPoints: RawPoint[], inputTimestamp: Date | null) {
+    const performance = await this.getApplicationContext().tournament.getPerformance(performanceId)
+    if (!performance) return null
+
+    const category = await this.getCategory(performance.categoryId)
+    if (!category) return null
+
+    const judgingRule = await this.getJudgingRuleByCategoryId(category.id)
+    if (!judgingRule) return null
+
+    await this.listCriteria()
+
+    const groupedCriteria = rawPoints.reduce((memo, rawPoint) => {
+      const criteria = this.lookupCriteria(rawPoint.criteriaId)
+      if (criteria) {
+        memo[criteria.criteriaName] = memo[criteria.criteriaName] ?? {}
+        memo[criteria.criteriaName].criteriaId = rawPoint.criteriaId
+        memo[criteria.criteriaName].criteriaName = criteria.criteriaName
+        memo[criteria.criteriaName].criteriaWeight = criteria.criteriaWeight
+        memo[criteria.criteriaName].judges = memo[criteria.criteriaName].judges ?? []
+        memo[criteria.criteriaName].judges.push({
+          judgeId: rawPoint.tournamentJudgeId,
+          subCriteriaPoints: rawPoint.subCriteriaPoints
+        })
+        memo[criteria.criteriaName].calculatedAggregatedCriteriaPoints = undefined
+      }
+
+      return memo
+    }, {} as CalculationJudgeCriteriaGroup)
+
+    const calculationMessage: CalculationPointsInput = {
+      tournamentId: performance.tournamentId,
+      performanceId,
+      categoryId: category.id,
+      categoryName: category.categoryName,
+      judgingRulId: judgingRule.id,
+      judgingRuleName: judgingRule.judgingRuleName,
+      // TODO
+      athletes: [],
+      timestamp: inputTimestamp ? inputTimestamp.toISOString() : undefined,
+      // TODO group raw points by criteria
+      judgeCriteria: groupedCriteria,
+      complete: undefined,
+      calculatedTimestamp: undefined,
+      calculatedCategoryPoints: 0
+    }
+    return calculationMessage
   }
 }

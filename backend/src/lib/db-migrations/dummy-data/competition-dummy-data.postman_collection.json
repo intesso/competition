@@ -1,0 +1,1055 @@
+{
+	"info": {
+		"_postman_id": "dd8a8231-aad8-4c1c-bd28-c7622d1febd2",
+		"name": "competition-dummy-data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9273620"
+	},
+	"item": [
+		{
+			"name": "tournament-single",
+			"item": [
+				{
+					"name": "addClub",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"club id should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"clubId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"street\": \"Nebenstrasse\",\n    \"houseNumber\": \"12\",\n    \"zipCode\": \"4321\",\n    \"city\": \"Teststadt\",\n    \"country\": \"Schweiz\",\n    \"clubName\": \"Test Club Einzel {{rand}}\",\n    \"associationId\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/people/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTorunament (single)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament id should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"street\": \"Teststrasse\",\n    \"houseNumber\": \"1\",\n    \"zipCode\": \"4321\",\n    \"city\": \"Testhausen\",\n    \"country\": \"Schweiz\",\n    \"tournamentName\": \"Testturnier Einzel {{rand}}\",\n    \"competition\": \"Einzel\",\n    \"tournamentStartTime\": \"2025-11-01T09:00:22.000+01:00\",\n    \"tournamentEndTime\": \"2025-11-01T19:00:00.000+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentLocation1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"location id should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"locationId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"locationName\": \"E1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/locations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentLocation2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"location id should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"locationId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"locationName\": \"E2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/locations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentJudge1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament judge should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"judgeId\", jsonData.judgeId);",
+									"    pm.environment.set(\"tournamentJudgeId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Einzel\",\n    \"lastName\": \"Huhn\",\n    \"gender\": \"female\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/judges",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"judges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentJudge2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament judge should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"judgeId\", jsonData.judgeId);",
+									"    pm.environment.set(\"tournamentJudgeId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Einzel\",\n    \"lastName\": \"Hahn\",\n    \"gender\": \"male\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/judges",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"judges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentJudge3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament judge should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"judgeId\", jsonData.judgeId);",
+									"    pm.environment.set(\"tournamentJudgeId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Einzel\",\n    \"lastName\": \"Küken\",\n    \"gender\": \"other\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/judges",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"judges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentAthlete1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament athlete should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"athleteId\", jsonData.athleteId);",
+									"    pm.environment.set(\"tournamentAthleteId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Hase\",\n    \"lastName\": \"Einzel\",\n    \"gender\": \"male\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/athletes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"athletes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentAthlete2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament athlete should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"athleteId\", jsonData.athleteId);",
+									"    pm.environment.set(\"tournamentAthleteId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Zibbe\",\n    \"lastName\": \"Einzel\",\n    \"gender\": \"female\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/athletes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"athletes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tournament-team",
+			"item": [
+				{
+					"name": "addClub",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"club id should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"clubId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"street\": \"Nebenstrasse\",\n    \"houseNumber\": \"12\",\n    \"zipCode\": \"4321\",\n    \"city\": \"Teststadt\",\n    \"country\": \"Schweiz\",\n    \"clubName\": \"Test Club Team {{rand}}\",\n    \"associationId\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/people/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTorunament (team)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament id should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"street\": \"Teststrasse\",\n    \"houseNumber\": \"1\",\n    \"zipCode\": \"4321\",\n    \"city\": \"Testhausen\",\n    \"country\": \"Schweiz\",\n    \"tournamentName\": \"Testturnier Team {{rand}}\",\n    \"competition\": \"Team\",\n    \"tournamentStartTime\": \"2025-11-01T09:00:22.000+01:00\",\n    \"tournamentEndTime\": \"2025-11-01T19:00:00.000+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentLocation1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"location id should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"locationId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"locationName\": \"T1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/locations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentLocation2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"location id should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"locationId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"locationName\": \"T2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/locations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentJudge1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament judge should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"judgeId\", jsonData.judgeId);",
+									"    pm.environment.set(\"tournamentJudgeId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Team\",\n    \"lastName\": \"Huhn\",\n    \"gender\": \"female\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/judges",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"judges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentJudge2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament judge should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"judgeId\", jsonData.judgeId);",
+									"    pm.environment.set(\"tournamentJudgeId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Team\",\n    \"lastName\": \"Hahn\",\n    \"gender\": \"male\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/judges",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"judges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentJudge3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament judge should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"judgeId\", jsonData.judgeId);",
+									"    pm.environment.set(\"tournamentJudgeId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Team\",\n    \"lastName\": \"Küken\",\n    \"gender\": \"other\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/judges",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"judges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentAthlete1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament athlete should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"athleteId\", jsonData.athleteId);",
+									"    pm.environment.set(\"tournamentAthleteId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Hase\",\n    \"lastName\": \"Team\",\n    \"gender\": \"male\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/athletes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"athletes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addTournamentAthlete2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament athlete should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"athleteId\", jsonData.athleteId);",
+									"    pm.environment.set(\"tournamentAthleteId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"firstName\": \"Test Zibbe\",\n    \"lastName\": \"Team\",\n    \"gender\": \"female\",\n    \"birthDate\": \"1991-11-01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/athletes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"athletes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "performances",
+			"item": [
+				{
+					"name": "addPerformance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"performanceId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"clubId\": \"{{clubId}}\",\n    \"categoryId\": \"{{categoryId}}\",\n    \"locationId\": \"{{locationId}}\",\n    \"athletes\": [],\n    \"performanceName\": \"Testperformance {{categoryName}}\",\n    \"slotNumber\": null,\n    \"performanceNumber\": null,\n    \"performanceStartTime\": \"2022-11-01T10:00:00.000+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

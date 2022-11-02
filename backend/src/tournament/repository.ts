@@ -123,7 +123,7 @@ export async function insertTournamentJudge (tournamentJudge: Omit<TournamentJud
 }
 
 export async function findTournamentJudges (tournamentJudge: Partial<TournamentJudge_InsertParameters>) {
-  const foundTournamentJudges = await TournamentJudge(db).find({ ...tournamentJudge, ...newRecordAttributes() }).all()
+  const foundTournamentJudges = await TournamentJudge(db).find({ ...tournamentJudge }).all()
   return foundTournamentJudges
 }
 

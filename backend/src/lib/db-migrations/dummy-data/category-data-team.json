@@ -1,0 +1,104 @@
+[
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000037",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-noAgeLimit-erso-speed-doubleDutchRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000038",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-noAgeLimit-erso-speed-singleRopeRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000039",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000006",
+    "categoryName": "team-noAgeLimit-erso-freestyle-singleRopePair",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000040",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000007",
+    "categoryName": "team-noAgeLimit-erso-freestyle-singleRopeTeam",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000041",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000008",
+    "categoryName": "team-noAgeLimit-erso-freestyle-doubleDutchSingle",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000042",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-ü21-teamShow-speed-doubleDutchRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000043",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-ü21-teamShow-speed-singleRopeRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000044",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000009",
+    "categoryName": "team-ü21-teamShow-teamShow-teamShow",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000045",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-u21-teamShow-speed-doubleDutchRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000046",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-u21-teamShow-speed-singleRopeRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000047",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000009",
+    "categoryName": "team-u21-teamShow-teamShow-teamShow",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000048",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-u15-teamShow-speed-doubleDutchRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000049",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-u15-teamShow-speed-singleRopeRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000050",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000009",
+    "categoryName": "team-u15-teamShow-teamShow-teamShow",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000051",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-u12-teamShow-speed-doubleDutchRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000052",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000000",
+    "categoryName": "team-u12-teamShow-speed-singleRopeRelay",
+    "competition": "team"
+  },
+  {
+    "categoryId": "11111111-0000-0000-0000-000000000053",
+    "judgingRuleId": "11111111-0000-0000-0000-000000000009",
+    "categoryName": "team-u12-teamShow-teamShow-teamShow",
+    "competition": "team"
+  }
+]

@@ -5,7 +5,7 @@ import { Category, CategoryCombination, Combination, Criteria, db, JudgingRule }
 import { JudgingRule_InsertParameters } from '../db/__generated__'
 
 async function insertJudgingRule () {
-  const rows = await readCsvFile('./src/lib/db-migrations/data/JudgingRule.csv')
+  const rows = await readCsvFile('./src/lib/db-migrations/master-data/JudgingRule.csv')
   const header = rows.shift()
   const records = rows.map(row => ({
     id: row[0] as string,
@@ -20,7 +20,7 @@ async function insertJudgingRule () {
 }
 
 async function insertCategory () {
-  const rows = await readCsvFile('./src/lib/db-migrations/data/Category.csv')
+  const rows = await readCsvFile('./src/lib/db-migrations/master-data/Category.csv')
   rows.shift() // remove header
   const records = rows.map(row => ({
     id: row[0] as string,
@@ -40,7 +40,7 @@ async function insertCategory () {
 }
 
 async function insertCriteria () {
-  const rows = await readCsvFile('./src/lib/db-migrations/data/Criteria.csv')
+  const rows = await readCsvFile('./src/lib/db-migrations/master-data/Criteria.csv')
   rows.shift()
   // create object with judgingRuleName-criteriaName as key first
   const distinctCriteria = rows
@@ -60,22 +60,24 @@ async function insertCriteria () {
     judgingRuleId: rows[0][1] as string,
     criteriaName: rows[0][3] as string,
     criteriaDescription: rows[0][4] as string,
-    criteriaUiLayout: rows[0][10] as string,
+    criteriaWeight: parseInt(rows[0][5]) as number,
+    criteriaUiLayout: rows[0][13] as string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     subCriteriaDefinition: rows.reduce((memo: any, row: any) => {
-      memo[row[5]] = {
-        subCriteriaName: row[5],
-        subCriteriaDescription: row[6],
-        valueType: row[7],
-        rangeStart: parseInput(row[7], row[8]),
-        rangeEnd: parseInput(row[7], row[9]),
-        uiPosition: row[11]
+      memo[row[6]] = {
+        subCriteriaName: row[6],
+        subCriteriaDescription: row[7],
+        subCriteriaWeight: parseInt(row[8]) as number,
+        valueType: row[9],
+        rangeStart: parseInput(row[9], row[10]),
+        rangeEnd: parseInput(row[9], row[11]),
+        step: parseInt(row[12]),
+        uiPosition: row[14]
       }
       return memo
     }, {}),
     createdAt: new Date()
   }))
-  console.log('criteria', records)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function parseInput (valueType: string, input: any) {
@@ -94,7 +96,7 @@ async function insertCriteria () {
 }
 
 async function insertCombination () {
-  const rows = await readCsvFile('./src/lib/db-migrations/data/Combination.csv')
+  const rows = await readCsvFile('./src/lib/db-migrations/master-data/Combination.csv')
   rows.shift()
   // create object with combinationName-categoryName as key first
   const combinations = rows
@@ -104,7 +106,6 @@ async function insertCombination () {
     }, {})
 
   const records = Object.values(combinations)
-  console.log('criteria', records)
 
   return await Combination(db).bulkInsert({
     columnsToInsert: ['createdAt'],
@@ -113,7 +114,7 @@ async function insertCombination () {
 }
 
 async function insertCategoryCombination () {
-  const rows = await readCsvFile('./src/lib/db-migrations/data/Combination.csv')
+  const rows = await readCsvFile('./src/lib/db-migrations/master-data/Combination.csv')
   rows.shift()
   const records = rows.map(row => ({
     categoryId: row[2] as string,
@@ -129,10 +130,34 @@ async function insertCategoryCombination () {
 }
 
 (async function () {
-  await insertJudgingRule()
-  await insertCategory()
-  await insertCriteria()
-  await insertCombination()
-  await insertCategoryCombination()
+  if (!process.argv[2] || !process.argv[2].startsWith('import=')) {
+    await insertJudgingRule()
+    await insertCategory()
+    await insertCriteria()
+    await insertCombination()
+    await insertCategoryCombination()
+  } else {
+    const table = process.argv[2].replace('import=', '')
+    switch (table) {
+      case 'JudgingRule':
+        await insertJudgingRule()
+        break
+      case 'Category':
+        await insertCategory()
+        break
+      case 'Criteria':
+        await insertCriteria()
+        break
+      case 'Combination':
+        await insertCombination()
+        break
+      case 'CategoryCombination':
+        await insertCategoryCombination()
+        break
+      default:
+        break
+    }
+  }
+
   await db.dispose()
 })()

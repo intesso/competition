@@ -1,6 +1,9 @@
+import { AxiosError } from 'axios'
 import { ParameterizedContext } from 'koa'
 import Router from 'koa-router'
 import { v4 as uuidv4 } from 'uuid'
+
+import { spawn, SpawnOptionsWithoutStdio } from 'child_process'
 
 export type Id = {id: string}
 
@@ -32,8 +35,14 @@ export async function respondWith<T> (ctx: ParameterizedContext<any, Router.IRou
     const response = await fn()
     ctx.body = response
   } catch (error) {
+    if (error instanceof AxiosError) {
+      console.error(error.response?.data)
+      ctx.body = { error: error.response?.data }
+    } else {
+      console.error(error)
+      ctx.body = { error }
+    }
     ctx.status = 400
-    ctx.body = { error }
   }
   return ctx
 }
@@ -44,3 +53,32 @@ export async function respondWithError (ctx: ParameterizedContext<any, Router.IR
   ctx.body = { error }
   return ctx
 }
+
+export const spawnAsync = async (
+  command: string,
+  options?: SpawnOptionsWithoutStdio
+) =>
+  new Promise<Buffer>((resolve, reject) => {
+    const [spawnCommand, ...args] = command.split(/\s+/)
+    const spawnProcess = spawn(spawnCommand, args, options)
+    const chunks: Buffer[] = []
+    const errorChunks: Buffer[] = []
+    spawnProcess.stdout.on('data', (data) => {
+      process.stdout.write(data.toString())
+      chunks.push(data)
+    })
+    spawnProcess.stderr.on('data', (data) => {
+      process.stderr.write(data.toString())
+      errorChunks.push(data)
+    })
+    spawnProcess.on('error', (error) => {
+      reject(error)
+    })
+    spawnProcess.on('close', (code) => {
+      if (code === 1) {
+        reject(Buffer.concat(errorChunks).toString())
+        return
+      }
+      resolve(Buffer.concat(chunks))
+    })
+  })

@@ -228,6 +228,7 @@ CREATE TABLE "Criteria" (
   "judgingRuleId" uuid NOT NULL,
   "criteriaName" text NOT NULL,
   "criteriaDescription" text NOT NULL,
+  "criteriaWeight" real NOT NULL,
   "criteriaUiLayout" text NULL,
   "subCriteriaDefinition" jsonb NULL,
   "createdAt" timestamp NULL,
@@ -264,6 +265,7 @@ CREATE TABLE "RawPoint" (
 -----------------------------------
 CREATE TABLE "CategoryPoint" (
   id uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
   "performanceId" uuid NOT NULL,
   "categoryPoint" int NULL,
   "criteriaPoints" jsonb NULL,
@@ -272,10 +274,13 @@ CREATE TABLE "CategoryPoint" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "CategoryPointPK" PRIMARY KEY (id),
+  CONSTRAINT "CategoryPointPerformanceIdUnique" UNIQUE ("performanceId"),
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
   FOREIGN KEY ("performanceId") REFERENCES "Performance"(id)
 );
 CREATE TABLE "CategoryRank" (
   id uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
   "categoryPointId" uuid NOT NULL,
   "categoryId" uuid NOT NULL,
   "rank" int NULL,
@@ -284,11 +289,13 @@ CREATE TABLE "CategoryRank" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "CategoryRankPK" PRIMARY KEY (id),
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
   FOREIGN KEY ("categoryPointId") REFERENCES "CategoryPoint"(id),
   FOREIGN KEY ("categoryId") REFERENCES "Category"(id)
 );
 CREATE TABLE "CombinationRank" (
   id uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
   "categoryPointId" uuid NOT NULL,
   "combinationId" uuid NOT NULL,
   "rank" int NULL,
@@ -297,6 +304,7 @@ CREATE TABLE "CombinationRank" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "CombinationRankPK" PRIMARY KEY (id),
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
   FOREIGN KEY ("categoryPointId") REFERENCES "CategoryPoint"(id),
   FOREIGN KEY ("combinationId") REFERENCES "Combination"(id)
 );

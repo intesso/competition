@@ -12,6 +12,7 @@ import {
 } from '../../contexts/ApiContextInterface'
 import { DateTime } from 'luxon'
 import { useSearchParams } from 'react-router-dom'
+import './RawPointInput.css'
 
 export interface RawPointInputProps {
   layout: string
@@ -86,7 +87,10 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         performanceId,
         tournamentJudgeId,
         criteriaId,
-        subCriteriaPoints: subCriteria,
+        subCriteriaPoints: Object.entries(subCriteria).reduce((memo, [, value]) => {
+          memo[value.subCriteriaName] = value
+          return memo
+        }, {} as SubCriteriaValue),
         timestamp: DateTime.now().toISO()
       }
       addRawPoint(rawPoint)
@@ -143,9 +147,15 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
       })
     }
 
+    function isDisabled () {
+      return !subCriteria[uiPosition] || subCriteria[uiPosition].rangeEnd === 0
+    }
+
     return (
       <Grid item xs={12} sm={cols}>
         <Button
+          className='raw-point-button'
+          disabled={isDisabled()}
           style={buttonStyle}
           variant="outlined"
           onClick={() => {
@@ -161,7 +171,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
             <div style={{ fontSize: '1.4em', fontWeight: '700' }}>
               {subCriteria[uiPosition]?.subCriteriaDescription}
             </div>
-            <div style={{ fontSize: '1em' }}>Anzahl {subCriteria[uiPosition]?.value}</div>
+            <div style={{ fontSize: '1em' }}>{isDisabled() ? '' : 'Anzahl '}{subCriteria[uiPosition]?.value}</div>
           </Stack>
         </Button>
       </Grid>
@@ -251,7 +261,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
           />
 
           {/* 2. row */}
-          <InstantButton uiPosition="2" onSelect={registerFns} />
+          <InstantButton uiPosition="7" onSelect={registerFns} />
           <Grid item xs={12} sm={4}>
             <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'row', sm: 'row' }} spacing={{ xs: 2, sm: 2, md: 2 }}>
               <Button
@@ -269,7 +279,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
               </Button>
             </Stack>
           </Grid>
-          <InstantButton uiPosition="3" onSelect={registerFns} />
+          <InstantButton uiPosition="9" onSelect={registerFns} />
         </Grid>
       </Container>
     )

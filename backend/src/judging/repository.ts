@@ -9,7 +9,7 @@ export async function insertCategory (category: Omit<Category_InsertParameters, 
   return insertedCategory
 }
 
-export async function findCategories () {
+export async function listCategories () {
   return await Category(db).find().all()
 }
 
@@ -106,6 +106,10 @@ export async function getCriteriaById (id: string) {
   return await Criteria(db).findOne({ id })
 }
 
+export async function listCriteria () {
+  return await Criteria(db).find().all()
+}
+
 // RawPoint
 export async function insertRawPoint (rawPoint: Omit<RawPoint_InsertParameters, 'id'>) {
   const [insertedRawPoint] = await RawPoint(db).insert({ ...rawPoint, ...newRecordAttributes() })
@@ -117,6 +121,10 @@ export async function insertOrUpdateRawPoint (rawPoint: Omit<RawPoint_InsertPara
   return insertedRawPoint
 }
 
-export async function findRawPoint (performanceId: string, tournamentJudgeId: string, criteriaId: string) {
+export async function getRawPoint (performanceId: string, tournamentJudgeId: string, criteriaId: string) {
   return await RawPoint(db).findOne({ performanceId, tournamentJudgeId, criteriaId })
+}
+
+export async function findRawPoints (rawPoints: Partial<RawPoint_InsertParameters>) {
+  return await RawPoint(db).find({ ...rawPoints }).all()
 }

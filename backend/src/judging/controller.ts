@@ -22,7 +22,7 @@ judgingController
     if (typeof ctx.request.query.categoryId !== 'string') {
       return respondWithError(ctx, 'categoryId queryParameter must be provided')
     }
-    return respondWith(ctx, () => applicationContext.judging.listCriteria(ctx.request.query.categoryId as string))
+    return respondWith(ctx, () => applicationContext.judging.getCriteriaByCategoryId(ctx.request.query.categoryId as string))
   })
   .get('/criteria/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.getCriteria(ctx.params.id as string))

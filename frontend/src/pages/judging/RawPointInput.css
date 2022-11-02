@@ -1,0 +1,4 @@
+.raw-point-button:focus,
+.raw-point-button:focus-within {
+  border: 10px solid !important;
+}

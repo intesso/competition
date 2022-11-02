@@ -7,7 +7,7 @@ import { Category, Combination, Criteria, JudgingRule, Person_InsertParameters, 
 import { insertJudge, insertPerson } from '../people/repository'
 import { insertTournamentJudge } from '../tournament/repository'
 import { _insertTestPerformance } from '../tournament/repository.test'
-import { findCategoriesByCombinationName, findCategoryByCategoryName, findCombinationByCombinationName, findCriteriaByCriteriaJudgingRuleAndCriteriaName, findJudgingRuleByName, findRawPoint, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertRawPoint } from './repository'
+import { findCategoriesByCombinationName, findCategoryByCategoryName, findCombinationByCombinationName, findCriteriaByCriteriaJudgingRuleAndCriteriaName, findJudgingRuleByName, getRawPoint, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertRawPoint } from './repository'
 
 test('should insert/find category', async () => {
   const judgingRuleName = 'single-speed-' + Math.random()
@@ -170,9 +170,13 @@ test('should insert/find criteria', async () => {
 
   expect(judgingRule).toBeTruthy()
 
-  const criteriaName = 'count'
+  const criteriaName = 'speed'
+  const criteriaDescription = 'Speed Discipline'
+  const criteriaWeight = 50
   const criteria = await insertCriteria({
     criteriaName,
+    criteriaDescription,
+    criteriaWeight,
     subCriteriaDefinition: {
       falseStart: 'boolean',
       count: 'integer'
@@ -183,6 +187,8 @@ test('should insert/find criteria', async () => {
   function testCriteria (it: Criteria | null) {
     expect(omit(it, 'id', 'createdAt')).toEqual({
       criteriaName,
+      criteriaDescription,
+      criteriaWeight,
       subCriteriaDefinition: {
         falseStart: 'boolean',
         count: 'integer'
@@ -209,9 +215,14 @@ test('should insert/find rawPoint', async () => {
   })
 
   // insert criteria
-  const criteriaName = 'count'
+  const criteriaName = 'speed'
+  const criteriaDescription = 'Speed Discipline'
+  const criteriaWeight = 50
+
   const criteria = await insertCriteria({
     criteriaName,
+    criteriaDescription,
+    criteriaWeight,
     subCriteriaDefinition: {
       falseStart: 'boolean',
       count: 'integer'
@@ -220,7 +231,7 @@ test('should insert/find rawPoint', async () => {
   })
 
   // insert performance
-  const { performance } = await _insertTestPerformance()
+  const { tournament, performance } = await _insertTestPerformance()
   const performanceId = performance.id
 
   // insert tournamentJudge
@@ -252,7 +263,7 @@ test('should insert/find rawPoint', async () => {
     clubName, ...addressInformation, ...contactInformation, ...personInformation
   })
   const judge = await insertJudge({ personId: person.id })
-  const tournamentJudge = await insertTournamentJudge({ judgeId: judge.id })
+  const tournamentJudge = await insertTournamentJudge({ tournamentId: tournament.id, judgeId: judge.id })
 
   const rawPoint = await insertRawPoint({
     criteriaId: criteria.id,
@@ -280,7 +291,7 @@ test('should insert/find rawPoint', async () => {
     })
   }
 
-  const foundRawPoint = await findRawPoint(performanceId, tournamentJudge.id, criteria.id)
+  const foundRawPoint = await getRawPoint(performanceId, tournamentJudge.id, criteria.id)
 
   testRawPoint(rawPoint)
   testRawPoint(foundRawPoint)

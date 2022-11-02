@@ -65,7 +65,10 @@ const {
   CategoryCombination,
   JudgingRule,
   Criteria,
-  RawPoint
+  RawPoint,
+  CategoryPoint,
+  CategoryRank,
+  CombinationRank
 } = tables<DatabaseSchema>({
   databaseSchema: require('../../lib/db/__generated__/schema.json')
 })
@@ -87,7 +90,10 @@ export {
   CategoryCombination,
   JudgingRule,
   Criteria,
-  RawPoint
+  RawPoint,
+  CategoryPoint,
+  CategoryRank,
+  CombinationRank
 }
 
 // Utility functions
