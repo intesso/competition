@@ -79,28 +79,6 @@ CREATE TABLE "Judge" (
 -----------------------------------
 -- Tournament Contect -------------
 -----------------------------------
-CREATE TABLE "TournamentAthlete" (
-  id uuid NOT NULL,
-  "athleteId" uuid NOT NULL,
-  "tournamentId" uuid NOT NULL,
-  "createdAt" timestamp NULL,
-  "createdBy" text NULL,
-  "updatedAt" timestamp NULL,
-  "updatedBy" text NULL,
-  CONSTRAINT "TournamentAthletePK" PRIMARY KEY (id),
-  FOREIGN KEY ("athleteId") REFERENCES "Athlete"(id)
-);
-CREATE TABLE "TournamentJudge" (
-  id uuid NOT NULL,
-  "judgeId" uuid NOT NULL,
-  "tournamentId" uuid NOT NULL,
-  "createdAt" timestamp NULL,
-  "createdBy" text NULL,
-  "updatedAt" timestamp NULL,
-  "updatedBy" text NULL,
-  CONSTRAINT "TournamentJudgePK" PRIMARY KEY (id),
-  FOREIGN KEY ("judgeId") REFERENCES "Judge"(id)
-);
 CREATE TABLE "Tournament" (
   id uuid NOT NULL,
   "addressId" uuid NULL,
@@ -116,6 +94,30 @@ CREATE TABLE "Tournament" (
   CONSTRAINT "TournamentPK" PRIMARY KEY (id),
   CONSTRAINT "TournamentNameUnique" UNIQUE ("tournamentName"),
   FOREIGN KEY ("addressId") REFERENCES "Address"(id)
+);
+CREATE TABLE "TournamentAthlete" (
+  id uuid NOT NULL,
+  "athleteId" uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
+  "createdAt" timestamp NULL,
+  "createdBy" text NULL,
+  "updatedAt" timestamp NULL,
+  "updatedBy" text NULL,
+  CONSTRAINT "TournamentAthletePK" PRIMARY KEY (id),
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
+  FOREIGN KEY ("athleteId") REFERENCES "Athlete"(id)
+);
+CREATE TABLE "TournamentJudge" (
+  id uuid NOT NULL,
+  "judgeId" uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
+  "createdAt" timestamp NULL,
+  "createdBy" text NULL,
+  "updatedAt" timestamp NULL,
+  "updatedBy" text NULL,
+  CONSTRAINT "TournamentJudgePK" PRIMARY KEY (id),
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
+  FOREIGN KEY ("judgeId") REFERENCES "Judge"(id)
 );
 CREATE TABLE "Location" (
   id uuid NOT NULL,
@@ -142,6 +144,19 @@ CREATE TABLE "Slot" (
   CONSTRAINT "SlotPK" PRIMARY KEY ("slotNumber", "tournamentId"),
   FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id)
 );
+CREATE TABLE "Performer" (
+  id uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
+  "tournamentAthletes" jsonb NOT NULL,
+  "performerName" text NOT NULL,
+  "createdAt" timestamp NULL,
+  "createdBy" text NULL,
+  "updatedAt" timestamp NULL,
+  "updatedBy" text NULL,
+  CONSTRAINT "PerformerPK" PRIMARY KEY (id),
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
+  CONSTRAINT "PerformertNameUnique" UNIQUE ("tournamentId", "performerName")
+);
 CREATE TABLE "Performance" (
   id uuid NOT NULL,
   "tournamentId" uuid NOT NULL,
@@ -149,7 +164,8 @@ CREATE TABLE "Performance" (
   "clubId" uuid NOT NULL,
   "categoryId" uuid NOT NULL,
   "slotNumber" int NULL,
-  "athletes" jsonb NOT NULL,
+  "performerId" uuid NOT NULL,
+  "judges" jsonb NULL,
   "performanceName" text NOT NULL,
   "performanceNumber" int NULL,
   "performanceStartTime" timestamp NULL,
@@ -163,7 +179,8 @@ CREATE TABLE "Performance" (
   FOREIGN KEY ("clubId") REFERENCES "Club"(id),
   -- Category is not yet created, therefore add the CONSTRAINT after Category is created
   -- FOREIGN KEY ("categoryId") REFERENCES "Category"(id),
-  FOREIGN KEY ("slotNumber", "tournamentId") REFERENCES "Slot"("slotNumber", "tournamentId")
+  FOREIGN KEY ("slotNumber", "tournamentId") REFERENCES "Slot"("slotNumber", "tournamentId"),
+  CONSTRAINT "PerformanceNameUnique" UNIQUE ("tournamentId", "performanceName")
 );
 -----------------------------------
 -- Judging Contect ----------------

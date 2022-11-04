@@ -9,15 +9,17 @@ import {
   ITournamentContext,
   Tournament,
   TournamentAthlete,
-  TournamentJudge
+  TournamentJudge,
+  Performer
 } from './interfaces'
 import {
   deleteLocation,
   findAllTournaments,
+  findAllTournamentSlots,
   findLocationsByTournamentId,
   findPerformances,
+  findPerformer,
   findTournamentAthletesAndPerson,
-  findTournamentByTournamentName,
   findTournamentJudgesAndPerson,
   getPerformanceById,
   getTournamentAthleteAndPerson,
@@ -25,6 +27,7 @@ import {
   getTournamentJudgeAndPerson,
   insertLocation,
   insertPerformance,
+  insertPerformer,
   insertSlot,
   insertTournament,
   insertTournamentAthlete,
@@ -47,9 +50,9 @@ export class TournamentService implements ITournamentContext {
     return await getTournamentById(id)
   }
 
-  async listSlots (tournamentName: string): Promise<(Slot & Id)[]> {
-    // TODO
-    return Promise.resolve([])
+  async listSlots (tournamentId: string): Promise<Slot[]> {
+    const slots = await findAllTournamentSlots(tournamentId)
+    return slots
   }
 
   async addTournament (t: TournamentAndAddress): Promise<TournamentAndAddress & Id> {
@@ -72,10 +75,8 @@ export class TournamentService implements ITournamentContext {
   }
 
   async addSlot (s: Slot): Promise<Slot | null> {
-    const tournament = await findTournamentByTournamentName(s.tournamentName)
-    if (!tournament) return null
-    await insertSlot({ ...s, tournamentId: tournament.id })
-    return s
+    const insertedSlot = await insertSlot(s)
+    return insertedSlot
   }
 
   async addLocation (l: Omit<Location, 'id'>): Promise<Location | null> {
@@ -96,31 +97,21 @@ export class TournamentService implements ITournamentContext {
     return locations
   }
 
-  // TODO remove
-  // async addPerformance (p: Performance): Promise<(Performance & Id) | null> {
-  //   // get TournamentName & ClubName & LocationName & CategoryName
-  //   const [tournament, club, location, category] = await Promise.all([
-  //     findTournamentByTournamentName(p.tournamentName),
-  //     findClubByName(p.clubName),
-  //     findLocationByLocationName(p.locationName),
-  //     findCategoryByCategoryName(p.categoryName)
-  //   ])
-  //   if (!tournament || !club || !location || !category) {
-  //     return null
-  //   }
+  async addPerformer (p: Performer): Promise<(Performer & Id) | null> {
+    const performance = await insertPerformer({
+      ...p,
+      ...newRecordAttributes()
+    })
+    return { ...p, id: performance.id }
+  }
 
-  //   // insert performance
-  //   const performance = await insertPerformance({
-  //     ...omit(p, 'tournamentName', 'clubName', 'locationName', 'categoryName'),
-  //     tournamentId: tournament.id,
-  //     clubId: club.id,
-  //     locationId: location.id,
-  //     categoryId: category.id,
-  //     ...newRecordAttributes()
-  //   })
+  async getPerformer (performerId: string): Promise<(Performer & Id | null)> {
+    return await this.getPerformer(performerId)
+  }
 
-  //   return { ...p, id: performance.id }
-  // }
+  async listPerformer (tournamentId: string): Promise<(Performer & Id)[]> {
+    return await findPerformer({ tournamentId })
+  }
 
   async addPerformance (p: Performance): Promise<(Performance & Id) | null> {
     const performance = await insertPerformance({

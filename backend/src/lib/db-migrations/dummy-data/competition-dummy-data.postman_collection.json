@@ -496,6 +496,60 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "addTournamentPerformer1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament athlete should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"performerId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"tournamentAthletes\": [ \"{{tournamentAthleteId}}\" ],\n    \"performerName\": \"Test Zibbe Zabbe Hoi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performer"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -989,6 +1043,60 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "addTournamentPerformer1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament athlete should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"performerId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"tournamentAthletes\": [ \"{{tournamentAthleteId}}\" ],\n    \"performerName\": \"Test Zibbe Zabbe Hoi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performer"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1028,7 +1136,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"clubId\": \"{{clubId}}\",\n    \"categoryId\": \"{{categoryId}}\",\n    \"locationId\": \"{{locationId}}\",\n    \"athletes\": [],\n    \"performanceName\": \"Testperformance {{categoryName}}\",\n    \"slotNumber\": null,\n    \"performanceNumber\": null,\n    \"performanceStartTime\": \"2022-11-01T10:00:00.000+01:00\"\n}",
+							"raw": "{\n    \"tournamentId\": \"{{tournamentId}}\",\n    \"clubId\": \"{{clubId}}\",\n    \"categoryId\": \"{{categoryId}}\",\n    \"locationId\": \"{{locationId}}\",\n    \"judges\": [],\n    \"performerId\": \"{{performerId}}\",\n    \"performanceName\": \"Testperformance {{categoryName}} {{rand}}\",\n    \"slotNumber\": null,\n    \"performanceNumber\": null,\n    \"performanceStartTime\": \"2022-11-01T10:00:00.000+01:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

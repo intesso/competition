@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 // /* eslint-disable camelcase */
 
-import { findLocationByLocationName, findSlotByTorunamentNameAndSlotNumber, findTournamentByTournamentName, insertLocation, insertPerformance, insertSlot, insertTournament, insertTournamentAthlete, insertTournamentJudge } from './repository'
+import { findLocationByLocationName, findSlotByTorunamentNameAndSlotNumber, findTournamentByTournamentName, insertLocation, insertPerformance, insertPerformer, insertSlot, insertTournament, insertTournamentAthlete, insertTournamentJudge } from './repository'
 
 import { DateTime } from 'luxon'
 import { dateTimeFormat } from '../lib/common'
@@ -162,6 +162,14 @@ export async function _insertTestPerformance () {
     judgingRuleName
   })
 
+  // insert category with judgingRule first
+  const performerName = 'performer-' + Math.random()
+  const performer = await insertPerformer({
+    tournamentId: tournament.id,
+    performerName,
+    tournamenAthletes: []
+  })
+
   const categoryName = 'team-speed-u15-single-rope-' + Math.random().toString()
   const category = await insertCategory({
     competition: 'team',
@@ -191,7 +199,8 @@ export async function _insertTestPerformance () {
   const performance = await insertPerformance({
     categoryId: category.id,
     tournamentId: tournament.id,
-    athletes: ['2345643573457612345', '23450234985602349867'],
+    performerId: performer.id,
+    judges: [],
     clubId: club.id,
     locationId: location.id,
     slotNumber: 1,

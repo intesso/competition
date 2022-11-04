@@ -3,7 +3,7 @@ import bodyParser from 'koa-bodyparser'
 import { inputValidation } from '../../api/inputValidation'
 import { applicationContext } from '../../applicationContext'
 import { respondWith } from '../lib/common'
-import { Location, Performance, TournamentAndAddress, TournamentAthlete, TournamentJudge } from './interfaces'
+import { Location, Performance, Performer, TournamentAndAddress, TournamentAthlete, TournamentJudge } from './interfaces'
 
 export const tournamentController = new Router()
 
@@ -14,6 +14,15 @@ tournamentController
   })
   .get('/:tournamentId/athletes/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.getTournamentJudge(ctx.params.id as string))
+  })
+  .post('/:tournamentId/performer', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.addPerformer(ctx.request.body as Performer))
+  })
+  .get('/:tournamentId/performer/:id', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.getPerformer(ctx.params.id as string))
+  })
+  .get('/:tournamentId/performer', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.listPerformer(ctx.params.tournamentId as string))
   })
   .post('/:tournamentId/judges', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournamentJudge(ctx.request.body as TournamentJudge))

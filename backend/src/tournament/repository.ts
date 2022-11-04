@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import { db, Location, Performance, Slot, sql, Tournament, TournamentAthlete, TournamentJudge } from '../lib/db/database'
-import { Location_InsertParameters, Performance_InsertParameters, Slot_InsertParameters, TournamentAthlete_InsertParameters, TournamentJudge_InsertParameters, Tournament_InsertParameters } from '../lib/db/__generated__'
+import { db, Location, Performance, Performer, Slot, sql, Tournament, TournamentAthlete, TournamentJudge } from '../lib/db/database'
+import { Location_InsertParameters, Performance_InsertParameters, Performer_InsertParameters, Slot_InsertParameters, TournamentAthlete_InsertParameters, TournamentJudge_InsertParameters, Tournament_InsertParameters } from '../lib/db/__generated__'
 import { Id, newRecordAttributes, updateRecordAttributes } from '../lib/common'
 import { TournamentJudge as TournamentJudgeDomainObject, TournamentAthlete as TournamentAthleteDomainObject } from './interfaces'
 
@@ -16,6 +16,10 @@ export async function findAllTournaments () {
 
 export async function getTournamentById (id: string) {
   return await Tournament(db).findOne({ id })
+}
+
+export async function findTournament (tournament: Partial<Tournament_InsertParameters>) {
+  return await Tournament(db).find(tournament).all()
 }
 
 export async function findTournamentByTournamentName (tournamentName: string) {
@@ -65,6 +69,10 @@ export async function findSlotByTorunamentNameAndSlotNumber (tournamentName: str
   return await Slot(db).findOne({ tournamentId: tournament.id, slotNumber })
 }
 
+export async function findAllTournamentSlots (tournamentId: string) {
+  return await Slot(db).find({ tournamentId }).all()
+}
+
 // Performance
 export async function insertPerformance (performance: Omit<Performance_InsertParameters, 'id'>) {
   const [insertedPerformance] = await Performance(db).insert({ ...performance, ...newRecordAttributes() })
@@ -86,7 +94,7 @@ export async function insertTournamentAthlete (tournamentAthlete: Omit<Tournamen
 }
 
 export async function findTournamentAthletes (tournamentAthlete: Partial<TournamentAthlete_InsertParameters>) {
-  const foundTournamentAthletes = await TournamentAthlete(db).find({ ...tournamentAthlete, ...newRecordAttributes() }).all()
+  const foundTournamentAthletes = await TournamentAthlete(db).find({ ...tournamentAthlete }).all()
   return foundTournamentAthletes
 }
 
@@ -151,4 +159,20 @@ export async function findTournamentJudgesAndPerson (tournamentId: string) {
     where "TournamentJudge"."tournamentId" = ${tournamentId}
 `)) as TournamentJudgeDomainObject[]
   return tournamentJudges
+}
+
+// Performer
+export async function insertPerformer (performer: Omit<Performer_InsertParameters, 'id'>) {
+  const [insertedPerformer] = await Performer(db).insert({ ...performer, ...newRecordAttributes() })
+  return insertedPerformer
+}
+
+export async function insertOrUpdatePerformer (performer: Omit<Performer_InsertParameters, 'id'>) {
+  const [insertedOrUpdatedPerformer] = await Performer(db).insertOrUpdate(['tournamentId', 'performerName'], { ...performer, ...newRecordAttributes() })
+  return insertedOrUpdatedPerformer
+}
+
+export async function findPerformer (performer: Partial<Performer_InsertParameters>) {
+  const foundPerformer = await Performer(db).find(performer).all()
+  return foundPerformer
 }
