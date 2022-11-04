@@ -103,7 +103,7 @@ export async function getTournamentAthleteAndPerson (id: string) {
     select  "TournamentAthlete".id, "TournamentAthlete"."tournamentId", "TournamentAthlete"."createdAt",  "TournamentAthlete"."createdBy", "TournamentAthlete"."updatedAt",  "TournamentAthlete"."updatedBy", "Person"."clubHead", "Person"."firstName", "Person"."lastName" 
     from "TournamentAthlete" 
     join "Athlete"
-    on "Athlete".id = "TournamentAthlete"."AthleteId"
+    on "Athlete".id = "TournamentAthlete"."athleteId"
     join "Person"
     on "Athlete"."personId" = "Person"."id"
     where "TournamentAthlete"."id" = ${id}
@@ -116,7 +116,7 @@ export async function findTournamentAthletesAndPerson (tournamentId: string) {
     select  "TournamentAthlete".id, "TournamentAthlete"."tournamentId", "TournamentAthlete"."createdAt",  "TournamentAthlete"."createdBy", "TournamentAthlete"."updatedAt",  "TournamentAthlete"."updatedBy", "Person"."clubHead", "Person"."firstName", "Person"."lastName" 
     from "TournamentAthlete" 
     join "Athlete"
-    on "Athlete".id = "TournamentAthlete"."AthleteId"
+    on "Athlete".id = "TournamentAthlete"."athleteId"
     join "Person"
     on "Athlete"."personId" = "Person"."id"
     where "TournamentAthlete"."tournamentId" = ${tournamentId}

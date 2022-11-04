@@ -39,6 +39,7 @@ export interface ITournamentContext extends IGetApplicationContext {
   getPerformance: (id: string) => Promise<(Performance & Id) | null>
   addTournamentAthlete: (athlete: TournamentAthlete) => Promise<TournamentAthlete>
   getTournamentAthlete: (id: string) => Promise<(TournamentAthlete & Id) | null>
+  listTournamentAthletes: (tournamentId: string) => Promise<TournamentAthlete[]>
   addTournamentJudge: (judge: TournamentJudge) => Promise<TournamentJudge>
   getTournamentJudge: (id: string) => Promise<(TournamentJudge & Id) | null>
   listTournamentJudges: (tournamentId: string) => Promise<TournamentJudge[]>

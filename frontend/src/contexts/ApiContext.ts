@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Category, Club, Criteria, JudgingRule, Location, Performance, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
+import { Category, Club, Criteria, JudgingRule, Location, Performance, Performer, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
@@ -13,9 +13,13 @@ export interface Api {
   getTournament: (id: string) => Promise<Tournament | null>
   addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
   getTournamentAthlete: (tournamentId: string, id: string) => Promise<TournamentPerson | null>
+  listTournamentAthletes: (tournamentId: string) => Promise<TournamentPerson[]>
   addTournamentJudge: (person: TournamentPerson) => Promise<TournamentPerson>
   getTournamentJudge: (tournamentId: string, id: string) => Promise<TournamentPerson | null>
   listTournamentJudges: (tournamentId: string) => Promise<TournamentPerson[]>
+  addPerformer: (performer: Performer) => Promise<Performer>
+  getPerformer: (tournamentId: string, id: string) => Promise<Performer | null>
+  listPerformer: (tournamentId: string) => Promise<Performer[]>
   addPerformance: (performance: Performance) => Promise<Performance>
   getPerformance: (tournamentId: string, id: string) => Promise<Performance | null>
   listPerformances: (tournamentId: string) => Promise<Performance[]>
@@ -102,6 +106,16 @@ export function provideApiContext (): Api {
         method: 'GET'
       })
     ).data as TorunamentAthlete
+  }
+
+  async function listTournamentAthletes (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/athletes`,
+        method: 'GET'
+      })
+    ).data as TorunamentAthlete[]
   }
 
   async function addTournamentAthlete (athlete: TorunamentAthlete) {
@@ -194,12 +208,44 @@ export function provideApiContext (): Api {
     ).data
   }
 
+  async function addPerformer (performer: Performer) {
+    const data = performer
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${performer.tournamentId}/performer`,
+        method: 'POST',
+        data
+      })
+    ).data
+  }
+
+  async function listPerformer (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performer`,
+        method: 'GET'
+      })
+    ).data as Performer[]
+  }
+
+  async function getPerformer (tournamentId: string, id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performer/${id}`,
+        method: 'GET'
+      })
+    ).data as Performer | null
+  }
+
   async function addPerformance (performance: Performance) {
     const data = performance
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/tournaments/${performance.tournamentId}/performances/`,
+        url: `${serverBaseUrl}/api/tournaments/${performance.tournamentId}/performances`,
         method: 'POST',
         data
       })
@@ -210,7 +256,7 @@ export function provideApiContext (): Api {
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performances/`,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performances`,
         method: 'GET'
       })
     ).data as Performance[]
@@ -311,9 +357,13 @@ export function provideApiContext (): Api {
     removeLocation,
     addTournamentAthlete,
     getTournamentAthlete,
+    listTournamentAthletes,
     addTournamentJudge,
     getTournamentJudge,
     listTournamentJudges,
+    addPerformer,
+    getPerformer,
+    listPerformer,
     addPerformance,
     getPerformance,
     listPerformances,

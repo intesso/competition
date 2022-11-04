@@ -4,11 +4,11 @@ import { useContext, useEffect, useState } from 'react'
 import { DateTime } from 'luxon'
 import SendIcon from '@mui/icons-material/Send'
 import { ApiContext } from '../../contexts/ApiContext'
-import { Category, Club, Location, Tournament } from '../../contexts/ApiContextInterface'
+import { Category, Club, Location, Performer, Tournament } from '../../contexts/ApiContextInterface'
 import { snakeToPascal } from '../../lib/common'
 
 export function AddPerformance () {
-  const { listTournaments, listLocations, listCategories, listClubs, addPerformance } = useContext(ApiContext)
+  const { listTournaments, listLocations, listCategories, listClubs, listPerformer, addPerformance } = useContext(ApiContext)
 
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
@@ -18,6 +18,8 @@ export function AddPerformance () {
   const [categoryId, setCategoryId] = useState('')
   const [clubs, setClubs] = useState([] as Club[])
   const [clubId, setClubId] = useState('')
+  const [performers, setPerformers] = useState([] as Performer[])
+  const [performerId, setPerformerId] = useState('')
 
   const [performanceName, setPerformanceName] = useState('')
   const [performanceNumber, setPerformanceNumber] = useState(null as unknown as number)
@@ -42,6 +44,9 @@ export function AddPerformance () {
       if (tournamentId) {
         const l = await listLocations(tournamentId)
         setLocations(l)
+
+        const p = await listPerformer(tournamentId)
+        setPerformers(p)
       }
     }
     fetchData().catch(console.error)
@@ -50,11 +55,11 @@ export function AddPerformance () {
   async function handleSend () {
     addPerformance({
       tournamentId,
-      clubId,
       categoryId,
+      clubId,
+      performerId,
       locationId,
-      // TODO add athletes
-      athletes: [],
+      judges: [],
       performanceName,
       // TODO add slotNumber
       slotNumber: null,
@@ -124,6 +129,17 @@ export function AddPerformance () {
           </Select>
         </FormControl>
 
+        <FormControl fullWidth margin="normal">
+          <InputLabel id="performerId">Performer</InputLabel>
+          <Select labelId="performerId" value={performerId} label="Performer" onChange={(e) => setPerformerId(e.target.value)}>
+            {performers.map((performer) => (
+              <MenuItem key={performer.id} value={performer.id}>
+                {performer.performerName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <TextField
           fullWidth={true}
           margin="normal"
@@ -156,7 +172,7 @@ export function AddPerformance () {
         />
 
         <FormControl fullWidth margin="normal">
-          <div>Note: Athletes / Slot noch nicht implementiert</div>
+          <div>Note: Slot noch nicht implementiert</div>
         </FormControl>
 
         <FormControl fullWidth margin="normal">

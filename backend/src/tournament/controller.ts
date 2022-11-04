@@ -13,7 +13,10 @@ tournamentController
     return respondWith(ctx, () => applicationContext.tournament.addTournamentAthlete(ctx.request.body as TournamentAthlete))
   })
   .get('/:tournamentId/athletes/:id', inputValidation.validate, (ctx) => {
-    return respondWith(ctx, () => applicationContext.tournament.getTournamentJudge(ctx.params.id as string))
+    return respondWith(ctx, () => applicationContext.tournament.getTournamentAthlete(ctx.params.id as string))
+  })
+  .get('/:tournamentId/athletes', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.listTournamentAthletes(ctx.params.tournamentId as string))
   })
   .post('/:tournamentId/performer', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addPerformer(ctx.request.body as Performer))
@@ -27,11 +30,11 @@ tournamentController
   .post('/:tournamentId/judges', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournamentJudge(ctx.request.body as TournamentJudge))
   })
-  .get('/:tournamentId/judges', inputValidation.validate, (ctx) => {
-    return respondWith(ctx, () => applicationContext.tournament.listTournamentJudges(ctx.params.tournamentId as string))
-  })
   .get('/:tournamentId/judges/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.getTournamentJudge(ctx.params.id as string))
+  })
+  .get('/:tournamentId/judges', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.listTournamentJudges(ctx.params.tournamentId as string))
   })
   .get('/:tournamentId', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.getTournament(ctx.params.tournamentId as string))

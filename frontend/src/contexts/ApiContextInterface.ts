@@ -104,11 +104,20 @@ export interface Performance {
   id?: string
   tournamentId: string
   locationId: string
-  clubId: string
   categoryId: string
+  clubId: string
+  performerId: string
   slotNumber: number | null
-  athletes: string[]
+  judges: string[]
   performanceName: string
   performanceNumber: number | null
   performanceStartTime: string | null
+}
+
+export interface Performer {
+  id?: string
+  tournamentId: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tournamentAthletes: any
+  performerName: string
 }

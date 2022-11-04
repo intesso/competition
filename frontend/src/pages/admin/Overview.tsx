@@ -19,6 +19,7 @@ const pages = [
   '/admin/edit-location',
   '/admin/add-judge',
   '/admin/add-athlete',
+  '/admin/add-performer',
   '/admin/add-performance',
   '/admin/select-raw-point'
 ]
