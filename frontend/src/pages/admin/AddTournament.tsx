@@ -6,10 +6,12 @@ import { Address, Tournament } from '../../contexts/ApiContextInterface'
 import { EditAddress } from '../../components/EditAddress'
 import { DateTime } from 'luxon'
 import { DateTimePicker } from '@mui/x-date-pickers'
+import { useSnackbar } from 'notistack'
+import { parseError } from '../../lib/common'
 
 export function AddTournament () {
   const { addTournament } = useContext(ApiContext)
-
+  const { enqueueSnackbar } = useSnackbar()
   const [address, setAddress] = useState({} as Address)
   const [tournamentName, setTournamentName] = useState('')
   // const [tournamentCoordinates, setTournamentCoordinates] = useState('')
@@ -26,6 +28,8 @@ export function AddTournament () {
       tournamentEndTime: tournamentEndTime.toISO()
     }
     addTournament(tournament)
+      .then(() => enqueueSnackbar('Done', { variant: 'success' }))
+      .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }
 
   return (

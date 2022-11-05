@@ -8,6 +8,7 @@ import { ApiContext, provideApiContext } from './contexts/ApiContext'
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon'
 import type {} from '@mui/x-date-pickers/themeAugmentation'
 import { LocalizationProvider } from '@mui/x-date-pickers'
+import { SnackbarProvider } from 'notistack'
 
 export interface AppProps {
   children?: ReactNode
@@ -21,8 +22,10 @@ export function App ({ children }: AppProps) {
     <ColorContext.Provider value={colorProviderValue}>
       <ThemeProvider theme={theme}>
         <LocalizationProvider adapterLocale={'de'} dateAdapter={AdapterLuxon}>
-        <CssBaseline enableColorScheme />
-        <ThemedApp children={children} />
+          <CssBaseline enableColorScheme />
+          <SnackbarProvider autoHideDuration={3000} maxSnack={2} preventDuplicate={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+            <ThemedApp children={children} />
+          </SnackbarProvider>
         </LocalizationProvider>
       </ThemeProvider>
     </ColorContext.Provider>

@@ -20,10 +20,13 @@ import AddIcon from '@mui/icons-material/Add'
 // import SaveIcon from '@mui/icons-material/Save'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SendIcon from '@mui/icons-material/Send'
+import { useSnackbar } from 'notistack'
+import { parseError } from '../../lib/common'
 
 export function AddPerformer () {
   const { listTournaments, listTournamentAthletes, addPerformer } = useContext(ApiContext)
 
+  const { enqueueSnackbar } = useSnackbar()
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
   const [performerName, setPerformerName] = useState('')
@@ -37,7 +40,7 @@ export function AddPerformer () {
       const t = await listTournaments()
       setTournaments(t)
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [])
 
   useEffect(() => {
@@ -47,7 +50,7 @@ export function AddPerformer () {
         setAthletes(l)
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [tournamentId])
 
   useEffect(() => {
@@ -60,8 +63,10 @@ export function AddPerformer () {
     addPerformer({
       tournamentId,
       performerName,
-      tournamentAthletes: selectedAthletes.filter(athlete => athlete)
+      tournamentAthletes: selectedAthletes.filter((athlete) => athlete)
     })
+      .then(() => enqueueSnackbar('Done', { variant: 'success' }))
+      .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }
 
   function addSelectedAthlete () {
@@ -69,7 +74,7 @@ export function AddPerformer () {
   }
 
   function updateSelectedAthletes (athleteId: string, index: number) {
-    const selectedAthlete = athletes.find(a => a.id === athleteId)
+    const selectedAthlete = athletes.find((a) => a.id === athleteId)
     if (selectedAthlete) {
       selectedAthletes[index] = selectedAthlete
       setSelectedAthletes([...selectedAthletes])
@@ -112,37 +117,36 @@ export function AddPerformer () {
           onChange={(e) => setPerformerName(e.target.value)}
         />
 
-        {selectedAthletes
-          .map((selectedAthlete, index) => (
-            <FormControl key={index} fullWidth margin="normal" variant="outlined">
-              <InputLabel htmlFor={'athlete-' + index.toString()}>Athlet</InputLabel>
+        {selectedAthletes.map((selectedAthlete, index) => (
+          <FormControl key={index} fullWidth margin="normal" variant="outlined">
+            <InputLabel htmlFor={'athlete-' + index.toString()}>Athlet</InputLabel>
 
-              <Select
-                labelId={'athlete-' + index.toString()}
-                value={selectedAthlete?.id}
-                label="Athlet"
-                onChange={(e) => updateSelectedAthletes(e.target.value, index)}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      disabled={!editing}
-                      aria-label="delete"
-                      onClick={() => removeSelectedAthlete(index)}
-                      edge="end"
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </InputAdornment>
-                }
-              >
-                {athletes.map((athlete) => (
-                  <MenuItem key={athlete.id} value={athlete.id}>
-                    {athlete.firstName} {athlete.lastName}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          ))}
+            <Select
+              labelId={'athlete-' + index.toString()}
+              value={selectedAthlete?.id}
+              label="Athlet"
+              onChange={(e) => updateSelectedAthletes(e.target.value, index)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    disabled={!editing}
+                    aria-label="delete"
+                    onClick={() => removeSelectedAthlete(index)}
+                    edge="end"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </InputAdornment>
+              }
+            >
+              {athletes.map((athlete) => (
+                <MenuItem key={athlete.id} value={athlete.id}>
+                  {athlete.firstName} {athlete.lastName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        ))}
 
         <Stack spacing={1} direction="row" margin="normal" justifyContent={'flex-end'}>
           {editing && (

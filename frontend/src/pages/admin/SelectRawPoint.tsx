@@ -3,14 +3,14 @@ import { useContext, useEffect, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 import { ApiContext } from '../../contexts/ApiContext'
 import { Criteria, JudgingRule, Performance, TorunamentJudge, Tournament } from '../../contexts/ApiContextInterface'
-import { snakeToPascal } from '../../lib/common'
+import { parseError, snakeToPascal } from '../../lib/common'
 import { createSearchParams, useNavigate } from 'react-router-dom'
+import { useSnackbar } from 'notistack'
 
 export function SelectRawPoint () {
   const { listTournaments, listPerformances, listCriteria, listTournamentJudges, getJudgingRuleByCategoryId: getJudgingRule } = useContext(ApiContext)
-
+  const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
-
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
   const [performances, setPerformances] = useState([] as Performance[])
@@ -30,7 +30,7 @@ export function SelectRawPoint () {
       const t = await listTournaments()
       setTournaments(t)
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [])
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export function SelectRawPoint () {
         setTournamentJudges(j)
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [tournamentId])
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export function SelectRawPoint () {
         setJudgingRule(j)
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [performanceId])
 
   async function handleSelect () {
@@ -81,7 +81,9 @@ export function SelectRawPoint () {
         })}`
       })
     } else {
-      console.error(`no criteria found for criteriaId: ${criteriaId}`)
+      const msg = `no criteria found for criteriaId: ${criteriaId}`
+      console.error(msg)
+      enqueueSnackbar(msg, { variant: 'error' })
     }
   }
 

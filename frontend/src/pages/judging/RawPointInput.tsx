@@ -13,6 +13,8 @@ import {
 import { DateTime } from 'luxon'
 import { useSearchParams } from 'react-router-dom'
 import './RawPointInput.css'
+import { useSnackbar } from 'notistack'
+import { parseError } from '../../lib/common'
 
 export interface RawPointInputProps {
   layout: string
@@ -21,6 +23,7 @@ export interface RawPointInputProps {
 export function RawPointInput ({ layout }: RawPointInputProps) {
   const { getTournamentJudge, getPerformance, getCategory, getCriteria, getJudgingRule, addRawPoint } =
     useContext(ApiContext)
+  const { enqueueSnackbar } = useSnackbar()
 
   // TODO remove unused vars
   const [searchParams] = useSearchParams()
@@ -55,7 +58,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         setJudgingRule(await getJudgingRule(judgingRuleId))
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [])
 
   useEffect(() => {
@@ -67,7 +70,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         }
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [performance])
 
   function criteriaDefinitionToSubCriteria (c: Criteria) {
@@ -94,8 +97,12 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         timestamp: DateTime.now().toISO()
       }
       addRawPoint(rawPoint)
+        .then(() => enqueueSnackbar('Done', { variant: 'success', autoHideDuration: 5 }))
+        .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error', autoHideDuration: 10 }))
     } else {
-      console.error('must provide performanceId && tournamentJudgeId && criteriaId')
+      const msg = 'must provide performanceId && tournamentJudgeId && criteriaId'
+      console.error(msg)
+      enqueueSnackbar(msg, { variant: 'error' })
     }
   }
 

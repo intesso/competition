@@ -18,10 +18,12 @@ import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import SaveIcon from '@mui/icons-material/Save'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { useSnackbar } from 'notistack'
+import { parseError } from '../../lib/common'
 
 export function EditLocation () {
   const { listTournaments, listLocations, modifyLocation, addLocation, removeLocation } = useContext(ApiContext)
-
+  const { enqueueSnackbar } = useSnackbar()
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
   const [locations, setLocations] = useState([] as Location[])
@@ -32,7 +34,7 @@ export function EditLocation () {
       const t = await listTournaments()
       setTournaments(t)
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [])
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export function EditLocation () {
         setLocations(l)
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [tournamentId])
 
   useEffect(() => {
@@ -56,13 +58,16 @@ export function EditLocation () {
           }
         }
       }
-      saveData().then(() => {
-        if (tournamentId) {
-          listLocations(tournamentId).then((l) => {
-            setLocations(l)
-          })
-        }
-      })
+      saveData()
+        .then(() => {
+          if (tournamentId) {
+            listLocations(tournamentId).then((l) => {
+              setLocations(l)
+            })
+          }
+        })
+        .then(() => enqueueSnackbar('Done', { variant: 'success' }))
+        .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
     }
   }, [editing])
 
@@ -106,30 +111,36 @@ export function EditLocation () {
             onChange={(e) => setTournamentId(e.target.value)}
           >
             {tournaments.map((tournament) => (
-              <MenuItem key={tournament.id} value={tournament.id}>{tournament.tournamentName}</MenuItem>
+              <MenuItem key={tournament.id} value={tournament.id}>
+                {tournament.tournamentName}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
 
         {locations.map((location, index) => (
-            <FormControl key={index} fullWidth margin="normal" required variant="outlined">
-              <InputLabel htmlFor={'location-' + index.toString()}>Platz Name</InputLabel>
-              <OutlinedInput
-                disabled={!editing}
-                id={'location-' + index.toString()}
-                value={location.locationName}
-                onChange={(e) => updateLocationName(e.target.value, index)}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton disabled={!editing} aria-label="delete" onClick={() => deleteLocation(location, index)} edge="end">
-                      <DeleteIcon />
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Platz Name"
-              />
-            </FormControl>
-
+          <FormControl key={index} fullWidth margin="normal" required variant="outlined">
+            <InputLabel htmlFor={'location-' + index.toString()}>Platz Name</InputLabel>
+            <OutlinedInput
+              disabled={!editing}
+              id={'location-' + index.toString()}
+              value={location.locationName}
+              onChange={(e) => updateLocationName(e.target.value, index)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    disabled={!editing}
+                    aria-label="delete"
+                    onClick={() => deleteLocation(location, index)}
+                    edge="end"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Platz Name"
+            />
+          </FormControl>
         ))}
 
         <Stack spacing={1} direction="row" margin="normal" justifyContent={'flex-end'}>
@@ -143,7 +154,6 @@ export function EditLocation () {
             {editing ? <SaveIcon /> : <EditIcon />}
           </Fab>
         </Stack>
-
       </form>
     </Container>
   )

@@ -259,9 +259,10 @@ CREATE TABLE "Criteria" (
 CREATE TABLE "RawPoint" (
   id uuid NOT NULL,
   "performanceId" uuid NOT NULL,
-  "tournamentJudgeId" uuid NOT NULL,
+  "tournamentJudgeId" uuid NULL,
   "criteriaId" uuid NOT NULL,
   "subCriteriaPoints" jsonb NULL,
+  "judge" jsonb NULL,
   "timestamp" timestamp NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,

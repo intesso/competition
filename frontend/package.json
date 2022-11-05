@@ -25,6 +25,7 @@
     "fscreen": "^1.2.0",
     "lodash-es": "^4.17.21",
     "luxon": "^2.5.0",
+    "notistack": "^2.0.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-joystick-component": "^4.0.0",

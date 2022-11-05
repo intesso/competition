@@ -5,6 +5,8 @@ import { DateTime } from 'luxon'
 import SendIcon from '@mui/icons-material/Send'
 import { ApiContext } from '../../contexts/ApiContext'
 import { Person, Tournament, TournamentPerson } from '../../contexts/ApiContextInterface'
+import { parseError } from '../../lib/common'
+import { useSnackbar } from 'notistack'
 
 interface AddTournamentPersonProps {
   role: 'tournamentAthlete' | 'tournamentJudge'
@@ -12,12 +14,12 @@ interface AddTournamentPersonProps {
 
 type RoleActions = {
   // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any
-  [key in AddTournamentPersonProps['role']]: () => any
-}
+  [key in AddTournamentPersonProps['role']]: () => any;
+};
 
 export function AddTournamentPerson ({ role }: AddTournamentPersonProps) {
   const { listTournaments, addTournamentAthlete, addTournamentJudge } = useContext(ApiContext)
-
+  const { enqueueSnackbar } = useSnackbar()
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
 
@@ -31,7 +33,7 @@ export function AddTournamentPerson ({ role }: AddTournamentPersonProps) {
       const t = await listTournaments()
       setTournaments(t)
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [])
 
   function handleSend () {
@@ -42,9 +44,15 @@ export function AddTournamentPerson ({ role }: AddTournamentPersonProps) {
       gender: gender as Person['gender'],
       birthDate: birthDate?.toISODate()
     }
-    const roleActions : RoleActions = {
-      tournamentAthlete: async () => await addTournamentAthlete(person),
-      tournamentJudge: async () => await addTournamentJudge(person)
+    const roleActions: RoleActions = {
+      tournamentAthlete: async () =>
+        await addTournamentAthlete(person)
+          .then(() => enqueueSnackbar('Done', { variant: 'success' }))
+          .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' })),
+      tournamentJudge: async () =>
+        await addTournamentJudge(person)
+          .then(() => enqueueSnackbar('Done', { variant: 'success' }))
+          .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
     }
     roleActions[role]()
   }
@@ -65,7 +73,9 @@ export function AddTournamentPerson ({ role }: AddTournamentPersonProps) {
             onChange={(e) => setTournamentId(e.target.value)}
           >
             {tournaments.map((tournament) => (
-              <MenuItem key={tournament.id} value={tournament.id}>{tournament.tournamentName}</MenuItem>
+              <MenuItem key={tournament.id} value={tournament.id}>
+                {tournament.tournamentName}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

@@ -17,7 +17,8 @@ import {
 } from '@mui/material'
 
 import Logo from '../../themes/default/assets/ropeskipping_swiss_logo.png'
-import { snakeToPascal } from '../../lib/common'
+import { parseError, snakeToPascal } from '../../lib/common'
+import { useSnackbar } from 'notistack'
 
 export interface AppProps {
   children?: ReactNode
@@ -25,9 +26,8 @@ export interface AppProps {
 
 export function JudgingApp ({ children }: AppProps) {
   const { getTournamentJudge, getPerformance, getCategory, getCriteria, getJudgingRule } = useContext(ApiContext)
-
+  const { enqueueSnackbar } = useSnackbar()
   const [showTopDrawer, setShowTopDrawer] = useState(false)
-
   const [searchParams] = useSearchParams()
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
@@ -55,7 +55,7 @@ export function JudgingApp ({ children }: AppProps) {
         setJudgingRule(await getJudgingRule(judgingRuleId))
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [])
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export function JudgingApp ({ children }: AppProps) {
         }
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [performance])
 
   function Infos () {

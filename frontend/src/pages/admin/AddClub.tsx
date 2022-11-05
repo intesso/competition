@@ -4,10 +4,12 @@ import SendIcon from '@mui/icons-material/Send'
 import { ApiContext } from '../../contexts/ApiContext'
 import { Address, Club } from '../../contexts/ApiContextInterface'
 import { EditAddress } from '../../components/EditAddress'
+import { parseError } from '../../lib/common'
+import { useSnackbar } from 'notistack'
 
 export function AddClub () {
   const { addClub } = useContext(ApiContext)
-
+  const { enqueueSnackbar } = useSnackbar()
   const [address, setAddress] = useState({} as Address)
   const [clubName, setClubName] = useState('')
   const [associationId, setAssociationId] = useState('')
@@ -19,6 +21,8 @@ export function AddClub () {
       associationId
     }
     addClub(club)
+      .then(() => enqueueSnackbar('Done', { variant: 'success' }))
+      .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }
 
   return (

@@ -5,11 +5,12 @@ import { DateTime } from 'luxon'
 import SendIcon from '@mui/icons-material/Send'
 import { ApiContext } from '../../contexts/ApiContext'
 import { Category, Club, Location, Performer, Tournament } from '../../contexts/ApiContextInterface'
-import { snakeToPascal } from '../../lib/common'
+import { parseError, snakeToPascal } from '../../lib/common'
+import { useSnackbar } from 'notistack'
 
 export function AddPerformance () {
   const { listTournaments, listLocations, listCategories, listClubs, listPerformer, addPerformance } = useContext(ApiContext)
-
+  const { enqueueSnackbar } = useSnackbar()
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
   const [locations, setLocations] = useState([] as Location[])
@@ -36,7 +37,7 @@ export function AddPerformance () {
       const c = await listClubs()
       setClubs(c)
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [])
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export function AddPerformance () {
         setPerformers(p)
       }
     }
-    fetchData().catch(console.error)
+    fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [tournamentId])
 
   async function handleSend () {
@@ -66,6 +67,8 @@ export function AddPerformance () {
       performanceNumber,
       performanceStartTime: performanceStartTime.toISO()
     })
+      .then(() => enqueueSnackbar('Done', { variant: 'success' }))
+      .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }
 
   return (

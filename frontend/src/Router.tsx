@@ -3,7 +3,6 @@ import { App } from './App'
 import { AddClub } from './pages/admin/AddClub'
 import { AddTournament } from './pages/admin/AddTournament'
 import { EditLocation } from './pages/admin/EditLocation'
-import Speed from './pages/admin/Speed'
 import { AddTournamentPerson } from './pages/admin/AddTournamentPerson'
 import { AddPerformance } from './pages/admin/AddPerformance'
 import { RawPointInput } from './pages/judging/RawPointInput'
@@ -19,8 +18,6 @@ export const Router = () => (
 
       <Route path="/admin" element={<AdminApp />}>
         <Route path="overview" element={<Overview />} />
-        {/* TODO remove */}
-        <Route path="speed" element={<Speed />} />
         <Route path="add-club" element={<AddClub />} />
         <Route path="add-tournament" element={<AddTournament />} />
         <Route path="edit-location" element={<EditLocation />} />
