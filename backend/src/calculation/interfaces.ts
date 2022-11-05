@@ -31,7 +31,9 @@ export interface CalculationJudgesCriteria {
 }
 
 export interface CalculationJudgeCriteria {
-  judgeId: string
+  judgeId?: string | null
+  judgeName?: string | null
+  judgeDevice?: string | null
   subCriteriaPoints: CalculationSubCriteriaPoints
 }
 

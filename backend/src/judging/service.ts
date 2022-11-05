@@ -3,7 +3,7 @@ import { CalculationPointsInput, CalculationJudgeCriteriaGroup } from '../calcul
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { listCategories, findCategoryByCategoryName, findCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria } from './repository'
+import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria } from './repository'
 
 let _categoriesLookup: {[key: string]: (Category & Id)} | null = null
 let _criteriaLookup: {[key: string]: (Criteria & Id)} | null = null
@@ -37,7 +37,11 @@ export class JudgingRuleService implements IJudgingRuleContext {
   }
 
   async getCategory (id: string): Promise<(Category & Id) | null> {
-    return await findCategoryById(id)
+    return await getCategoryById(id)
+  }
+
+  async getCategoryByName (categoryName: string): Promise<(Category & Id) | null> {
+    return await getCategoryByCategoryName(categoryName)
   }
 
   async addCombination (combinationName: string, weightedCategories: WeightedCategory[]) : Promise<Combination & Id | null> {
@@ -45,7 +49,7 @@ export class JudgingRuleService implements IJudgingRuleContext {
     const combination = await insertCombination({ combinationName, ...newRecordAttributes() })
     interface C {category: CategoryDAO, weight: number}
     // then retrieve the categories with the given categoryNames
-    const categories = await Promise.all(weightedCategories.map(weightedCategory => findCategoryByCategoryName(weightedCategory.categoryName)))
+    const categories = await Promise.all(weightedCategories.map(weightedCategory => getCategoryByCategoryName(weightedCategory.categoryName)))
     const categoryWeightPairs = categories.map((category, i) => ({ category, weight: weightedCategories[i].categoryWeight }))
     const filteredCategories = categoryWeightPairs.filter((categoryWeightPair): categoryWeightPair is C => isNotNull(categoryWeightPair.category))
     // then insert the CategoryCombination Objects
@@ -140,6 +144,8 @@ export class JudgingRuleService implements IJudgingRuleContext {
         memo[criteria.criteriaName].judges = memo[criteria.criteriaName].judges ?? []
         memo[criteria.criteriaName].judges.push({
           judgeId: rawPoint.tournamentJudgeId,
+          judgeName: rawPoint.judge?.judgeName,
+          judgeDevice: rawPoint.judge?.judgeDevice,
           subCriteriaPoints: rawPoint.subCriteriaPoints
         })
         memo[criteria.criteriaName].calculatedAggregatedCriteriaPoints = undefined

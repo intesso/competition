@@ -1,0 +1,74 @@
+[
+  {
+    "tournamentName": "TestTournament",
+    "slotNumber": "1",
+    "locationName": "L1",
+    "categoryName": "single-ü15-erso-speed-30sSingleRope",
+    "performerName": "BugsBunny",
+    "clubName": "ClubWaltDisney",
+    "performanceName": "P-single-ü15-erso-speed-30sSingleRope-BugsBunny",
+    "judgeDevice": "J1",
+    "judgeName": "Ingrid Einstein",
+    "criteriaName": "speed"
+  },
+  {
+    "tournamentName": "TestTournament",
+    "slotNumber": "1",
+    "locationName": "L1",
+    "categoryName": "single-ü15-erso-speed-30sSingleRope",
+    "performerName": "BugsBunny",
+    "clubName": "ClubWaltDisney",
+    "performanceName": "P-single-ü15-erso-speed-30sSingleRope-BugsBunny",
+    "judgeDevice": "J2",
+    "judgeName": "Margrith Booth",
+    "criteriaName": "speed"
+  },
+  {
+    "tournamentName": "TestTournament",
+    "slotNumber": "1",
+    "locationName": "L1",
+    "categoryName": "single-ü15-erso-speed-30sSingleRope",
+    "performerName": "BugsBunny",
+    "clubName": "ClubWaltDisney",
+    "performanceName": "P-single-ü15-erso-speed-30sSingleRope-BugsBunny",
+    "judgeDevice": "J3",
+    "judgeName": "Elsbeth Dreamer",
+    "criteriaName": "speed"
+  },
+  {
+    "tournamentName": "TestTournament",
+    "slotNumber": "1",
+    "locationName": "L2",
+    "categoryName": "single-ü15-erso-speed-30sSingleRope",
+    "performerName": "SpeedyGonzales",
+    "clubName": "ClubWaltDisney",
+    "performanceName": "P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales",
+    "judgeDevice": "J4",
+    "judgeName": "Waltrauth Nimmersatt",
+    "criteriaName": "speed"
+  },
+  {
+    "tournamentName": "TestTournament",
+    "slotNumber": "1",
+    "locationName": "L2",
+    "categoryName": "single-ü15-erso-speed-30sSingleRope",
+    "performerName": "SpeedyGonzales",
+    "clubName": "ClubWaltDisney",
+    "performanceName": "P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales",
+    "judgeDevice": "J5",
+    "judgeName": "Ingeborg Neustadt",
+    "criteriaName": "speed"
+  },
+  {
+    "tournamentName": "TestTournament",
+    "slotNumber": "1",
+    "locationName": "L2",
+    "categoryName": "single-ü15-erso-speed-30sSingleRope",
+    "performerName": "SpeedyGonzales",
+    "clubName": "ClubWaltDisney",
+    "performanceName": "P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales",
+    "judgeDevice": "J6",
+    "judgeName": "Mina Safina",
+    "criteriaName": "speed"
+  }
+]

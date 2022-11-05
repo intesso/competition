@@ -4,6 +4,20 @@ import { Address as AddressDAO, Tournament as TournamentDAO, Location as Locatio
 import { Person } from '../people/interfaces'
 
 // Domain Types
+
+export interface TournamentPlan {
+  tournamentName: string
+  slotNumber: number | string
+  locationName: string
+  categoryName: string
+  performerName: string
+  clubName: string
+  performanceName: string
+  judgeDevice: string
+  judgeName: string
+  criteriaName: string
+}
+
 export type TournamentName = {tournamentName: string}
 export type TournamentId = {tournamentId: string}
 export type ClubName = {clubName: string}
@@ -22,6 +36,7 @@ export type TournamentJudge = Person & TournamentId
 
 // Interfaces (Ports)
 export interface ITournamentContext extends IGetApplicationContext {
+  planTournament: (tournamentPlan: TournamentPlan[]) => Promise<TournamentPlan[] | null>
   addTournament: (tournament: TournamentAndAddress) => Promise<TournamentAndAddress & Id>
   getTournament: (id: string) => Promise<(Tournament & Id) | null>
   listTournaments: () => Promise<(Tournament & Id)[]>

@@ -26,7 +26,7 @@ CREATE TABLE "ContactInformation" (
 );
 CREATE TABLE "Club" (
   id uuid NOT NULL,
-  "addressId" uuid NOT NULL,
+  "addressId" uuid NULL,
   "clubName" text NOT NULL,
   "associationId" text NULL,
   "createdAt" timestamp NULL,
@@ -269,15 +269,19 @@ CREATE TABLE "RawPoint" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "RawPointPK" PRIMARY KEY (id),
-  CONSTRAINT "RawPointPerformanceTournamentJudgeIdCriteriaUnique" UNIQUE (
-    "performanceId",
-    "tournamentJudgeId",
-    "criteriaId"
-  ),
   FOREIGN KEY ("performanceId") REFERENCES "Performance"(id),
   FOREIGN KEY ("tournamentJudgeId") REFERENCES "TournamentJudge"(id),
   FOREIGN KEY ("criteriaId") REFERENCES "Criteria"(id)
 );
+CREATE UNIQUE INDEX "RawPointPerformanceTournamentJudgeIdCriteriaUnique" ON "RawPoint" (
+  "performanceId",
+  "tournamentJudgeId",
+  "criteriaId"
+)
+WHERE "tournamentJudgeId" IS NOT NULL;
+CREATE UNIQUE INDEX "RawPointPerformanceTournamentJudgeCriteriaUnique" ON "RawPoint"(("judge"->>'judgeName'))
+WHERE "tournamentJudgeId" IS NULL;
+;
 -----------------------------------
 -- Rank Contect -------------------
 -----------------------------------

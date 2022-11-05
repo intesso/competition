@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { resolve } from 'path'
 import { parse, Options } from 'csv-parse'
+import { parse as parseSync } from 'csv-parse/sync'
 import { finished } from 'stream/promises'
 
 export const readCsvFile = async (pathName: string, csvOptions = {} as Options) => {
@@ -17,4 +18,11 @@ export const readCsvFile = async (pathName: string, csvOptions = {} as Options) 
   })
   await finished(parser)
   return records
+}
+
+export const readCsv = <T>(csvInput: string) => {
+  return parseSync(csvInput, {
+    columns: true,
+    skip_empty_lines: true
+  }) as T
 }

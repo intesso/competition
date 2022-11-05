@@ -13,11 +13,11 @@ export async function listCategories () {
   return await Category(db).find().all()
 }
 
-export async function findCategoryByCategoryName (categoryName: string) {
+export async function getCategoryByCategoryName (categoryName: string) {
   return await Category(db).findOne({ categoryName })
 }
 
-export async function findCategoryById (id: string) {
+export async function getCategoryById (id: string) {
   return await Category(db).findOne({ id })
 }
 
@@ -26,7 +26,7 @@ export async function findCategoriesByCombinationName (combinationName: string) 
   if (!combination) return null
   const categoryCombinations = await CategoryCombination(db).find({ combinationId: combination.id }).all()
 
-  const categories = await Promise.all(categoryCombinations.map(cc => findCategoryById(cc.categoryId)))
+  const categories = await Promise.all(categoryCombinations.map(cc => getCategoryById(cc.categoryId)))
   return categories.filter(isNotNull)
 }
 
@@ -47,7 +47,7 @@ export async function findCombinationById (id: string) {
 // CategoryCombination
 export async function insertCategoryCombination (combinationName: string, categoryName: string, categoryWeight: number) {
   const combination = await findCombinationByCombinationName(combinationName)
-  const category = await findCategoryByCategoryName(categoryName)
+  const category = await getCategoryByCategoryName(categoryName)
   if (!combination || !category) return null
   const [insertedCombination] = await CategoryCombination(db).insert({ categoryId: category.id, combinationId: combination.id, categoryWeight, createdAt: new Date() })
   return insertedCombination
@@ -55,7 +55,7 @@ export async function insertCategoryCombination (combinationName: string, catego
 
 export async function findCategoryCombinationByNames (combinationName: string, categoryName: string) {
   const combination = await findCombinationByCombinationName(combinationName)
-  const category = await findCategoryByCategoryName(categoryName)
+  const category = await getCategoryByCategoryName(categoryName)
   if (!combination || !category) return null
   return await CategoryCombination(db).findOne({ categoryId: category.id, combinationId: combination.id })
 }

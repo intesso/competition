@@ -162,12 +162,12 @@ export async function _insertTestPerformance () {
     judgingRuleName
   })
 
-  // insert category with judgingRule first
+  // insert performer
   const performerName = 'performer-' + Math.random()
   const performer = await insertPerformer({
     tournamentId: tournament.id,
     performerName,
-    tournamenAthletes: []
+    tournamentAthletes: []
   })
 
   const categoryName = 'team-speed-u15-single-rope-' + Math.random().toString()

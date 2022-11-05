@@ -10,7 +10,7 @@ export const peopleController = new Router()
 peopleController
   .use(bodyParser())
   .post('/clubs', inputValidation.validate, (ctx) => {
-    return respondWith(ctx, () => applicationContext.people.addClub(ctx.request.body as ClubWithAddress))
+    return respondWith(ctx, () => applicationContext.people.addClubWithAddress(ctx.request.body as ClubWithAddress))
   })
   .get('/clubs', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.people.listClubs())

@@ -7,7 +7,7 @@ export type JudgingRuleId = {judgingRuleId: string}
 export type CategoryName = {categoryName: string}
 export type PerformanceId = {performanceId: string}
 export type CriteriaId = {criteriaId: string}
-export type TournamentJudgeId = {tournamentJudgeId: string}
+export type TournamentJudgeId = {tournamentJudgeId?: string | null}
 export type CategoryWeight = {categoryWeight: number}
 export type WeightedCategory = CategoryName & CategoryWeight
 export type Category = CategoryDAO
@@ -21,6 +21,7 @@ export interface IJudgingRuleContext extends IGetApplicationContext {
   addCategory: (category: Omit<Category, 'id'>) => Promise<Category | null>
   listCategories: () => Promise<(Category & Id)[] | null>
   getCategory: (id: string) => Promise<(Category & Id) | null>
+  getCategoryByName: (categoryName: string) => Promise<(Category & Id) | null>
   addCombination: (combinationName: string, weightedCategories: WeightedCategory[]) => Promise<Combination & Id | null>
   addJudgingRule: (judgingRule: JudgingRule) => Promise<JudgingRule & Id>
   getJudgingRuleByCategoryId: (categoryId: string) => Promise<(JudgingRule & Id) | null>

@@ -7,7 +7,7 @@ import { Category, Combination, Criteria, JudgingRule, Person_InsertParameters, 
 import { insertJudge, insertPerson } from '../people/repository'
 import { insertTournamentJudge } from '../tournament/repository'
 import { _insertTestPerformance } from '../tournament/repository.test'
-import { findCategoriesByCombinationName, findCategoryByCategoryName, findCombinationByCombinationName, findCriteriaByCriteriaJudgingRuleAndCriteriaName, findJudgingRuleByName, getRawPoint, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertRawPoint } from './repository'
+import { findCategoriesByCombinationName, getCategoryByCategoryName, findCombinationByCombinationName, findCriteriaByCriteriaJudgingRuleAndCriteriaName, findJudgingRuleByName, getRawPoint, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertRawPoint } from './repository'
 
 test('should insert/find category', async () => {
   const judgingRuleName = 'single-speed-' + Math.random()
@@ -32,7 +32,7 @@ test('should insert/find category', async () => {
   expect(category.id).toBeTruthy()
   expect(category.createdAt).toBeTruthy()
 
-  const foundCategory = await findCategoryByCategoryName(categoryName)
+  const foundCategory = await getCategoryByCategoryName(categoryName)
 
   function testCategory (it: Category | null) {
     expect(omit(it, 'id', 'createdAt')).toEqual({

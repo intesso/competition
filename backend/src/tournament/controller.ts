@@ -3,12 +3,15 @@ import bodyParser from 'koa-bodyparser'
 import { inputValidation } from '../../api/inputValidation'
 import { applicationContext } from '../../applicationContext'
 import { respondWith } from '../lib/common'
-import { Location, Performance, Performer, TournamentAndAddress, TournamentAthlete, TournamentJudge } from './interfaces'
+import { Location, Performance, Performer, TournamentAndAddress, TournamentAthlete, TournamentJudge, TournamentPlan } from './interfaces'
 
 export const tournamentController = new Router()
 
 tournamentController
   .use(bodyParser())
+  .post('/plan', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.planTournament(ctx.request.body as unknown as TournamentPlan[]))
+  })
   .post('/:tournamentId/athletes', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournamentAthlete(ctx.request.body as TournamentAthlete))
   })

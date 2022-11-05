@@ -1,5 +1,7 @@
+import _ from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import { Id, newRecordAttributes } from '../lib/common'
+// TODO only access other modules via service (use applicationContext)
 import { insertAddress, insertAthlete, insertJudge, insertPerson } from '../people/repository'
 import {
   Location,
@@ -10,7 +12,8 @@ import {
   Tournament,
   TournamentAthlete,
   TournamentJudge,
-  Performer
+  Performer,
+  TournamentPlan
 } from './interfaces'
 import {
   deleteLocation,
@@ -20,12 +23,17 @@ import {
   findPerformances,
   findPerformer,
   findTournamentAthletesAndPerson,
+  findTournamentByTournamentName,
   findTournamentJudgesAndPerson,
   getPerformanceById,
   getTournamentAthleteAndPerson,
   getTournamentById,
   getTournamentJudgeAndPerson,
   insertLocation,
+  insertOrUpdateLocation,
+  insertOrUpdatePerformance,
+  insertOrUpdatePerformer,
+  insertOrUpdateSlot,
   insertPerformance,
   insertPerformer,
   insertSlot,
@@ -158,5 +166,91 @@ export class TournamentService implements ITournamentContext {
 
   async listTournamentJudges (tournamentId: string): Promise<TournamentJudge[]> {
     return await findTournamentJudgesAndPerson(tournamentId)
+  }
+
+  async planTournament (tournamentPlan: TournamentPlan[]) : Promise<TournamentPlan[] | null> {
+    const groupedByPerformance = _(tournamentPlan).groupBy('performanceName').map((items: TournamentPlan[], performanceName: string) => ({
+      tournamentName: items[0].tournamentName,
+      slotNumber: items[0].slotNumber,
+      locationName: items[0].locationName,
+      categoryName: items[0].categoryName,
+      performerName: items[0].performerName,
+      clubName: items[0].clubName,
+      performanceName,
+      judges: items.map(it => ({ judgeDevice: it.judgeDevice, judgeName: it.judgeName, criteriaName: it.criteriaName }))
+    }))
+
+    // precondition
+    if (groupedByPerformance.size() < 1) {
+      throw new Error('no performance provided')
+    }
+
+    // tournament
+    const tournamentName = groupedByPerformance.get(0).tournamentName
+    let tournament = await findTournamentByTournamentName(tournamentName)
+    if (!tournament) {
+      tournament = await insertTournament({
+        tournamentName,
+        tournamentEndTime: new Date(),
+        tournamentStartTime: new Date()
+      })
+    }
+
+    // iterate over grouped performance plan
+    const ctx = this.getApplicationContext()
+    const planArray = groupedByPerformance.toJSON()
+    for await (const plan of planArray) {
+      // slot
+      const slot = await insertOrUpdateSlot({
+        tournamentId: tournament.id,
+        slotNumber: typeof plan.slotNumber === 'string' ? parseInt(plan.slotNumber) : plan.slotNumber
+      })
+
+      // location
+      const location = await insertOrUpdateLocation({
+        tournamentId: tournament.id,
+        locationName: plan.locationName
+      })
+
+      // club
+      let club = await ctx.people.getClub(plan.clubName)
+      if (!club) {
+        club = await ctx.people.addClub({
+          clubName: plan.clubName,
+          associationId: null
+        })
+      }
+
+      // performer
+      const performer = await insertOrUpdatePerformer({
+        tournamentId: tournament.id,
+        performerName: plan.performerName,
+        tournamentAthletes: []
+      })
+
+      // category
+      const category = await ctx.judging.getCategoryByName(plan.categoryName)
+      if (!category) {
+        throw new Error(`no category found with name: ${plan.categoryName}`)
+      }
+
+      // performance
+      const performance = await insertOrUpdatePerformance({
+        tournamentId: tournament.id,
+        performanceName: plan.performanceName,
+        categoryId: category.id,
+        clubId: club.id,
+        slotNumber: slot.slotNumber,
+        locationId: location.id,
+        performerId: performer.id,
+        judges: plan.judges
+      })
+
+      // TODO remove
+      console.log('performance', performance)
+    }
+
+    console.log(groupedByPerformance)
+    return tournamentPlan
   }
 }

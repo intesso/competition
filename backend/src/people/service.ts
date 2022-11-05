@@ -1,7 +1,7 @@
 import { IGetApplicationContext } from '../../applicationContext'
 import { Id } from '../lib/common'
 import { Club, ClubWithAddress, IPeopleContext, Person } from './interfaces'
-import { findClubs, insertAddress, insertAthlete, insertClub, insertJudge, insertPerson } from './repository'
+import { findClubs, getClubByName, insertAddress, insertAthlete, insertClub, insertJudge, insertPerson } from './repository'
 
 export class PeopleService implements IPeopleContext {
   getApplicationContext
@@ -9,14 +9,23 @@ export class PeopleService implements IPeopleContext {
     this.getApplicationContext = getApplicationContext
   }
 
-  async addClub (club: ClubWithAddress): Promise<ClubWithAddress> {
+  async addClubWithAddress (club: ClubWithAddress): Promise<ClubWithAddress> {
     const address = await insertAddress({ street: club.street, houseNumber: club.houseNumber, zipCode: club.zipCode, city: club.city, country: club.country })
     const insertedClub = await insertClub({ addressId: address.id, clubName: club.clubName, associationId: club.associationId })
     return { ...club, ...insertedClub }
   }
 
-  async listClubs (): Promise<Club[]> {
+  async addClub (club: Omit<Club, 'id'>): Promise<Club & Id> {
+    const insertedClub = await insertClub({ clubName: club.clubName, associationId: club.associationId })
+    return { ...club, ...insertedClub }
+  }
+
+  async listClubs (): Promise<(Club & Id)[]> {
     return await findClubs()
+  }
+
+  async getClub (clubName: string) : Promise<(Club & Id) | null> {
+    return await getClubByName(clubName)
   }
 
   async addAthlete<P extends Person> (athlete: P): Promise<P & Id> {

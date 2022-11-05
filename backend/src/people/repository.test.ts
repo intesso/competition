@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { findAddress, findClubByName, insertAddress, insertClub, insertOrUpdateClub, insertPerson } from './repository'
+import { findAddress, getClubByName, insertAddress, insertClub, insertOrUpdateClub, insertPerson } from './repository'
 import { omit } from 'lodash'
 import { db } from '../lib/db/database'
 import { Person_InsertParameters } from '../lib/db/__generated__'
@@ -58,7 +58,7 @@ test('should insert/find address & club', async () => {
       updatedBy: null
     })
 
-  const foundClub = await findClubByName(clubName)
+  const foundClub = await getClubByName(clubName)
   expect(omit(foundClub, 'id', 'createdAt', 'updatedAt'))
     .toEqual({
       clubName,

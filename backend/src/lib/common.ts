@@ -13,6 +13,36 @@ export function delay (ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+interface InsertRecordAttributes {
+  id: string | null
+  createdAt?: (Date) | null
+  createdBy?: (string) | null
+  updatedAt?: (Date) | null
+  updatedBy?: (string) | null
+}
+
+export function recordAttributes <T extends InsertRecordAttributes> (r :T) {
+  if (r.id) {
+    return {
+      ...r,
+      id: r.id,
+      createdAt: r.createdAt === undefined ? null : r.createdAt,
+      createdBy: r.createdBy === undefined ? null : r.createdBy,
+      updatedAt: new Date(),
+      updatedBy: r.updatedBy === undefined ? null : r.updatedBy
+    }
+  }
+  return {
+    ...r,
+    id: uuidv4(),
+    createdAt: new Date(),
+    createdBy: r.createdBy === undefined ? null : r.createdBy,
+    updatedAt: null,
+    updatedBy: r.updatedBy === undefined ? null : r.updatedBy
+
+  }
+}
+
 export function newRecordAttributes () {
   return { id: uuidv4(), createdAt: new Date() }
 }

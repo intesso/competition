@@ -102,22 +102,16 @@ export async function insertClub ({
   return club
 }
 
-export async function insertOrUpdateClub ({
-  clubName,
-  associationId,
-  addressId
-} : ClubInsert) {
-  const [club] = await Club(db).insertOrUpdate(['clubName'], {
-    clubName,
-    associationId,
-    addressId,
-    ...newRecordAttributes(),
-    updatedAt: new Date()
-  })
-  return club
+export async function insertOrUpdateClub (club : ClubInsert) {
+  const foundClub = await getClubByName(club.clubName)
+  if (foundClub) {
+    const [updatedClub] = await Club(db).update({ clubName: club.clubName }, { ...foundClub, ...club, updatedAt: new Date() })
+    return updatedClub
+  }
+  return await insertClub(club)
 }
 
-export async function findClubByName (clubName: string) {
+export async function getClubByName (clubName: string) {
   return await Club(db).findOne({ clubName })
 }
 
@@ -141,7 +135,7 @@ type PersonCombinedInsert = Omit<Person_InsertParameters & Partial<ContactInform
 export async function insertPerson (p: PersonCombinedInsert) {
   let club
   if (p.clubName) {
-    club = await findClubByName(p.clubName)
+    club = await getClubByName(p.clubName)
   }
   const contactInformationParameters = { email: p.email, phone: p.phone }
   let contactInformation = await findContactInformation(contactInformationParameters)
