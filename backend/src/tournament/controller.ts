@@ -12,6 +12,9 @@ tournamentController
   .post('/plan', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.planTournament(ctx.request.body as unknown as TournamentPlan[]))
   })
+  .get('/:tournamentId/plan', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.getTournamentPlan(ctx.params.tournamentId as string))
+  })
   .post('/:tournamentId/athletes', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournamentAthlete(ctx.request.body as TournamentAthlete))
   })

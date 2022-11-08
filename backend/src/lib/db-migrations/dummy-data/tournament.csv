@@ -1,7 +1,7 @@
-tournamentName,slotNumber,locationName,categoryName,performerName,clubName,performanceName,judgeDevice,judgeName,criteriaName
-TestTournament,1,L1,single-ü15-erso-speed-30sSingleRope,BugsBunny,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-BugsBunny,J1,Ingrid Einstein,speed
-TestTournament,1,L1,single-ü15-erso-speed-30sSingleRope,BugsBunny,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-BugsBunny,J2,Margrith Booth,speed
-TestTournament,1,L1,single-ü15-erso-speed-30sSingleRope,BugsBunny,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-BugsBunny,J3,Elsbeth Dreamer,speed
-TestTournament,1,L2,single-ü15-erso-speed-30sSingleRope,SpeedyGonzales,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales,J4,Waltrauth Nimmersatt,speed
-TestTournament,1,L2,single-ü15-erso-speed-30sSingleRope,SpeedyGonzales,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales,J5,Ingeborg Neustadt,speed
-TestTournament,1,L2,single-ü15-erso-speed-30sSingleRope,SpeedyGonzales,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales,J6,Mina Safina,speed
+tournamentName,slotNumber,locationName,categoryName,performerName,performerNumber,clubName,performanceName,judgeDevice,judgeName,criteriaName
+TestTournament,1,L1,single-ü15-erso-speed-30sSingleRope,BugsBunny,1,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-BugsBunny,J1,Ingrid Einstein,speed
+TestTournament,1,L1,single-ü15-erso-speed-30sSingleRope,BugsBunny,1,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-BugsBunny,J2,Margrith Booth,speed
+TestTournament,1,L1,single-ü15-erso-speed-30sSingleRope,BugsBunny,1,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-BugsBunny,J3,Elsbeth Dreamer,speed
+TestTournament,1,L2,single-ü15-erso-speed-30sSingleRope,SpeedyGonzales,2,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales,J4,Waltrauth Nimmersatt,speed
+TestTournament,1,L2,single-ü15-erso-speed-30sSingleRope,SpeedyGonzales,2,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales,J5,Ingeborg Neustadt,speed
+TestTournament,1,L2,single-ü15-erso-speed-30sSingleRope,SpeedyGonzales,2,ClubWaltDisney,P-single-ü15-erso-speed-30sSingleRope-SpeedyGonzales,J6,Mina Safina,speed

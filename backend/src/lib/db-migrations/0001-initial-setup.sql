@@ -149,6 +149,7 @@ CREATE TABLE "Performer" (
   "tournamentId" uuid NOT NULL,
   "tournamentAthletes" jsonb NOT NULL,
   "performerName" text NOT NULL,
+  "performerNumber" int NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,

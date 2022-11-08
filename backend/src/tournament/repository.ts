@@ -2,7 +2,7 @@
 import { db, Location, Performance, Performer, Slot, sql, Tournament, TournamentAthlete, TournamentJudge } from '../lib/db/database'
 import { Location_InsertParameters, Performance_InsertParameters, Performer_InsertParameters, Slot_InsertParameters, TournamentAthlete_InsertParameters, TournamentJudge_InsertParameters, Tournament_InsertParameters } from '../lib/db/__generated__'
 import { Id, newRecordAttributes, updateRecordAttributes } from '../lib/common'
-import { TournamentJudge as TournamentJudgeDomainObject, TournamentAthlete as TournamentAthleteDomainObject } from './interfaces'
+import { TournamentJudge as TournamentJudgeDomainObject, TournamentAthlete as TournamentAthleteDomainObject, TournamentPlanDetails } from './interfaces'
 
 // Tournament
 export async function insertTournament (tournament: Omit<Tournament_InsertParameters, 'id'>) {
@@ -234,4 +234,44 @@ export async function findPerformer (performer: Partial<Performer_InsertParamete
 
 export async function getPerformer (tournamentId: string, performerName: string) {
   return await Performer(db).findOne({ tournamentId, performerName })
+}
+
+// Plan Tournament
+export async function findTournamentPlan (tournamentId: string) {
+  const tournamentAthletes = (await db.query(sql`
+    select "Tournament"."id" as "tournamentId",
+      "Tournament"."tournamentName",
+      "Tournament"."addressId" as "tournamentAddressId",
+      "Performance"."id" as "performanceId",
+      "Performance"."performanceName",
+      "Performance"."performanceNumber",
+      "Performance"."judges" as "judges",
+      "Club"."id" as "clubId",
+      "Club"."clubName",
+      "Club"."addressId" as "clubAddressId",
+      "Location"."id" as "locationId",
+      "Location"."locationName",
+      "Slot"."slotNumber",
+      "Performer"."id" as "performerId",
+      "Performer"."performerName",
+      "Performer"."performerNumber",
+      "Performer"."tournamentAthletes",
+      "Category"."id" as "categoryId",
+      "Category"."categoryName" 
+    from "Tournament" 
+    left outer join "Performance" 
+    on "Tournament"."id" = "Performance"."tournamentId" 
+    left outer join "Club" 
+    on "Performance"."clubId" = "Club"."id" 
+    left outer join "Location" 
+    on "Performance"."locationId" = "Location"."id" 
+    left outer join "Slot" 
+    on "Performance"."id" = "Slot"."tournamentId" and "Performance"."slotNumber" = "Slot"."slotNumber" 
+    left outer join "Performer" 
+    on "Performance"."performerId" = "Performer"."id" 
+    left outer join "Category"
+    on "Performance"."categoryId" = "Category"."id"
+    where "Tournament"."id" = ${tournamentId}
+`)) as (TournamentPlanDetails)[]
+  return tournamentAthletes
 }

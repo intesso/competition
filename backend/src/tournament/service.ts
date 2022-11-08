@@ -13,7 +13,8 @@ import {
   TournamentAthlete,
   TournamentJudge,
   Performer,
-  TournamentPlan
+  TournamentPlan,
+  TournamentPlanDetails
 } from './interfaces'
 import {
   deleteLocation,
@@ -25,6 +26,7 @@ import {
   findTournamentAthletesAndPerson,
   findTournamentByTournamentName,
   findTournamentJudgesAndPerson,
+  findTournamentPlan,
   getPerformanceById,
   getTournamentAthleteAndPerson,
   getTournamentById,
@@ -54,7 +56,7 @@ export class TournamentService implements ITournamentContext {
     return tournaments
   }
 
-  async getTournament (id: string): Promise<((Tournament & Id) | null)> {
+  async getTournament (id: string): Promise<(Tournament & Id) | null> {
     return await getTournamentById(id)
   }
 
@@ -113,7 +115,7 @@ export class TournamentService implements ITournamentContext {
     return { ...p, id: performance.id }
   }
 
-  async getPerformer (performerId: string): Promise<(Performer & Id | null)> {
+  async getPerformer (performerId: string): Promise<(Performer & Id) | null> {
     return await this.getPerformer(performerId)
   }
 
@@ -168,17 +170,24 @@ export class TournamentService implements ITournamentContext {
     return await findTournamentJudgesAndPerson(tournamentId)
   }
 
-  async planTournament (tournamentPlan: TournamentPlan[]) : Promise<TournamentPlan[] | null> {
-    const groupedByPerformance = _(tournamentPlan).groupBy('performanceName').map((items: TournamentPlan[], performanceName: string) => ({
-      tournamentName: items[0].tournamentName,
-      slotNumber: items[0].slotNumber,
-      locationName: items[0].locationName,
-      categoryName: items[0].categoryName,
-      performerName: items[0].performerName,
-      clubName: items[0].clubName,
-      performanceName,
-      judges: items.map(it => ({ judgeDevice: it.judgeDevice, judgeName: it.judgeName, criteriaName: it.criteriaName }))
-    }))
+  async planTournament (tournamentPlan: TournamentPlan[]): Promise<TournamentPlan[] | null> {
+    const groupedByPerformance = _(tournamentPlan)
+      .groupBy('performanceName')
+      .map((items: TournamentPlan[], performanceName: string) => ({
+        tournamentName: items[0].tournamentName,
+        slotNumber: items[0].slotNumber,
+        locationName: items[0].locationName,
+        categoryName: items[0].categoryName,
+        performerName: items[0].performerName,
+        performerNumber: items[0].performerNumber,
+        clubName: items[0].clubName,
+        performanceName,
+        judges: items.map((it) => ({
+          judgeDevice: it.judgeDevice,
+          judgeName: it.judgeName,
+          criteriaName: it.criteriaName
+        }))
+      }))
 
     // precondition
     if (groupedByPerformance.size() < 1) {
@@ -225,6 +234,7 @@ export class TournamentService implements ITournamentContext {
       const performer = await insertOrUpdatePerformer({
         tournamentId: tournament.id,
         performerName: plan.performerName,
+        performerNumber: typeof plan.performerNumber === 'string' ? parseInt(plan.performerNumber) : plan.performerNumber,
         tournamentAthletes: []
       })
 
@@ -235,7 +245,7 @@ export class TournamentService implements ITournamentContext {
       }
 
       // performance
-      const performance = await insertOrUpdatePerformance({
+      await insertOrUpdatePerformance({
         tournamentId: tournament.id,
         performanceName: plan.performanceName,
         categoryId: category.id,
@@ -245,12 +255,13 @@ export class TournamentService implements ITournamentContext {
         performerId: performer.id,
         judges: plan.judges
       })
-
-      // TODO remove
-      console.log('performance', performance)
     }
 
-    console.log(groupedByPerformance)
+    return tournamentPlan
+  }
+
+  async getTournamentPlan (tournamentId: string): Promise<TournamentPlanDetails[] | null> {
+    const tournamentPlan = await findTournamentPlan(tournamentId)
     return tournamentPlan
   }
 }
