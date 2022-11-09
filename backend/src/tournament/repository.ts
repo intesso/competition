@@ -266,12 +266,13 @@ export async function findTournamentPlan (tournamentId: string) {
     left outer join "Location" 
     on "Performance"."locationId" = "Location"."id" 
     left outer join "Slot" 
-    on "Performance"."id" = "Slot"."tournamentId" and "Performance"."slotNumber" = "Slot"."slotNumber" 
+    on "Performance"."tournamentId" = "Slot"."tournamentId" and "Performance"."slotNumber" = "Slot"."slotNumber" 
     left outer join "Performer" 
     on "Performance"."performerId" = "Performer"."id" 
     left outer join "Category"
     on "Performance"."categoryId" = "Category"."id"
     where "Tournament"."id" = ${tournamentId}
+    order by "Performance"."slotNumber" asc, "Location"."locationName" asc
 `)) as (TournamentPlanDetails)[]
   return tournamentAthletes
 }

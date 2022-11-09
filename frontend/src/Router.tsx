@@ -11,6 +11,7 @@ import { JudgingApp } from './pages/judging/JudgingApp'
 import { AdminApp } from './pages/admin/AdminApp'
 import { Overview } from './pages/admin/Overview'
 import { AddPerformer } from './pages/admin/AddPerformer'
+import { ListTournamentPlan } from './pages/admin/listTournamentPlan'
 
 export const Router = () => (
   <Routes>
@@ -18,6 +19,7 @@ export const Router = () => (
 
       <Route path="/admin" element={<AdminApp />}>
         <Route path="overview" element={<Overview />} />
+        <Route path="tournament-plan" element={<ListTournamentPlan />} />
         <Route path="add-club" element={<AddClub />} />
         <Route path="add-tournament" element={<AddTournament />} />
         <Route path="edit-location" element={<EditLocation />} />

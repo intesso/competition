@@ -21,7 +21,8 @@ const pages = [
   '/admin/add-athlete',
   '/admin/add-performer',
   '/admin/add-performance',
-  '/admin/select-raw-point'
+  '/admin/select-raw-point',
+  '/admin/tournament-plan'
 ]
 
 export function Overview () {
@@ -38,8 +39,8 @@ export function Overview () {
         </Typography>
         <Grid container spacing={2}>
           {/* 1. row */}
-          {pages.map((page) => (
-            <Grid item xs={12}>
+          {pages.map((page, i) => (
+            <Grid key={i} item xs={12}>
               <a style={styledLink} href={page}>
                 <Paper
                   elevation={9}

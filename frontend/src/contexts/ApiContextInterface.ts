@@ -121,3 +121,29 @@ export interface Performer {
   tournamentAthletes: any
   performerName: string
 }
+
+export interface TournamentPlanDetails {
+  tournamentId: string
+  tournamentName: string
+  slotNumber: number | string
+  locationId: string
+  locationName: string
+  categoryId: string
+  categoryName: string
+  performerId: string
+  performerName: string
+  performerNumber?: string
+  tournamentAthletes: string[]
+  clubId: string
+  clubName: string
+  clubAddressId: string
+  performanceId: string
+  performanceName: string
+  judges: PerformanceJudge[]
+}
+
+export interface PerformanceJudge {
+  judgeDevice: string
+  judgeName: string
+  criteriaName: string
+}

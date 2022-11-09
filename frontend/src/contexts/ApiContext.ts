@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Category, Club, Criteria, JudgingRule, Location, Performance, Performer, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson } from './ApiContextInterface'
+import { Category, Club, Criteria, JudgingRule, Location, Performance, Performer, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson, TournamentPlanDetails } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
@@ -8,6 +8,7 @@ export interface Api {
   addClub: (club: Club) => Promise<void>
   listClubs: () => Promise<Club[]>
   // tournament
+  listTournamentPlan: (tournamentId: string) => Promise<TournamentPlanDetails[]>
   listTournaments: () => Promise<Tournament[]>
   addTournament: (tournament: Tournament) => Promise<void>
   getTournament: (id: string) => Promise<Tournament | null>
@@ -272,6 +273,16 @@ export function provideApiContext (): Api {
     ).data as Performance | null
   }
 
+  async function listTournamentPlan (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/plan`,
+        method: 'GET'
+      })
+    ).data as TournamentPlanDetails[]
+  }
+
   async function getCategory (id: string) {
     return (
       await axios({
@@ -367,6 +378,7 @@ export function provideApiContext (): Api {
     addPerformance,
     getPerformance,
     listPerformances,
+    listTournamentPlan,
     getCategory,
     listCategories,
     getCriteria,
