@@ -1,9 +1,10 @@
+import { groupBy, keyBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import { CalculationPointsInput, CalculationJudgeCriteriaGroup } from '../calculation/interfaces'
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria } from './repository'
+import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations } from './repository'
 
 let _categoriesLookup: {[key: string]: (Category & Id)} | null = null
 let _criteriaLookup: {[key: string]: (Criteria & Id)} | null = null
@@ -55,6 +56,46 @@ export class JudgingRuleService implements IJudgingRuleContext {
     // then insert the CategoryCombination Objects
     await Promise.all(filteredCategories.map(category => insertCategoryCombination(combination.combinationName, category.category?.categoryName, category.weight)))
     return combination
+  }
+
+  async listWeightedCombination (combinationId: string) {
+    const categories = keyBy(await listCategories(), 'id')
+    const combinations = keyBy(await listCombinations(), 'id')
+    const combinationGroups = groupBy(await listCategoryCombinations(), 'combinationId')
+
+    const c = combinationGroups[combinationId]
+    const groupedCombination = {
+      combinationId,
+      combinationName: combinations[combinationId].combinationName,
+      categories: c.map(category => {
+        return {
+          categoryId: category.categoryId,
+          categoryName: categories[category.categoryId].categoryName,
+          categoryWeight: category.categoryWeight
+        }
+      })
+    }
+    return groupedCombination
+  }
+
+  async listWeightedCombinations () {
+    const categories = keyBy(await listCategories(), 'id')
+    const combinations = keyBy(await listCombinations(), 'id')
+    const combinationGroups = groupBy(await listCategoryCombinations(), 'combinationId')
+    const groupedCombinations = Object.entries(combinationGroups).map(([combinationId, c]) => {
+      return {
+        combinationId,
+        combinationName: combinations[combinationId].combinationName,
+        categories: c.map(category => {
+          return {
+            categoryId: category.categoryId,
+            categoryName: categories[category.categoryId].categoryName,
+            categoryWeight: category.categoryWeight
+          }
+        })
+      }
+    })
+    return groupedCombinations
   }
 
   async addJudgingRule (j: JudgingRule) : Promise<JudgingRule & Id> {
@@ -157,12 +198,12 @@ export class JudgingRuleService implements IJudgingRuleContext {
     const calculationMessage: CalculationPointsInput = {
       tournamentId: performance.tournamentId,
       performanceId,
+      disqualified: performance.disqualified === true,
+      performerId: performance.performerId,
       categoryId: category.id,
       categoryName: category.categoryName,
       judgingRulId: judgingRule.id,
       judgingRuleName: judgingRule.judgingRuleName,
-      // TODO
-      athletes: [],
       timestamp: inputTimestamp ? inputTimestamp.toISOString() : undefined,
       // TODO group raw points by criteria
       judgeCriteria: groupedCriteria,

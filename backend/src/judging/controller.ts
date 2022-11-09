@@ -27,6 +27,12 @@ judgingController
   .get('/criteria/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.getCriteria(ctx.params.id as string))
   })
+  .get('/combinations/:combinationId', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.judging.listWeightedCombination(ctx.params.combinationId as string))
+  })
+  .get('/combinations', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.judging.listWeightedCombinations())
+  })
   .get('/judging-rule/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.getJudgingRule(ctx.params.id as string))
   })

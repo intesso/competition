@@ -1,16 +1,21 @@
 import { IGetApplicationContext } from '../../applicationContext'
 
-import { CategoryRank as CategoryRankDAO } from '../lib/db/__generated__'
-export type CategoryRank = Omit<CategoryRankDAO, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy'>
+import { CategoryRank as CategoryRankDAO, CategoryPoint as CategoryPointDAO } from '../lib/db/__generated__'
+export type CategoryRank = Omit<CategoryRankDAO, 'id' | 'updatedAt' | 'updatedBy' | 'createdAt' | 'createdBy'>;
+export type CategoryPoint = Omit<CategoryPointDAO, 'id' | 'updatedAt' | 'updatedBy' | 'createdAt' | 'createdBy'>;
+export type CombinationRank = CategoryRank & CategoryPoint & { combinationRank?: number, categoryWeight: number };
+
+export type CombinedRankPoint = CategoryPoint & CategoryRank;
 
 export interface CalculationPointsInput {
   tournamentId: string
   performanceId: string
+  performerId: string
+  disqualified: boolean
   categoryId: string
   categoryName: string
   judgingRulId: string
   judgingRuleName: string
-  athletes: string[]
   judgeCriteria: CalculationJudgeCriteriaGroup
   timestamp?: string
   calculatedTimestamp?: string
@@ -19,7 +24,7 @@ export interface CalculationPointsInput {
 }
 
 export interface CalculationJudgeCriteriaGroup {
-  [key: string] : CalculationJudgesCriteria
+  [key: string]: CalculationJudgesCriteria
 }
 
 export interface CalculationJudgesCriteria {
@@ -38,7 +43,7 @@ export interface CalculationJudgeCriteria {
 }
 
 export interface CalculationSubCriteriaPoints {
-  [key: string] : CalculationSubCriteriaPoint
+  [key: string]: CalculationSubCriteriaPoint
 }
 
 export interface CalculationSubCriteriaPoint {
@@ -67,7 +72,7 @@ export interface CalculationPointsOutput {
   complete: boolean
   calculatedCategoryPoints: number
   calculatedCategoryStats: {
-    [key: string] : number
+    [key: string]: number
   }
 }
 
@@ -76,13 +81,22 @@ export interface CalculationCategoryRanksInput {
   categoryId: string
 }
 
+export interface CalculationCombinationRanksInput {
+  tournamentId: string
+  combinationId: string
+}
+
 // TODO create real interfaces
-export type CalculationCategoryRanksOutput = CategoryRank[]
-export type CalculationCombinationRanksInput = CalculationCategoryRanksInput
-export type CalculationCombinationRanksOutput = CalculationCategoryRanksInput
+export type CalculationCategoryRanksOutput = CategoryRank[];
+export type CalculationCombinationRanksOutput = CalculationCombinationRanksInput;
 
 export interface ICalculationContext extends IGetApplicationContext {
   calculatePoints: (input: CalculationPointsInput) => Promise<CalculationPointsOutput | null>
+  calculateAllPoints: (tournamentId: string) => Promise<boolean | null>
   calculateCategoryRanks: (input: CalculationCategoryRanksInput) => Promise<CalculationCategoryRanksOutput | null>
-  calculateCombinationRanks: (input: CalculationCombinationRanksInput) => Promise<CalculationCombinationRanksOutput | null>
+  calculateAllCategoryRanks: (tournamentId: string) => Promise<boolean | null>
+  calculateCombinationRanks: (
+    input: CalculationCombinationRanksInput
+  ) => Promise<CalculationCombinationRanksOutput | null>
+  calculateAllCombinationRanks: (tournamentId: string) => Promise<boolean | null>
 }

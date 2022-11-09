@@ -44,6 +44,10 @@ export async function findCombinationById (id: string) {
   return await Combination(db).findOne({ id })
 }
 
+export async function listCombinations () {
+  return await Combination(db).find().all()
+}
+
 // CategoryCombination
 export async function insertCategoryCombination (combinationName: string, categoryName: string, categoryWeight: number) {
   const combination = await findCombinationByCombinationName(combinationName)
@@ -58,6 +62,10 @@ export async function findCategoryCombinationByNames (combinationName: string, c
   const category = await getCategoryByCategoryName(categoryName)
   if (!combination || !category) return null
   return await CategoryCombination(db).findOne({ categoryId: category.id, combinationId: combination.id })
+}
+
+export async function listCategoryCombinations () {
+  return await CategoryCombination(db).find().all()
 }
 
 // JudgingRule

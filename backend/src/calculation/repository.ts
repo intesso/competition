@@ -49,7 +49,7 @@ export async function insertOrUpdateCategoryRanks (categoryRanks: Omit<CategoryR
   })
 }
 
-export async function findCategoryRankById (id: string) {
+export async function getCategoryRankById (id: string) {
   return await CategoryRank(db).findOne({ id })
 }
 
@@ -67,7 +67,7 @@ export async function findCombinationRankById (id: string) {
   return await CombinationRank(db).findOne({ id })
 }
 
-export async function findCategoryPointByCombinationName (combinationName: string) {
+export async function findCategoryRankByCombinationName (combinationName: string) {
   const combination = await Combination(db).findOne({ combinationName })
   if (!combination) return null
   return await CombinationRank(db).findOne({ combinationId: combination.id })

@@ -1,4 +1,5 @@
 import { IGetApplicationContext } from '../../applicationContext'
+import { CalculationPointsInput } from '../calculation/interfaces'
 import { Id } from '../lib/common'
 import { JudgingRule as JudgingRuleDAO, Criteria as CriteriaDAO, RawPoint as RawPointDAO, Category as CategoryDAO, Combination as CombinationDAO } from '../lib/db/__generated__'
 
@@ -16,10 +17,22 @@ export type JudgingRule = Omit<JudgingRuleDAO, 'id'| 'updatedAt'| 'updatedBy'| '
 export type Criteria = Omit<JudgingRuleId & Omit<CriteriaDAO, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' | 'judgingRuleId'>, 'id'>
 export type RawPoint = Omit<PerformanceId & TournamentJudgeId & CriteriaId & Omit<RawPointDAO, 'id'| 'updatedAt'| 'updatedBy'| 'createdAt'| 'createdBy' | 'performanceId' | 'criteriaId' | 'tournamentJudgeId'>, 'id'>
 
+export type WeightedCombination = {
+  combinationId: string
+  combinationName: string
+  categories: {
+      categoryId: string
+      categoryName: string
+      categoryWeight: number
+  }[]
+}
+
 // Interfaces (Ports)
 export interface IJudgingRuleContext extends IGetApplicationContext {
   addCategory: (category: Omit<Category, 'id'>) => Promise<Category | null>
   listCategories: () => Promise<(Category & Id)[] | null>
+  listWeightedCombination: (combinationId: string) => Promise<WeightedCombination>
+  listWeightedCombinations: () => Promise<WeightedCombination[]>
   getCategory: (id: string) => Promise<(Category & Id) | null>
   getCategoryByName: (categoryName: string) => Promise<(Category & Id) | null>
   addCombination: (combinationName: string, weightedCategories: WeightedCategory[]) => Promise<Combination & Id | null>
@@ -32,4 +45,5 @@ export interface IJudgingRuleContext extends IGetApplicationContext {
   listCriteria: () => Promise<(Criteria & Id)[] | null>
   addRawPoint: (rawPoint: RawPoint) => Promise<RawPoint & Id | null>
   listRawPoints: (performanceId: string) => Promise<(RawPoint & Id)[]>
+  prepareCalculationMessage: (performanceId: string, rawPoints: RawPoint[], inputTimestamp: Date | null) => Promise<CalculationPointsInput | null>
 }

@@ -31,6 +31,13 @@ npm start
 
 http://localhost:8080/admin/overview
 
+expose for apps during testing:
+
+```sh
+npx localtunnel --subdomain intesso  --port 8080
+https://intesso.loca.lt/admin/overview
+```
+
 
 ## db setup
 

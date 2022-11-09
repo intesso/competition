@@ -166,6 +166,7 @@ CREATE TABLE "Performance" (
   "categoryId" uuid NOT NULL,
   "slotNumber" int NULL,
   "performerId" uuid NOT NULL,
+  "disqualified" boolean NULL,
   "judges" jsonb NULL,
   "performanceName" text NOT NULL,
   "performanceNumber" int NULL,
@@ -290,9 +291,11 @@ CREATE TABLE "CategoryPoint" (
   id uuid NOT NULL,
   "tournamentId" uuid NOT NULL,
   "performanceId" uuid NOT NULL,
+  "performerId" uuid NOT NULL,
   "categoryId" uuid NOT NULL,
   "categoryPoint" int NULL,
   "criteriaPoints" jsonb NULL,
+  "disqualified" boolean NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
@@ -301,6 +304,7 @@ CREATE TABLE "CategoryPoint" (
   CONSTRAINT "CategoryPointPerformanceIdUnique" UNIQUE ("performanceId"),
   FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
   FOREIGN KEY ("performanceId") REFERENCES "Performance"(id),
+  FOREIGN KEY ("performerId") REFERENCES "Performer"(id),
   FOREIGN KEY ("categoryId") REFERENCES "Category"(id)
 );
 CREATE TABLE "CategoryRank" (
@@ -309,11 +313,13 @@ CREATE TABLE "CategoryRank" (
   "categoryPointId" uuid NOT NULL,
   "categoryId" uuid NOT NULL,
   "categoryRank" int NULL,
+  "disqualified" boolean NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "CategoryRankPK" PRIMARY KEY (id),
+  CONSTRAINT "CategoryRankPointIdUnique" UNIQUE ("categoryPointId"),
   FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
   FOREIGN KEY ("categoryPointId") REFERENCES "CategoryPoint"(id),
   FOREIGN KEY ("categoryId") REFERENCES "Category"(id)
@@ -321,15 +327,14 @@ CREATE TABLE "CategoryRank" (
 CREATE TABLE "CombinationRank" (
   id uuid NOT NULL,
   "tournamentId" uuid NOT NULL,
-  "categoryPointId" uuid NOT NULL,
   "combinationId" uuid NOT NULL,
-  "combinationRank" int NULL,
+  "combinationRanks" jsonb NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "CombinationRankPK" PRIMARY KEY (id),
   FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
-  FOREIGN KEY ("categoryPointId") REFERENCES "CategoryPoint"(id),
-  FOREIGN KEY ("combinationId") REFERENCES "Combination"(id)
+  FOREIGN KEY ("combinationId") REFERENCES "Combination"(id),
+  CONSTRAINT "CombinationRankTournamentCombinationUnique" UNIQUE ("tournamentId", "combinationId")
 );
