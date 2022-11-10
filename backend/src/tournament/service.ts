@@ -183,7 +183,7 @@ export class TournamentService implements ITournamentContext {
         clubName: items[0].clubName,
         performanceName,
         judges: items.map((it) => ({
-          judgeDevice: it.judgeDevice,
+          judgeId: it.judgeDevice,
           judgeName: it.judgeName,
           criteriaName: it.criteriaName
         }))

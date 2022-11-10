@@ -184,9 +184,8 @@ export class JudgingRuleService implements IJudgingRuleContext {
         memo[criteria.criteriaName].criteriaWeight = criteria.criteriaWeight
         memo[criteria.criteriaName].judges = memo[criteria.criteriaName].judges ?? []
         memo[criteria.criteriaName].judges.push({
-          judgeId: rawPoint.tournamentJudgeId,
-          judgeName: rawPoint.judge?.judgeName,
-          judgeDevice: rawPoint.judge?.judgeDevice,
+          judgeId: rawPoint.judgeId || rawPoint.tournamentJudgeId,
+          judgeName: rawPoint.judgeName || rawPoint.judge.judgeName,
           subCriteriaPoints: rawPoint.subCriteriaPoints
         })
         memo[criteria.criteriaName].calculatedAggregatedCriteriaPoints = undefined

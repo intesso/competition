@@ -104,7 +104,7 @@ export function ListTournamentPlan () {
             <tbody>
             {params.value?.map((judge, i) => (
             <tr key={i}>
-              <td>{judge.judgeDevice}</td>
+              <td>{judge.judgeId}</td>
               <td>{judge.judgeName}</td>
               <td>{judge.criteriaName}</td>
             </tr>

@@ -29,6 +29,8 @@ export function JudgingApp ({ children }: AppProps) {
   const { enqueueSnackbar } = useSnackbar()
   const [showTopDrawer, setShowTopDrawer] = useState(false)
   const [searchParams] = useSearchParams()
+  const judgeId = searchParams.get('id')
+  const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
@@ -42,6 +44,15 @@ export function JudgingApp ({ children }: AppProps) {
 
   // TODO remove judgingRule if not neeeded
   console.log('judgingRule', judgingRule)
+
+  function getJudgeId () {
+    return judgeId || tournamentJudgeId || ''
+  }
+  console.log('getJudgeId', getJudgeId())
+
+  function getJudgeName () {
+    return judgeName || tournamentJudge ? `${tournamentJudge?.firstName} ${tournamentJudge?.lastName}` : ''
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -105,7 +116,7 @@ export function JudgingApp ({ children }: AppProps) {
             <ListItem>
               <ListItemText
                 primary="WERTUNGSRICHTER"
-                secondary={(tournamentJudge?.firstName || '') + ' ' + (tournamentJudge?.lastName || '')}
+                secondary={getJudgeName()}
               />
             </ListItem>
           </List>

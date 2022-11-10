@@ -67,7 +67,9 @@ export interface Criteria {
 
 export interface RawPoint {
   performanceId: string
-  tournamentJudgeId: string
+  tournamentJudgeId?: string
+  judgeId: string
+  judgeName: string
   criteriaId: string
   subCriteriaPoints: SubCriteriaValue
   timestamp: string
@@ -143,7 +145,7 @@ export interface TournamentPlanDetails {
 }
 
 export interface PerformanceJudge {
-  judgeDevice: string
+  judgeId: string
   judgeName: string
   criteriaName: string
 }

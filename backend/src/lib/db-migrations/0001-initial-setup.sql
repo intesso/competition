@@ -264,6 +264,8 @@ CREATE TABLE "RawPoint" (
   "tournamentJudgeId" uuid NULL,
   "criteriaId" uuid NOT NULL,
   "subCriteriaPoints" jsonb NULL,
+  "judgeId" text NOT NULL,
+  "judgeName" text NOT NULL,
   "judge" jsonb NULL,
   "timestamp" timestamp NULL,
   "createdAt" timestamp NULL,
@@ -271,19 +273,11 @@ CREATE TABLE "RawPoint" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "RawPointPK" PRIMARY KEY (id),
+  CONSTRAINT "RawPointPerformanceTournamentJudgeIdCriteriaUnique" UNIQUE ("performanceId", "judgeId", "criteriaId"),
   FOREIGN KEY ("performanceId") REFERENCES "Performance"(id),
   FOREIGN KEY ("tournamentJudgeId") REFERENCES "TournamentJudge"(id),
   FOREIGN KEY ("criteriaId") REFERENCES "Criteria"(id)
 );
-CREATE UNIQUE INDEX "RawPointPerformanceTournamentJudgeIdCriteriaUnique" ON "RawPoint" (
-  "performanceId",
-  "tournamentJudgeId",
-  "criteriaId"
-)
-WHERE "tournamentJudgeId" IS NOT NULL;
-CREATE UNIQUE INDEX "RawPointPerformanceTournamentJudgeCriteriaUnique" ON "RawPoint"(("judge"->>'judgeName'))
-WHERE "tournamentJudgeId" IS NULL;
-;
 -----------------------------------
 -- Rank Contect -------------------
 -----------------------------------

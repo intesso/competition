@@ -125,7 +125,7 @@ export async function insertRawPoint (rawPoint: Omit<RawPoint_InsertParameters, 
 }
 
 export async function insertOrUpdateRawPoint (rawPoint: Omit<RawPoint_InsertParameters, 'id'>) {
-  const [insertedRawPoint] = await RawPoint(db).insertOrUpdate(['performanceId', 'tournamentJudgeId', 'criteriaId'], { ...rawPoint, ...newRecordAttributes() })
+  const [insertedRawPoint] = await RawPoint(db).insertOrUpdate(['performanceId', 'judgeId', 'criteriaId'], { ...rawPoint, ...newRecordAttributes() })
   return insertedRawPoint
 }
 

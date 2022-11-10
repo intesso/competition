@@ -27,6 +27,8 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
 
   // TODO remove unused vars
   const [searchParams] = useSearchParams()
+  const judgeId = searchParams.get('id')
+  const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
@@ -84,12 +86,22 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     setFns(fns)
   }
 
+  function getJudgeId () {
+    return judgeId || tournamentJudgeId || ''
+  }
+
+  function getJudgeName () {
+    return judgeName || tournamentJudge ? `${tournamentJudge?.firstName} ${tournamentJudge?.lastName}` : ''
+  }
+
   async function handleSend () {
-    if (performanceId && tournamentJudgeId && criteriaId) {
+    if (performanceId && getJudgeId() && criteriaId) {
       const rawPoint: RawPoint = {
         performanceId,
-        tournamentJudgeId,
+        tournamentJudgeId: tournamentJudgeId || undefined,
         criteriaId,
+        judgeId: getJudgeId(),
+        judgeName: getJudgeName(),
         subCriteriaPoints: Object.entries(subCriteria).reduce((memo, [, value]) => {
           memo[value.subCriteriaName] = value
           return memo
@@ -97,10 +109,10 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         timestamp: DateTime.now().toISO()
       }
       addRawPoint(rawPoint)
-        .then(() => enqueueSnackbar('Done', { variant: 'success', autoHideDuration: 5 }))
-        .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error', autoHideDuration: 10 }))
+        .then(() => enqueueSnackbar('Done', { variant: 'success', autoHideDuration: 5000 }))
+        .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error', autoHideDuration: 10000 }))
     } else {
-      const msg = 'must provide performanceId && tournamentJudgeId && criteriaId'
+      const msg = 'must provide performanceId && (id || tournamentJudgeId) && criteriaId'
       console.error(msg)
       enqueueSnackbar(msg, { variant: 'error' })
     }
