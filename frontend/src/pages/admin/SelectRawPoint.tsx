@@ -6,14 +6,22 @@ import { Criteria, JudgingRule, Performance, TorunamentJudge, Tournament } from 
 import { parseError, snakeToPascal } from '../../lib/common'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
+import { Dictionary, keyBy } from 'lodash'
 
 export function SelectRawPoint () {
-  const { listTournaments, listPerformances, listCriteria, listTournamentJudges, getJudgingRuleByCategoryId: getJudgingRule } = useContext(ApiContext)
+  const {
+    listTournaments,
+    listPerformances,
+    listCriteria,
+    listTournamentJudges,
+    getJudgingRuleByCategoryId: getJudgingRule
+  } = useContext(ApiContext)
   const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useState('')
   const [performances, setPerformances] = useState([] as Performance[])
+  const [performanceLookup, setPerformanceLookup] = useState({} as Dictionary<Performance>)
   const [performanceId, setPerformanceId] = useState('')
   const [categoryId, setCategoryId] = useState('')
 
@@ -24,6 +32,8 @@ export function SelectRawPoint () {
 
   const [tournamentJudges, setTournamentJudges] = useState([] as TorunamentJudge[])
   const [tournamentJudgeId, setTournamentJudgeId] = useState('')
+  const [judgeId, setJudgeId] = useState('')
+  const [judgeName, setJudgeName] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +48,7 @@ export function SelectRawPoint () {
       if (tournamentId) {
         const p = await listPerformances(tournamentId)
         setPerformances(p)
+        setPerformanceLookup(keyBy(p, 'id'))
 
         const j = await listTournamentJudges(tournamentId)
         setTournamentJudges(j)
@@ -48,11 +59,11 @@ export function SelectRawPoint () {
 
   useEffect(() => {
     const fetchData = async () => {
-      const performance = performances.find(p => p.id === performanceId)
+      const performance = performances.find((p) => p.id === performanceId)
       if (performance) {
         setCategoryId(performance.categoryId)
         const c = await listCriteria(performance.categoryId)
-        c.forEach(it => console.log(it.criteriaName, it.subCriteriaDefinition))
+        // c.forEach((it) => console.log(it.criteriaName, it.subCriteriaDefinition))
         setCriteria(c)
         const j = await getJudgingRule(performance.categoryId)
         setJudgingRule(j)
@@ -61,9 +72,21 @@ export function SelectRawPoint () {
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [performanceId])
 
+  function setJudge (judgeId: string) {
+    const judge = performanceLookup[performanceId].judges.find(it => it.judgeId === judgeId)
+    if (judge) {
+      setJudgeId(judge.judgeId)
+      setJudgeName(judge.judgeName)
+    } else {
+      const msg = `no judge provided with id ${judgeId}`
+      console.error(msg)
+      enqueueSnackbar(msg, { variant: 'error' })
+    }
+  }
+
   async function handleSelect () {
     const judgingRuleName = judgingRule?.judgingRuleName || ''
-    const foundCriteria = criteria.find(it => it.id === criteriaId)
+    const foundCriteria = criteria.find((it) => it.id === criteriaId)
     if (foundCriteria) {
       const criteriaName = foundCriteria.criteriaName
       const criteriaUiLayout = foundCriteria.criteriaUiLayout
@@ -76,6 +99,8 @@ export function SelectRawPoint () {
           categoryId,
           criteriaId,
           tournamentJudgeId,
+          judgeId,
+          judgeName,
           judgingRuleName,
           criteriaName
         })}`
@@ -112,7 +137,12 @@ export function SelectRawPoint () {
 
         <FormControl fullWidth margin="normal">
           <InputLabel id="performanceId">Performance</InputLabel>
-          <Select labelId="performanceId" value={performanceId} label="Performance" onChange={(e) => setPerformanceId(e.target.value)}>
+          <Select
+            labelId="performanceId"
+            value={performanceId}
+            label="Performance"
+            onChange={(e) => setPerformanceId(e.target.value)}
+          >
             {performances.map((performance) => (
               <MenuItem key={performance.id} value={performance.id}>
                 {performance.performanceName}
@@ -139,18 +169,41 @@ export function SelectRawPoint () {
 
         <FormControl fullWidth margin="normal">
           <InputLabel id="judgeId">Wertungsrichter(in)</InputLabel>
-          <Select
-            labelId="judgeId"
-            value={tournamentJudgeId}
-            label="Wertungsrichter(in)"
-            onChange={(e) => setTournamentJudgeId(e.target.value)}
-          >
-            {tournamentJudges.map((judge) => (
-              <MenuItem key={judge.id} value={judge.id}>
-               {judge.firstName}{' '}{judge.lastName}
-              </MenuItem>
-            ))}
-          </Select>
+
+          {performanceId &&
+          performanceLookup[performanceId] &&
+          performanceLookup[performanceId].judges &&
+          performanceLookup[performanceId].judges.length
+            ? (
+            <>
+              <Select
+                labelId="judgeId"
+                value={judgeId}
+                label="Wertungsrichter(in)"
+                onChange={(e) => setJudge(e.target.value)}
+              >
+                {performanceLookup[performanceId].judges.map((judge) => (
+                  <MenuItem key={judge.judgeId} value={judge.judgeId}>
+                    {judge.judgeName}
+                  </MenuItem>
+                ))}
+              </Select>
+            </>
+              )
+            : (
+            <Select
+              labelId="judgeId"
+              value={tournamentJudgeId}
+              label="Wertungsrichter(in)"
+              onChange={(e) => setTournamentJudgeId(e.target.value)}
+            >
+              {tournamentJudges.map((judge) => (
+                <MenuItem key={judge.id} value={judge.id}>
+                  {judge.firstName} {judge.lastName}
+                </MenuItem>
+              ))}
+            </Select>
+              )}
         </FormControl>
 
         <FormControl fullWidth margin="normal">

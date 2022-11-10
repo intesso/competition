@@ -60,6 +60,9 @@ tournamentController
   .delete('/:tournamentId/locations/:locationId', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.removeLocation(ctx.request.body as unknown as Location))
   })
+  .get('/:tournamentId/locations/:id', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.getLocation(ctx.params.id as string))
+  })
   .get('/:tournamentId/locations', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.listLocations(ctx.params.tournamentId as string))
   })

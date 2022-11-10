@@ -2,7 +2,16 @@ import { ReactNode, useContext, useEffect, useState } from 'react'
 import { Outlet, useSearchParams } from 'react-router-dom'
 import type {} from '@mui/x-date-pickers/themeAugmentation'
 import { ApiContext } from '../../contexts/ApiContext'
-import { Category, Criteria, JudgingRule, Performance, TournamentPerson } from '../../contexts/ApiContextInterface'
+
+import {
+  Category,
+  Criteria,
+  JudgingRule,
+  Location,
+  Performance,
+  Performer,
+  TournamentPerson
+} from '../../contexts/ApiContextInterface'
 import {
   AppBar,
   Box,
@@ -15,17 +24,22 @@ import {
   Toolbar,
   Typography
 } from '@mui/material'
-
 import Logo from '../../themes/default/assets/ropeskipping_swiss_logo.png'
-import { parseError, snakeToPascal } from '../../lib/common'
+import { dedupe, parseError, snakeToPascal } from '../../lib/common'
 import { useSnackbar } from 'notistack'
-
+import CategoryIcon from '@mui/icons-material/Category'
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import WorkspacesIcon from '@mui/icons-material/Workspaces'
+import TableRowsIcon from '@mui/icons-material/TableRows'
+import PlaceIcon from '@mui/icons-material/Place'
+import GavelIcon from '@mui/icons-material/Gavel'
 export interface AppProps {
   children?: ReactNode
 }
 
 export function JudgingApp ({ children }: AppProps) {
-  const { getTournamentJudge, getPerformance, getCategory, getCriteria, getJudgingRule } = useContext(ApiContext)
+  const { getTournamentJudge, getPerformance, getPerformer, getCategory, getCriteria, getJudgingRule, getLocation } =
+    useContext(ApiContext)
   const { enqueueSnackbar } = useSnackbar()
   const [showTopDrawer, setShowTopDrawer] = useState(false)
   const [searchParams] = useSearchParams()
@@ -36,7 +50,10 @@ export function JudgingApp ({ children }: AppProps) {
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
   const performanceId = searchParams.get('performanceId')
   const [performance, setPerformance] = useState(null as Performance | null)
+  const performerId = searchParams.get('performerId')
+  const [performer, setPerformer] = useState(null as Performer | null)
   const [category, setCategory] = useState(null as Category | null)
+  const [location, setLocation] = useState(null as Location | null)
   const criteriaId = searchParams.get('criteriaId')
   const [criteria, setCriteria] = useState(null as Criteria | null)
   const judgingRuleId = searchParams.get('judgingRuleId')
@@ -51,13 +68,16 @@ export function JudgingApp ({ children }: AppProps) {
   console.log('getJudgeId', getJudgeId())
 
   function getJudgeName () {
-    return judgeName || tournamentJudge ? `${tournamentJudge?.firstName} ${tournamentJudge?.lastName}` : ''
+    return judgeName || (tournamentJudge ? `${tournamentJudge?.firstName} ${tournamentJudge?.lastName}` : '')
   }
 
   useEffect(() => {
     const fetchData = async () => {
       if (tournamentId && performanceId) {
         setPerformance(await getPerformance(tournamentId, performanceId))
+      }
+      if (tournamentId && performerId) {
+        setPerformer(await getPerformer(tournamentId, performerId))
       }
       if (criteriaId) {
         setCriteria(await getCriteria(criteriaId))
@@ -67,7 +87,7 @@ export function JudgingApp ({ children }: AppProps) {
       }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
-  }, [])
+  }, [undefined, window.location.pathname])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,51 +96,59 @@ export function JudgingApp ({ children }: AppProps) {
         if (tournamentJudgeId) {
           setTournamentJudge(await getTournamentJudge(performance.tournamentId, tournamentJudgeId))
         }
+        if (tournamentId) {
+          setLocation(await getLocation(tournamentId, performance.locationId))
+        }
       }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [performance])
 
+  const classes = {
+    list: { width: '100%', bgcolor: 'primary', margin: 0, padding: 0 },
+    listItem: { padding: 0 }
+  }
+
   function Infos () {
     return (
-      <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'column' }} spacing={{ xs: 0, sm: 0, md: 0 }}>
-        <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
-          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-            <ListItem>
-              <ListItemText primary="Kriterium" secondary={criteria?.criteriaName} />
+      <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
+        {performance && performance?.slotNumber && (
+          <List sx={classes.list}>
+            <ListItem sx={classes.listItem}>
+              <ListItemText primary={<TableRowsIcon />} secondary={performance?.slotNumber} />
             </ListItem>
           </List>
-          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-            <ListItem>
-              <ListItemText primary="PERFORMANCE NAME" secondary={performance?.performanceName} />
+        )}
+        {location && (
+          <List sx={classes.list}>
+            <ListItem sx={classes.listItem}>
+              <ListItemText primary={<PlaceIcon />} secondary={location?.locationName} />
             </ListItem>
           </List>
-          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-            <ListItem>
-              <ListItemText primary="PERFORMANCE NUMMER" secondary={performance?.performanceNumber} />
-            </ListItem>
-          </List>
-        </Stack>
-        <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
-          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-            <ListItem>
-              <ListItemText primary="KATEGORIE" secondary={snakeToPascal(category?.categoryName || '')} />
-            </ListItem>
-          </List>
-          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-            <ListItem>
-              <ListItemText primary="DISZIPLIN" secondary={category?.discipline} />
-            </ListItem>
-          </List>
-          <List sx={{ width: '100%', bgcolor: 'primary ' }}>
-            <ListItem>
+        )}
+        <ListItem sx={classes.listItem}>
+          <ListItemText primary={<CategoryIcon />} secondary={dedupe(snakeToPascal(category?.categoryName || ''))} />
+        </ListItem>
+        {performer && (
+          <List sx={classes.list}>
+            <ListItem sx={classes.listItem}>
               <ListItemText
-                primary="WERTUNGSRICHTER"
-                secondary={getJudgeName()}
+                primary={<PeopleAltIcon />}
+                secondary={`${performer?.performerName} ${performer?.performerNumber}`}
               />
             </ListItem>
           </List>
-        </Stack>
+        )}
+        <List sx={classes.list}>
+          <ListItem sx={classes.listItem}>
+            <ListItemText primary={<WorkspacesIcon />} secondary={criteria?.criteriaName} />
+          </ListItem>
+        </List>
+        <List sx={classes.list}>
+          <ListItem sx={classes.listItem}>
+            <ListItemText primary={<GavelIcon />} secondary={getJudgeName()} />
+          </ListItem>
+        </List>
       </Stack>
     )
   }
@@ -163,7 +191,7 @@ export function JudgingApp ({ children }: AppProps) {
             <Box
               component="img"
               sx={{
-                height: 100
+                height: 40
               }}
               alt="logo"
               src={Logo}

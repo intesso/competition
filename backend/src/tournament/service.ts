@@ -27,6 +27,7 @@ import {
   findTournamentByTournamentName,
   findTournamentJudgesAndPerson,
   findTournamentPlan,
+  getLocationById,
   getPerformanceById,
   getTournamentAthleteAndPerson,
   getTournamentById,
@@ -104,6 +105,11 @@ export class TournamentService implements ITournamentContext {
 
   async listLocations (tournamentId: string): Promise<Location[]> {
     const locations = await findLocationsByTournamentId(tournamentId)
+    return locations
+  }
+
+  async getLocation (id: string): Promise<Location | null> {
+    const locations = await getLocationById(id)
     return locations
   }
 

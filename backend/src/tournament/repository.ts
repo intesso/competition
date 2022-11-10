@@ -53,6 +53,10 @@ export async function insertOrUpdateLocation (location: Omit<Location_InsertPara
   return await insertLocation(location)
 }
 
+export async function getLocationById (id: string) {
+  return await Location(db).findOne({ id })
+}
+
 export async function getLocation (tournamentId: string, locationName: string) {
   return await Location(db).findOne({ tournamentId, locationName })
 }

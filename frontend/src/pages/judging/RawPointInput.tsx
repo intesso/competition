@@ -27,7 +27,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
 
   // TODO remove unused vars
   const [searchParams] = useSearchParams()
-  const judgeId = searchParams.get('id')
+  const judgeId = searchParams.get('judgeId') || searchParams.get('id')
   const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
@@ -51,7 +51,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         const c = await getCriteria(criteriaId)
         console.log('criteria', c)
         if (c) {
-          console.log('criteriaDefinitionToUI(c)', criteriaDefinitionToSubCriteria(c))
+          console.log('criteriaDefinitionToSubCriteria(c)', criteriaDefinitionToSubCriteria(c))
           setSubCriteria(criteriaDefinitionToSubCriteria(c))
         }
         setCriteria(c)
@@ -91,7 +91,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
   }
 
   function getJudgeName () {
-    return judgeName || tournamentJudge ? `${tournamentJudge?.firstName} ${tournamentJudge?.lastName}` : ''
+    return judgeName || (tournamentJudge ? `${tournamentJudge?.firstName} ${tournamentJudge?.lastName}` : '')
   }
 
   async function handleSend () {
@@ -210,10 +210,14 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     }
   }
 
+  const classes = {
+    root: { marginTop: '0px' }
+  }
+
   function Layout1 () {
     return (
       <Container>
-        <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+        <Grid container spacing={2} sx={classes.root}>
           {/* 1. row */}
           <InstantButton uiPosition="1" onSelect={registerFns} />
           <InstantButton uiPosition="2" onSelect={registerFns} />
@@ -252,7 +256,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
   function Layout2 () {
     return (
       <Container>
-        <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+        <Grid container spacing={2} sx={classes.root}>
           {/* 1. row */}
           <InstantButton
             uiPosition="1"
@@ -307,7 +311,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
   function Layout3 () {
     return (
       <Container>
-        <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+        <Grid container spacing={2} sx={classes.root}>
           {/* 1. row */}
           <InstantButton
             uiPosition="1"

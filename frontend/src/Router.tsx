@@ -31,6 +31,7 @@ export const Router = () => (
       </Route>
 
       <Route path="/judging" element={<JudgingApp />}>
+        <Route path="start" element={<SelectRawPoint />} />
         <Route path="3x3" element={<RawPointInput layout="3x3" />} />
         <Route path="3x2" element={<RawPointInput layout="3x2" />} />
         <Route path="1-3x1" element={<RawPointInput layout="1-3x1" />} />

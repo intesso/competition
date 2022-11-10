@@ -24,6 +24,7 @@ export interface Api {
   addPerformance: (performance: Performance) => Promise<Performance>
   getPerformance: (tournamentId: string, id: string) => Promise<Performance | null>
   listPerformances: (tournamentId: string) => Promise<Performance[]>
+  getLocation: (tournamentId: string, id: string) => Promise<Location | null>
   listLocations: (tournamentName: string) => Promise<Location[]>
   addLocation: (location: Location) => Promise<Location>
   modifyLocation: (location: Location) => Promise<Location>
@@ -171,6 +172,16 @@ export function provideApiContext (): Api {
         method: 'GET'
       })
     ).data as Location[]
+  }
+
+  async function getLocation (tournamentId: string, id: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/locations/${id}`,
+        method: 'GET'
+      })
+    ).data as Location | null
   }
 
   async function addLocation (location: Location) {
@@ -362,6 +373,7 @@ export function provideApiContext (): Api {
     addTournament,
     getTournament,
     listTournaments,
+    getLocation,
     listLocations,
     addLocation,
     modifyLocation,

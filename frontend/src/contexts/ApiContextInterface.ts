@@ -110,7 +110,7 @@ export interface Performance {
   clubId: string
   performerId: string
   slotNumber: number | null
-  judges: string[]
+  judges: PerformanceJudge[]
   performanceName: string
   performanceNumber: number | null
   performanceStartTime: string | null
@@ -122,6 +122,7 @@ export interface Performer {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tournamentAthletes: any
   performerName: string
+  performerNumber?: string
 }
 
 export interface TournamentPlanDetails {
