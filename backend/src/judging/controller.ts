@@ -13,16 +13,22 @@ judgingController
     return respondWith(ctx, () => applicationContext.judging.addRawPoint(ctx.request.body as RawPoint))
   })
   .get('/categories', inputValidation.validate, (ctx) => {
+    if (ctx.query.categoryName) {
+      return respondWith(ctx, () => applicationContext.judging.getCategoryByName(ctx.query.categoryName as string))
+    }
     return respondWith(ctx, () => applicationContext.judging.listCategories())
   })
   .get('/categories/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.getCategory(ctx.params.id as string))
   })
   .get('/criteria', inputValidation.validate, (ctx) => {
-    if (typeof ctx.request.query.categoryId !== 'string') {
-      return respondWithError(ctx, 'categoryId queryParameter must be provided')
+    if (typeof ctx.request.query.categoryId === 'string') {
+      return respondWith(ctx, () => applicationContext.judging.listCriteriaByCategoryId(ctx.request.query.categoryId as string))
     }
-    return respondWith(ctx, () => applicationContext.judging.getCriteriaByCategoryId(ctx.request.query.categoryId as string))
+    if (typeof ctx.request.query.criteriaName === 'string') {
+      return respondWith(ctx, () => applicationContext.judging.getCriteriaByName(ctx.request.query.criteriaName as string))
+    }
+    return respondWithError(ctx, 'categoryId queryParameter must be provided')
   })
   .get('/criteria/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.getCriteria(ctx.params.id as string))

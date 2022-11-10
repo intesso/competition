@@ -10,11 +10,14 @@ import {
   CalculationCombinationRanksInput,
   CalculationCombinationRanksOutput,
   CategoryRank,
-  CombinationRank
+  CombinationRank,
+  CategoryPoint
 } from './interfaces'
 import {
   findCategoryPointByCategoryId,
   findCategoryRankByCategoryId,
+  getCategoryPointById,
+  getCategoryPointByPerformanceId,
   insertCombinationRank,
   insertOrUpdateCategoryPoint,
   insertOrUpdateCategoryRanks
@@ -71,6 +74,10 @@ export class CalculationService implements ICalculationContext {
         return null
       }
     }
+  }
+
+  async getPoints (performanceId: string) :Promise<CategoryPoint | null> {
+    return await getCategoryPointByPerformanceId(performanceId)
   }
 
   async calculateAllCategoryRanks (tournamentId: string): Promise<boolean | null> {

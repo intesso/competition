@@ -28,9 +28,11 @@ import {
   findTournamentJudgesAndPerson,
   findTournamentPlan,
   getLocationById,
+  getPerformance,
   getPerformanceById,
   getTournamentAthleteAndPerson,
   getTournamentById,
+  getTournamentByName,
   getTournamentJudgeAndPerson,
   insertLocation,
   insertOrUpdateLocation,
@@ -59,6 +61,10 @@ export class TournamentService implements ITournamentContext {
 
   async getTournament (id: string): Promise<(Tournament & Id) | null> {
     return await getTournamentById(id)
+  }
+
+  async getTournamentByName (tournamentName: string): Promise<(Tournament & Id) | null> {
+    return await getTournamentByName(tournamentName)
   }
 
   async listSlots (tournamentId: string): Promise<Slot[]> {
@@ -144,6 +150,10 @@ export class TournamentService implements ITournamentContext {
 
   async getPerformance (id: string): Promise<(Performance & Id) | null> {
     return await getPerformanceById(id)
+  }
+
+  async getPerformanceByName (tournamentId: string, performanceName: string): Promise<(Performance & Id) | null> {
+    return await getPerformance(tournamentId, performanceName)
   }
 
   async addTournamentAthlete (a: TournamentAthlete): Promise<TournamentAthlete> {

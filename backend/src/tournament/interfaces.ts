@@ -85,6 +85,7 @@ export interface ITournamentContext extends IGetApplicationContext {
   getTournamentPlan: (tournamentId: string) => Promise<TournamentPlanDetails[] | null>
   addTournament: (tournament: TournamentAndAddress) => Promise<TournamentAndAddress & Id>
   getTournament: (id: string) => Promise<(Tournament & Id) | null>
+  getTournamentByName: (tournamentName: string) => Promise<(Tournament & Id) | null>
   listTournaments: () => Promise<(Tournament & Id)[]>
   addSlot: (slot: Slot) => Promise<Slot | null>
   listSlots: (tournamentId: string) => Promise<Slot[]>
@@ -98,6 +99,7 @@ export interface ITournamentContext extends IGetApplicationContext {
   listPerformer: (tournamentId: string) => Promise<(Performer & Id)[]>
   addPerformance: (performance: Performance) => Promise<(Performance & Id) | null>
   listPerformances: (tournamentId: string) => Promise<(Performance & Id)[]>
+  getPerformanceByName: (tournamentId: string, performanceName: string) => Promise<(Performance & Id) | null>
   getPerformance: (id: string) => Promise<(Performance & Id) | null>
   addTournamentAthlete: (athlete: TournamentAthlete) => Promise<TournamentAthlete>
   getTournamentAthlete: (id: string) => Promise<(TournamentAthlete & Id) | null>

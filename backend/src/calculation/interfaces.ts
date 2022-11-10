@@ -92,6 +92,7 @@ export type CalculationCombinationRanksOutput = CalculationCombinationRanksInput
 
 export interface ICalculationContext extends IGetApplicationContext {
   calculatePoints: (input: CalculationPointsInput) => Promise<CalculationPointsOutput | null>
+  getPoints: (performanceId: string) => Promise<CategoryPoint | null>
   calculateAllPoints: (tournamentId: string) => Promise<boolean | null>
   calculateCategoryRanks: (input: CalculationCategoryRanksInput) => Promise<CalculationCategoryRanksOutput | null>
   calculateAllCategoryRanks: (tournamentId: string) => Promise<boolean | null>

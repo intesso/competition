@@ -49,6 +49,9 @@ tournamentController
     return respondWith(ctx, () => applicationContext.tournament.addTournament(ctx.request.body as TournamentAndAddress))
   })
   .get('/', inputValidation.validate, (ctx) => {
+    if (ctx.query.tournamentName) {
+      return respondWith(ctx, () => applicationContext.tournament.getTournamentByName(ctx.query.tournamentName as string))
+    }
     return respondWith(ctx, () => applicationContext.tournament.listTournaments())
   })
   .post('/:tournamentId/locations', inputValidation.validate, (ctx) => {
@@ -70,6 +73,9 @@ tournamentController
     return respondWith(ctx, () => applicationContext.tournament.addPerformance(ctx.request.body as unknown as Performance))
   })
   .get('/:tournamentId/performances', inputValidation.validate, (ctx) => {
+    if (ctx.query.performanceName) {
+      return respondWith(ctx, () => applicationContext.tournament.getPerformanceByName(ctx.params.tournamentId as string, ctx.query.performanceName as string))
+    }
     return respondWith(ctx, () => applicationContext.tournament.listPerformances(ctx.params.tournamentId as string))
   })
   .get('/:tournamentId/performances/:id', inputValidation.validate, (ctx) => {

@@ -40,7 +40,8 @@ export interface IJudgingRuleContext extends IGetApplicationContext {
   getJudgingRuleByCategoryId: (categoryId: string) => Promise<(JudgingRule & Id) | null>
   getJudgingRule: (id: string) => Promise<(JudgingRule & Id) | null>
   addCriteria: (criteria: Criteria) => Promise<Criteria & Id | null>
-  getCriteriaByCategoryId: (categoryId: string) => Promise<(Criteria & Id)[] | null>
+  listCriteriaByCategoryId: (categoryId: string) => Promise<(Criteria & Id)[] | null>
+  getCriteriaByName: (criteriaName: string) => Promise<(Criteria & Id) | null>
   getCriteria: (id: string) => Promise<(Criteria & Id) | null>
   listCriteria: () => Promise<(Criteria & Id)[] | null>
   addRawPoint: (rawPoint: RawPoint) => Promise<RawPoint & Id | null>

@@ -4,7 +4,7 @@ import { CalculationPointsInput, CalculationJudgeCriteriaGroup } from '../calcul
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations } from './repository'
+import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByName } from './repository'
 
 let _categoriesLookup: {[key: string]: (Category & Id)} | null = null
 let _criteriaLookup: {[key: string]: (Criteria & Id)} | null = null
@@ -115,12 +115,16 @@ export class JudgingRuleService implements IJudgingRuleContext {
     return await insertCriteria(c)
   }
 
-  async getCriteriaByCategoryId (categoryId: string) : Promise<(Criteria & Id)[] | null> {
+  async listCriteriaByCategoryId (categoryId: string) : Promise<(Criteria & Id)[] | null> {
     return await findCriteriaByCategoryId(categoryId)
   }
 
   async getCriteria (id: string) : Promise<(Criteria & Id) | null> {
     return await getCriteriaById(id)
+  }
+
+  async getCriteriaByName (criteriaName: string) : Promise<(Criteria & Id) | null> {
+    return await getCriteriaByName(criteriaName)
   }
 
   async listCriteria (): Promise<(Criteria & Id)[] | null> {

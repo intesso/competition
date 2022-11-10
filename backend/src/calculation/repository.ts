@@ -14,11 +14,11 @@ export async function insertOrUpdateCategoryPoint (categoryPoint: Omit<CategoryP
   return insertedCategoryPoint
 }
 
-export async function findCategoryPointById (id: string) {
+export async function getCategoryPointById (id: string) {
   return await CategoryPoint(db).findOne({ id })
 }
 
-export async function findCategoryPointByPerformanceId (performanceId: string) {
+export async function getCategoryPointByPerformanceId (performanceId: string) {
   return await CategoryPoint(db).findOne({ performanceId })
 }
 

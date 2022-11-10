@@ -26,6 +26,11 @@ export async function findAllTournaments () {
 export async function getTournamentById (id: string) {
   return await Tournament(db).findOne({ id })
 }
+
+export async function getTournamentByName (tournamentName: string) {
+  return await Tournament(db).findOne({ tournamentName })
+}
+
 export async function getTournament (tournamentName: string) {
   return await Tournament(db).findOne({ tournamentName })
 }

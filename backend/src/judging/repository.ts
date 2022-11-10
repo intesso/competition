@@ -114,6 +114,10 @@ export async function getCriteriaById (id: string) {
   return await Criteria(db).findOne({ id })
 }
 
+export async function getCriteriaByName (criteriaName: string) {
+  return await Criteria(db).findOne({ criteriaName })
+}
+
 export async function listCriteria () {
   return await Criteria(db).find().all()
 }
