@@ -60,14 +60,14 @@ async function insertCriteria () {
     judgingRuleId: rows[0][1] as string,
     criteriaName: rows[0][3] as string,
     criteriaDescription: rows[0][4] as string,
-    criteriaWeight: parseInt(rows[0][5]) as number,
+    criteriaWeight: parseFloat(rows[0][5]) as number,
     criteriaUiLayout: rows[0][13] as string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     subCriteriaDefinition: rows.reduce((memo: any, row: any) => {
       memo[row[6]] = {
         subCriteriaName: row[6],
         subCriteriaDescription: row[7],
-        subCriteriaWeight: parseInt(row[8]) as number,
+        subCriteriaWeight: parseFloat(row[8]) as number,
         valueType: row[9],
         rangeStart: parseInput(row[9], row[10]),
         rangeEnd: parseInput(row[9], row[11]),

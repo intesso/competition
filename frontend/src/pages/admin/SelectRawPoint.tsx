@@ -96,6 +96,7 @@ export function SelectRawPoint () {
         search: `?${createSearchParams({
           tournamentId,
           performanceId,
+          performerId: performanceLookup[performanceId].performerId,
           categoryId,
           criteriaId,
           tournamentJudgeId,

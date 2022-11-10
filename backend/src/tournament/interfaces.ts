@@ -95,7 +95,8 @@ export interface ITournamentContext extends IGetApplicationContext {
   listLocations: (tournamentId: TournamentDAO['id']) => Promise<Location[]>
   getLocation: (locationId: LocationDAO['id']) => Promise<Location | null>
   addPerformer: (performer: Performer) => Promise<(Performer & Id) | null>
-  getPerformer: (performerId: string) => Promise<(Performer & Id) | null>
+  getPerformer: (id: string) => Promise<(Performer & Id) | null>
+  getPerformerByName: (tournamentId: TournamentDAO['id'], performerName: string) => Promise<(Performer & Id) | null>
   listPerformer: (tournamentId: string) => Promise<(Performer & Id)[]>
   addPerformance: (performance: Performance) => Promise<(Performance & Id) | null>
   listPerformances: (tournamentId: string) => Promise<(Performance & Id)[]>

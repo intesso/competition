@@ -538,14 +538,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performer",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performers",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"tournaments",
 								"{{tournamentId}}",
-								"performer"
+								"performers"
 							]
 						}
 					},
@@ -1085,14 +1085,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performer",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performers",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"tournaments",
 								"{{tournamentId}}",
-								"performer"
+								"performers"
 							]
 						}
 					},

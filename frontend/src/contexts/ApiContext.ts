@@ -225,7 +225,7 @@ export function provideApiContext (): Api {
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/tournaments/${performer.tournamentId}/performer`,
+        url: `${serverBaseUrl}/api/tournaments/${performer.tournamentId}/performers`,
         method: 'POST',
         data
       })
@@ -236,7 +236,7 @@ export function provideApiContext (): Api {
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performer`,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performers`,
         method: 'GET'
       })
     ).data as Performer[]
@@ -246,7 +246,7 @@ export function provideApiContext (): Api {
     return (
       await axios({
         headers,
-        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performer/${id}`,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performers/${id}`,
         method: 'GET'
       })
     ).data as Performer | null

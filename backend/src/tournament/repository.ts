@@ -228,7 +228,7 @@ export async function insertPerformer (performer: Omit<Performer_InsertParameter
 }
 
 export async function insertOrUpdatePerformer (performer: Omit<Performer_InsertParameters, 'id'>) {
-  const foundPerformer = await getPerformer(performer.tournamentId, performer.performerName)
+  const foundPerformer = await getPerformerByName(performer.tournamentId, performer.performerName)
   if (foundPerformer) {
     const [updatedLocation] = await Performer(db).update({ tournamentId: performer.tournamentId, performerName: performer.performerName }, { ...foundPerformer, ...performer, updatedAt: new Date() })
     return updatedLocation
@@ -241,7 +241,11 @@ export async function findPerformer (performer: Partial<Performer_InsertParamete
   return foundPerformer
 }
 
-export async function getPerformer (tournamentId: string, performerName: string) {
+export async function getPerformerById (id: string) {
+  return await Performer(db).findOne({ id })
+}
+
+export async function getPerformerByName (tournamentId: string, performerName: string) {
   return await Performer(db).findOne({ tournamentId, performerName })
 }
 

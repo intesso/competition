@@ -147,7 +147,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     function incrementValue () {
       setSubCriteria((prevValue) => {
         if (prevValue[uiPosition].value < prevValue[uiPosition].rangeEnd) {
-          prevValue[uiPosition].value += 1
+          prevValue[uiPosition].value += prevValue[uiPosition].step
           return { ...prevValue }
         } else {
           return prevValue
@@ -158,7 +158,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     function decrementValue () {
       setSubCriteria((prevValue) => {
         if (prevValue[uiPosition].value > prevValue[uiPosition].rangeStart) {
-          prevValue[uiPosition].value -= 1
+          prevValue[uiPosition].value -= prevValue[uiPosition].step
           return { ...prevValue }
         } else {
           return prevValue

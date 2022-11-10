@@ -24,13 +24,16 @@ tournamentController
   .get('/:tournamentId/athletes', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.listTournamentAthletes(ctx.params.tournamentId as string))
   })
-  .post('/:tournamentId/performer', inputValidation.validate, (ctx) => {
+  .post('/:tournamentId/performers', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addPerformer(ctx.request.body as Performer))
   })
-  .get('/:tournamentId/performer/:id', inputValidation.validate, (ctx) => {
+  .get('/:tournamentId/performers/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.getPerformer(ctx.params.id as string))
   })
-  .get('/:tournamentId/performer', inputValidation.validate, (ctx) => {
+  .get('/:tournamentId/performers', inputValidation.validate, (ctx) => {
+    if (ctx.query.performerName) {
+      return respondWith(ctx, () => applicationContext.tournament.getPerformerByName(ctx.params.tournamentId as string, ctx.params.id as string))
+    }
     return respondWith(ctx, () => applicationContext.tournament.listPerformer(ctx.params.tournamentId as string))
   })
   .post('/:tournamentId/judges', inputValidation.validate, (ctx) => {

@@ -105,7 +105,7 @@ export function JudgingApp ({ children }: AppProps) {
   }, [performance])
 
   const classes = {
-    list: { width: '100%', bgcolor: 'primary', margin: 0, padding: 0 },
+    list: { bgcolor: 'primary', margin: 0, padding: 0 },
     listItem: { padding: 0 }
   }
 
@@ -126,15 +126,18 @@ export function JudgingApp ({ children }: AppProps) {
             </ListItem>
           </List>
         )}
-        <ListItem sx={classes.listItem}>
-          <ListItemText primary={<CategoryIcon />} secondary={dedupe(snakeToPascal(category?.categoryName || ''))} />
-        </ListItem>
+        <List sx={classes.list}>
+          <ListItem sx={classes.listItem}>
+            <ListItemText primary={<CategoryIcon />} secondary={dedupe(snakeToPascal(category?.categoryName || ''))} />
+          </ListItem>
+        </List>
+
         {performer && (
           <List sx={classes.list}>
             <ListItem sx={classes.listItem}>
               <ListItemText
                 primary={<PeopleAltIcon />}
-                secondary={`${performer?.performerName} ${performer?.performerNumber}`}
+                secondary={`${performer?.performerName} | ${performer?.performerNumber}`}
               />
             </ListItem>
           </List>

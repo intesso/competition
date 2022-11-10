@@ -30,6 +30,8 @@ import {
   getLocationById,
   getPerformance,
   getPerformanceById,
+  getPerformerById,
+  getPerformerByName,
   getTournamentAthleteAndPerson,
   getTournamentById,
   getTournamentByName,
@@ -127,8 +129,12 @@ export class TournamentService implements ITournamentContext {
     return { ...p, id: performance.id }
   }
 
-  async getPerformer (performerId: string): Promise<(Performer & Id) | null> {
-    return await this.getPerformer(performerId)
+  async getPerformer (id: string): Promise<(Performer & Id) | null> {
+    return await getPerformerById(id)
+  }
+
+  async getPerformerByName (tournamentId: string, performerName: string): Promise<(Performer & Id) | null> {
+    return await getPerformerByName(tournamentId, performerName)
   }
 
   async listPerformer (tournamentId: string): Promise<(Performer & Id)[]> {

@@ -287,7 +287,7 @@ CREATE TABLE "CategoryPoint" (
   "performanceId" uuid NOT NULL,
   "performerId" uuid NOT NULL,
   "categoryId" uuid NOT NULL,
-  "categoryPoint" int NULL,
+  "categoryPoint" real NULL,
   "criteriaPoints" jsonb NULL,
   "disqualified" boolean NULL,
   "createdAt" timestamp NULL,
