@@ -1,5 +1,6 @@
 import { ReactNode, useContext, useEffect, useState } from 'react'
 import { Outlet, useSearchParams } from 'react-router-dom'
+import { useLocalStorage } from 'usehooks-ts'
 import type {} from '@mui/x-date-pickers/themeAugmentation'
 import { ApiContext } from '../../contexts/ApiContext'
 
@@ -21,6 +22,7 @@ import {
   ListItem,
   ListItemText,
   Stack,
+  Switch,
   Toolbar,
   Typography
 } from '@mui/material'
@@ -33,9 +35,13 @@ import WorkspacesIcon from '@mui/icons-material/Workspaces'
 import TableRowsIcon from '@mui/icons-material/TableRows'
 import PlaceIcon from '@mui/icons-material/Place'
 import GavelIcon from '@mui/icons-material/Gavel'
+import TuneIcon from '@mui/icons-material/Tune'
+
 export interface AppProps {
   children?: ReactNode
 }
+
+export type InputType = 'button' | 'slider';
 
 export function JudgingApp ({ children }: AppProps) {
   const { getTournamentJudge, getPerformance, getPerformer, getCategory, getCriteria, getJudgingRule, getLocation } =
@@ -47,6 +53,7 @@ export function JudgingApp ({ children }: AppProps) {
   const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
+  const [inputType, setInputType] = useLocalStorage<InputType>('inputType', 'slider') // TODO change: 'slider' -> 'button'
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
   const performanceId = searchParams.get('performanceId')
   const [performance, setPerformance] = useState(null as Performance | null)
@@ -106,7 +113,7 @@ export function JudgingApp ({ children }: AppProps) {
 
   const classes = {
     list: { bgcolor: 'primary', margin: 0, padding: 0 },
-    listItem: { padding: 0 }
+    listItem: { padding: '0px 20px', textAlign: 'center' }
   }
 
   function Infos () {
@@ -131,7 +138,6 @@ export function JudgingApp ({ children }: AppProps) {
             <ListItemText primary={<CategoryIcon />} secondary={dedupe(snakeToPascal(category?.categoryName || ''))} />
           </ListItem>
         </List>
-
         {performer && (
           <List sx={classes.list}>
             <ListItem sx={classes.listItem}>
@@ -150,6 +156,20 @@ export function JudgingApp ({ children }: AppProps) {
         <List sx={classes.list}>
           <ListItem sx={classes.listItem}>
             <ListItemText primary={<GavelIcon />} secondary={getJudgeName()} />
+          </ListItem>
+        </List>
+        <List sx={classes.list}>
+          <ListItem sx={classes.listItem}>
+            <ListItemText
+              primary={<TuneIcon />}
+              secondary={
+                <Switch
+                  checked={inputType === 'slider'}
+                  onChange={(event) => setInputType(event.target.checked ? 'slider' : 'button')}
+                  inputProps={{ 'aria-label': 'inputType' }}
+                />
+              }
+            />
           </ListItem>
         </List>
       </Stack>

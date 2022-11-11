@@ -260,6 +260,9 @@ CREATE TABLE "Criteria" (
 );
 CREATE TABLE "RawPoint" (
   id uuid NOT NULL,
+  -- tournamentId
+  -- tournamentName
+  -- performanceName
   "performanceId" uuid NOT NULL,
   "tournamentJudgeId" uuid NULL,
   "criteriaId" uuid NOT NULL,

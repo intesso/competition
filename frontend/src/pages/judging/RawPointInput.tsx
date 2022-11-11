@@ -1,10 +1,9 @@
-import { Button, Container, Grid, Stack } from '@mui/material'
-import { useContext, useEffect, useState } from 'react'
+import { Button, Container, Grid, Slider, Stack } from '@mui/material'
+import { SyntheticEvent, useContext, useEffect, useState } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 import { ApiContext } from '../../contexts/ApiContext'
 import {
-  Category,
   Criteria,
-  JudgingRule,
   Performance,
   RawPoint,
   SubCriteriaValue,
@@ -12,16 +11,16 @@ import {
 } from '../../contexts/ApiContextInterface'
 import { DateTime } from 'luxon'
 import { useSearchParams } from 'react-router-dom'
-import './RawPointInput.css'
 import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
+import { InputType } from './JudgingApp'
 
 export interface RawPointInputProps {
   layout: string
 }
 
 export function RawPointInput ({ layout }: RawPointInputProps) {
-  const { getTournamentJudge, getPerformance, getCategory, getCriteria, getJudgingRule, addRawPoint } =
+  const { getPerformance, getTournamentJudge, getCriteria, addRawPoint } =
     useContext(ApiContext)
   const { enqueueSnackbar } = useSnackbar()
 
@@ -31,15 +30,13 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
   const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
+  const [inputType] = useLocalStorage<InputType>('inputType', 'slider') // TODO change: 'slider' -> 'button'
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
   const performanceId = searchParams.get('performanceId')
   const [performance, setPerformance] = useState(null as Performance | null)
-  const [category, setCategory] = useState(null as Category | null)
   const criteriaId = searchParams.get('criteriaId')
-  const [criteria, setCriteria] = useState(null as Criteria | null)
+  const [, setCriteria] = useState(null as Criteria | null)
   const [subCriteria, setSubCriteria] = useState({} as SubCriteriaValue)
-  const judgingRuleId = searchParams.get('judgingRuleId')
-  const [judgingRule, setJudgingRule] = useState(null as JudgingRule | null)
   const [fns, setFns] = useState({} as SelectFn)
 
   useEffect(() => {
@@ -56,25 +53,18 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         }
         setCriteria(c)
       }
-      if (judgingRuleId) {
-        setJudgingRule(await getJudgingRule(judgingRuleId))
-      }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [])
 
   useEffect(() => {
     const fetchData = async () => {
-      if (performance) {
-        setCategory(await getCategory(performance.categoryId))
-        if (tournamentJudgeId) {
-          setTournamentJudge(await getTournamentJudge(performance.tournamentId, tournamentJudgeId))
-        }
+      if (performance && tournamentJudgeId) {
+        setTournamentJudge(await getTournamentJudge(performance.tournamentId, tournamentJudgeId))
       }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [performance])
-
   function criteriaDefinitionToSubCriteria (c: Criteria) {
     return Object.entries(c.subCriteriaDefinition).reduce((memo, [, value]) => {
       memo[value.uiPosition] = { ...value, value: value.rangeStart }
@@ -118,15 +108,19 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     }
   }
 
+  const colHeight = 150
+
   const styledButton = {
     width: '100%',
-    minHeight: '160px'
+    minHeight: `${colHeight}px`
   }
 
   interface InstantButtonProps {
     uiPosition: string
     cols?: number
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     buttonStyle?: any
+    inputType?: InputType
     onSelect: (fn: SelectFn) => void
   }
 
@@ -170,29 +164,105 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
       return !subCriteria[uiPosition] || subCriteria[uiPosition].rangeEnd === 0
     }
 
+    function handleSliderChange (event: Event | SyntheticEvent<Element, Event>, newValue: number | number[]) {
+      event.preventDefault()
+      event.stopPropagation()
+      setSubCriteria((prevValue) => {
+        prevValue[uiPosition].value = newValue as number
+        return { ...prevValue }
+      })
+    }
+
     return (
       <Grid item xs={12} sm={cols}>
-        <Button
-          className='raw-point-button'
-          disabled={isDisabled()}
-          style={buttonStyle}
-          variant="outlined"
-          onClick={() => {
-            incrementValue()
-            onSelect({
-              incrementValue,
-              decrementValue,
-              updateValue
-            })
-          }}
-        >
-          <Stack direction="column" justifyContent="space-between" alignItems="center" spacing={4}>
-            <div style={{ fontSize: '1.4em', fontWeight: '700' }}>
-              {subCriteria[uiPosition]?.subCriteriaDescription}
-            </div>
-            <div style={{ fontSize: '1em' }}>{isDisabled() ? '' : 'Anzahl '}{subCriteria[uiPosition]?.value}</div>
-          </Stack>
-        </Button>
+        {inputType === 'button'
+        // button
+          ? (
+          <Button
+            className="raw-point-button"
+            disabled={isDisabled()}
+            style={buttonStyle}
+            variant="outlined"
+            onClick={() => {
+              incrementValue()
+              onSelect({
+                incrementValue,
+                decrementValue,
+                updateValue
+              })
+            }}
+          >
+            <Stack direction="column" justifyContent="space-between" alignItems="center" spacing={4}>
+              <div style={{ fontSize: '1.4em', fontWeight: '700' }}>
+                {subCriteria[uiPosition]?.subCriteriaDescription}
+              </div>
+              <div style={{ fontSize: '1em' }}>
+                {isDisabled() ? '' : 'Anzahl '}
+                {subCriteria[uiPosition]?.value}
+              </div>
+            </Stack>
+          </Button>
+            )
+        // slider
+          : (
+              subCriteria[uiPosition]
+                ? (
+                <Button
+                className="raw-point-button"
+                disabled={isDisabled()}
+                style={buttonStyle}
+                variant="outlined"
+                onClick={() => {
+                  onSelect({
+                    incrementValue,
+                    decrementValue,
+                    updateValue
+                  })
+                }}
+              >
+              <Stack direction="column" justifyContent="space-between" alignItems="center" spacing={4} width='100%'>
+                <div style={{ fontSize: '1.4em', fontWeight: '700' }}>
+                  {subCriteria[uiPosition]?.subCriteriaDescription}
+                </div>
+                  <Slider
+                  sx={{ width: '90%' }}
+                    aria-label="Value"
+                    defaultValue={subCriteria[uiPosition].value}
+                    disableSwap={true}
+                    onChangeCommitted={(event, newValue) => {
+                      handleSliderChange(event, newValue)
+                      onSelect({
+                        incrementValue,
+                        decrementValue,
+                        updateValue
+                      })
+                    }}
+                    valueLabelDisplay="on"
+                    step={subCriteria[uiPosition].step}
+                    marks={subCriteria[uiPosition].step > 1}
+                    min={subCriteria[uiPosition].rangeStart}
+                    max={subCriteria[uiPosition].rangeEnd}
+                  />
+              </Stack>
+              </Button>
+                  )
+                  // disabled (placeholder) button
+                : (
+                <Button
+                className="raw-point-button"
+                disabled={isDisabled()}
+                style={buttonStyle}
+                variant="outlined"
+                onClick={() => {
+                  onSelect({
+                    incrementValue,
+                    decrementValue,
+                    updateValue
+                  })
+                }}
+              ></Button>
+                  )
+            )}
       </Grid>
     )
   }
@@ -262,7 +332,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
             uiPosition="1"
             buttonStyle={{
               width: '100%',
-              minHeight: '320px'
+              minHeight: `${2 * colHeight}px`
             }}
             onSelect={registerFns}
           />
@@ -270,7 +340,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
             uiPosition="2"
             buttonStyle={{
               width: '100%',
-              minHeight: '320px'
+              minHeight: `${2 * colHeight}px`
             }}
             onSelect={registerFns}
           />
@@ -278,7 +348,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
             uiPosition="3"
             buttonStyle={{
               width: '100%',
-              minHeight: '320px'
+              minHeight: `${2 * colHeight}px`
             }}
             onSelect={registerFns}
           />
@@ -318,7 +388,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
             cols={12}
             buttonStyle={{
               width: '100%',
-              minHeight: '320px'
+              minHeight: `${2 * colHeight}px`
             }}
             onSelect={registerFns}
           />
