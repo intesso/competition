@@ -25,11 +25,10 @@ npm start
 ## edit / test
 
 - node-red (engine) is running at: http://localhost:8082/red
-- backend at http://localhost:8081
+- backend at http://localhost:8080
+- frontend in production modus: at http://localhost:8080/admin/overview
+- frontend in dev modus: at http://localhost:8081/admin/overview
 
-(frontend runs at) http://localhost:8080
-
-http://localhost:8080/admin/overview
 
 expose for apps during testing:
 

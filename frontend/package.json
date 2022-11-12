@@ -10,7 +10,7 @@
     "pm2": "pm2 start npm --name controller-web -- run start",
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --host",
     "test": "jest"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
     "@mui/x-date-pickers": "^5.0.3",
     "axios": "^0.27.2",
     "fscreen": "^1.2.0",
+    "koa-send": "^5.0.1",
     "lodash-es": "^4.17.21",
     "luxon": "^2.5.0",
     "notistack": "^2.0.8",

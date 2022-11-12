@@ -1,4 +1,7 @@
 import Koa from 'koa'
+import send from 'koa-send'
+import serve from 'koa-static'
+import { resolve } from 'path'
 import Router from 'koa-router'
 import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
@@ -17,7 +20,15 @@ const router = new Router()
 
 export const app = new Koa()
 
-app.use(bodyParser())
+// frontend spa production build
+const staticRoot = resolve(__dirname, '../frontend/dist')
+app
+  .use(serve(staticRoot))
+  .use(async (ctx, next) => send(ctx, '/index.html', { root: staticRoot }).then(() => next()))
+
+// backend api routes
+app
+  .use(bodyParser())
   .use(cors())
   .use(async (ctx, next) => {
     try {
