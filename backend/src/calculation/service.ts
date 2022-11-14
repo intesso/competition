@@ -16,7 +16,6 @@ import {
 import {
   findCategoryPointByCategoryId,
   findCategoryRankByCategoryId,
-  getCategoryPointById,
   getCategoryPointByPerformanceId,
   insertCombinationRank,
   insertOrUpdateCategoryPoint,
@@ -35,12 +34,15 @@ export class CalculationService implements ICalculationContext {
       const performances = await this.getApplicationContext().tournament.listPerformances(tournamentId)
       for (const performance of performances) {
         const rawPoints = await ctx.judging.listRawPoints(performance.id)
-        const calculationMessage = await ctx.judging.prepareCalculationMessage(performance.id, rawPoints, new Date())
-
-        if (calculationMessage) {
-          this.calculatePoints(calculationMessage)
+        if (rawPoints.length > 0) {
+          const calculationMessage = await ctx.judging.prepareCalculationMessage(performance.id, rawPoints, new Date())
+          if (calculationMessage) {
+            this.calculatePoints(calculationMessage)
+          } else {
+            console.error(`could not prepareCalculationMessage for ${JSON.stringify(performance)}`)
+          }
         } else {
-          console.error(`could not prepareCalculationMessage for ${JSON.stringify(performance)}`)
+          console.log(`no rawPoints found for performanceId: ${performance.id}, performanceName: ${performance.performanceName}`)
         }
       }
     } catch (error) {
@@ -97,7 +99,7 @@ export class CalculationService implements ICalculationContext {
 
     // 1. calculate category rank based on category points for the given category and tournament
     let numberOfEqualPoints = 0
-    let currentRank = 1
+    let currentRank = 0
     const categoryRanks = sortedCategoryPoints.map((categoryPoint, i) => {
       // if disqualified do nothing
       if (categoryPoint.disqualified) {

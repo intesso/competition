@@ -42,3 +42,7 @@ app
     }
   })
   .use(router.routes())
+
+process.on('uncaughtException', function (err) {
+  console.log(err)
+})

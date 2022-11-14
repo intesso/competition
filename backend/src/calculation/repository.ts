@@ -38,13 +38,14 @@ export async function insertOrUpdateCategoryRanks (categoryRanks: Omit<CategoryR
     categoryId: r.categoryId,
     categoryPointId: r.categoryPointId,
     categoryRank: r.categoryRank === undefined ? null : r.categoryRank,
+    disqualified: r.disqualified === undefined ? null : r.disqualified,
     ...newRecordAttributes(),
     ...updateRecordAttributes()
   }))
   return await CategoryRank(db).bulkInsertOrUpdate({
-    columnsToInsert: ['tournamentId', 'categoryId', 'categoryPointId', 'categoryRank', 'createdAt', 'updatedAt'],
-    columnsThatConflict: ['tournamentId', 'categoryId', 'categoryPointId'],
-    columnsToUpdate: ['categoryRank', 'updatedAt'],
+    columnsToInsert: ['categoryPointId', 'tournamentId', 'categoryId', 'categoryRank', 'disqualified', 'createdAt', 'updatedAt'],
+    columnsThatConflict: ['categoryPointId'],
+    columnsToUpdate: ['tournamentId', 'categoryId', 'categoryRank', 'disqualified', 'createdAt', 'updatedAt'],
     records
   })
 }
