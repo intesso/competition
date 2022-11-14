@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { keyBy, sortBy } from 'lodash'
+import { keyBy, sortBy, update } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import {
   CalculationPointsInput,
@@ -14,12 +14,17 @@ import {
   CategoryPoint
 } from './interfaces'
 import {
+  deleteCategoryPointById,
+  deleteCategoryRankById,
   findCategoryPointByCategoryId,
   findCategoryRankByCategoryId,
   getCategoryPointByPerformanceId,
+  getCategoryRankByCategoryPointId,
   insertCombinationRank,
   insertOrUpdateCategoryPoint,
-  insertOrUpdateCategoryRanks
+  insertOrUpdateCategoryRanks,
+  updateCategoryPoint,
+  updateCategoryRank
 } from './repository'
 
 export class CalculationService implements ICalculationContext {
@@ -210,5 +215,46 @@ export class CalculationService implements ICalculationContext {
     })
 
     return input
+  }
+
+  async setDisqualified (performanceId: string, disqualified: boolean): Promise<boolean> {
+    try {
+      const categoryPoint = await getCategoryPointByPerformanceId(performanceId)
+      if (!categoryPoint) {
+        return true
+      }
+      const updatedCategoryPoint = await updateCategoryPoint({ ...categoryPoint, disqualified })
+      if (!updatedCategoryPoint) {
+        return true
+      }
+      const categoryRank = await getCategoryRankByCategoryPointId(categoryPoint.id)
+      if (!categoryRank) {
+        return true
+      }
+      await updateCategoryRank({ ...categoryRank, disqualified })
+      return true
+    } catch (error) {
+      console.error(error)
+      return false
+    }
+  }
+
+  async removeCalculation (performanceId: string) : Promise<boolean> {
+    try {
+      const categoryPoint = await getCategoryPointByPerformanceId(performanceId)
+      if (!categoryPoint) {
+        return true
+      }
+      const categoryRank = await getCategoryRankByCategoryPointId(categoryPoint.id)
+
+      await deleteCategoryPointById(categoryPoint.id)
+      if (categoryRank) {
+        deleteCategoryRankById(categoryRank.id)
+      }
+      return true
+    } catch (error) {
+      console.error(error)
+      return false
+    }
   }
 }

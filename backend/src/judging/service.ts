@@ -4,7 +4,7 @@ import { CalculationPointsInput, CalculationJudgeCriteriaGroup } from '../calcul
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByName } from './repository'
+import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByName, deleteRawPointsForPerformance, deleteRawPoint } from './repository'
 
 let _categoriesLookup: {[key: string]: (Category & Id)} | null = null
 let _criteriaLookup: {[key: string]: (Criteria & Id)} | null = null
@@ -165,6 +165,24 @@ export class JudgingRuleService implements IJudgingRuleContext {
 
   async listRawPoints (performanceId: string): Promise<(RawPoint & Id)[]> {
     return await findRawPoints({ performanceId })
+  }
+
+  async removeRawPoints (performanceId: string): Promise<boolean> {
+    try {
+      await deleteRawPointsForPerformance(performanceId)
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  async removeRawPoint (id: string): Promise<boolean> {
+    try {
+      await deleteRawPoint(id)
+      return true
+    } catch (error) {
+      return false
+    }
   }
 
   async prepareCalculationMessage (performanceId: string, rawPoints: RawPoint[], inputTimestamp: Date | null) {

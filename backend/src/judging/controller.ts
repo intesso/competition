@@ -12,6 +12,12 @@ judgingController
   .post('/raw-points', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.addRawPoint(ctx.request.body as RawPoint))
   })
+  .delete('/raw-points/:id', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.judging.removeRawPoint(ctx.params.id as string))
+  })
+  .delete('/raw-points/performance/:performanceId', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.judging.removeRawPoints(ctx.params.performanceId as string))
+  })
   .get('/categories', inputValidation.validate, (ctx) => {
     if (ctx.query.categoryName) {
       return respondWith(ctx, () => applicationContext.judging.getCategoryByName(ctx.query.categoryName as string))
@@ -23,10 +29,14 @@ judgingController
   })
   .get('/criteria', inputValidation.validate, (ctx) => {
     if (typeof ctx.request.query.categoryId === 'string') {
-      return respondWith(ctx, () => applicationContext.judging.listCriteriaByCategoryId(ctx.request.query.categoryId as string))
+      return respondWith(ctx, () =>
+        applicationContext.judging.listCriteriaByCategoryId(ctx.request.query.categoryId as string)
+      )
     }
     if (typeof ctx.request.query.criteriaName === 'string') {
-      return respondWith(ctx, () => applicationContext.judging.getCriteriaByName(ctx.request.query.criteriaName as string))
+      return respondWith(ctx, () =>
+        applicationContext.judging.getCriteriaByName(ctx.request.query.criteriaName as string)
+      )
     }
     return respondWithError(ctx, 'categoryId queryParameter must be provided')
   })
@@ -34,7 +44,9 @@ judgingController
     return respondWith(ctx, () => applicationContext.judging.getCriteria(ctx.params.id as string))
   })
   .get('/combinations/:combinationId', inputValidation.validate, (ctx) => {
-    return respondWith(ctx, () => applicationContext.judging.listWeightedCombination(ctx.params.combinationId as string))
+    return respondWith(ctx, () =>
+      applicationContext.judging.listWeightedCombination(ctx.params.combinationId as string)
+    )
   })
   .get('/combinations', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.listWeightedCombinations())
@@ -46,5 +58,7 @@ judgingController
     if (typeof ctx.request.query.categoryId !== 'string') {
       return respondWithError(ctx, 'categoryId queryParameter must be provided')
     }
-    return respondWith(ctx, () => applicationContext.judging.getJudgingRuleByCategoryId(ctx.request.query.categoryId as string))
+    return respondWith(ctx, () =>
+      applicationContext.judging.getJudgingRuleByCategoryId(ctx.request.query.categoryId as string)
+    )
   })

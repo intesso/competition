@@ -47,7 +47,8 @@ import {
   insertTournament,
   insertTournamentAthlete,
   insertTournamentJudge,
-  updateLocation
+  updateLocation,
+  updatePerformance
 } from './repository'
 
 export class TournamentService implements ITournamentContext {
@@ -256,7 +257,8 @@ export class TournamentService implements ITournamentContext {
       const performer = await insertOrUpdatePerformer({
         tournamentId: tournament.id,
         performerName: plan.performerName,
-        performerNumber: typeof plan.performerNumber === 'string' ? parseInt(plan.performerNumber) : plan.performerNumber,
+        performerNumber:
+          typeof plan.performerNumber === 'string' ? parseInt(plan.performerNumber) : plan.performerNumber,
         tournamentAthletes: []
       })
 
@@ -285,5 +287,20 @@ export class TournamentService implements ITournamentContext {
   async getTournamentPlan (tournamentId: string): Promise<TournamentPlanDetails[] | null> {
     const tournamentPlan = await findTournamentPlan(tournamentId)
     return tournamentPlan
+  }
+
+  async disqualifyPerformance (performanceId: string, disqualified: boolean): Promise<(Performance & Id) | null> {
+    const performance = await getPerformanceById(performanceId)
+    if (!performance) {
+      return null
+    }
+    const updatedPerformance = await updatePerformance({ ...performance, disqualified })
+    this.getApplicationContext().calculation.setDisqualified(performanceId, disqualified)
+    return updatedPerformance
+  }
+
+  async removePointsForPerformance (performanceId: string) {
+    await this.getApplicationContext().calculation.removeCalculation(performanceId)
+    await this.getApplicationContext().judging.removeRawPoints(performanceId)
   }
 }

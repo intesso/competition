@@ -84,3 +84,10 @@ tournamentController
   .get('/:tournamentId/performances/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.getPerformance(ctx.params.id as string))
   })
+  .put('/:tournamentId/performances/:id/disqualified/:disqualified', inputValidation.validate, (ctx) => {
+    const disqualified = ctx.params.disqualified.toLowerCase() === 'true'
+    return respondWith(ctx, () => applicationContext.tournament.disqualifyPerformance(ctx.params.id as string, disqualified))
+  })
+  .delete('/:tournamentId/performances/:id/points', inputValidation.validate, async (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.removePointsForPerformance(ctx.params.id as string))
+  })

@@ -100,4 +100,6 @@ export interface ICalculationContext extends IGetApplicationContext {
     input: CalculationCombinationRanksInput
   ) => Promise<CalculationCombinationRanksOutput | null>
   calculateAllCombinationRanks: (tournamentId: string) => Promise<boolean | null>
+  setDisqualified: (performanceId: string, disqualified: boolean) => Promise<boolean>
+  removeCalculation: (performanceId: string) => Promise<boolean>
 }

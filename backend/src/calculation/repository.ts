@@ -10,8 +10,23 @@ export async function insertCategoryPoint (categoryPoint: Omit<CategoryPoint_Ins
 }
 
 export async function insertOrUpdateCategoryPoint (categoryPoint: Omit<CategoryPoint_InsertParameters, 'id'>) {
-  const [insertedCategoryPoint] = await CategoryPoint(db).insertOrUpdate(['performanceId'], { ...categoryPoint, ...newRecordAttributes() })
-  return insertedCategoryPoint
+  const foundCategoryPoints = await getCategoryPointByPerformanceId(categoryPoint.performanceId)
+  if (foundCategoryPoints) {
+    const [updatedCategoryPoints] = await CategoryPoint(db).update(
+      { performanceId: categoryPoint.performanceId },
+      { ...foundCategoryPoints, ...categoryPoint, updatedAt: new Date() })
+    return updatedCategoryPoints
+  }
+  return await insertCategoryPoint(categoryPoint)
+}
+
+export async function updateCategoryPoint (categoryPoint: CategoryPoint_InsertParameters) {
+  const [updatedCategoryPoint] = await CategoryPoint(db).update({ id: categoryPoint.id }, { ...categoryPoint, ...updateRecordAttributes() })
+  return updatedCategoryPoint
+}
+
+export async function deleteCategoryPointById (id: string) {
+  return await CategoryPoint(db).delete({ id })
 }
 
 export async function getCategoryPointById (id: string) {
@@ -32,6 +47,11 @@ export async function insertCategoryRank (categoryRank: Omit<CategoryRank_Insert
   return insertedCategoryRank
 }
 
+export async function updateCategoryRank (categoryRank: CategoryRank_InsertParameters) {
+  const [updatedCategoryRank] = await CategoryRank(db).update({ id: categoryRank.id }, { ...categoryRank, ...updateRecordAttributes() })
+  return updatedCategoryRank
+}
+
 export async function insertOrUpdateCategoryRanks (categoryRanks: Omit<CategoryRank_InsertParameters, 'id'>[]) {
   const records = categoryRanks.map(r => ({
     tournamentId: r.tournamentId,
@@ -50,8 +70,16 @@ export async function insertOrUpdateCategoryRanks (categoryRanks: Omit<CategoryR
   })
 }
 
+export async function deleteCategoryRankById (id: string) {
+  return await CategoryRank(db).delete({ id })
+}
+
 export async function getCategoryRankById (id: string) {
   return await CategoryRank(db).findOne({ id })
+}
+
+export async function getCategoryRankByCategoryPointId (categoryPointId: string) {
+  return await CategoryRank(db).findOne({ categoryPointId })
 }
 
 export async function findCategoryRankByCategoryId (tournamentId: string, categoryId: string) {

@@ -129,14 +129,28 @@ export async function insertRawPoint (rawPoint: Omit<RawPoint_InsertParameters, 
 }
 
 export async function insertOrUpdateRawPoint (rawPoint: Omit<RawPoint_InsertParameters, 'id'>) {
-  const [insertedRawPoint] = await RawPoint(db).insertOrUpdate(['performanceId', 'judgeId', 'criteriaId'], { ...rawPoint, ...newRecordAttributes() })
-  return insertedRawPoint
+  const foundRawPoints = await getRawPoint(rawPoint.performanceId, rawPoint.judgeId, rawPoint.criteriaId)
+  if (foundRawPoints) {
+    const [updatedRawPoints] = await RawPoint(db).update(
+      { performanceId: rawPoint.performanceId, judgeId: rawPoint.judgeId, criteriaId: rawPoint.criteriaId },
+      { ...foundRawPoints, ...rawPoint, updatedAt: new Date() })
+    return updatedRawPoints
+  }
+  return await insertRawPoint(rawPoint)
 }
 
-export async function getRawPoint (performanceId: string, tournamentJudgeId: string, criteriaId: string) {
-  return await RawPoint(db).findOne({ performanceId, tournamentJudgeId, criteriaId })
+export async function getRawPoint (performanceId: string, judgeId: string, criteriaId: string) {
+  return await RawPoint(db).findOne({ performanceId, judgeId, criteriaId })
 }
 
 export async function findRawPoints (rawPoints: Partial<RawPoint_InsertParameters>) {
   return await RawPoint(db).find({ ...rawPoints }).all()
+}
+
+export async function deleteRawPointsForPerformance (performanceId: string) {
+  return await RawPoint(db).delete({ performanceId })
+}
+
+export async function deleteRawPoint (id: string) {
+  return await RawPoint(db).delete({ id })
 }

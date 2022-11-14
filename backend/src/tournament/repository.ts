@@ -126,6 +126,11 @@ export async function insertPerformance (performance: Omit<Performance_InsertPar
   return insertedPerformance
 }
 
+export async function updatePerformance (performance: Performance_InsertParameters) {
+  const [updatedPerformance] = await Performance(db).update({ id: performance.id }, { ...performance, ...updateRecordAttributes() })
+  return updatedPerformance
+}
+
 export async function insertOrUpdatePerformance (performance: Omit<Performance_InsertParameters, 'id'>) {
   const foundPerformance = await getPerformance(performance.tournamentId, performance.performanceName)
   if (foundPerformance) {
