@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import { Id, newRecordAttributes } from '../lib/common'
+import { TournamentQueue } from '../lib/db/__generated__'
 // TODO only access other modules via service (use applicationContext)
 import { insertAddress, insertAthlete, insertJudge, insertPerson } from '../people/repository'
 import {
@@ -14,7 +15,9 @@ import {
   TournamentJudge,
   Performer,
   TournamentPlan,
-  TournamentPlanDetails
+  TournamentPlanDetails,
+  PerformanceJudge,
+  CurrentQueueUIResponse
 } from './interfaces'
 import {
   deleteLocation,
@@ -36,11 +39,13 @@ import {
   getTournamentById,
   getTournamentByName,
   getTournamentJudgeAndPerson,
+  getTournamentQueueByTournamentId,
   insertLocation,
   insertOrUpdateLocation,
   insertOrUpdatePerformance,
   insertOrUpdatePerformer,
   insertOrUpdateSlot,
+  insertOrUpdateTournamentQueue,
   insertPerformance,
   insertPerformer,
   insertSlot,
@@ -287,6 +292,93 @@ export class TournamentService implements ITournamentContext {
   async getTournamentPlan (tournamentId: string): Promise<TournamentPlanDetails[] | null> {
     const tournamentPlan = await findTournamentPlan(tournamentId)
     return tournamentPlan
+  }
+
+  async setTournamentQueueSlot (tournamentId: string, slotNumber: number) {
+    try {
+      const tournamentQueue = (await getTournamentQueueByTournamentId(tournamentId)) || { tournamentId } as TournamentQueue
+      const newSlot = slotNumber
+      const updatedTournamentQueue = await insertOrUpdateTournamentQueue({ ...tournamentQueue, slotNumber: newSlot })
+      return updatedTournamentQueue
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
+
+  async moveTournamentQueueToNextSlot (tournamentId: string): Promise<TournamentQueue | null> {
+    return await this.moveTournamentQueueSlot(tournamentId, 1)
+  }
+
+  async moveTournamentQueueToPreviousSlot (tournamentId: string): Promise<TournamentQueue | null> {
+    return await this.moveTournamentQueueSlot(tournamentId, -1)
+  }
+
+  async moveTournamentQueueSlot (tournamentId: string, steps: number): Promise<TournamentQueue | null> {
+    try {
+      const tournamentQueue = (await getTournamentQueueByTournamentId(tournamentId)) || { tournamentId } as TournamentQueue
+      const newSlot = (tournamentQueue.slotNumber || 0) + steps
+      const updatedTournamentQueue = await insertOrUpdateTournamentQueue({ ...tournamentQueue, slotNumber: newSlot })
+      return updatedTournamentQueue
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
+
+  async getCurrentTournamentQueue (tournamentId: string, judgeId: string): Promise<CurrentQueueUIResponse | null> {
+    try {
+      // 0. check parameters
+      if (!tournamentId || !judgeId) {
+        return null
+      }
+      // 1. get tournamentQueue
+      const tournamentQueue = await getTournamentQueueByTournamentId(tournamentId)
+      if (!tournamentQueue) {
+        return null
+      }
+      // 2. get performances with tournamentId and current slotNumber
+      const performances = await findPerformances({ tournamentId, slotNumber: tournamentQueue.slotNumber })
+      // 3. search performance with judgeId
+      let criteriaName = ''
+      let judgeName = ''
+      const performance = performances.find(p => {
+        const judges: PerformanceJudge[] = p.judges
+        const judge = judges.find(j => j.judgeId === judgeId)
+        if (judge) {
+          criteriaName = judge.criteriaName
+          judgeName = judge.judgeName
+          return true
+        }
+        return false
+      })
+      if (!performance) {
+        return null
+      }
+      const criteria = await this.getApplicationContext().judging.getCriteriaByCategoryIdAndName(performance.categoryId, criteriaName)
+      if (!criteria) {
+        return null
+      }
+      // 4. return queryParams for UI
+      const uiResponse: CurrentQueueUIResponse = {
+        path: `/judging/${criteria?.criteriaUiLayout || 'nothing'}`,
+        query: {
+          slotNumber: performance.slotNumber,
+          tournamentId,
+          performanceId: performance.id,
+          performerId: performance.performerId,
+          categoryId: performance.categoryId,
+          criteriaId: criteria.id,
+          judgeId,
+          judgeName,
+          criteriaName
+        }
+      }
+      return uiResponse
+    } catch (error) {
+      console.error(error)
+      return null
+    }
   }
 
   async disqualifyPerformance (performanceId: string, disqualified: boolean): Promise<(Performance & Id) | null> {

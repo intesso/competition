@@ -1,13 +1,12 @@
 import { ReactNode, useContext, useEffect, useState } from 'react'
-import { Outlet, useSearchParams } from 'react-router-dom'
-import { useLocalStorage } from 'usehooks-ts'
+import { createSearchParams, Outlet, useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocalStorage, useInterval } from 'usehooks-ts'
 import type {} from '@mui/x-date-pickers/themeAugmentation'
 import { ApiContext } from '../../contexts/ApiContext'
 
 import {
   Category,
   Criteria,
-  JudgingRule,
   Location,
   Performance,
   Performer,
@@ -44,12 +43,21 @@ export interface AppProps {
 export type InputType = 'button' | 'slider';
 
 export function JudgingApp ({ children }: AppProps) {
-  const { getTournamentJudge, getPerformance, getPerformer, getCategory, getCriteria, getJudgingRule, getLocation } =
-    useContext(ApiContext)
+  const {
+    getTournamentQueue,
+    getTournamentJudge,
+    getPerformance,
+    getPerformer,
+    getCategory,
+    getCriteria,
+    getLocation
+  } = useContext(ApiContext)
+  const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
   const [showTopDrawer, setShowTopDrawer] = useState(false)
   const [searchParams] = useSearchParams()
-  const judgeId = searchParams.get('id')
+  const judgeId = searchParams.get('judgeId') || searchParams.get('id')
+  const slotNumber = searchParams.get('slotNumber')
   const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
@@ -63,11 +71,6 @@ export function JudgingApp ({ children }: AppProps) {
   const [location, setLocation] = useState(null as Location | null)
   const criteriaId = searchParams.get('criteriaId')
   const [criteria, setCriteria] = useState(null as Criteria | null)
-  const judgingRuleId = searchParams.get('judgingRuleId')
-  const [judgingRule, setJudgingRule] = useState(null as JudgingRule | null)
-
-  // TODO remove judgingRule if not neeeded
-  console.log('judgingRule', judgingRule)
 
   function getJudgeId () {
     return judgeId || tournamentJudgeId || ''
@@ -78,8 +81,69 @@ export function JudgingApp ({ children }: AppProps) {
     return judgeName || (tournamentJudge ? `${tournamentJudge?.firstName} ${tournamentJudge?.lastName}` : '')
   }
 
+  // periodically check the current queue, and decide what to display
+  useInterval(
+    () => {
+      async function getCurrentQueue () {
+        if (tournamentId && judgeId) {
+          return await getTournamentQueue(tournamentId, judgeId)
+        }
+        return null
+      }
+
+      getCurrentQueue()
+        .then((queue) => {
+          console.log('interval')
+          const nothingPath = '/judging/nothing'
+          if (!queue) {
+            if (window.location.pathname !== nothingPath) {
+              navigate({
+                pathname: nothingPath,
+                search: `?${createSearchParams({
+                  slotNumber: '',
+                  locationName: '',
+                  tournamentId: (tournamentId as string) || '',
+                  categoryId: '',
+                  criteriaId: '',
+                  criteriaName: '',
+                  tournamentJudgeId: '',
+                  performanceId: '',
+                  judgeId: getJudgeId(),
+                  judgeName: ''
+                })}`
+              })
+            }
+          } else {
+            if (performanceId !== queue.query.performanceId) {
+              navigate({
+                pathname: queue.path,
+                search: `?${createSearchParams(
+                  Object.fromEntries(
+                    Object.entries(queue.query).map(([key, value]) => [key, value !== null ? value.toString() : ''])
+                  )
+                )}`
+              })
+            }
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+          enqueueSnackbar(err.message, { variant: 'error' })
+        })
+    },
+    // poll time in milliseconds or null to stop it
+    3000
+  )
+
   useEffect(() => {
     const fetchData = async () => {
+      if (!performanceId && !performerId && !criteriaId) {
+        setPerformance(null)
+        setPerformer(null)
+        setCriteria(null)
+        setCategory(null)
+        setLocation(null)
+      }
       if (tournamentId && performanceId) {
         setPerformance(await getPerformance(tournamentId, performanceId))
       }
@@ -89,12 +153,9 @@ export function JudgingApp ({ children }: AppProps) {
       if (criteriaId) {
         setCriteria(await getCriteria(criteriaId))
       }
-      if (judgingRuleId) {
-        setJudgingRule(await getJudgingRule(judgingRuleId))
-      }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
-  }, [undefined, window.location.pathname])
+  }, [undefined, window.location.href])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -116,13 +177,17 @@ export function JudgingApp ({ children }: AppProps) {
     listItem: { padding: '0px 8px', textAlign: 'center' }
   }
 
+  function getSlotNumber () {
+    return (performance && performance?.slotNumber) || slotNumber
+  }
+
   function Infos () {
     return (
       <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
-        {performance && performance?.slotNumber && (
+        {getSlotNumber() && (
           <List sx={classes.list}>
             <ListItem sx={{ ...classes.listItem, width: '38px' }}>
-              <ListItemText primary={<TableRowsIcon />} secondary={performance?.slotNumber} />
+              <ListItemText primary={<TableRowsIcon />} secondary={getSlotNumber()} />
             </ListItem>
           </List>
         )}
@@ -133,7 +198,7 @@ export function JudgingApp ({ children }: AppProps) {
             </ListItem>
           </List>
         )}
-                {performer && (
+        {performer && (
           <List sx={classes.list}>
             <ListItem sx={{ ...classes.listItem, minWidth: '160px' }}>
               <ListItemText
@@ -142,9 +207,9 @@ export function JudgingApp ({ children }: AppProps) {
               />
             </ListItem>
           </List>
-                )}
+        )}
         <List sx={classes.list}>
-        <ListItem sx={{ ...classes.listItem, minWidth: '160px' }}>
+          <ListItem sx={{ ...classes.listItem, minWidth: '160px' }}>
             <ListItemText primary={<CategoryIcon />} secondary={dedupe(snakeToPascal(category?.categoryName || ''))} />
           </ListItem>
         </List>
@@ -221,7 +286,7 @@ export function JudgingApp ({ children }: AppProps) {
               src={Logo}
             />
           </IconButton>
-          <Infos />
+          {performanceId && <Infos />}
         </Toolbar>
       </AppBar>
 

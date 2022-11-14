@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Category, Club, Criteria, JudgingRule, Location, Performance, Performer, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson, TournamentPlanDetails } from './ApiContextInterface'
+import { Category, Club, Criteria, CurrentQueueUIResponse, JudgingRule, Location, Performance, Performer, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson, TournamentPlanDetails } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
@@ -10,6 +10,7 @@ export interface Api {
   // tournament
   listTournamentPlan: (tournamentId: string) => Promise<TournamentPlanDetails[]>
   listTournaments: () => Promise<Tournament[]>
+  getTournamentQueue: (tournamentId:string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
   addTournament: (tournament: Tournament) => Promise<void>
   getTournament: (id: string) => Promise<Tournament | null>
   addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
@@ -98,6 +99,16 @@ export function provideApiContext (): Api {
         method: 'GET'
       })
     ).data as Tournament[]
+  }
+
+  async function getTournamentQueue (tournamentId: string, judgeId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue?judgeId=${judgeId}`,
+        method: 'GET'
+      })
+    ).data as CurrentQueueUIResponse | null
   }
 
   async function getTournamentAthlete (tournamentId: string, id: string) {
@@ -373,6 +384,7 @@ export function provideApiContext (): Api {
     addTournament,
     getTournament,
     listTournaments,
+    getTournamentQueue,
     getLocation,
     listLocations,
     addLocation,

@@ -184,6 +184,21 @@ CREATE TABLE "Performance" (
   FOREIGN KEY ("slotNumber", "tournamentId") REFERENCES "Slot"("slotNumber", "tournamentId"),
   CONSTRAINT "PerformanceNameUnique" UNIQUE ("tournamentId", "performanceName")
 );
+CREATE TABLE "TournamentQueue" (
+  id uuid NOT NULL,
+  "tournamentId" uuid NOT NULL,
+  "slotNumber" int NULL,
+  "status" text NULL,
+  "runs" jsonb NULL,
+  "createdAt" timestamp NULL,
+  "createdBy" text NULL,
+  "updatedAt" timestamp NULL,
+  "updatedBy" text NULL,
+  CONSTRAINT "TournamentQueuePK" PRIMARY KEY (id),
+  FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
+  FOREIGN KEY ("slotNumber", "tournamentId") REFERENCES "Slot"("slotNumber", "tournamentId"),
+  CONSTRAINT "TournamentQueueTournamentIdUnique" UNIQUE ("tournamentId")
+);
 -----------------------------------
 -- Judging Contect ----------------
 -----------------------------------

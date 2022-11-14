@@ -15,6 +15,18 @@ tournamentController
   .get('/:tournamentId/plan', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.getTournamentPlan(ctx.params.tournamentId as string))
   })
+  .get('/:tournamentId/queue', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.getCurrentTournamentQueue(ctx.params.tournamentId, ctx.query.judgeId as string))
+  })
+  .put('/:tournamentId/queue/next', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.moveTournamentQueueToNextSlot(ctx.params.tournamentId as string))
+  })
+  .put('/:tournamentId/queue/back', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.moveTournamentQueueToPreviousSlot(ctx.params.tournamentId as string))
+  })
+  .put('/:tournamentId/queue/:slotNumber', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.setTournamentQueueSlot(ctx.params.tournamentId as string, parseInt(ctx.params.slotNumber)))
+  })
   .post('/:tournamentId/athletes', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournamentAthlete(ctx.request.body as TournamentAthlete))
   })

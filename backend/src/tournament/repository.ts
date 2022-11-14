@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import { db, Location, Performance, Performer, Slot, sql, Tournament, TournamentAthlete, TournamentJudge } from '../lib/db/database'
-import { Location_InsertParameters, Performance_InsertParameters, Performer_InsertParameters, Slot_InsertParameters, TournamentAthlete_InsertParameters, TournamentJudge_InsertParameters, Tournament_InsertParameters } from '../lib/db/__generated__'
+import { db, Location, Performance, Performer, Slot, sql, Tournament, TournamentAthlete, TournamentJudge, TournamentQueue } from '../lib/db/database'
+import { Location_InsertParameters, Performance_InsertParameters, Performer_InsertParameters, Slot_InsertParameters, TournamentAthlete_InsertParameters, TournamentJudge_InsertParameters, TournamentQueue_InsertParameters, Tournament_InsertParameters } from '../lib/db/__generated__'
 import { Id, newRecordAttributes, updateRecordAttributes } from '../lib/common'
 import { TournamentJudge as TournamentJudgeDomainObject, TournamentAthlete as TournamentAthleteDomainObject, TournamentPlanDetails } from './interfaces'
 
@@ -41,6 +41,25 @@ export async function findTournament (tournament: Partial<Tournament_InsertParam
 
 export async function findTournamentByTournamentName (tournamentName: string) {
   return await Tournament(db).findOne({ tournamentName })
+}
+
+// TournamentQueue
+export async function insertOrUpdateTournamentQueue (tournamentQueue: Omit<TournamentQueue_InsertParameters, 'id'>) {
+  const foundTournamentQueue = await getTournamentQueueByTournamentId(tournamentQueue.tournamentId)
+  if (foundTournamentQueue) {
+    const [updatedLocation] = await TournamentQueue(db).update({ tournamentId: tournamentQueue.tournamentId }, { ...foundTournamentQueue, ...tournamentQueue, updatedAt: new Date() })
+    return updatedLocation
+  }
+  return await insertTournamentQueue(tournamentQueue)
+}
+
+export async function insertTournamentQueue (tournamentQueue: Omit<TournamentQueue_InsertParameters, 'id'>) {
+  const [insertedTournament] = await TournamentQueue(db).insert({ ...tournamentQueue, ...newRecordAttributes() })
+  return insertedTournament
+}
+
+export async function getTournamentQueueByTournamentId (tournamentId: string) {
+  return await TournamentQueue(db).findOne({ tournamentId })
 }
 
 // Location

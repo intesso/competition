@@ -24,19 +24,20 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     useContext(ApiContext)
   const { enqueueSnackbar } = useSnackbar()
 
-  // TODO remove unused vars
   const [searchParams] = useSearchParams()
   const judgeId = searchParams.get('judgeId') || searchParams.get('id')
   const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
-  const [inputType] = useLocalStorage<InputType>('inputType', 'slider') // TODO change: 'slider' -> 'button'
+  const [inputType] = useLocalStorage<InputType>('inputType', 'button')
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
   const performanceId = searchParams.get('performanceId')
   const [performance, setPerformance] = useState(null as Performance | null)
   const criteriaId = searchParams.get('criteriaId')
-  const [, setCriteria] = useState(null as Criteria | null)
-  const [subCriteria, setSubCriteria] = useState({} as SubCriteriaValue)
+  const subCriteriaKey = `subCriteria_${performanceId}_${criteriaId}`
+  const [subCriteria, setSubCriteria] = useLocalStorage<SubCriteriaValue>(subCriteriaKey, {})
+  const finishedKey = `finished_${performanceId}_${criteriaId}`
+  const [finished, setFinished] = useLocalStorage<string>(finishedKey, '')
   const [fns, setFns] = useState({} as SelectFn)
 
   useEffect(() => {
@@ -45,17 +46,30 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         setPerformance(await getPerformance(tournamentId, performanceId))
       }
       if (criteriaId) {
-        const c = await getCriteria(criteriaId)
-        console.log('criteria', c)
-        if (c) {
-          console.log('criteriaDefinitionToSubCriteria(c)', criteriaDefinitionToSubCriteria(c))
-          setSubCriteria(criteriaDefinitionToSubCriteria(c))
+        // try read from localStorage (previously visited page)
+        const storedFinishedString = localStorage.getItem(finishedKey)
+        if (storedFinishedString) {
+          const storedFinished = JSON.parse(storedFinishedString)
+          setFinished(storedFinished)
         }
-        setCriteria(c)
+
+        const storedSubCriteriaString = localStorage.getItem(subCriteriaKey)
+        if (storedSubCriteriaString) {
+          const storedSubCriteria = JSON.parse(storedSubCriteriaString)
+          setSubCriteria(storedSubCriteria)
+        } else {
+          // fetch criteria from server
+          const c = await getCriteria(criteriaId)
+          console.log('criteria', c)
+          if (c) {
+            console.log('criteriaDefinitionToSubCriteria(c)', criteriaDefinitionToSubCriteria(c))
+            setSubCriteria(criteriaDefinitionToSubCriteria(c))
+          }
+        }
       }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
-  }, [])
+  }, [tournamentId, performanceId, criteriaId])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -99,12 +113,29 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         timestamp: DateTime.now().toISO()
       }
       addRawPoint(rawPoint)
-        .then(() => enqueueSnackbar('Done', { variant: 'success', autoHideDuration: 5000 }))
-        .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error', autoHideDuration: 10000 }))
+        .then(() => {
+          setFinished('success')
+          enqueueSnackbar('Done', { variant: 'success', autoHideDuration: 5000 })
+        })
+        .catch((err) => {
+          setFinished('error')
+          enqueueSnackbar(parseError(err), { variant: 'error', autoHideDuration: 10000 })
+        })
     } else {
       const msg = 'must provide performanceId && (id || tournamentJudgeId) && criteriaId'
       console.error(msg)
       enqueueSnackbar(msg, { variant: 'error' })
+    }
+  }
+
+  function getSubmitButtonColor () {
+    switch (finished) {
+      case 'error':
+        return 'error'
+      case 'success':
+        return 'success'
+      default:
+        return 'primary'
     }
   }
 
@@ -312,7 +343,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
               >
                 REMOVE
               </Button>
-              <Button style={styledButton} variant="contained" color="primary" onClick={handleSend}>
+              <Button style={styledButton} variant="contained" color={getSubmitButtonColor()} onClick={handleSend}>
                 SUBMIT
               </Button>
             </Stack>
@@ -367,7 +398,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
               >
                 REMOVE
               </Button>
-              <Button style={styledButton} variant="contained" color="primary" onClick={handleSend}>
+              <Button style={styledButton} variant="contained" color={getSubmitButtonColor()} onClick={handleSend}>
                 SUBMIT
               </Button>
             </Stack>
@@ -407,7 +438,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
               >
                 REMOVE
               </Button>
-              <Button style={styledButton} variant="contained" color="primary" onClick={handleSend}>
+              <Button style={styledButton} variant="contained" color={getSubmitButtonColor()} onClick={handleSend}>
                 SUBMIT
               </Button>
             </Stack>

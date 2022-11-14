@@ -2,7 +2,7 @@ import { Button, Container, FormControl, InputLabel, MenuItem, Select, Typograph
 import { useContext, useEffect, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 import { ApiContext } from '../../contexts/ApiContext'
-import { Criteria, JudgingRule, Performance, TorunamentJudge, Tournament } from '../../contexts/ApiContextInterface'
+import { Criteria, Performance, TorunamentJudge, Tournament } from '../../contexts/ApiContextInterface'
 import { parseError, snakeToPascal } from '../../lib/common'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
@@ -13,8 +13,7 @@ export function SelectRawPoint () {
     listTournaments,
     listPerformances,
     listCriteria,
-    listTournamentJudges,
-    getJudgingRuleByCategoryId: getJudgingRule
+    listTournamentJudges
   } = useContext(ApiContext)
   const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
@@ -27,8 +26,6 @@ export function SelectRawPoint () {
 
   const [criteria, setCriteria] = useState([] as Criteria[])
   const [criteriaId, setCriteriaId] = useState('')
-
-  const [judgingRule, setJudgingRule] = useState(null as JudgingRule | null)
 
   const [tournamentJudges, setTournamentJudges] = useState([] as TorunamentJudge[])
   const [tournamentJudgeId, setTournamentJudgeId] = useState('')
@@ -65,8 +62,6 @@ export function SelectRawPoint () {
         const c = await listCriteria(performance.categoryId)
         // c.forEach((it) => console.log(it.criteriaName, it.subCriteriaDefinition))
         setCriteria(c)
-        const j = await getJudgingRule(performance.categoryId)
-        setJudgingRule(j)
       }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
@@ -85,7 +80,6 @@ export function SelectRawPoint () {
   }
 
   async function handleSelect () {
-    const judgingRuleName = judgingRule?.judgingRuleName || ''
     const foundCriteria = criteria.find((it) => it.id === criteriaId)
     if (foundCriteria) {
       const criteriaName = foundCriteria.criteriaName
@@ -102,7 +96,6 @@ export function SelectRawPoint () {
           tournamentJudgeId,
           judgeId,
           judgeName,
-          judgingRuleName,
           criteriaName
         })}`
       })

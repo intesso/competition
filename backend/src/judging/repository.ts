@@ -110,12 +110,17 @@ export async function findCriteriaByCategoryId (categoryId: string) {
   return await Criteria(db).find({ judgingRuleId: judgingRule.id }).all()
 }
 
-export async function getCriteriaById (id: string) {
-  return await Criteria(db).findOne({ id })
+export async function getCriteriaByCategoryIdAndName (categoryId: string, criteriaName: string) {
+  const category = await Category(db).findOne({ id: categoryId })
+  if (!category) return null
+  const judgingRule = await JudgingRule(db).findOne({ id: category.judgingRuleId })
+  if (!judgingRule) return null
+
+  return await Criteria(db).findOne({ judgingRuleId: judgingRule?.id, criteriaName })
 }
 
-export async function getCriteriaByName (criteriaName: string) {
-  return await Criteria(db).findOne({ criteriaName })
+export async function getCriteriaById (id: string) {
+  return await Criteria(db).findOne({ id })
 }
 
 export async function listCriteria () {

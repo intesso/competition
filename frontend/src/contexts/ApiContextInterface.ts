@@ -150,3 +150,18 @@ export interface PerformanceJudge {
   judgeName: string
   criteriaName: string
 }
+
+export interface CurrentQueueUIResponse {
+  path: string
+  query: {
+    slotNumber: number | null
+    tournamentId: string
+    performanceId: string
+    performerId: string
+    categoryId: string
+    criteriaId: string
+    judgeId: string
+    judgeName: string
+    criteriaName: string
+  }
+}

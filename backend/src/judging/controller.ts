@@ -28,14 +28,14 @@ judgingController
     return respondWith(ctx, () => applicationContext.judging.getCategory(ctx.params.id as string))
   })
   .get('/criteria', inputValidation.validate, (ctx) => {
+    if (typeof ctx.request.query.categoryId === 'string' && typeof ctx.request.query.criteriaName === 'string') {
+      return respondWith(ctx, () =>
+        applicationContext.judging.getCriteriaByCategoryIdAndName(ctx.request.query.categoryId as string, ctx.request.query.criteriaName as string)
+      )
+    }
     if (typeof ctx.request.query.categoryId === 'string') {
       return respondWith(ctx, () =>
         applicationContext.judging.listCriteriaByCategoryId(ctx.request.query.categoryId as string)
-      )
-    }
-    if (typeof ctx.request.query.criteriaName === 'string') {
-      return respondWith(ctx, () =>
-        applicationContext.judging.getCriteriaByName(ctx.request.query.criteriaName as string)
       )
     }
     return respondWithError(ctx, 'categoryId queryParameter must be provided')

@@ -6,7 +6,8 @@ import {
   Location as LocationDAO,
   Slot as SlotDAO,
   Performance as PerformanceDAO,
-  Performer as PerformerDAO
+  Performer as PerformerDAO,
+  TournamentQueue
 } from '../lib/db/__generated__'
 import { Person } from '../people/interfaces'
 
@@ -21,9 +22,15 @@ export interface TournamentPlan {
   performerNumber?: string
   clubName: string
   performanceName: string
-  judgeDevice: PerformanceJudge['judgeDevice']
-  judgeName: PerformanceJudge['judgeName']
-  criteriaName: PerformanceJudge['criteriaName']
+  judgeDevice: PerformanceJudgePlanImport['judgeDevice']
+  judgeName: PerformanceJudgePlanImport['judgeName']
+  criteriaName: PerformanceJudgePlanImport['criteriaName']
+}
+
+export interface PerformanceJudgePlanImport {
+  judgeDevice: string
+  judgeName: string
+  criteriaName: string
 }
 
 export interface TournamentPlanDetails {
@@ -47,9 +54,24 @@ export interface TournamentPlanDetails {
 }
 
 export interface PerformanceJudge {
-  judgeDevice: string
+  judgeId: string
   judgeName: string
   criteriaName: string
+}
+
+export interface CurrentQueueUIResponse {
+  path: string
+  query: {
+    slotNumber: number | null
+    tournamentId: string
+    performanceId: string
+    performerId: string
+    categoryId: string
+    criteriaId: string
+    judgeId: string
+    judgeName: string
+    criteriaName: string
+  }
 }
 
 export type TournamentName = { tournamentName: string };
@@ -110,4 +132,8 @@ export interface ITournamentContext extends IGetApplicationContext {
   addTournamentJudge: (judge: TournamentJudge) => Promise<TournamentJudge>
   getTournamentJudge: (id: string) => Promise<(TournamentJudge & Id) | null>
   listTournamentJudges: (tournamentId: string) => Promise<TournamentJudge[]>
+  setTournamentQueueSlot: (tournamentId: string, slotNumber: number) => Promise<TournamentQueue | null>
+  moveTournamentQueueToNextSlot: (tournamentId: string) => Promise<TournamentQueue | null>
+  moveTournamentQueueToPreviousSlot: (tournamentId: string) => Promise<TournamentQueue | null>
+  getCurrentTournamentQueue: (tournamentId: string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
 }
