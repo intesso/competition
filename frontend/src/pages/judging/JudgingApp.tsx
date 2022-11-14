@@ -113,7 +113,7 @@ export function JudgingApp ({ children }: AppProps) {
 
   const classes = {
     list: { bgcolor: 'primary', margin: 0, padding: 0 },
-    listItem: { padding: '0px 20px', textAlign: 'center' }
+    listItem: { padding: '0px 8px', textAlign: 'center' }
   }
 
   function Infos () {
@@ -121,33 +121,34 @@ export function JudgingApp ({ children }: AppProps) {
       <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
         {performance && performance?.slotNumber && (
           <List sx={classes.list}>
-            <ListItem sx={classes.listItem}>
+            <ListItem sx={{ ...classes.listItem, width: '38px' }}>
               <ListItemText primary={<TableRowsIcon />} secondary={performance?.slotNumber} />
             </ListItem>
           </List>
         )}
         {location && (
           <List sx={classes.list}>
-            <ListItem sx={classes.listItem}>
+            <ListItem sx={{ ...classes.listItem, width: '38px' }}>
               <ListItemText primary={<PlaceIcon />} secondary={location?.locationName} />
             </ListItem>
           </List>
         )}
-        <List sx={classes.list}>
-          <ListItem sx={classes.listItem}>
-            <ListItemText primary={<CategoryIcon />} secondary={dedupe(snakeToPascal(category?.categoryName || ''))} />
-          </ListItem>
-        </List>
-        {performer && (
+                {performer && (
           <List sx={classes.list}>
-            <ListItem sx={classes.listItem}>
+            <ListItem sx={{ ...classes.listItem, minWidth: '160px' }}>
               <ListItemText
                 primary={<PeopleAltIcon />}
                 secondary={`${performer?.performerName} | ${performer?.performerNumber}`}
               />
             </ListItem>
           </List>
-        )}
+                )}
+        <List sx={classes.list}>
+        <ListItem sx={{ ...classes.listItem, minWidth: '160px' }}>
+            <ListItemText primary={<CategoryIcon />} secondary={dedupe(snakeToPascal(category?.categoryName || ''))} />
+          </ListItem>
+        </List>
+
         <List sx={classes.list}>
           <ListItem sx={classes.listItem}>
             <ListItemText primary={<WorkspacesIcon />} secondary={criteria?.criteriaName} />
@@ -210,7 +211,7 @@ export function JudgingApp ({ children }: AppProps) {
       {/* Big Device AppBar */}
       <AppBar position="static" sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
         <Toolbar>
-          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+          <IconButton size="large" edge="start" color="inherit" aria-label="menu">
             <Box
               component="img"
               sx={{

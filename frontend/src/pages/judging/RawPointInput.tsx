@@ -108,7 +108,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     }
   }
 
-  const colHeight = 150
+  const colHeight = 142
 
   const styledButton = {
     width: '100%',
