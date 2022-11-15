@@ -1,7 +1,7 @@
 import { IGetApplicationContext } from '../../applicationContext'
 import { Id } from '../lib/common'
 import { Club, ClubWithAddress, IPeopleContext, Person } from './interfaces'
-import { findClubs, getClubByName, insertAddress, insertAthlete, insertClub, insertJudge, insertPerson } from './repository'
+import { findClubs, getClubById, getClubByName, insertAddress, insertAthlete, insertClub, insertJudge, insertPerson } from './repository'
 
 export class PeopleService implements IPeopleContext {
   getApplicationContext
@@ -24,8 +24,12 @@ export class PeopleService implements IPeopleContext {
     return await findClubs()
   }
 
-  async getClub (clubName: string) : Promise<(Club & Id) | null> {
+  async getClubByName (clubName: string) : Promise<(Club & Id) | null> {
     return await getClubByName(clubName)
+  }
+
+  async getClubById (id: string) : Promise<(Club & Id) | null> {
+    return await getClubById(id)
   }
 
   async addAthlete<P extends Person> (athlete: P): Promise<P & Id> {

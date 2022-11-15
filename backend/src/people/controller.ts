@@ -12,6 +12,9 @@ peopleController
   .post('/clubs', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.people.addClubWithAddress(ctx.request.body as ClubWithAddress))
   })
+  .get('/clubs/:id', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.people.getClubById(ctx.params.id))
+  })
   .get('/clubs', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.people.listClubs())
   })

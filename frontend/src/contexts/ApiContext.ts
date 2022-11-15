@@ -13,6 +13,7 @@ export interface Api {
   getTournamentQueue: (tournamentId:string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
   addTournament: (tournament: Tournament) => Promise<void>
   getTournament: (id: string) => Promise<Tournament | null>
+  getTournamentByName:(tournamentName: string) => Promise<Tournament | null>
   addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
   getTournamentAthlete: (tournamentId: string, id: string) => Promise<TournamentPerson | null>
   listTournamentAthletes: (tournamentId: string) => Promise<TournamentPerson[]>
@@ -86,6 +87,16 @@ export function provideApiContext (): Api {
       await axios({
         headers,
         url: `${serverBaseUrl}/api/tournaments/${id}`,
+        method: 'GET'
+      })
+    ).data as Tournament | null
+  }
+
+  async function getTournamentByName (tournamentName: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/?tournamentName=${tournamentName}`,
         method: 'GET'
       })
     ).data as Tournament | null
@@ -383,6 +394,7 @@ export function provideApiContext (): Api {
     listClubs,
     addTournament,
     getTournament,
+    getTournamentByName,
     listTournaments,
     getTournamentQueue,
     getLocation,

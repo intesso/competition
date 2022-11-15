@@ -11,21 +11,27 @@ import {
   CalculationCombinationRanksOutput,
   CategoryRank,
   CombinationRank,
-  CategoryPoint
+  CategoryPoint,
+  CalculationJudgeCriteriaGroup,
+  CategoryRanksSummary,
+  CategoryRankDetails,
+  CategoryRanksDetailsResult,
+  CategoryRanksDetailsAllResult
 } from './interfaces'
 import {
   deleteCategoryPointById,
   deleteCategoryRankById,
   findCategoryPointByCategoryId,
   findCategoryRankByCategoryId,
-  findCombinationRankByCombinationId,
+  getCombinationRankByCombinationId,
+  getCategoryPointById,
   getCategoryPointByPerformanceId,
   getCategoryRankByCategoryPointId,
-  insertCombinationRank,
   insertOrUpdateCategoryPoint,
   insertOrUpdateCategoryRanks,
   updateCategoryPoint,
-  updateCategoryRank
+  updateCategoryRank,
+  insertOrUpdateCombinationRank
 } from './repository'
 
 export class CalculationService implements ICalculationContext {
@@ -48,7 +54,9 @@ export class CalculationService implements ICalculationContext {
             console.error(`could not prepareCalculationMessage for ${JSON.stringify(performance)}`)
           }
         } else {
-          console.log(`no rawPoints found for performanceId: ${performance.id}, performanceName: ${performance.performanceName}`)
+          console.log(
+            `no rawPoints found for performanceId: ${performance.id}, performanceName: ${performance.performanceName}`
+          )
         }
       }
     } catch (error) {
@@ -84,14 +92,14 @@ export class CalculationService implements ICalculationContext {
     }
   }
 
-  async getPoints (performanceId: string) :Promise<CategoryPoint | null> {
+  async getPoints (performanceId: string): Promise<CategoryPoint | null> {
     return await getCategoryPointByPerformanceId(performanceId)
   }
 
   async calculateAllCategoryRanks (tournamentId: string): Promise<boolean | null> {
     const categories = await this.getApplicationContext().judging.listCategories()
     try {
-      for (const category of (categories || [])) {
+      for (const category of categories || []) {
         await this.calculateCategoryRanks({ tournamentId, categoryId: category.id })
       }
     } catch (error) {
@@ -141,7 +149,7 @@ export class CalculationService implements ICalculationContext {
   async calculateAllCombinationRanks (tournamentId: string): Promise<boolean | null> {
     const weightedCombinations = await this.getApplicationContext().judging.listWeightedCombinations()
     try {
-      for (const combination of (weightedCombinations || [])) {
+      for (const combination of weightedCombinations || []) {
         await this.calculateCombinationRanks({ tournamentId, combinationId: combination.combinationId })
       }
     } catch (error) {
@@ -155,9 +163,78 @@ export class CalculationService implements ICalculationContext {
     return sortedCategoryRanks
   }
 
+  async getAllCategoryRanksDetailed (tournamentId: string): Promise<CategoryRanksDetailsAllResult | null> {
+    const categoryIds = await this.getApplicationContext().tournament.listTournamentCategories(tournamentId)
+    const ranksDetails: CategoryRanksDetailsAllResult = {}
+    for (const categoryId of categoryIds) {
+      const categoryRanks = await this.getCategoryRanksDetailed(tournamentId, categoryId)
+      if (categoryRanks && categoryRanks.summary.length) {
+        const categoryName = categoryRanks.summary[0].categoryName
+        ranksDetails[categoryName] = categoryRanks.summary
+      }
+    }
+    return ranksDetails
+  }
+
+  async getCategoryRanksDetailed (
+    tournamentId: string,
+    categoryId: string
+  ): Promise<CategoryRanksDetailsResult | null> {
+    const category = await this.getApplicationContext().judging.getCategory(categoryId)
+    if (!category) {
+      console.error(`can't getCategory: ${categoryId}`)
+      return null
+    }
+
+    const sortedCategoryRanks = await findCategoryRankByCategoryId(tournamentId, categoryId)
+
+    const detailLookup: { [key: string]: CategoryRankDetails } = {}
+    const summaryLookup: { [key: string]: CategoryRanksSummary } = {}
+    for (const rank of sortedCategoryRanks) {
+      const points = await getCategoryPointById(rank.categoryPointId)
+      if (!points) {
+        console.error(`can't getCategoryPointById: ${rank.categoryPointId}`)
+        continue
+      }
+      const performance = await this.getApplicationContext().tournament.getPerformance(points.performanceId)
+      if (!performance) {
+        console.error(`can't getPerformance: ${points.performanceId}`)
+        continue
+      }
+      const club = await this.getApplicationContext().people.getClubById(performance.clubId)
+      const clubName = club?.clubName || ''
+
+      const performer = await this.getApplicationContext().tournament.getPerformer(points.performerId)
+      if (!performer) {
+        console.error(`can't getPerformer: ${points.performerId}`)
+        continue
+      }
+      const criteriaPoints: CalculationJudgeCriteriaGroup = points.criteriaPoints
+      const criteriaPointsSummary = Object.values(criteriaPoints).reduce((memo, p) => {
+        memo[p.criteriaName] = p.calculatedAggregatedCriteriaPoints
+        return memo
+      }, {} as { [key: string]: number | undefined })
+      detailLookup[rank.categoryPointId] = { ...points, categoryRank: rank.categoryRank }
+      summaryLookup[rank.categoryPointId] = {
+        categoryName: category.categoryName,
+        performerNumber: performer.performerNumber,
+        performerName: performer.performerName,
+        clubName,
+        ...criteriaPointsSummary,
+        categoryPoint: points.categoryPoint,
+        categoryRank: rank.categoryRank
+      }
+    }
+
+    return {
+      summary: Object.values(summaryLookup),
+      details: Object.values(detailLookup)
+    }
+  }
+
   async calculateCombinationRanks (input: CalculationCombinationRanksInput): Promise<CalculationCombinationRanksOutput> {
     const combination = await this.getApplicationContext().judging.listWeightedCombination(input.combinationId)
-    const combinationByCategory: { [key: string]: (CombinationRank)[] } = {} // key: categoryId
+    const combinationByCategory: { [key: string]: CombinationRank[] } = {} // key: categoryId
 
     // 1. prepare and calculate the combination rank
     // only consider performers that competed in all categories for the combination
@@ -170,7 +247,7 @@ export class CalculationService implements ICalculationContext {
         await findCategoryPointByCategoryId(input.tournamentId, category.categoryId),
         'id'
       )
-      const combinedRanks: (CombinationRank)[] = sortedCategoryRanks.map((rank) => ({
+      const combinedRanks: CombinationRank[] = sortedCategoryRanks.map((rank) => ({
         ...rank,
         ...sortedCategoryPoints[rank.categoryPointId],
         combinationRank: -1,
@@ -187,8 +264,12 @@ export class CalculationService implements ICalculationContext {
     // recalculate combination rank rank
     for (const ranks of Object.values(combinationByCategory)) {
       // only keep the performances of performers that competed in all categieries in the combination
-      const filteredRanks = ranks.filter(it => {
-        if (it.performerId && combinationPerformer[it.performerId] && combinationPerformer[it.performerId] === numberOfCategoriesInCombination) {
+      const filteredRanks = ranks.filter((it) => {
+        if (
+          it.performerId &&
+          combinationPerformer[it.performerId] &&
+          combinationPerformer[it.performerId] === numberOfCategoriesInCombination
+        ) {
           return true
         }
         return false
@@ -197,21 +278,25 @@ export class CalculationService implements ICalculationContext {
       filteredRanks.map((it, i) => {
         it.combinationRank = i + 1
         performerWeightedRank[it.performerId] = performerWeightedRank[it.performerId] || 0
-        performerWeightedRank[it.performerId] = performerWeightedRank[it.performerId] + (it.combinationRank * it.categoryWeight)
+        performerWeightedRank[it.performerId] =
+          performerWeightedRank[it.performerId] + it.combinationRank * it.categoryWeight
         return it
       })
     }
 
     // sort calculated combination ranks
-    const calculatedCombinationRanks = sortBy(Object.entries(performerWeightedRank), it => it[1])
-      .map(([performerId, calculatedRank], i) => {
+    const calculatedCombinationRanks = sortBy(Object.entries(performerWeightedRank), (it) => it[1]).map(
+      ([performerId, combinationRankPoints], i) => {
         return {
-          performerId, calculatedRank, i
+          performerId,
+          combinationRankPoints,
+          combinationRank: i + 1
         }
-      })
+      }
+    )
 
     // 2. store the combination rank
-    await insertCombinationRank({
+    await insertOrUpdateCombinationRank({
       tournamentId: input.tournamentId,
       combinationId: input.combinationId,
       combinationRanks: {
@@ -223,8 +308,8 @@ export class CalculationService implements ICalculationContext {
     return input
   }
 
-  async getCombinationRanks (combinationId: string): Promise<CalculationCombinationRanksOutput | null> {
-    const sortedCategoryRanks = await findCombinationRankByCombinationId(combinationId)
+  async getCombinationRanks (tournamentId: string, combinationId: string): Promise<CalculationCombinationRanksOutput | null> {
+    const sortedCategoryRanks = await getCombinationRankByCombinationId(tournamentId, combinationId)
     return sortedCategoryRanks
   }
 
@@ -250,7 +335,7 @@ export class CalculationService implements ICalculationContext {
     }
   }
 
-  async removeCalculation (performanceId: string) : Promise<boolean> {
+  async removeCalculation (performanceId: string): Promise<boolean> {
     try {
       const categoryPoint = await getCategoryPointByPerformanceId(performanceId)
       if (!categoryPoint) {

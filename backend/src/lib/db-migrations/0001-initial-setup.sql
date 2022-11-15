@@ -188,7 +188,6 @@ CREATE TABLE "TournamentQueue" (
   id uuid NOT NULL,
   "tournamentId" uuid NOT NULL,
   "slotNumber" int NULL,
-  "status" text NULL,
   "runs" jsonb NULL,
   "createdAt" timestamp NULL,
   "createdBy" text NULL,

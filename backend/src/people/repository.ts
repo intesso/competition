@@ -111,6 +111,10 @@ export async function insertOrUpdateClub (club : ClubInsert) {
   return await insertClub(club)
 }
 
+export async function getClubById (id: string) {
+  return await Club(db).findOne({ id })
+}
+
 export async function getClubByName (clubName: string) {
   return await Club(db).findOne({ clubName })
 }

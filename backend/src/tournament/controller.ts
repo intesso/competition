@@ -16,7 +16,10 @@ tournamentController
     return respondWith(ctx, () => applicationContext.tournament.getTournamentPlan(ctx.params.tournamentId as string))
   })
   .get('/:tournamentId/queue', inputValidation.validate, (ctx) => {
-    return respondWith(ctx, () => applicationContext.tournament.getCurrentTournamentQueue(ctx.params.tournamentId, ctx.query.judgeId as string))
+    if (ctx.query.judgeId) {
+      return respondWith(ctx, () => applicationContext.tournament.getCurrentTournamentQueueForJudge(ctx.params.tournamentId, ctx.query.judgeId as string))
+    }
+    return respondWith(ctx, () => applicationContext.tournament.getCurrentTournamentQueue(ctx.params.tournamentId))
   })
   .put('/:tournamentId/queue/next', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.moveTournamentQueueToNextSlot(ctx.params.tournamentId as string))
@@ -59,6 +62,9 @@ tournamentController
   })
   .get('/:tournamentId', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.getTournament(ctx.params.tournamentId as string))
+  })
+  .get('/:tournamentId/categories', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.listTournamentCategories(ctx.params.tournamentId as string))
   })
   .post('/', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournament(ctx.request.body as TournamentAndAddress))

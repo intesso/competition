@@ -13,6 +13,7 @@ import { Overview } from './pages/admin/Overview'
 import { AddPerformer } from './pages/admin/AddPerformer'
 import { ListTournamentPlan } from './pages/admin/listTournamentPlan'
 import { Nothing } from './pages/judging/Nothing'
+import { Start } from './pages/judging/Start'
 
 export const Router = () => (
   <Routes>
@@ -31,9 +32,9 @@ export const Router = () => (
         <Route path="select-raw-point" element={<SelectRawPoint />} />
       </Route>
 
-      <Route path="/judging/start" element={<SelectRawPoint />}/>
-
       <Route path="/judging" element={<JudgingApp />}>
+        <Route path="start" element={<Start />}/>
+        <Route path="select" element={<SelectRawPoint />}/>
         <Route path="nothing" element={<Nothing />} />
         <Route path="3x3" element={<RawPointInput layout="3x3" />} />
         <Route path="3x2" element={<RawPointInput layout="3x2" />} />

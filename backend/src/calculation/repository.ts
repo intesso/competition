@@ -83,7 +83,7 @@ export async function getCategoryRankByCategoryPointId (categoryPointId: string)
 }
 
 export async function findCategoryRankByCategoryId (tournamentId: string, categoryId: string) {
-  return await CategoryRank(db).find({ tournamentId, categoryId }).orderByDesc('categoryRank').all()
+  return await CategoryRank(db).find({ tournamentId, categoryId }).orderByAsc('categoryRank').all()
 }
 
 // CombinationRank
@@ -92,16 +92,28 @@ export async function insertCombinationRank (combinationRank: Omit<CombinationRa
   return insertedCombinationRank
 }
 
+export async function insertOrUpdateCombinationRank (combinationRank: Omit<CombinationRank_InsertParameters, 'id'>) {
+  const foundCombinationRank = await getCombinationRankByCombinationId(combinationRank.tournamentId, combinationRank.combinationId)
+  if (foundCombinationRank) {
+    const [updatedCombinationRank] = await CombinationRank(db).update(
+      { tournamentId: combinationRank.tournamentId, combinationId: combinationRank.combinationId },
+      { ...foundCombinationRank, ...combinationRank, updatedAt: new Date() }
+    )
+    return updatedCombinationRank
+  }
+  return await insertCombinationRank(combinationRank)
+}
+
 export async function findCombinationRankById (id: string) {
   return await CombinationRank(db).findOne({ id })
 }
 
-export async function findCombinationRankByCombinationName (combinationName: string) {
+export async function getCombinationRankByCombinationName (tournamentId: string, combinationName: string) {
   const combination = await Combination(db).findOne({ combinationName })
   if (!combination) return null
-  return await findCombinationRankByCombinationId(combination.id)
+  return await getCombinationRankByCombinationId(tournamentId, combination.id)
 }
 
-export async function findCombinationRankByCombinationId (combinationId: string) {
-  return await CombinationRank(db).findOne({ combinationId })
+export async function getCombinationRankByCombinationId (tournamentId: string, combinationId: string) {
+  return await CombinationRank(db).findOne({ tournamentId, combinationId })
 }

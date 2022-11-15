@@ -1,8 +1,32 @@
 /* eslint-disable camelcase */
-import { db, Location, Performance, Performer, Slot, sql, Tournament, TournamentAthlete, TournamentJudge, TournamentQueue } from '../lib/db/database'
-import { Location_InsertParameters, Performance_InsertParameters, Performer_InsertParameters, Slot_InsertParameters, TournamentAthlete_InsertParameters, TournamentJudge_InsertParameters, TournamentQueue_InsertParameters, Tournament_InsertParameters } from '../lib/db/__generated__'
+import {
+  db,
+  Location,
+  Performance,
+  Performer,
+  Slot,
+  sql,
+  Tournament,
+  TournamentAthlete,
+  TournamentJudge,
+  TournamentQueue
+} from '../lib/db/database'
+import {
+  Location_InsertParameters,
+  Performance_InsertParameters,
+  Performer_InsertParameters,
+  Slot_InsertParameters,
+  TournamentAthlete_InsertParameters,
+  TournamentJudge_InsertParameters,
+  TournamentQueue_InsertParameters,
+  Tournament_InsertParameters
+} from '../lib/db/__generated__'
 import { Id, newRecordAttributes, updateRecordAttributes } from '../lib/common'
-import { TournamentJudge as TournamentJudgeDomainObject, TournamentAthlete as TournamentAthleteDomainObject, TournamentPlanDetails } from './interfaces'
+import {
+  TournamentJudge as TournamentJudgeDomainObject,
+  TournamentAthlete as TournamentAthleteDomainObject,
+  TournamentPlanDetails
+} from './interfaces'
 
 // Tournament
 export async function insertTournament (tournament: Omit<Tournament_InsertParameters, 'id'>) {
@@ -13,14 +37,17 @@ export async function insertTournament (tournament: Omit<Tournament_InsertParame
 export async function insertOrUpdateTournament (tournament: Omit<Tournament_InsertParameters, 'id'>) {
   const foundTournament = await getTournament(tournament.tournamentName)
   if (foundTournament) {
-    const [updatedLocation] = await Tournament(db).update({ tournamentName: tournament.tournamentName }, { ...foundTournament, ...tournament, updatedAt: new Date() })
+    const [updatedLocation] = await Tournament(db).update(
+      { tournamentName: tournament.tournamentName },
+      { ...foundTournament, ...tournament, updatedAt: new Date() }
+    )
     return updatedLocation
   }
   return await insertTournament(tournament)
 }
 
 export async function findAllTournaments () {
-  return await (await Tournament(db).find().all())
+  return await await Tournament(db).find().all()
 }
 
 export async function getTournamentById (id: string) {
@@ -47,7 +74,10 @@ export async function findTournamentByTournamentName (tournamentName: string) {
 export async function insertOrUpdateTournamentQueue (tournamentQueue: Omit<TournamentQueue_InsertParameters, 'id'>) {
   const foundTournamentQueue = await getTournamentQueueByTournamentId(tournamentQueue.tournamentId)
   if (foundTournamentQueue) {
-    const [updatedLocation] = await TournamentQueue(db).update({ tournamentId: tournamentQueue.tournamentId }, { ...foundTournamentQueue, ...tournamentQueue, updatedAt: new Date() })
+    const [updatedLocation] = await TournamentQueue(db).update(
+      { tournamentId: tournamentQueue.tournamentId },
+      { ...foundTournamentQueue, ...tournamentQueue, updatedAt: new Date() }
+    )
     return updatedLocation
   }
   return await insertTournamentQueue(tournamentQueue)
@@ -71,7 +101,10 @@ export async function insertLocation (location: Omit<Location_InsertParameters, 
 export async function insertOrUpdateLocation (location: Omit<Location_InsertParameters, 'id'>) {
   const foundLocation = await getLocation(location.tournamentId, location.locationName)
   if (foundLocation) {
-    const [updatedLocation] = await Location(db).update({ tournamentId: location.tournamentId, locationName: location.locationName }, { ...foundLocation, ...location, updatedAt: new Date() })
+    const [updatedLocation] = await Location(db).update(
+      { tournamentId: location.tournamentId, locationName: location.locationName },
+      { ...foundLocation, ...location, updatedAt: new Date() }
+    )
     return updatedLocation
   }
   return await insertLocation(location)
@@ -86,7 +119,10 @@ export async function getLocation (tournamentId: string, locationName: string) {
 }
 
 export async function updateLocation (location: Location_InsertParameters) {
-  const [updatedLocation] = await Location(db).update({ id: location.id }, { ...location, ...updateRecordAttributes() })
+  const [updatedLocation] = await Location(db).update(
+    { id: location.id },
+    { ...location, ...updateRecordAttributes() }
+  )
   return updatedLocation
 }
 
@@ -119,7 +155,10 @@ export async function insertSlot (slot: Slot_InsertParameters) {
 export async function insertOrUpdateSlot (slot: Slot_InsertParameters) {
   const foundSlot = await getSlot(slot.tournamentId, slot.slotNumber)
   if (foundSlot) {
-    const [updatedSlot] = await Slot(db).update({ tournamentId: slot.tournamentId, slotNumber: slot.slotNumber }, { ...foundSlot, ...slot, updatedAt: new Date() })
+    const [updatedSlot] = await Slot(db).update(
+      { tournamentId: slot.tournamentId, slotNumber: slot.slotNumber },
+      { ...foundSlot, ...slot, updatedAt: new Date() }
+    )
     return updatedSlot
   }
   return await insertSlot(slot)
@@ -146,14 +185,20 @@ export async function insertPerformance (performance: Omit<Performance_InsertPar
 }
 
 export async function updatePerformance (performance: Performance_InsertParameters) {
-  const [updatedPerformance] = await Performance(db).update({ id: performance.id }, { ...performance, ...updateRecordAttributes() })
+  const [updatedPerformance] = await Performance(db).update(
+    { id: performance.id },
+    { ...performance, ...updateRecordAttributes() }
+  )
   return updatedPerformance
 }
 
 export async function insertOrUpdatePerformance (performance: Omit<Performance_InsertParameters, 'id'>) {
   const foundPerformance = await getPerformance(performance.tournamentId, performance.performanceName)
   if (foundPerformance) {
-    const [updatedPerformance] = await Performance(db).update({ tournamentId: performance.tournamentId, performanceName: performance.performanceName }, { ...foundPerformance, ...performance, updatedAt: new Date() })
+    const [updatedPerformance] = await Performance(db).update(
+      { tournamentId: performance.tournamentId, performanceName: performance.performanceName },
+      { ...foundPerformance, ...performance, updatedAt: new Date() }
+    )
     return updatedPerformance
   }
   return await insertPerformance(performance)
@@ -171,14 +216,27 @@ export async function getPerformance (tournamentId: string, performanceName: str
   return await Performance(db).findOne({ tournamentId, performanceName })
 }
 
+export async function getDistinctTorunamentCategories (tournamentId: string) {
+  const categories = (await db.query(sql`
+    select distinct  "Performance"."categoryId" 
+    from "Performance" 
+    where "Performance"."tournamentId" = ${tournamentId}`)) as { categoryId: string }[]
+  return categories.map(c => c.categoryId)
+}
+
 // TournamentAthlete
 export async function insertTournamentAthlete (tournamentAthlete: Omit<TournamentAthlete_InsertParameters, 'id'>) {
-  const [insertedTournamentAthlete] = await TournamentAthlete(db).insert({ ...tournamentAthlete, ...newRecordAttributes() })
+  const [insertedTournamentAthlete] = await TournamentAthlete(db).insert({
+    ...tournamentAthlete,
+    ...newRecordAttributes()
+  })
   return insertedTournamentAthlete
 }
 
 export async function findTournamentAthletes (tournamentAthlete: Partial<TournamentAthlete_InsertParameters>) {
-  const foundTournamentAthletes = await TournamentAthlete(db).find({ ...tournamentAthlete }).all()
+  const foundTournamentAthletes = await TournamentAthlete(db)
+    .find({ ...tournamentAthlete })
+    .all()
   return foundTournamentAthletes
 }
 
@@ -215,7 +273,9 @@ export async function insertTournamentJudge (tournamentJudge: Omit<TournamentJud
 }
 
 export async function findTournamentJudges (tournamentJudge: Partial<TournamentJudge_InsertParameters>) {
-  const foundTournamentJudges = await TournamentJudge(db).find({ ...tournamentJudge }).all()
+  const foundTournamentJudges = await TournamentJudge(db)
+    .find({ ...tournamentJudge })
+    .all()
   return foundTournamentJudges
 }
 
@@ -228,7 +288,7 @@ export async function getTournamentJudgeAndPerson (id: string) {
     join "Person"
     on "Judge"."personId" = "Person"."id"
     where "TournamentJudge"."id" = ${id}
-`)) as (TournamentJudgeDomainObject & Id) []
+`)) as (TournamentJudgeDomainObject & Id)[]
   return tournamentJudge
 }
 
@@ -254,7 +314,10 @@ export async function insertPerformer (performer: Omit<Performer_InsertParameter
 export async function insertOrUpdatePerformer (performer: Omit<Performer_InsertParameters, 'id'>) {
   const foundPerformer = await getPerformerByName(performer.tournamentId, performer.performerName)
   if (foundPerformer) {
-    const [updatedLocation] = await Performer(db).update({ tournamentId: performer.tournamentId, performerName: performer.performerName }, { ...foundPerformer, ...performer, updatedAt: new Date() })
+    const [updatedLocation] = await Performer(db).update(
+      { tournamentId: performer.tournamentId, performerName: performer.performerName },
+      { ...foundPerformer, ...performer, updatedAt: new Date() }
+    )
     return updatedLocation
   }
   return await insertPerformer(performer)
@@ -310,6 +373,6 @@ export async function findTournamentPlan (tournamentId: string) {
     on "Performance"."categoryId" = "Category"."id"
     where "Tournament"."id" = ${tournamentId}
     order by "Performance"."slotNumber" asc, "Location"."locationName" asc
-`)) as (TournamentPlanDetails)[]
+`)) as TournamentPlanDetails[]
   return tournamentAthletes
 }

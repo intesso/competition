@@ -15,7 +15,8 @@ export interface IPeopleContext extends IGetApplicationContext {
   addClubWithAddress: (club: Omit<ClubWithAddress, 'id'>) => Promise<ClubWithAddress>
   addClub: (club: Club) => Promise<Club & Id>
   listClubs: () => Promise<(Club & Id)[]>
-  getClub: (clubName: string) => Promise<(Club & Id) | null>
+  getClubByName: (clubName: string) => Promise<(Club & Id) | null>
+  getClubById: (id: string) => Promise<(Club & Id) | null>
   addAthlete: <P extends Person>(athlete: P) => Promise<P & Id>
   addJudge: <P extends Person>(judge: P) => Promise<P & Id>
 }
