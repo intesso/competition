@@ -96,8 +96,12 @@ export async function findCombinationRankById (id: string) {
   return await CombinationRank(db).findOne({ id })
 }
 
-export async function findCategoryRankByCombinationName (combinationName: string) {
+export async function findCombinationRankByCombinationName (combinationName: string) {
   const combination = await Combination(db).findOne({ combinationName })
   if (!combination) return null
-  return await CombinationRank(db).findOne({ combinationId: combination.id })
+  return await findCombinationRankByCombinationId(combination.id)
+}
+
+export async function findCombinationRankByCombinationId (combinationId: string) {
+  return await CombinationRank(db).findOne({ combinationId })
 }

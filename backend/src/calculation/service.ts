@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios'
-import { keyBy, sortBy, update } from 'lodash'
+import { keyBy, sortBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import {
   CalculationPointsInput,
@@ -18,6 +18,7 @@ import {
   deleteCategoryRankById,
   findCategoryPointByCategoryId,
   findCategoryRankByCategoryId,
+  findCombinationRankByCombinationId,
   getCategoryPointByPerformanceId,
   getCategoryRankByCategoryPointId,
   insertCombinationRank,
@@ -149,6 +150,11 @@ export class CalculationService implements ICalculationContext {
     return true
   }
 
+  async getCategoryRanks (tournamentId: string, categoryId: string): Promise<CalculationCategoryRanksOutput | null> {
+    const sortedCategoryRanks = await findCategoryRankByCategoryId(tournamentId, categoryId)
+    return sortedCategoryRanks
+  }
+
   async calculateCombinationRanks (input: CalculationCombinationRanksInput): Promise<CalculationCombinationRanksOutput> {
     const combination = await this.getApplicationContext().judging.listWeightedCombination(input.combinationId)
     const combinationByCategory: { [key: string]: (CombinationRank)[] } = {} // key: categoryId
@@ -215,6 +221,11 @@ export class CalculationService implements ICalculationContext {
     })
 
     return input
+  }
+
+  async getCombinationRanks (combinationId: string): Promise<CalculationCombinationRanksOutput | null> {
+    const sortedCategoryRanks = await findCombinationRankByCombinationId(combinationId)
+    return sortedCategoryRanks
   }
 
   async setDisqualified (performanceId: string, disqualified: boolean): Promise<boolean> {

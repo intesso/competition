@@ -91,14 +91,16 @@ export type CalculationCategoryRanksOutput = CategoryRank[];
 export type CalculationCombinationRanksOutput = CalculationCombinationRanksInput;
 
 export interface ICalculationContext extends IGetApplicationContext {
-  calculatePoints: (input: CalculationPointsInput) => Promise<CalculationPointsOutput | null>
   getPoints: (performanceId: string) => Promise<CategoryPoint | null>
+  calculatePoints: (input: CalculationPointsInput) => Promise<CalculationPointsOutput | null>
   calculateAllPoints: (tournamentId: string) => Promise<boolean | null>
+  getCategoryRanks: (tournamentId: string, categoryId: string) => Promise<CalculationCategoryRanksOutput | null>
   calculateCategoryRanks: (input: CalculationCategoryRanksInput) => Promise<CalculationCategoryRanksOutput | null>
   calculateAllCategoryRanks: (tournamentId: string) => Promise<boolean | null>
   calculateCombinationRanks: (
     input: CalculationCombinationRanksInput
   ) => Promise<CalculationCombinationRanksOutput | null>
+  getCombinationRanks: (combinationId: string) => Promise<CalculationCombinationRanksOutput | null>
   calculateAllCombinationRanks: (tournamentId: string) => Promise<boolean | null>
   setDisqualified: (performanceId: string, disqualified: boolean) => Promise<boolean>
   removeCalculation: (performanceId: string) => Promise<boolean>
