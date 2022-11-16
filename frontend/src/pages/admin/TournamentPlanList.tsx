@@ -1,12 +1,17 @@
-import { Container, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material'
+import { FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
-import { DataGrid, GridColDef, GridRenderCellParams, GridRowHeightParams, GridValueGetterParams } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowHeightParams
+} from '@mui/x-data-grid'
 import { ApiContext } from '../../contexts/ApiContext'
 import { PerformanceJudge, Tournament, TournamentPlanDetails } from '../../contexts/ApiContextInterface'
 import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
 
-export function ListTournamentPlan () {
+export function TournamentPlanList () {
   const { listTournaments, listTournamentPlan } = useContext(ApiContext)
 
   const { enqueueSnackbar } = useSnackbar()
@@ -35,34 +40,26 @@ export function ListTournamentPlan () {
   function getColumns (): GridColDef[] {
     return [
       {
-        field: '#',
-        headerName: '#',
-        description: '',
-        sortable: false,
-        width: 40,
-        valueGetter: (params: GridValueGetterParams) => `${params.row.slotNumber}-${params.row.locationName}`
-      },
-      {
         field: 'slotNumber',
         headerName: 'slotNumber',
         description: '',
         type: 'number',
         sortable: false,
-        width: 160
+        width: 100
       },
       {
         field: 'locationName',
         headerName: 'locationName',
         description: '',
         sortable: false,
-        width: 160
+        width: 110
       },
       {
         field: 'categoryName',
         headerName: 'categoryName',
         description: '',
         sortable: false,
-        width: 300
+        width: 420
       },
       {
         field: 'performerName',
@@ -77,40 +74,39 @@ export function ListTournamentPlan () {
         description: '',
         sortable: false,
         type: 'number',
-        width: 160
+        width: 140
       },
       {
         field: 'clubName',
         headerName: 'clubName',
         description: '',
         sortable: false,
-        width: 200
+        width: 240
       },
-      {
-        field: 'performanceName',
-        headerName: 'performanceName',
-        description: '',
-        sortable: false,
-        width: 300
-      },
+      // {
+      //   field: 'performanceName',
+      //   headerName: 'performanceName',
+      //   description: '',
+      //   sortable: false,
+      //   width: 300
+      // },
       {
         field: 'judges',
         headerName: 'judges',
         description: '',
         sortable: false,
-        width: 260,
+        width: 380,
         renderCell: (params: GridRenderCellParams<PerformanceJudge[]>) => (
           <table>
             <tbody>
-            {params.value?.map((judge, i) => (
-            <tr key={i}>
-              <td>{judge.judgeId}</td>
-              <td>{judge.judgeName}</td>
-              <td>{judge.criteriaName}</td>
-            </tr>
-            ))}
+              {params.value?.map((judge, i) => (
+                <tr key={i}>
+                  <td>{judge.judgeId}</td>
+                  <td>{judge.judgeName}</td>
+                  <td>{judge.criteriaName}</td>
+                </tr>
+              ))}
             </tbody>
-
           </table>
         )
       }
@@ -123,36 +119,41 @@ export function ListTournamentPlan () {
   }
 
   function getRowHeight (_params: GridRowHeightParams) {
-    return 80
+    return 100
   }
 
   return (
-    <Container>
-      <form>
-        <Typography variant={'h4'} sx={{ marginTop: '22px', textAlign: 'center' }}>
-          Turnier Plan anzeigen
-        </Typography>
+    <div style={{ height: 'calc(100vh -  160px)' }}>
+      <Typography variant={'h4'} sx={{ marginTop: '22px', textAlign: 'center' }}>
+        Turnier Plan anzeigen
+      </Typography>
 
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="tournamentId">Wettkampf</InputLabel>
-          <Select
-            labelId="tournamentId"
-            value={tournamentId}
-            label="Wettkampf"
-            onChange={(e) => setTournamentId(e.target.value)}
-          >
-            {tournaments.map((tournament) => (
-              <MenuItem key={tournament.id} value={tournament.id}>
-                {tournament.tournamentName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+      <FormControl fullWidth margin="normal">
+        <InputLabel id="tournamentId">Wettkampf</InputLabel>
+        <Select
+          labelId="tournamentId"
+          value={tournamentId}
+          label="Wettkampf"
+          onChange={(e) => setTournamentId(e.target.value)}
+        >
+          {tournaments.map((tournament) => (
+            <MenuItem key={tournament.id} value={tournament.id}>
+              {tournament.tournamentName}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
 
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid rows={getRows()} columns={getColumns()} getRowHeight={getRowHeight} pageSize={50} rowsPerPageOptions={[50]} />
-        </div>
-      </form>
-    </Container>
+      {/* <div style={{ width: '100%' }}> */}
+        <DataGrid
+        // sx={{ height: '1000px' }}
+          rows={getRows()}
+          columns={getColumns()}
+          getRowHeight={getRowHeight}
+          pageSize={100}
+          rowsPerPageOptions={[1000]}
+        />
+      {/* </div> */}
+    </div>
   )
 }

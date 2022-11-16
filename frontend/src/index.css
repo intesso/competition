@@ -8,14 +8,16 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
-  height: -webkit-fill-available;
+  /* height: 100vh;
+  height: -webkit-fill-available; */
   width: 100%;
 }
 
 #root {
   height: 100vh;
   height: -webkit-fill-available;
+  height: -moz-available;
+  height: fill-available;
   width: 100%;
 }
 

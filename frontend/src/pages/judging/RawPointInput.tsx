@@ -86,6 +86,12 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     }, {} as SubCriteriaValue)
   }
 
+  function checkChangesAfterSubmit () {
+    if (finished === 'success') {
+      setFinished('changes')
+    }
+  }
+
   function registerFns (fns: SelectFn) {
     setFns(fns)
   }
@@ -134,6 +140,8 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
         return 'error'
       case 'success':
         return 'success'
+      case 'changes':
+        return 'warning'
       default:
         return 'primary'
     }
@@ -163,6 +171,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
 
   function InstantButton ({ uiPosition, cols = 4, buttonStyle = styledButton, onSelect }: InstantButtonProps) {
     function updateValue (value: number) {
+      checkChangesAfterSubmit()
       setSubCriteria((prevValue) => {
         prevValue[uiPosition].value = value
         return { ...prevValue }
@@ -170,6 +179,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     }
 
     function incrementValue () {
+      checkChangesAfterSubmit()
       setSubCriteria((prevValue) => {
         if (prevValue[uiPosition].value < prevValue[uiPosition].rangeEnd) {
           prevValue[uiPosition].value += prevValue[uiPosition].step
@@ -181,6 +191,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     }
 
     function decrementValue () {
+      checkChangesAfterSubmit()
       setSubCriteria((prevValue) => {
         if (prevValue[uiPosition].value > prevValue[uiPosition].rangeStart) {
           prevValue[uiPosition].value -= prevValue[uiPosition].step
@@ -198,6 +209,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
     function handleSliderChange (event: Event | SyntheticEvent<Element, Event>, newValue: number | number[]) {
       event.preventDefault()
       event.stopPropagation()
+      checkChangesAfterSubmit()
       setSubCriteria((prevValue) => {
         prevValue[uiPosition].value = newValue as number
         return { ...prevValue }
