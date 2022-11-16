@@ -1,6 +1,8 @@
 import axios, { AxiosError } from 'axios'
 import { keyBy, sortBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
+import { generateCategoryReport } from '../lib/reports/category-report'
+import { generateCombinationReport } from '../lib/reports/combination-report'
 import {
   CalculationPointsInput,
   ICalculationContext,
@@ -72,7 +74,7 @@ export class CalculationService implements ICalculationContext {
       const result = (await axios.post(`${process.env.CALCULATION_ENGINE_URL}/api/engine/calculations/points`, input))
         .data as CalculationPointsOutput
       console.log('calculation output', JSON.stringify(result, null, 2))
-      insertOrUpdateCategoryPoint({
+      await insertOrUpdateCategoryPoint({
         tournamentId: input.tournamentId,
         performerId: input.performerId,
         performanceId: input.performanceId,
@@ -233,6 +235,11 @@ export class CalculationService implements ICalculationContext {
     }
   }
 
+  async generateCategoryRanksReport (tournamentId: string): Promise<any> {
+    const categoryRanks = await this.getAllCategoryRanksDetailed(tournamentId)
+    return await generateCategoryReport(categoryRanks as any)
+  }
+
   async calculateCombinationRanks (input: CalculationCombinationRanksInput): Promise<CalculationCombinationRanksOutput> {
     const combination = await this.getApplicationContext().judging.listWeightedCombination(input.combinationId)
     const combinationByCategory: { [key: string]: CombinationRank[] } = {} // key: categoryId
@@ -348,6 +355,11 @@ export class CalculationService implements ICalculationContext {
         memo[it[0].combinationName] = it
         return memo
       }, {})
+  }
+
+  async generateCombinationRanksReport (tournamentId: string): Promise<any> {
+    const combinationRanks = await this.getAllCombinationRanks(tournamentId)
+    return await generateCombinationReport(combinationRanks)
   }
 
   async getCombinationRanks (tournamentId: string, combinationId: string): Promise<any | null> {

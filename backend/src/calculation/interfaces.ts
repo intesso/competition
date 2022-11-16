@@ -126,6 +126,7 @@ export interface ICalculationContext extends IGetApplicationContext {
   getCategoryRanks: (tournamentId: string, categoryId: string) => Promise<CalculationCategoryRanksOutput | null>
   getCategoryRanksDetailed: (tournamentId: string, categoryId: string) => Promise<CategoryRanksDetailsResult | null>
   getAllCategoryRanksDetailed: (tournamentId: string) => Promise<CategoryRanksDetailsAllResult | null>
+  generateCategoryRanksReport: (tournamentId: string) => Promise<boolean | null>
   calculateCategoryRanks: (input: CalculationCategoryRanksInput) => Promise<CalculationCategoryRanksOutput | null>
   calculateAllCategoryRanks: (tournamentId: string) => Promise<boolean | null>
   calculateCombinationRanks: (
@@ -134,6 +135,7 @@ export interface ICalculationContext extends IGetApplicationContext {
   getCombinationRanks: (tournamentId: string, combinationId: string) => Promise<CalculationCombinationRanksOutput | null>
   getAllCombinationRanks :(tournamentId: string) => Promise<any | null>
   calculateAllCombinationRanks: (tournamentId: string) => Promise<boolean | null>
+  generateCombinationRanksReport: (tournamentId: string) => Promise<boolean | null>
   setDisqualified: (performanceId: string, disqualified: boolean) => Promise<boolean>
   removeCalculation: (performanceId: string) => Promise<boolean>
 }

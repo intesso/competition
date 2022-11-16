@@ -154,7 +154,7 @@ export class JudgingRuleService implements IJudgingRuleContext {
     const calculationMessage = await this.prepareCalculationMessage(rawPoint.performanceId, rawPoints, rawPoint.timestamp)
     // 4. do calculation
     if (calculationMessage) {
-      this.getApplicationContext().calculation.calculatePoints(calculationMessage)
+      await this.getApplicationContext().calculation.calculatePoints(calculationMessage)
     } else {
       // TODO notify about error
       console.error(`could not prepareCalculationMessage for ${JSON.stringify(rawPoint)}`)

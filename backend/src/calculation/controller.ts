@@ -19,6 +19,9 @@ calculationController
   .post('/:tournamentId/points', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.calculateAllPoints(ctx.params.tournamentId))
   })
+  .post('/:tournamentId/category-ranks/reports', inputValidation.validate, async (ctx) => {
+    return respondWith(ctx, () => applicationContext.calculation.generateCategoryRanksReport(ctx.params.tournamentId))
+  })
   .post('/:tournamentId/category-ranks/:categoryId', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.calculateCategoryRanks(ctx.request.body as unknown as CalculationCategoryRanksInput))
   })
@@ -33,6 +36,9 @@ calculationController
   })
   .get('/:tournamentId/category-ranks', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.getAllCategoryRanksDetailed(ctx.params.tournamentId as string))
+  })
+  .post('/:tournamentId/combination-ranks/reports', inputValidation.validate, async (ctx) => {
+    return respondWith(ctx, () => applicationContext.calculation.generateCombinationRanksReport(ctx.params.tournamentId))
   })
   .post('/:tournamentId/combination-ranks/:combinationId', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.calculateCombinationRanks({ tournamentId: ctx.params.tournamentId, combinationId: ctx.params.combinationId }))
