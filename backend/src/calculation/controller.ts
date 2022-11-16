@@ -43,3 +43,6 @@ calculationController
   .post('/:tournamentId/combination-ranks', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.calculateAllCombinationRanks(ctx.params.tournamentId))
   })
+  .get('/:tournamentId/combination-ranks', inputValidation.validate, async (ctx) => {
+    return respondWith(ctx, () => applicationContext.calculation.getAllCombinationRanks(ctx.params.tournamentId as string))
+  })

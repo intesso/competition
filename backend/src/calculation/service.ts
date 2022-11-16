@@ -31,7 +31,8 @@ import {
   insertOrUpdateCategoryRanks,
   updateCategoryPoint,
   updateCategoryRank,
-  insertOrUpdateCombinationRank
+  insertOrUpdateCombinationRank,
+  listCombinationRankByTournament
 } from './repository'
 
 export class CalculationService implements ICalculationContext {
@@ -236,23 +237,43 @@ export class CalculationService implements ICalculationContext {
     const combination = await this.getApplicationContext().judging.listWeightedCombination(input.combinationId)
     const combinationByCategory: { [key: string]: CombinationRank[] } = {} // key: categoryId
 
+    // 0. prepare lookups for performance reasons
+    const performanceLookup = keyBy(await this.getApplicationContext().tournament.listPerformances(input.tournamentId), 'id')
+    const performerLookup = keyBy(await this.getApplicationContext().tournament.listPerformer(input.tournamentId), 'id')
+    const clubsLookup = keyBy(await this.getApplicationContext().people.listClubs(), 'id')
+
     // 1. prepare and calculate the combination rank
     // only consider performers that competed in all categories for the combination
     const combinationPerformer: { [key: string]: number } = {} // key: performerId
-    const performerWeightedRank: { [key: string]: number } = {} // key: performerId
+    const performerWeightedRank: { [key: string]: any } = {} // key: performerId
     const numberOfCategoriesInCombination = combination.categories.length
     for (const category of combination.categories) {
+      // retrieve meta data from database
       const sortedCategoryRanks = await findCategoryRankByCategoryId(input.tournamentId, category.categoryId)
       const sortedCategoryPoints = keyBy(
         await findCategoryPointByCategoryId(input.tournamentId, category.categoryId),
         'id'
       )
-      const combinedRanks: CombinationRank[] = sortedCategoryRanks.map((rank) => ({
-        ...rank,
-        ...sortedCategoryPoints[rank.categoryPointId],
-        combinationRank: -1,
-        categoryWeight: category.categoryWeight
-      }))
+      const combinedRanks: CombinationRank[] = sortedCategoryRanks.map((rank) => {
+        // get attributes used for output
+        const performerId = sortedCategoryPoints[rank.categoryPointId].performerId
+        const performanceId = sortedCategoryPoints[rank.categoryPointId].performanceId
+        const performance = performanceLookup[performanceId]
+        const clubName = clubsLookup[performance.clubId].clubName
+        const performerName = performerLookup[performerId].performerName
+        const performerNumber = performerLookup[performerId].performerNumber
+        return {
+          ...rank,
+          ...sortedCategoryPoints[rank.categoryPointId],
+          combinationRank: -1,
+          categoryWeight: category.categoryWeight,
+          categoryName: category.categoryName,
+          combinationName: combination.combinationName,
+          clubName: clubName || '',
+          performerName,
+          performerNumber: performerNumber || -1
+        }
+      })
       combinationByCategory[category.categoryId] = combinedRanks
 
       for (const rank of combinedRanks) {
@@ -275,21 +296,31 @@ export class CalculationService implements ICalculationContext {
         return false
       })
 
-      filteredRanks.map((it, i) => {
-        it.combinationRank = i + 1
-        performerWeightedRank[it.performerId] = performerWeightedRank[it.performerId] || 0
-        performerWeightedRank[it.performerId] =
-          performerWeightedRank[it.performerId] + it.combinationRank * it.categoryWeight
-        return it
-      })
+      let i = 1
+      for (const it of filteredRanks) {
+        it.combinationRank = i++
+        performerWeightedRank[it.performerId] = performerWeightedRank[it.performerId] || { ...ranks, combinationRank: 0 }
+        performerWeightedRank[it.performerId].combinationRank = performerWeightedRank[it.performerId].combinationRank + it.combinationRank * it.categoryWeight
+        // add attributes used for output
+        performerWeightedRank[it.performerId].categories = performerWeightedRank[it.performerId].categories || {}
+        performerWeightedRank[it.performerId].categories[it.categoryName] = it.categoryRank
+        performerWeightedRank[it.performerId].combinationName = it.combinationName
+        performerWeightedRank[it.performerId].clubName = it.clubName
+        performerWeightedRank[it.performerId].performerName = it.performerName
+        performerWeightedRank[it.performerId].performerNumber = it.performerNumber
+      }
     }
 
     // sort calculated combination ranks
-    const calculatedCombinationRanks = sortBy(Object.entries(performerWeightedRank), (it) => it[1]).map(
-      ([performerId, combinationRankPoints], i) => {
+    const calculatedCombinationRanks = sortBy(Object.entries(performerWeightedRank), (it) => it[1].combinationRank).map(
+      ([, it], i) => {
         return {
-          performerId,
-          combinationRankPoints,
+          combinationName: it.combinationName,
+          clubName: it.clubName,
+          performerName: it.performerName,
+          performerNumber: it.performerNumber,
+          ...it.categories,
+          combinationRankPoints: it.combinationRank,
           combinationRank: i + 1
         }
       }
@@ -300,17 +331,28 @@ export class CalculationService implements ICalculationContext {
       tournamentId: input.tournamentId,
       combinationId: input.combinationId,
       combinationRanks: {
-        combinationRanks: calculatedCombinationRanks,
-        combinationByCategory
+        summary: calculatedCombinationRanks,
+        details: combinationByCategory
       }
     })
 
     return input
   }
 
-  async getCombinationRanks (tournamentId: string, combinationId: string): Promise<CalculationCombinationRanksOutput | null> {
+  async getAllCombinationRanks (tournamentId: string): Promise<any | null> {
+    const combinationRanks = await listCombinationRankByTournament(tournamentId)
+    return combinationRanks
+      .filter(it => it.combinationRanks?.summary?.length)
+      .map(it => it.combinationRanks.summary)
+      .reduce((memo, it) => {
+        memo[it[0].combinationName] = it
+        return memo
+      }, {})
+  }
+
+  async getCombinationRanks (tournamentId: string, combinationId: string): Promise<any | null> {
     const sortedCategoryRanks = await getCombinationRankByCombinationId(tournamentId, combinationId)
-    return sortedCategoryRanks
+    return sortedCategoryRanks?.combinationRanks
   }
 
   async setDisqualified (performanceId: string, disqualified: boolean): Promise<boolean> {

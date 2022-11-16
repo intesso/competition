@@ -104,7 +104,7 @@ export async function insertOrUpdateCombinationRank (combinationRank: Omit<Combi
   return await insertCombinationRank(combinationRank)
 }
 
-export async function findCombinationRankById (id: string) {
+export async function getCombinationRankById (id: string) {
   return await CombinationRank(db).findOne({ id })
 }
 
@@ -116,4 +116,8 @@ export async function getCombinationRankByCombinationName (tournamentId: string,
 
 export async function getCombinationRankByCombinationId (tournamentId: string, combinationId: string) {
   return await CombinationRank(db).findOne({ tournamentId, combinationId })
+}
+
+export async function listCombinationRankByTournament (tournamentId: string) {
+  return await CombinationRank(db).find({ tournamentId }).all()
 }

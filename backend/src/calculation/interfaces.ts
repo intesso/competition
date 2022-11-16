@@ -3,7 +3,7 @@ import { IGetApplicationContext } from '../../applicationContext'
 import { CategoryRank as CategoryRankDAO, CategoryPoint as CategoryPointDAO } from '../lib/db/__generated__'
 export type CategoryRank = Omit<CategoryRankDAO, 'id' | 'updatedAt' | 'updatedBy' | 'createdAt' | 'createdBy'>;
 export type CategoryPoint = Omit<CategoryPointDAO, 'id' | 'updatedAt' | 'updatedBy' | 'createdAt' | 'createdBy'>;
-export type CombinationRank = CategoryRank & CategoryPoint & { combinationRank?: number, categoryWeight: number };
+export type CombinationRank = CategoryRank & CategoryPoint & { combinationRank?: number, categoryWeight: number, categoryName: string, combinationName: string, clubName: string, performerName: string, performerNumber: number };
 
 export type CombinedRankPoint = CategoryPoint & CategoryRank;
 
@@ -132,6 +132,7 @@ export interface ICalculationContext extends IGetApplicationContext {
     input: CalculationCombinationRanksInput
   ) => Promise<CalculationCombinationRanksOutput | null>
   getCombinationRanks: (tournamentId: string, combinationId: string) => Promise<CalculationCombinationRanksOutput | null>
+  getAllCombinationRanks :(tournamentId: string) => Promise<any | null>
   calculateAllCombinationRanks: (tournamentId: string) => Promise<boolean | null>
   setDisqualified: (performanceId: string, disqualified: boolean) => Promise<boolean>
   removeCalculation: (performanceId: string) => Promise<boolean>
