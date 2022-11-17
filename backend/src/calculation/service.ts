@@ -345,7 +345,7 @@ export class CalculationService implements ICalculationContext {
           performerName: it.performerName,
           performerNumber: it.performerNumber,
           ...it.categories,
-          combinationRankPoints: it.combinationRankPoints,
+          combinationRankPoints: parseFloat((it.combinationRankPoints / 100).toFixed(2)),
           preliminaryCombinationRank: it.preliminaryCombinationRank,
           combinationRank: i + 1
         }
