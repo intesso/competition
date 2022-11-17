@@ -6,36 +6,31 @@ export interface AppProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const styledLink: any = {
+export const styledLink: any = {
   textDecoration: 'none',
   textAlign: 'center',
   verticalAlign: 'center',
   width: '100%'
 }
 
-const pages = [
-  '/admin/tournament-queue',
-  '/admin/tournament-plan',
-  '/admin/select-raw-point',
+export const pages = {
+  '/admin/tournament-queue': 'Turnier Queue',
+  '/admin/tournament-plan': 'Turnier Plan',
+  '/admin/select-raw-point': 'Wertung Auswählen',
 
-  '/admin/category-ranks',
-  '/admin/combination-ranks',
+  '/admin/category-ranks': 'Kagegorie Rangliste',
+  '/admin/combination-ranks': 'Kombination Rangliste',
 
-  '/admin/add-club',
-  '/admin/add-tournament',
-  '/admin/edit-location',
-  '/admin/add-judge',
-  '/admin/add-athlete',
-  '/admin/add-performer',
-  '/admin/add-performance'
-]
+  '/admin/add-club': 'Club hinzufügen',
+  '/admin/add-tournament': 'Turnier hinzufügen',
+  '/admin/edit-location': 'Feld hinzufügen',
+  '/admin/add-judge': 'Wertungsrichter hinzufügen',
+  '/admin/add-athlete': 'Athlet:in hinzufügen',
+  '/admin/add-performer': 'Performer:in hinzufügen',
+  '/admin/add-performance': 'Performance hinzufügen'
+}
 
 export function Overview () {
-  function getPageName (page: string) {
-    const segments = page.split('/')
-    return segments[segments.length - 1].replace(/-/g, ' ')
-  }
-
   return (
     <>
       <Container>
@@ -44,14 +39,14 @@ export function Overview () {
         </Typography>
         <Grid container spacing={2}>
           {/* 1. row */}
-          {pages.map((page, i) => (
+          {Object.entries(pages).map(([link, name], i) => (
             <Grid key={i} item xs={12}>
-              <a style={styledLink} href={page}>
+              <a style={styledLink} href={link}>
                 <Paper
                   elevation={9}
                   sx={{ textAlign: 'center', verticalAlign: 'center', padding: '10px', textTransform: 'uppercase' }}
                 >
-                  {getPageName(page)}
+                  {name}
                 </Paper>
               </a>
             </Grid>

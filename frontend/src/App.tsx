@@ -23,7 +23,12 @@ export function App ({ children }: AppProps) {
       <ThemeProvider theme={theme}>
         <LocalizationProvider adapterLocale={'de'} dateAdapter={AdapterLuxon}>
           <CssBaseline enableColorScheme />
-          <SnackbarProvider autoHideDuration={3000} maxSnack={2} preventDuplicate={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+          <SnackbarProvider
+            autoHideDuration={3000}
+            maxSnack={2}
+            preventDuplicate={true}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          >
             <ThemedApp children={children} />
           </SnackbarProvider>
         </LocalizationProvider>
@@ -35,6 +40,7 @@ export function App ({ children }: AppProps) {
 function ThemedApp ({ children }: AppProps) {
   return (
     <ApiContext.Provider value={provideApiContext()}>
+
       {children}
       <Outlet />
     </ApiContext.Provider>

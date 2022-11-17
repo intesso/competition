@@ -24,3 +24,8 @@ export function parseError (err: any) {
   }
   return err.message
 }
+
+export function getPageName (page: string) {
+  const segments = page.split('/')
+  return segments[segments.length - 1].replace(/-/g, ' ')
+}

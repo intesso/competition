@@ -712,7 +712,7 @@ export const categoryOrder: ReportOrder = {
 
 export const combinationOrder: ReportOrder = {
   'team-erso': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -725,7 +725,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 10
   },
   'team-ü21-show': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -736,7 +736,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 8
   },
   'team-u21-show': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -747,7 +747,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 8
   },
   'team-u15-show': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -758,7 +758,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 8
   },
   'team-u12-show': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -770,7 +770,7 @@ export const combinationOrder: ReportOrder = {
   },
 
   'single-ü15-erso': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -781,7 +781,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 8
   },
   'single-ü15-beginners': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -793,7 +793,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 9
   },
   'single-u15-beginners': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -805,7 +805,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 9
   },
   'single-u12-beginners': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -817,7 +817,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 9
   },
   'single-ü15-intermediate': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -829,7 +829,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 9
   },
   'single-u15-intermediate': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -841,7 +841,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 9
   },
   'single-u12-intermediate': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -853,7 +853,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 9
   },
   'single-ü15-advanced': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -864,7 +864,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 8
   },
   'single-u15-advanced': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
@@ -875,7 +875,7 @@ export const combinationOrder: ReportOrder = {
     combinationRank: 8
   },
   'single-u12-advanced': {
-    categoryName: 0,
+    combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
