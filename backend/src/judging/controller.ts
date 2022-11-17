@@ -12,6 +12,15 @@ judgingController
   .post('/raw-points', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.addRawPoint(ctx.request.body as RawPoint))
   })
+  .get('/raw-points/:id', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.judging.getRawPoint(ctx.params.id as string))
+  })
+  .get('/raw-points', inputValidation.validate, (ctx) => {
+    if (typeof ctx.request.query.performanceId !== 'string') {
+      return respondWithError(ctx, 'performanceId queryParameter must be provided')
+    }
+    return respondWith(ctx, () => applicationContext.judging.listRawPoints(ctx.query.performanceId as string))
+  })
   .delete('/raw-points/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.removeRawPoint(ctx.params.id as string))
   })

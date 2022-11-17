@@ -60,7 +60,7 @@ export interface PerformanceJudge {
 }
 
 export interface QueueRunPerformanceJudge extends PerformanceJudge {
-  sent: string
+  sent: string | null
 }
 
 export interface CurrentQueueUIResponse {
@@ -148,6 +148,6 @@ export interface ITournamentContext extends IGetApplicationContext {
   setTournamentQueueSlot: (tournamentId: string, slotNumber: number) => Promise<TournamentQueue | null>
   moveTournamentQueueToNextSlot: (tournamentId: string) => Promise<TournamentQueue | null>
   moveTournamentQueueToPreviousSlot: (tournamentId: string) => Promise<TournamentQueue | null>
-  getCurrentTournamentQueue: (tournamentId: string) => Promise<CurrentQueueUIResponse | null>
+  getCurrentTournamentQueue: (tournamentId: string) => Promise<TournamentQueue | null>
   getCurrentTournamentQueueForJudge: (tournamentId: string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
 }

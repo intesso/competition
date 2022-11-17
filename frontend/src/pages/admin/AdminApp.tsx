@@ -26,19 +26,18 @@ export function AdminApp ({ children }: AppProps) {
         <LunchDiningIcon />
       </Fab>
       <Drawer anchor="top" open={drawer} onClose={() => toggleDrawer()}>
-        {Object.entries(pages).map(([url, name], i) => (<>
-          <MenuItem sx={{ justifyContent: 'center' }}>
-          <a style={styledLink} href={url}>
-                <Paper
-                  elevation={9}
-                  sx={{ textAlign: 'center', verticalAlign: 'center', padding: '10px', textTransform: 'uppercase' }}
-                >
-                  {name}
-                </Paper>
-              </a>
+        {Object.entries(pages).map(([url, name], i) => (
+          <MenuItem key={i} sx={{ justifyContent: 'center' }}>
+            <a style={styledLink} href={url}>
+              <Paper
+                elevation={9}
+                sx={{ textAlign: 'center', verticalAlign: 'center', padding: '10px', textTransform: 'uppercase' }}
+              >
+                {name}
+              </Paper>
+            </a>
           </MenuItem>
-
-        </>))}
+        ))}
       </Drawer>
       {children}
       <Outlet />

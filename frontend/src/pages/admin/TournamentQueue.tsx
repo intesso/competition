@@ -146,14 +146,37 @@ export function TournamentQueueDashboard () {
           </Box>
         </Stack>
 
-        <Box component="div" sx={{ ...classes.queueElements, marginBottom: '10px', borderColor: theme.palette.primary.main }}>
+        <Box
+          component="div"
+          sx={{ ...classes.queueElements, marginBottom: '10px', borderColor: theme.palette.primary.main }}
+        >
           <h2>Aktuell</h2>
+          <Stack
+            sx={{ marginBottom: '10px' }}
+            direction={{ xs: 'row', sm: 'row' }}
+            spacing={{ xs: 1, sm: 2, md: 4 }}
+            justifyContent="center"
+            alignItems="center"
+          >
+            {queue.status?.map((s, i) => (
+              <Box
+                key={i}
+                component="span"
+                sx={{ textAlign: 'center', justifyItems: 'center', minWidth: '40px', padding: '5px' }}
+                style={{ backgroundColor: s.sent ? theme.palette.primary.main : theme.palette.warning.main }}
+              >
+                {s.judgeId}
+              </Box>
+            ))}
+          </Stack>
           <TournamentPlanItems items={plan.filter((p) => p.slotNumber === queue.slotNumber)} />
         </Box>
 
-        <Box component="div"sx={{ ...classes.queueElements, marginBottom: '10px' }}>
+        <Box component="div" sx={{ ...classes.queueElements, marginBottom: '10px' }}>
           <h2>Nächste</h2>
-          <TournamentPlanItems items={plan.filter((p) => p.slotNumber >= queue.slotNumber + 1 && p.slotNumber <= queue.slotNumber + 5)} />
+          <TournamentPlanItems
+            items={plan.filter((p) => p.slotNumber >= queue.slotNumber + 1 && p.slotNumber <= queue.slotNumber + 5)}
+          />
         </Box>
       </form>
     </Container>

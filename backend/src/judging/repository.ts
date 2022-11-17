@@ -144,6 +144,10 @@ export async function insertOrUpdateRawPoint (rawPoint: Omit<RawPoint_InsertPara
   return await insertRawPoint(rawPoint)
 }
 
+export async function getRawPointById (id: string) {
+  return await RawPoint(db).findOne({ id })
+}
+
 export async function getRawPoint (performanceId: string, judgeId: string, criteriaId: string) {
   return await RawPoint(db).findOne({ performanceId, judgeId, criteriaId })
 }

@@ -170,8 +170,15 @@ export interface TournamentQueue {
   id: string
   tournamentId: string
   slotNumber: number
-  status?: string
+  status?: TournamentQueueStatus[]
   runs: TournamentQueueRun[]
+}
+
+export interface TournamentQueueStatus {
+      judgeId: string
+      judgeName: string
+      criteriaName: string
+      sent: string| null
 }
 
 export interface TournamentQueueRun {

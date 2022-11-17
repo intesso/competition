@@ -3,18 +3,13 @@ import { useContext, useEffect, useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
 import { ApiContext } from '../../contexts/ApiContext'
 import { Criteria, Performance, TorunamentJudge, Tournament } from '../../contexts/ApiContextInterface'
-import { parseError, snakeToPascal } from '../../lib/common'
+import { dedupe, parseError, snakeToPascal } from '../../lib/common'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 import { Dictionary, keyBy } from 'lodash'
 
 export function SelectRawPoint () {
-  const {
-    listTournaments,
-    listPerformances,
-    listCriteria,
-    listTournamentJudges
-  } = useContext(ApiContext)
+  const { listTournaments, listPerformances, listCriteria, listTournamentJudges } = useContext(ApiContext)
   const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
   const [tournaments, setTournaments] = useState([] as Tournament[])
@@ -68,7 +63,7 @@ export function SelectRawPoint () {
   }, [performanceId])
 
   function setJudge (judgeId: string) {
-    const judge = performanceLookup[performanceId].judges.find(it => it.judgeId === judgeId)
+    const judge = performanceLookup[performanceId].judges.find((it) => it.judgeId === judgeId)
     if (judge) {
       setJudgeId(judge.judgeId)
       setJudgeName(judge.judgeName)
@@ -139,7 +134,7 @@ export function SelectRawPoint () {
           >
             {performances.map((performance) => (
               <MenuItem key={performance.id} value={performance.id}>
-                {performance.performanceName}
+              {performance.slotNumber} |  {dedupe(snakeToPascal(performance.performanceName || ''))}
               </MenuItem>
             ))}
           </Select>

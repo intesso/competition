@@ -18,7 +18,8 @@ import {
   TournamentPlanDetails,
   PerformanceJudge,
   CurrentQueueUIResponse,
-  QueueRun
+  QueueRun,
+  QueueRunPerformanceJudge
 } from './interfaces'
 import {
   deleteLocation,
@@ -354,48 +355,26 @@ export class TournamentService implements ITournamentContext {
       const performances = await findPerformances({ tournamentId, slotNumber: tournamentQueue.slotNumber })
       console.log(performances)
 
-      // TODO
+      // create lookup with planned judges for performance
+      const judgesPlanned: {[key: string]: QueueRunPerformanceJudge} = {}
+      performances.forEach((p) => {
+        if (p.judges?.length) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          p.judges.forEach((j: PerformanceJudge) => {
+            judgesPlanned[j.judgeId] = { ...j, sent: null }
+          })
+        }
+      })
 
-      // 3. get rawPoints for performances
+      // 3. get rawPoints for performances & set plannedJudge for the judgeIds to true, that sent rawPoints
+      for (const performance of performances) {
+        const rawPoints = await this.getApplicationContext().judging.listRawPoints(performance.id)
+        rawPoints.forEach(p => {
+          judgesPlanned[p.judgeId] = { ...judgesPlanned[p.judgeId], sent: p.timestamp?.toString() || 'true' }
+        })
+      }
 
-      // 4. check rawPoints with judgeId
-
-      // let criteriaName = ''
-      // let judgeName = ''
-      // const performance = performances.find(p => {
-      //   const judges: PerformanceJudge[] = p.judges
-      //   const judge = judges.find(j => j.judgeId === judgeId)
-      //   if (judge) {
-      //     criteriaName = judge.criteriaName
-      //     judgeName = judge.judgeName
-      //     return true
-      //   }
-      //   return false
-      // })
-      // if (!performance) {
-      //   return null
-      // }
-      // const criteria = await this.getApplicationContext().judging.getCriteriaByCategoryIdAndName(performance.categoryId, criteriaName)
-      // if (!criteria) {
-      //   return null
-      // }
-      // // 4. return queryParams for UI
-      // const uiResponse: CurrentQueueUIResponse = {
-      //   path: `/judging/${criteria?.criteriaUiLayout || 'nothing'}`,
-      //   query: {
-      //     slotNumber: performance.slotNumber,
-      //     tournamentId,
-      //     performanceId: performance.id,
-      //     performerId: performance.performerId,
-      //     categoryId: performance.categoryId,
-      //     criteriaId: criteria.id,
-      //     judgeId,
-      //     judgeName,
-      //     criteriaName
-      //   }
-      // }
-      // return uiResponse
-      return tournamentQueue
+      return { ...tournamentQueue, status: Object.values(judgesPlanned) }
     } catch (error) {
       console.error(error)
       return null
