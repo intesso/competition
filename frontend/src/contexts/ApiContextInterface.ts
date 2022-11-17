@@ -165,3 +165,19 @@ export interface CurrentQueueUIResponse {
     criteriaName: string
   }
 }
+
+export interface TournamentQueue {
+  id: string
+  tournamentId: string
+  slotNumber: number
+  status?: string
+  runs: TournamentQueueRun[]
+}
+
+export interface TournamentQueueRun {
+  status: {
+    [key: string]: string
+  }
+  slotStart: string
+  slotNumber: number
+}

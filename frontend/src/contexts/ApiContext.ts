@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Category, Club, Criteria, CurrentQueueUIResponse, JudgingRule, Location, Performance, Performer, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson, TournamentPlanDetails } from './ApiContextInterface'
+import { Category, Club, Criteria, CurrentQueueUIResponse, JudgingRule, Location, Performance, Performer, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson, TournamentPlanDetails, TournamentQueue } from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
@@ -8,6 +8,10 @@ export interface Api {
   addClub: (club: Club) => Promise<void>
   listClubs: () => Promise<Club[]>
   // tournament
+  getQueue: (tournamentId: string) => Promise<TournamentQueue>
+  setQueue: (tournamentId: string, slotNumber: number) => Promise<TournamentQueue>
+  moveQueueForward: (tournamentId: string) => Promise<TournamentQueue>
+  moveQueueBackward: (tournamentId: string) => Promise<TournamentQueue>
   listTournamentPlan: (tournamentId: string) => Promise<TournamentPlanDetails[]>
   listTournaments: () => Promise<Tournament[]>
   getTournamentQueue: (tournamentId:string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
@@ -388,10 +392,54 @@ export function provideApiContext (): Api {
     ).data
   }
 
+  async function getQueue (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue`,
+        method: 'GET'
+      })
+    ).data
+  }
+
+  async function setQueue (tournamentId: string, slotNumber: number) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue/${slotNumber}`,
+        method: 'PUT'
+      })
+    ).data
+  }
+
+  async function moveQueueForward (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue/next`,
+        method: 'PUT'
+      })
+    ).data
+  }
+
+  async function moveQueueBackward (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue/back`,
+        method: 'PUT'
+      })
+    ).data
+  }
+
   return {
     serverBaseUrl,
     addClub,
     listClubs,
+    getQueue,
+    setQueue,
+    moveQueueForward,
+    moveQueueBackward,
     addTournament,
     getTournament,
     getTournamentByName,

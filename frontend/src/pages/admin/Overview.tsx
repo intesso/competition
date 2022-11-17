@@ -14,15 +14,17 @@ const styledLink: any = {
 }
 
 const pages = [
+  '/admin/tournament-queue',
+  '/admin/tournament-plan',
+  '/admin/select-raw-point',
+
   '/admin/add-club',
   '/admin/add-tournament',
   '/admin/edit-location',
   '/admin/add-judge',
   '/admin/add-athlete',
   '/admin/add-performer',
-  '/admin/add-performance',
-  '/admin/select-raw-point',
-  '/admin/tournament-plan'
+  '/admin/add-performance'
 ]
 
 export function Overview () {

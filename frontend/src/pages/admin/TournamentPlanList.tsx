@@ -118,8 +118,9 @@ export function TournamentPlanList () {
     return plan.map((it, i) => ({ ...it, id: i }))
   }
 
-  function getRowHeight (_params: GridRowHeightParams) {
-    return 100
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  function getRowHeight (_params: GridRowHeightParams): any {
+    return 'auto'
   }
 
   return (

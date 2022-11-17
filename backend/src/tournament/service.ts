@@ -339,7 +339,7 @@ export class TournamentService implements ITournamentContext {
     }
   }
 
-  async getCurrentTournamentQueue (tournamentId: string): Promise<CurrentQueueUIResponse | null> {
+  async getCurrentTournamentQueue (tournamentId: string): Promise<any | null> {
     try {
       // 0. check parameters
       if (!tournamentId) {
@@ -395,7 +395,7 @@ export class TournamentService implements ITournamentContext {
       //   }
       // }
       // return uiResponse
-      return null
+      return tournamentQueue
     } catch (error) {
       console.error(error)
       return null

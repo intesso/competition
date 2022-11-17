@@ -14,6 +14,7 @@ import { AddPerformer } from './pages/admin/AddPerformer'
 import { Nothing } from './pages/judging/Nothing'
 import { Start } from './pages/judging/Start'
 import { TournamentPlanList } from './pages/admin/TournamentPlanList'
+import { TournamentQueueDashboard } from './pages/admin/TournamentQueue'
 
 export const Router = () => (
   <Routes>
@@ -21,6 +22,7 @@ export const Router = () => (
 
       <Route path="/admin" element={<AdminApp />}>
         <Route path="overview" element={<Overview />} />
+        <Route path="tournament-queue" element={<TournamentQueueDashboard />} />
         <Route path="tournament-plan" element={<TournamentPlanList />} />
         <Route path="add-club" element={<AddClub />} />
         <Route path="add-tournament" element={<AddTournament />} />
