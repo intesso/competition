@@ -5,6 +5,7 @@
 prerequisites: 
 
 - install node.js LTS: https://nodejs.org/en/download/
+- v16.17.0
 
 open a terminal at this directory and run:
 
@@ -39,6 +40,15 @@ https://intesso.loca.lt/admin/overview
 
 
 ## db setup
+
+install postgres (docker) with mounted volume
+
+```sh
+docker run -itd -e POSTGRES_DB=competition -e POSTGRES_USER=competition -e POSTGRES_PASSWORD=comp1234 -p 5432:5432 -v competition-postgres-data:/var/lib/postgresql/data --name competition-postgres postgres
+
+# set db connection
+export DB_CONNECTION="postgres://competition:comp1234@localhost:5432/competition"
+```
 
 if needed first reset the existing db. check run the script: reset.db.test.sql
 
