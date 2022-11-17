@@ -18,6 +18,9 @@ const pages = [
   '/admin/tournament-plan',
   '/admin/select-raw-point',
 
+  '/admin/category-ranks',
+  '/admin/combination-ranks',
+
   '/admin/add-club',
   '/admin/add-tournament',
   '/admin/edit-location',

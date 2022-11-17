@@ -1,6 +1,23 @@
 import axios from 'axios'
 import { createContext } from 'react'
-import { Category, Club, Criteria, CurrentQueueUIResponse, JudgingRule, Location, Performance, Performer, RawPoint, TorunamentAthlete, TorunamentJudge, Tournament, TournamentPerson, TournamentPlanDetails, TournamentQueue } from './ApiContextInterface'
+import {
+  Category,
+  Club,
+  Criteria,
+  CurrentQueueUIResponse,
+  JudgingRule,
+  Location,
+  Performance,
+  Performer,
+  RawPoint,
+  ReportFormat,
+  TorunamentAthlete,
+  TorunamentJudge,
+  Tournament,
+  TournamentPerson,
+  TournamentPlanDetails,
+  TournamentQueue
+} from './ApiContextInterface'
 
 export interface Api {
   serverBaseUrl: string
@@ -14,10 +31,10 @@ export interface Api {
   moveQueueBackward: (tournamentId: string) => Promise<TournamentQueue>
   listTournamentPlan: (tournamentId: string) => Promise<TournamentPlanDetails[]>
   listTournaments: () => Promise<Tournament[]>
-  getTournamentQueue: (tournamentId:string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
+  getTournamentQueue: (tournamentId: string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
   addTournament: (tournament: Tournament) => Promise<void>
   getTournament: (id: string) => Promise<Tournament | null>
-  getTournamentByName:(tournamentName: string) => Promise<Tournament | null>
+  getTournamentByName: (tournamentName: string) => Promise<Tournament | null>
   addTournamentAthlete: (person: TournamentPerson) => Promise<TournamentPerson>
   getTournamentAthlete: (tournamentId: string, id: string) => Promise<TournamentPerson | null>
   listTournamentAthletes: (tournamentId: string) => Promise<TournamentPerson[]>
@@ -43,6 +60,9 @@ export interface Api {
   getJudgingRuleByCategoryId: (categoryId: string) => Promise<JudgingRule | null>
   getJudgingRule: (id: string) => Promise<JudgingRule | null>
   addRawPoint: (rawPoint: RawPoint) => Promise<RawPoint>
+  // ranks (calculatiom)
+  getCategoryRanks: (tournamentId: string) => Promise<ReportFormat>
+  getCombinationRanks: (tournamentId: string) => Promise<ReportFormat>
 }
 
 export function provideApiContext (): Api {
@@ -432,6 +452,26 @@ export function provideApiContext (): Api {
     ).data
   }
 
+  async function getCategoryRanks (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/calculations/${tournamentId}/category-ranks`,
+        method: 'GET'
+      })
+    ).data as ReportFormat
+  }
+
+  async function getCombinationRanks (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/calculations/${tournamentId}/combination-ranks`,
+        method: 'GET'
+      })
+    ).data as ReportFormat
+  }
+
   return {
     serverBaseUrl,
     addClub,
@@ -469,7 +509,9 @@ export function provideApiContext (): Api {
     listCriteria,
     getJudgingRule,
     getJudgingRuleByCategoryId,
-    addRawPoint
+    addRawPoint,
+    getCategoryRanks,
+    getCombinationRanks
   }
 }
 

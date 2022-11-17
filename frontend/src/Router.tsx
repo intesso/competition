@@ -15,6 +15,8 @@ import { Nothing } from './pages/judging/Nothing'
 import { Start } from './pages/judging/Start'
 import { TournamentPlanList } from './pages/admin/TournamentPlanList'
 import { TournamentQueueDashboard } from './pages/admin/TournamentQueue'
+import { CategoryRanks } from './pages/admin/CategoryRanks'
+import { CombinationRanks } from './pages/admin/CombinationRanks'
 
 export const Router = () => (
   <Routes>
@@ -24,6 +26,9 @@ export const Router = () => (
         <Route path="overview" element={<Overview />} />
         <Route path="tournament-queue" element={<TournamentQueueDashboard />} />
         <Route path="tournament-plan" element={<TournamentPlanList />} />
+        <Route path="select-raw-point" element={<SelectRawPoint />} />
+        <Route path="category-ranks" element={<CategoryRanks />} />
+        <Route path="combination-ranks" element={<CombinationRanks />} />
         <Route path="add-club" element={<AddClub />} />
         <Route path="add-tournament" element={<AddTournament />} />
         <Route path="edit-location" element={<EditLocation />} />
@@ -31,7 +36,6 @@ export const Router = () => (
         <Route path="add-athlete" element={<AddTournamentPerson role="tournamentAthlete" />} />
         <Route path="add-performer" element={<AddPerformer />} />
         <Route path="add-performance" element={<AddPerformance />} />
-        <Route path="select-raw-point" element={<SelectRawPoint />} />
       </Route>
 
       <Route path="/judging" element={<JudgingApp />}>

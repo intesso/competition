@@ -181,3 +181,11 @@ export interface TournamentQueueRun {
   slotStart: string
   slotNumber: number
 }
+
+export interface ReportFormat {
+  [key: string]: ReportItemFormat[]
+}
+
+export interface ReportItemFormat {
+  [key: string]: string | number
+}
