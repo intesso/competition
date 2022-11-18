@@ -4,5 +4,6 @@ dist
 coverage
 *.log
 *.backup
+backup
 .config.*
 __generated__

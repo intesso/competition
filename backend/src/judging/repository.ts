@@ -170,8 +170,10 @@ export async function deleteRawPoint (id: string) {
 
 export async function backupRawPoint (rp: Omit<RawPoint_InsertParameters, 'id'>) {
   await initializeBackup()
-  const fileName = `${Date.now()}-${rp.performanceName}.json`
-  fs.writeFile(JSON.stringify(rp, null, 2), resolve(backupPath, fileName), { encoding: 'utf8' })
+  const fileName = generateFilename()
+  fs.writeFile(resolve(backupPath, fileName), JSON.stringify(rp, null, 2), { encoding: 'utf8' })
+    .then(() => console.log(`backupRawPoint written: ${fileName}`))
+    .catch((err) => console.error(`backupRawPoint ERROR: ${fileName}, ${err.message}`))
 }
 
 async function initializeBackup () {
@@ -181,4 +183,10 @@ async function initializeBackup () {
   const path = resolve(process.env.BACKUP_RAW_DATA)
   await fs.mkdir(path, { recursive: true })
   backupPath = path
+}
+
+function generateFilename () {
+  const now = (Date.now()).toString().padStart(24, '0')
+  const rand = (Math.random() * 100000).toFixed(0).padStart(5, '0')
+  return `${now}-${rand}.json`
 }

@@ -1,11 +1,10 @@
-import { raw } from 'express'
 import { groupBy, keyBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import { CalculationPointsInput, CalculationJudgeCriteriaGroup } from '../calculation/interfaces'
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByCategoryIdAndName, deleteRawPointsForPerformance, deleteRawPoint, getRawPointById, getRawPoint, backupRawPoint } from './repository'
+import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByCategoryIdAndName, deleteRawPointsForPerformance, deleteRawPoint, getRawPointById, backupRawPoint } from './repository'
 
 let _categoriesLookup: {[key: string]: (Category & Id)} | null = null
 let _criteriaLookup: {[key: string]: (Criteria & Id)} | null = null

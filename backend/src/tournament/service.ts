@@ -305,7 +305,8 @@ export class TournamentService implements ITournamentContext {
     try {
       const tournamentQueue = (await getTournamentQueueByTournamentId(tournamentId)) || { tournamentId } as TournamentQueue
       const newSlot = slotNumber
-      const updatedTournamentQueue = await insertOrUpdateTournamentQueue({ ...tournamentQueue, slotNumber: newSlot })
+      const runs = this.prepareRuns(tournamentId, tournamentQueue, newSlot)
+      const updatedTournamentQueue = await insertOrUpdateTournamentQueue({ ...tournamentQueue, slotNumber: newSlot, runs })
       return updatedTournamentQueue
     } catch (error) {
       console.error(error)
@@ -325,19 +326,24 @@ export class TournamentService implements ITournamentContext {
     try {
       const tournamentQueue = (await getTournamentQueueByTournamentId(tournamentId)) || { tournamentId } as TournamentQueue
       const newSlot = (tournamentQueue.slotNumber || 0) + steps
-      const newRuns = (tournamentQueue.runs as QueueRun[] || [] as QueueRun[])
-      newRuns.push({
-        slotNumber: newSlot,
-        slotStart: new Date().toISOString(),
-        // TODO
-        status: {}
-      })
-      const updatedTournamentQueue = await insertOrUpdateTournamentQueue({ ...tournamentQueue, slotNumber: newSlot, runs: newRuns })
+      const runs = this.prepareRuns(tournamentId, tournamentQueue, newSlot)
+      const updatedTournamentQueue = await insertOrUpdateTournamentQueue({ ...tournamentQueue, slotNumber: newSlot, runs })
       return updatedTournamentQueue
     } catch (error) {
       console.error(error)
       return null
     }
+  }
+
+  async prepareRuns (tournamentId: string, tournamentQueue: TournamentQueue, slotNumber: number) {
+    const newRuns = (tournamentQueue.runs as QueueRun[] || [] as QueueRun[])
+    const currentQueueStatus = await this.getCurrentTournamentQueue(tournamentId)
+    newRuns.push({
+      slotNumber,
+      slotStart: new Date().toISOString(),
+      status: currentQueueStatus?.status || null
+    })
+    return newRuns
   }
 
   async getCurrentTournamentQueue (tournamentId: string): Promise<any | null> {
