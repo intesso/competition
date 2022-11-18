@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { keyBy, orderBy, sortBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
-import { equalFloat } from '../lib/common'
+import { equalFloat, Id } from '../lib/common'
 import { generateCategoryReport } from '../lib/reports/category-report'
 import { generateCombinationReport } from '../lib/reports/combination-report'
 import { combinationMixed, combinationPriority } from '../lib/reports/reportDefinitions'
@@ -153,11 +153,11 @@ export class CalculationService implements ICalculationContext {
     // 1. calculate category rank based on category points for the given category and tournament
     let numberOfEqualPoints = 0
     let currentRank = 0
-    const categoryRanks = sortedCategoryPoints.map((categoryPoint: any, i: number) => {
+    const categoryRanks = sortedCategoryPoints.map((categoryPoint: CategoryPoint & Id, i: number) => {
       // if disqualified do nothing
       if (categoryPoint.disqualified) {
         // handle equal points
-      } else if (i > 0 && equalFloat(categoryPoint, sortedCategoryPoints[i - 1].categoryPoint)) {
+      } else if (i > 0 && equalFloat(categoryPoint.categoryPoint, sortedCategoryPoints[i - 1].categoryPoint)) {
         numberOfEqualPoints++
         // normal case: different points
       } else {
