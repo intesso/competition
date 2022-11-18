@@ -72,7 +72,6 @@ export class CalculationService implements ICalculationContext {
   }
 
   async calculatePoints (input: CalculationPointsInput): Promise<CalculationPointsOutput | null> {
-    console.log('calculation input', JSON.stringify(input, null, 2))
     try {
       const result = (await axios.post(`${process.env.CALCULATION_ENGINE_URL}/api/engine/calculations/points`, input))
         .data as CalculationPointsOutput
@@ -405,7 +404,7 @@ export class CalculationService implements ICalculationContext {
     let orderByAttributes: string[] = []
     if (performerWeightedRankValues && performerWeightedRankValues.length > 0) {
       const attrs = performerWeightedRankValues[0]
-      console.log('combinationName', attrs.combinationName)
+      // console.log('combinationName', attrs.combinationName)
       const priorityLookup = combinationPriority[attrs.combinationName]
       Object.keys(attrs).forEach((category) => {
         const priority = priorityLookup[category]
@@ -415,7 +414,7 @@ export class CalculationService implements ICalculationContext {
       })
       orderByAttributes.unshift('preliminaryCombinationRank')
       orderByAttributes = orderByAttributes.filter((it) => it)
-      console.log('filteredSortAttributes', orderByAttributes)
+      // console.log('filteredSortAttributes', orderByAttributes)
     }
 
     const orderByOrder: any[] = orderByAttributes.map(() => 'asc')

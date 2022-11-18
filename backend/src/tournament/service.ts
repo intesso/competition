@@ -305,7 +305,7 @@ export class TournamentService implements ITournamentContext {
     try {
       const tournamentQueue = (await getTournamentQueueByTournamentId(tournamentId)) || { tournamentId } as TournamentQueue
       const newSlot = slotNumber
-      const runs = this.prepareRuns(tournamentId, tournamentQueue, newSlot)
+      const runs = await this.prepareRuns(tournamentId, tournamentQueue, newSlot)
       const updatedTournamentQueue = await insertOrUpdateTournamentQueue({ ...tournamentQueue, slotNumber: newSlot, runs })
       return updatedTournamentQueue
     } catch (error) {
@@ -326,7 +326,7 @@ export class TournamentService implements ITournamentContext {
     try {
       const tournamentQueue = (await getTournamentQueueByTournamentId(tournamentId)) || { tournamentId } as TournamentQueue
       const newSlot = (tournamentQueue.slotNumber || 0) + steps
-      const runs = this.prepareRuns(tournamentId, tournamentQueue, newSlot)
+      const runs = await this.prepareRuns(tournamentId, tournamentQueue, newSlot)
       const updatedTournamentQueue = await insertOrUpdateTournamentQueue({ ...tournamentQueue, slotNumber: newSlot, runs })
       return updatedTournamentQueue
     } catch (error) {
@@ -359,7 +359,6 @@ export class TournamentService implements ITournamentContext {
       }
       // 2. get performances with tournamentId and current slotNumber
       const performances = await findPerformances({ tournamentId, slotNumber: tournamentQueue.slotNumber })
-      console.log(performances)
 
       // create lookup with planned judges for performance
       const judgesPlanned: {[key: string]: QueueRunPerformanceJudge} = {}
