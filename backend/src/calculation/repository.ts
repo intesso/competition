@@ -29,6 +29,10 @@ export async function deleteCategoryPointById (id: string) {
   return await CategoryPoint(db).delete({ id })
 }
 
+export async function deleteCategoryPointForTournamentId (tournamentId: string) {
+  return await CategoryPoint(db).delete({ tournamentId })
+}
+
 export async function getCategoryPointById (id: string) {
   return await CategoryPoint(db).findOne({ id })
 }
@@ -72,6 +76,10 @@ export async function insertOrUpdateCategoryRanks (categoryRanks: Omit<CategoryR
 
 export async function deleteCategoryRankById (id: string) {
   return await CategoryRank(db).delete({ id })
+}
+
+export async function deleteCategoryRankForTournamentId (tournamentId: string) {
+  return await CategoryRank(db).delete({ tournamentId })
 }
 
 export async function getCategoryRankById (id: string) {

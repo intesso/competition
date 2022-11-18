@@ -37,7 +37,9 @@ import {
   updateCategoryRank,
   insertOrUpdateCombinationRank,
   listCombinationRankByTournament,
-  deleteCombinationRankForTournament
+  deleteCombinationRankForTournament,
+  deleteCategoryPointForTournamentId,
+  deleteCategoryRankForTournamentId
 } from './repository'
 
 export class CalculationService implements ICalculationContext {
@@ -523,10 +525,8 @@ export class CalculationService implements ICalculationContext {
   }
 
   async removeAllCalculations (tournamentId: string): Promise<void> {
-    const performances = await this.getApplicationContext().tournament.listPerformances(tournamentId)
-    for (const performance of performances) {
-      await this.removeCalculation(performance.id)
-    }
-    return await deleteCombinationRankForTournament(tournamentId)
+    await deleteCategoryRankForTournamentId(tournamentId)
+    await deleteCategoryPointForTournamentId(tournamentId)
+    await deleteCombinationRankForTournament(tournamentId)
   }
 }
