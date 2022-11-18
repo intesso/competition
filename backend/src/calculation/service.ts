@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { keyBy, orderBy, sortBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
+import { equalFloat } from '../lib/common'
 import { generateCategoryReport } from '../lib/reports/category-report'
 import { generateCombinationReport } from '../lib/reports/combination-report'
 import { combinationMixed, combinationPriority } from '../lib/reports/reportDefinitions'
@@ -156,7 +157,7 @@ export class CalculationService implements ICalculationContext {
       // if disqualified do nothing
       if (categoryPoint.disqualified) {
         // handle equal points
-      } else if (i > 0 && categoryPoint === sortedCategoryPoints[i - 1]) {
+      } else if (i > 0 && equalFloat(categoryPoint, sortedCategoryPoints[i - 1].categoryPoint)) {
         numberOfEqualPoints++
         // normal case: different points
       } else {
@@ -387,7 +388,7 @@ export class CalculationService implements ICalculationContext {
 
     for (const it of performerWeightedRankValues) {
       // handle equal points
-      if (i > 0 && it.combinationRankPoints === performerWeightedRankValues[i - 1].combinationRankPoints) {
+      if (i > 0 && equalFloat(it.combinationRankPoints, performerWeightedRankValues[i - 1].combinationRankPoints)) {
         numberOfEqualRanks++
         // normal case: different points
       } else {

@@ -12,30 +12,17 @@ import {
 } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import { ApiContext } from '../../contexts/ApiContext'
-import {
-  Tournament,
-  TournamentPlanDetails,
-  TournamentQueue,
-  TournamentQueueStatus
-} from '../../contexts/ApiContextInterface'
+import { Tournament } from '../../contexts/ApiContextInterface'
 import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
 import { useLocalStorage } from 'usehooks-ts'
-import { sortBy } from 'lodash-es'
-import { useSearchParams } from 'react-router-dom'
 
 export function CalculationAdmin () {
-  const { listTournaments, listTournamentPlan } = useContext(ApiContext)
+  const { listTournaments, calculateAllPoints, calculateAllCategoryRanks, calculateAllCombinationRanks, deleteAllCalculations } = useContext(ApiContext)
   const theme = useTheme()
   const { enqueueSnackbar } = useSnackbar()
-  const [searchParams] = useSearchParams()
-  const admin = searchParams.get('admin')
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useLocalStorage('tournamentId', '')
-  const [queue, storeQueue] = useState({} as TournamentQueue)
-  const [judgeStatus, setJudgeStatus] = useState([] as TournamentQueueStatus[])
-  const [slotNumber, setSlotNumber] = useState(-1)
-  const [plan, setPlan] = useState([] as TournamentPlanDetails[])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,18 +34,10 @@ export function CalculationAdmin () {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (tournamentId) {
-        const p = await listTournamentPlan(tournamentId)
-        setPlan(sortBy(p, 'slotNumber'))
-      }
+      // TODO fetch whatever
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [tournamentId])
-
-  function getTournamentName (tournamentId: string) {
-    if (!tournaments) return ''
-    return tournaments.find((t) => t.id === tournamentId)?.tournamentName || ''
-  }
 
   const colHeight = 200
 
@@ -99,7 +78,7 @@ export function CalculationAdmin () {
               style={classes.styledButton}
               variant="outlined"
               onClick={() => {
-                console.log('a')
+                calculateAllPoints(tournamentId)
               }}
             >
               Calculate All Category Points
@@ -110,7 +89,7 @@ export function CalculationAdmin () {
               style={classes.styledButton}
               variant="outlined"
               onClick={() => {
-                console.log('a')
+                calculateAllCategoryRanks(tournamentId)
               }}
             >
               Calculate All Category Ranks
@@ -121,7 +100,7 @@ export function CalculationAdmin () {
               style={classes.styledButton}
               variant="outlined"
               onClick={() => {
-                console.log('a')
+                calculateAllCombinationRanks(tournamentId)
               }}
             >
               Calculate All Combination Ranks
@@ -132,10 +111,11 @@ export function CalculationAdmin () {
               style={classes.styledButton}
               variant="outlined"
               onClick={() => {
-                console.log('a')
+                deleteAllCalculations(tournamentId)
               }}
+              sx={{ color: theme.palette.warning.main }}
             >
-              <h2>DELETE all Points</h2>
+              <h2>DELETE all Calculations</h2>
             </Button>
           </Grid>
         </Grid>

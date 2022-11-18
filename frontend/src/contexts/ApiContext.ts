@@ -63,6 +63,10 @@ export interface Api {
   // ranks (calculatiom)
   getCategoryRanks: (tournamentId: string) => Promise<ReportFormat>
   getCombinationRanks: (tournamentId: string) => Promise<ReportFormat>
+  calculateAllPoints: (tournamentId: string) => Promise<void>
+  calculateAllCategoryRanks: (tournamentId: string) => Promise<void>
+  calculateAllCombinationRanks: (tournamentId: string) => Promise<void>
+  deleteAllCalculations: (tournamentId: string) => Promise<void>
 }
 
 export function provideApiContext (): Api {
@@ -472,6 +476,46 @@ export function provideApiContext (): Api {
     ).data as ReportFormat
   }
 
+  async function calculateAllPoints (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/calculations/${tournamentId}/points`,
+        method: 'POST'
+      })
+    ).data
+  }
+
+  async function calculateAllCategoryRanks (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/calculations/${tournamentId}/category-ranks`,
+        method: 'POST'
+      })
+    ).data
+  }
+
+  async function calculateAllCombinationRanks (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/calculations/${tournamentId}/combination-ranks`,
+        method: 'POST'
+      })
+    ).data
+  }
+
+  async function deleteAllCalculations (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/calculations/${tournamentId}`,
+        method: 'DELETE'
+      })
+    ).data
+  }
+
   return {
     serverBaseUrl,
     addClub,
@@ -511,7 +555,11 @@ export function provideApiContext (): Api {
     getJudgingRuleByCategoryId,
     addRawPoint,
     getCategoryRanks,
-    getCombinationRanks
+    getCombinationRanks,
+    calculateAllPoints,
+    calculateAllCategoryRanks,
+    calculateAllCombinationRanks,
+    deleteAllCalculations
   }
 }
 

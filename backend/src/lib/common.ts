@@ -112,3 +112,17 @@ export const spawnAsync = async (
       resolve(Buffer.concat(chunks))
     })
   })
+
+export function equalFloat (a: number | null | undefined, b: number | null | undefined, precision = 2) {
+  // both "nullish"
+  if (a === undefined && b === undefined) return true
+  if (a === null && b === null) return true
+  // one "nullish"
+  if (a === null || b === null) return false
+  if (a === undefined || b === undefined) return false
+  // equal within precision
+  if (a === b) return true
+  if (a.toFixed(precision) === b.toFixed(precision)) return true
+  // unequal
+  return false
+}
