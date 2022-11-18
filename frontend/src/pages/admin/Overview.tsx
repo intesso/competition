@@ -14,13 +14,19 @@ export const styledLink: any = {
 }
 
 export const pages = {
-  '/admin/tournament-queue': 'Turnier Queue',
+  '/admin/tournament-queue': 'Turnier Queue Dashboard',
   '/admin/tournament-plan': 'Turnier Plan',
   '/admin/select-raw-point': 'Wertung Auswählen',
 
   '/admin/category-ranks': 'Kagegorie Rangliste',
   '/admin/combination-ranks': 'Kombination Rangliste',
 
+  '/admin/calculation': 'Kalkulation Admin',
+
+  '/admin/tournament-queue?admin=true': 'Turnier Queue Admin'
+}
+
+export const enhancedPages = {
   '/admin/add-club': 'Club hinzufügen',
   '/admin/add-tournament': 'Turnier hinzufügen',
   '/admin/edit-location': 'Feld hinzufügen',

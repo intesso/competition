@@ -47,6 +47,7 @@ export function TournamentPlanItems ({ items }: TournamentPlanProps) {
                   <Tooltip
                     title={
                       <table>
+                        <tbody>
                         {it.judges.map((judge, j) => (
                           <tr key={j}>
                             <td>{judge.judgeId}</td>
@@ -54,6 +55,7 @@ export function TournamentPlanItems ({ items }: TournamentPlanProps) {
                             <td>{judge.criteriaName}</td>
                           </tr>
                         ))}
+                        </tbody>
                       </table>
                     }
                     disableInteractive

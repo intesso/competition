@@ -25,13 +25,13 @@ export interface Api {
   addClub: (club: Club) => Promise<void>
   listClubs: () => Promise<Club[]>
   // tournament
-  getQueue: (tournamentId: string) => Promise<TournamentQueue>
-  setQueue: (tournamentId: string, slotNumber: number) => Promise<TournamentQueue>
+  getTournamentQueue: (tournamentId: string) => Promise<TournamentQueue>
+  setTournamentQueue: (tournamentId: string, slotNumber: number) => Promise<TournamentQueue>
   moveQueueForward: (tournamentId: string) => Promise<TournamentQueue>
   moveQueueBackward: (tournamentId: string) => Promise<TournamentQueue>
   listTournamentPlan: (tournamentId: string) => Promise<TournamentPlanDetails[]>
   listTournaments: () => Promise<Tournament[]>
-  getTournamentQueue: (tournamentId: string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
+  getTournamentQueueForJudge: (tournamentId: string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
   addTournament: (tournament: Tournament) => Promise<void>
   getTournament: (id: string) => Promise<Tournament | null>
   getTournamentByName: (tournamentName: string) => Promise<Tournament | null>
@@ -136,7 +136,7 @@ export function provideApiContext (): Api {
     ).data as Tournament[]
   }
 
-  async function getTournamentQueue (tournamentId: string, judgeId: string) {
+  async function getTournamentQueueForJudge (tournamentId: string, judgeId: string) {
     return (
       await axios({
         headers,
@@ -144,6 +144,26 @@ export function provideApiContext (): Api {
         method: 'GET'
       })
     ).data as CurrentQueueUIResponse | null
+  }
+
+  async function getTournamentQueue (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue`,
+        method: 'GET'
+      })
+    ).data
+  }
+
+  async function setTournamentQueue (tournamentId: string, slotNumber: number) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue/${slotNumber}`,
+        method: 'PUT'
+      })
+    ).data
   }
 
   async function getTournamentAthlete (tournamentId: string, id: string) {
@@ -412,26 +432,6 @@ export function provideApiContext (): Api {
     ).data
   }
 
-  async function getQueue (tournamentId: string) {
-    return (
-      await axios({
-        headers,
-        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue`,
-        method: 'GET'
-      })
-    ).data
-  }
-
-  async function setQueue (tournamentId: string, slotNumber: number) {
-    return (
-      await axios({
-        headers,
-        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue/${slotNumber}`,
-        method: 'PUT'
-      })
-    ).data
-  }
-
   async function moveQueueForward (tournamentId: string) {
     return (
       await axios({
@@ -476,15 +476,15 @@ export function provideApiContext (): Api {
     serverBaseUrl,
     addClub,
     listClubs,
-    getQueue,
-    setQueue,
+    getTournamentQueue,
+    setTournamentQueue,
     moveQueueForward,
     moveQueueBackward,
     addTournament,
     getTournament,
     getTournamentByName,
     listTournaments,
-    getTournamentQueue,
+    getTournamentQueueForJudge,
     getLocation,
     listLocations,
     addLocation,

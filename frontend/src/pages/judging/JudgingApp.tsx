@@ -44,7 +44,7 @@ export type InputType = 'button' | 'slider';
 
 export function JudgingApp ({ children }: AppProps) {
   const {
-    getTournamentQueue,
+    getTournamentQueueForJudge,
     getTournamentJudge,
     getPerformance,
     getPerformer,
@@ -86,7 +86,7 @@ export function JudgingApp ({ children }: AppProps) {
     () => {
       async function getCurrentQueue () {
         if (tournamentId && judgeId) {
-          return await getTournamentQueue(tournamentId, judgeId)
+          return await getTournamentQueueForJudge(tournamentId, judgeId)
         }
         return null
       }

@@ -15,25 +15,65 @@ import {
 } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import { ApiContext } from '../../contexts/ApiContext'
-import { Tournament, TournamentPlanDetails, TournamentQueue } from '../../contexts/ApiContextInterface'
+import {
+  Tournament,
+  TournamentPlanDetails,
+  TournamentQueue,
+  TournamentQueueStatus
+} from '../../contexts/ApiContextInterface'
 import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
-import { useLocalStorage } from 'usehooks-ts'
+import { useInterval, useLocalStorage } from 'usehooks-ts'
 import ArrowBackIosRounded from '@mui/icons-material/ArrowBackIosRounded'
 import ArrowForwardIosRounded from '@mui/icons-material/ArrowForwardIosRounded'
 import { sortBy } from 'lodash-es'
 import { TournamentPlanItems } from '../../components/TournamentPlanItems'
+import { Link, useSearchParams } from 'react-router-dom'
 
 export function TournamentQueueDashboard () {
-  const { listTournaments, listTournamentPlan, moveQueueBackward, moveQueueForward, setQueue, getQueue } =
-    useContext(ApiContext)
+  const {
+    listTournaments,
+    listTournamentPlan,
+    moveQueueBackward,
+    moveQueueForward,
+    setTournamentQueue,
+    getTournamentQueue
+  } = useContext(ApiContext)
   const theme = useTheme()
   const { enqueueSnackbar } = useSnackbar()
+  const [searchParams] = useSearchParams()
+  const admin = searchParams.get('admin')
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useLocalStorage('tournamentId', '')
   const [queue, storeQueue] = useState({} as TournamentQueue)
+  const [judgeStatus, setJudgeStatus] = useState([] as TournamentQueueStatus[])
   const [slotNumber, setSlotNumber] = useState(-1)
   const [plan, setPlan] = useState([] as TournamentPlanDetails[])
+
+  // poll for current queue judge status
+  useInterval(
+    () => {
+      async function getCurrentQueue () {
+        if (tournamentId) {
+          return await getTournamentQueue(tournamentId)
+        }
+        return null
+      }
+      getCurrentQueue()
+        .then((queue) => {
+          if (queue) {
+            // store the current queue status in another variable, to avaoid problems with moving the queue while polling the same item
+            setJudgeStatus(queue.status ? queue.status : [])
+          }
+        })
+        .catch((err) => {
+          console.error(err)
+          enqueueSnackbar(err.message, { variant: 'error' })
+        })
+    },
+    // poll time in milliseconds or null to stop it
+    3000
+  )
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,14 +105,21 @@ export function TournamentQueueDashboard () {
   }
 
   async function jumpToSlot (slotNumber: number) {
-    await setQueue(tournamentId, slotNumber)
+    await setTournamentQueue(tournamentId, slotNumber)
     storeQueueAndSlotNumber(tournamentId)
   }
 
   async function storeQueueAndSlotNumber (tournamentId: string) {
-    const q = await getQueue(tournamentId)
+    const q = await getTournamentQueue(tournamentId)
     storeQueue({ ...q })
     setSlotNumber(q.slotNumber)
+    // set status as well for immediate feedback
+    setJudgeStatus(q.status ? q.status : [])
+  }
+
+  function getTournamentName (tournamentId: string) {
+    if (!tournaments) return ''
+    return tournaments.find((t) => t.id === tournamentId)?.tournamentName || ''
   }
 
   const classes = {
@@ -158,14 +205,30 @@ export function TournamentQueueDashboard () {
             justifyContent="center"
             alignItems="center"
           >
-            {queue.status?.map((s, i) => (
+            {judgeStatus?.map((s, i) => (
               <Box
                 key={i}
                 component="span"
                 sx={{ textAlign: 'center', justifyItems: 'center', minWidth: '40px', padding: '5px' }}
-                style={{ backgroundColor: s.sent ? theme.palette.primary.main : theme.palette.warning.main }}
+                style={{
+                  backgroundColor: s.sent ? theme.palette.success.main : theme.palette.primary.main,
+                  color: theme.palette.primary.contrastText,
+                  ...classes.queueElements
+                }}
               >
-                {s.judgeId}
+                {admin
+                  ? (
+                  <Link
+                    target={'_blank'}
+                    to={`/judging/start?tournamentName=${getTournamentName(tournamentId)}&id=${s.judgeId}`}
+                    style={{ color: theme.palette.primary.contrastText, textDecoration: 'none' }}
+                  >
+                    {s.judgeId}
+                  </Link>
+                    )
+                  : (
+                  <>{s.judgeId}</>
+                    )}
               </Box>
             ))}
           </Stack>
