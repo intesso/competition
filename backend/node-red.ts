@@ -22,7 +22,8 @@ const settings = {
   nodesDir: 'nodes',
   flowFile: 'flows_competition.json',
   flowFilePretty: true,
-  functionGlobalContext: {} // enables global context
+  functionGlobalContext: {}, // enables global context
+  credentialSecret: 'dunno-why'
 }
 
 // Initialise the runtime with a server and settings
