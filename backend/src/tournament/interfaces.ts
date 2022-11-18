@@ -151,4 +151,5 @@ export interface ITournamentContext extends IGetApplicationContext {
   moveTournamentQueueToPreviousSlot: (tournamentId: string) => Promise<TournamentQueue | null>
   getCurrentTournamentQueue: (tournamentId: string) => Promise<TournamentQueue | null>
   getCurrentTournamentQueueForJudge: (tournamentId: string, judgeId: string) => Promise<CurrentQueueUIResponse | null>
+  removeTournamentQueueForTournamentDANGER: (tournamentId: string) => Promise<void>
 }

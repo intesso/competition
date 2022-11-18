@@ -16,6 +16,12 @@ calculationController
   .get('/:tournamentId/points/:performanceId', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.getPoints(ctx.params.performanceId as string))
   })
+  .delete('/:tournamentId/points/:performanceId', inputValidation.validate, async (ctx) => {
+    return respondWith(ctx, () => applicationContext.calculation.removeCalculation(ctx.params.performanceId as string))
+  })
+  .delete('/:tournamentId', inputValidation.validate, async (ctx) => {
+    return respondWith(ctx, () => applicationContext.calculation.removeAllCalculations(ctx.params.tournamentId as string))
+  })
   .post('/:tournamentId/points', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.calculateAllPoints(ctx.params.tournamentId))
   })

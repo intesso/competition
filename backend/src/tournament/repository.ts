@@ -92,6 +92,10 @@ export async function getTournamentQueueByTournamentId (tournamentId: string) {
   return await TournamentQueue(db).findOne({ tournamentId })
 }
 
+export async function deleteTournamentQueueForTournamentId (tournamentId: string) {
+  return await TournamentQueue(db).delete({ tournamentId })
+}
+
 // Location
 export async function insertLocation (location: Omit<Location_InsertParameters, 'id'>) {
   const [insertedLocation] = await Location(db).insert({ ...location, ...newRecordAttributes() })

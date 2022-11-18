@@ -133,9 +133,12 @@ export interface ICalculationContext extends IGetApplicationContext {
     input: CalculationCombinationRanksInput
   ) => Promise<CalculationCombinationRanksOutput | null>
   getCombinationRanks: (tournamentId: string, combinationId: string) => Promise<CalculationCombinationRanksOutput | null>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getAllCombinationRanks :(tournamentId: string) => Promise<any | null>
   calculateAllCombinationRanks: (tournamentId: string) => Promise<boolean | null>
   generateCombinationRanksReport: (tournamentId: string) => Promise<boolean | null>
   setDisqualified: (performanceId: string, disqualified: boolean) => Promise<boolean>
   removeCalculation: (performanceId: string) => Promise<boolean>
+  removeAllCalculations :(tournamentId: string) => Promise<void>
+  removeCombinationRanks :(tournamentId: string) => Promise<void>
 }

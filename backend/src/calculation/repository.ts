@@ -121,3 +121,7 @@ export async function getCombinationRankByCombinationId (tournamentId: string, c
 export async function listCombinationRankByTournament (tournamentId: string) {
   return await CombinationRank(db).find({ tournamentId }).all()
 }
+
+export async function deleteCombinationRankForTournament (tournamentId: string) {
+  return await CombinationRank(db).delete({ tournamentId })
+}

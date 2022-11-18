@@ -21,6 +21,9 @@ tournamentController
     }
     return respondWith(ctx, () => applicationContext.tournament.getCurrentTournamentQueue(ctx.params.tournamentId))
   })
+  .delete('/:tournamentId/queue/DANGER', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.removeTournamentQueueForTournamentDANGER(ctx.params.tournamentId))
+  })
   .put('/:tournamentId/queue/next', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.moveTournamentQueueToNextSlot(ctx.params.tournamentId as string))
   })

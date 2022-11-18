@@ -23,6 +23,7 @@ import {
 } from './interfaces'
 import {
   deleteLocation,
+  deleteTournamentQueueForTournamentId,
   findAllTournaments,
   findAllTournamentSlots,
   findLocationsByTournamentId,
@@ -441,6 +442,10 @@ export class TournamentService implements ITournamentContext {
     }
   }
 
+  async removeTournamentQueueForTournamentDANGER (tournamentId: string): Promise<void> {
+    return await deleteTournamentQueueForTournamentId(tournamentId)
+  }
+
   async disqualifyPerformance (performanceId: string, disqualified: boolean): Promise<(Performance & Id) | null> {
     const performance = await getPerformanceById(performanceId)
     if (!performance) {
@@ -456,6 +461,7 @@ export class TournamentService implements ITournamentContext {
     for (const performance of performances) {
       await this.removePointsForPerformance(performance.id)
     }
+    await this.getApplicationContext().calculation.removeCombinationRanks(tournamentId)
   }
 
   async removePointsForPerformance (performanceId: string) {
