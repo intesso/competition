@@ -54,7 +54,7 @@ newgrp docker
 install postgres (docker) with mounted volume
 
 ```sh
-docker run -itd -e POSTGRES_DB=competition -e POSTGRES_USER=competition -e POSTGRES_PASSWORD=comp1234 -p 5432:5432 -v competition-postgres-data:/var/lib/postgresql/data --name competition-postgres postgres
+docker run -dit --restart unless-stopped -e POSTGRES_DB=competition -e POSTGRES_USER=competition -e POSTGRES_PASSWORD=comp1234 -p 5432:5432 -v competition-postgres-data:/var/lib/postgresql/data --name competition-postgres postgres
 
 # set db connection
 export DB_CONNECTION="postgres://competition:comp1234@localhost:5432/competition"
