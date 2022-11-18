@@ -53,3 +53,6 @@ id,judgingRuleId,judgingRuleName,competition,group,level,type,discipline,categor
 11111111-0000-0000-0000-000000000051,11111111-0000-0000-0000-000000000000,speed,team,u12,teamShow,speed,doubleDutchRelay,team-u12-teamShow-speed-doubleDutchRelay
 11111111-0000-0000-0000-000000000052,11111111-0000-0000-0000-000000000000,speed,team,u12,teamShow,speed,singleRopeRelay,team-u12-teamShow-speed-singleRopeRelay
 11111111-0000-0000-0000-000000000053,11111111-0000-0000-0000-000000000009,teamShow,team,u12,teamShow,teamShow,teamShow,team-u12-teamShow-teamShow-teamShow
+11111111-0000-0000-0000-000000000054,11111111-0000-0000-0000-000000000000,speed,team,overall,teamShow,speed,singleRopeRelay,team-overall-teamShow-speed-singleRopeRelay
+11111111-0000-0000-0000-000000000055,11111111-0000-0000-0000-000000000000,speed,team,overall,teamShow,speed,doubleDutchRelay,team-overall-teamShow-speed-doubleDutchRelay
+11111111-0000-0000-0000-000000000056,11111111-0000-0000-0000-000000000009,teamShow,team,overall,teamShow,teamShow,teamShow,team-overall-teamShow-teamShow-teamShow

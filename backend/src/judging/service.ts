@@ -1,10 +1,11 @@
+import { raw } from 'express'
 import { groupBy, keyBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import { CalculationPointsInput, CalculationJudgeCriteriaGroup } from '../calculation/interfaces'
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByCategoryIdAndName, deleteRawPointsForPerformance, deleteRawPoint, getRawPointById, getRawPoint } from './repository'
+import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByCategoryIdAndName, deleteRawPointsForPerformance, deleteRawPoint, getRawPointById, getRawPoint, backupRawPoint } from './repository'
 
 let _categoriesLookup: {[key: string]: (Category & Id)} | null = null
 let _criteriaLookup: {[key: string]: (Criteria & Id)} | null = null
@@ -146,8 +147,23 @@ export class JudgingRuleService implements IJudgingRuleContext {
   }
 
   async addRawPoint (rp: RawPoint) : Promise<RawPoint & Id> {
+    // 0. enhance attributes used for backup&restore
+    let enhancedRawPoint: RawPoint = { ...rp }
+    if (!rp.tournamentId || !rp.tournamentName || !rp.performanceName) {
+      const performance = await this.getApplicationContext().tournament.getPerformance(rp.performanceId)
+      if (performance) {
+        enhancedRawPoint = { ...enhancedRawPoint, performanceName: performance.performanceName }
+        const tournament = await this.getApplicationContext().tournament.getTournament(performance?.tournamentId)
+        if (tournament) {
+          enhancedRawPoint = { ...enhancedRawPoint, tournamentId: tournament?.id, tournamentName: tournament?.tournamentName }
+        }
+      }
+    }
     // 1. insert the RawPoint request data
-    const rawPoint = await insertOrUpdateRawPoint(rp)
+    const rawPoint = await insertOrUpdateRawPoint(enhancedRawPoint)
+    if (process.env.BACKUP_RAW_DATA) {
+      this.backupRawPoint(rawPoint)
+    }
     // 2. get all rawPoints for this performance
     const rawPoints = await this.listRawPoints(rawPoint.performanceId)
     // 3. transform rawPoints for calculation request message
@@ -160,7 +176,48 @@ export class JudgingRuleService implements IJudgingRuleContext {
       console.error(`could not prepareCalculationMessage for ${JSON.stringify(rawPoint)}`)
     }
     // 5. return rawPoints with id. Note: the calculation result is stored within the calculate method, but not returned there
-    return { ...rp, id: rawPoint.id }
+    return { ...enhancedRawPoint, id: rawPoint.id }
+  }
+
+  backupRawPoint (rp: RawPoint) {
+    // don't await
+    backupRawPoint(rp)
+  }
+
+  async importRawPoints (rawPoints: RawPoint[]): Promise<boolean> {
+    // used for restore
+    try {
+      for (const rawPoint of rawPoints) {
+        // 1. get all RawPoint FK (foreign key) entities, in order to update the ids
+        const tournament = await this.getApplicationContext().tournament.getTournamentByName(rawPoint.tournamentName)
+        if (!tournament) {
+          return false
+        }
+        const performance = await this.getApplicationContext().tournament.getPerformanceByName(tournament.id, rawPoint.performanceName)
+        if (!performance) {
+          return false
+        }
+        // 2. insertOrUpdate the RawPoints with the new FK IDs
+        await insertOrUpdateRawPoint({
+          tournamentId: tournament.id,
+          tournamentName: tournament.tournamentName,
+          performanceId: performance.id,
+          performanceName: performance.performanceName,
+          // not used currently
+          tournamentJudgeId: rawPoint.tournamentJudgeId,
+          // fixed ids
+          criteriaId: rawPoint.criteriaId,
+          subCriteriaPoints: rawPoint.subCriteriaPoints,
+          // fixed id
+          judgeId: rawPoint.judgeId,
+          judgeName: rawPoint.judgeName,
+          judge: rawPoint.judge
+        })
+      }
+    } catch (error) {
+      return false
+    }
+    return true
   }
 
   async getRawPoint (id: string) : Promise<(RawPoint & Id) | null> {

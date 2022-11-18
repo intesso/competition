@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { _insertTestPerformance } from '../tournament/repository.test'
-import { getCategoryPointByPerformanceId, insertCategoryPoint } from './repository'
+import { getCategoryPointByPerformanceIdAndCategoryId, insertCategoryPoint } from './repository'
 
 // CategoryPoint
 test('should insert/find categoryPoint', async () => {
@@ -16,7 +16,7 @@ test('should insert/find categoryPoint', async () => {
 
   expect(categoryPoint).toBeTruthy()
 
-  const foundCategoryPoint = await getCategoryPointByPerformanceId(performance.id)
+  const foundCategoryPoint = await getCategoryPointByPerformanceIdAndCategoryId(performance.id)
   expect(foundCategoryPoint).toBeTruthy()
   expect(foundCategoryPoint?.categoryPoint).toBe(200)
 })

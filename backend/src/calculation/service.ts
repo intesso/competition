@@ -3,7 +3,7 @@ import { keyBy, orderBy, sortBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import { generateCategoryReport } from '../lib/reports/category-report'
 import { generateCombinationReport } from '../lib/reports/combination-report'
-import { combinationPriority } from '../lib/reports/reportDefinitions'
+import { combinationMixed, combinationPriority } from '../lib/reports/reportDefinitions'
 import {
   CalculationPointsInput,
   ICalculationContext,
@@ -28,7 +28,7 @@ import {
   findCategoryRankByCategoryId,
   getCombinationRankByCombinationId,
   getCategoryPointById,
-  getCategoryPointByPerformanceId,
+  getCategoryPointByPerformanceIdAndCategoryId,
   getCategoryRankByCategoryPointId,
   insertOrUpdateCategoryPoint,
   insertOrUpdateCategoryRanks,
@@ -53,7 +53,7 @@ export class CalculationService implements ICalculationContext {
         if (rawPoints.length > 0) {
           const calculationMessage = await ctx.judging.prepareCalculationMessage(performance.id, rawPoints, new Date())
           if (calculationMessage) {
-            this.calculatePoints(calculationMessage)
+            await this.calculatePoints(calculationMessage)
           } else {
             console.error(`could not prepareCalculationMessage for ${JSON.stringify(performance)}`)
           }
@@ -63,6 +63,8 @@ export class CalculationService implements ICalculationContext {
           )
         }
       }
+      // calculate MixedCategoryPoints (Hack: used for the overall winner)
+      await this.copyMixedCategoryPoints(tournamentId)
     } catch (error) {
       return false
     }
@@ -97,7 +99,39 @@ export class CalculationService implements ICalculationContext {
   }
 
   async getPoints (performanceId: string): Promise<CategoryPoint | null> {
-    return await getCategoryPointByPerformanceId(performanceId)
+    const performance = await this.getApplicationContext().tournament.getPerformance(performanceId)
+    if (!performance) {
+      return null
+    }
+    return await getCategoryPointByPerformanceIdAndCategoryId(performanceId, performance.categoryId)
+  }
+
+  async copyMixedCategoryPoints (tournamentId: string) {
+    const mixedCategories = Object.values(combinationMixed)
+    for (const mixedCategoryDefinition of mixedCategories) {
+      for (const [mixedCategoryName, originalCategories] of Object.entries(mixedCategoryDefinition)) {
+        const mixedCategory = await this.getApplicationContext().judging.getCategoryByName(mixedCategoryName)
+        if (mixedCategory) {
+          for (const categoryName of originalCategories) {
+            const category = await this.getApplicationContext().judging.getCategoryByName(categoryName)
+            if (category) {
+              const sortedCategoryPoints = await findCategoryPointByCategoryId(tournamentId, category.id)
+              for (const existingCategoryPoint of sortedCategoryPoints) {
+                await insertOrUpdateCategoryPoint({
+                  tournamentId: existingCategoryPoint.tournamentId,
+                  performerId: existingCategoryPoint.performerId,
+                  performanceId: existingCategoryPoint.performanceId,
+                  disqualified: existingCategoryPoint.disqualified,
+                  categoryId: mixedCategory.id, // store under the mixedCategoryName (copy original categoryPoint)
+                  categoryPoint: existingCategoryPoint.categoryPoint,
+                  criteriaPoints: existingCategoryPoint.criteriaPoints
+                })
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   async calculateAllCategoryRanks (tournamentId: string): Promise<boolean | null> {
@@ -436,7 +470,11 @@ export class CalculationService implements ICalculationContext {
 
   async setDisqualified (performanceId: string, disqualified: boolean): Promise<boolean> {
     try {
-      const categoryPoint = await getCategoryPointByPerformanceId(performanceId)
+      const performance = await this.getApplicationContext().tournament.getPerformance(performanceId)
+      if (!performance) {
+        return false
+      }
+      const categoryPoint = await getCategoryPointByPerformanceIdAndCategoryId(performanceId, performance.categoryId)
       if (!categoryPoint) {
         return true
       }
@@ -458,7 +496,11 @@ export class CalculationService implements ICalculationContext {
 
   async removeCalculation (performanceId: string): Promise<boolean> {
     try {
-      const categoryPoint = await getCategoryPointByPerformanceId(performanceId)
+      const performance = await this.getApplicationContext().tournament.getPerformance(performanceId)
+      if (!performance) {
+        return false
+      }
+      const categoryPoint = await getCategoryPointByPerformanceIdAndCategoryId(performanceId, performance.categoryId)
       if (!categoryPoint) {
         return true
       }

@@ -2,6 +2,10 @@
 import { Category, CategoryCombination, Combination, Criteria, db, JudgingRule, RawPoint } from '../lib/db/database'
 import { Category_InsertParameters, Combination_InsertParameters, Criteria_InsertParameters, JudgingRule_InsertParameters, RawPoint_InsertParameters } from '../lib/db/__generated__'
 import { isNotNull, newRecordAttributes } from '../lib/common'
+import { promises as fs } from 'fs'
+import { resolve } from 'path'
+
+let backupPath = ''
 
 // Category
 export async function insertCategory (category: Omit<Category_InsertParameters, 'id'>) {
@@ -162,4 +166,19 @@ export async function deleteRawPointsForPerformance (performanceId: string) {
 
 export async function deleteRawPoint (id: string) {
   return await RawPoint(db).delete({ id })
+}
+
+export async function backupRawPoint (rp: Omit<RawPoint_InsertParameters, 'id'>) {
+  await initializeBackup()
+  const fileName = `${Date.now()}-${rp.performanceName}.json`
+  fs.writeFile(JSON.stringify(rp, null, 2), resolve(backupPath, fileName), { encoding: 'utf8' })
+}
+
+async function initializeBackup () {
+  if (backupPath || !process.env.BACKUP_RAW_DATA) {
+    return true
+  }
+  const path = resolve(process.env.BACKUP_RAW_DATA)
+  await fs.mkdir(path, { recursive: true })
+  backupPath = path
 }

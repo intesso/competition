@@ -73,6 +73,7 @@ export interface IJudgingRuleContext extends IGetApplicationContext {
   getCriteria: (id: string) => Promise<(Criteria & Id) | null>
   listCriteria: () => Promise<(Criteria & Id)[] | null>
   addRawPoint: (rawPoint: RawPoint) => Promise<(RawPoint & Id) | null>
+  importRawPoints: (rawPoints: RawPoint[]) => Promise<boolean>
   removeRawPoint: (id: string) => Promise<boolean>
   removeRawPoints: (performanceId: string) => Promise<boolean>
   getRawPoint: (id: string) => Promise<(RawPoint & Id) | null>

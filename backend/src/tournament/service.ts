@@ -446,6 +446,13 @@ export class TournamentService implements ITournamentContext {
     return updatedPerformance
   }
 
+  async removePointsForTournamentDANGER (tournamentId: string) {
+    const performances = await this.listPerformances(tournamentId)
+    for (const performance of performances) {
+      await this.removePointsForPerformance(performance.id)
+    }
+  }
+
   async removePointsForPerformance (performanceId: string) {
     await this.getApplicationContext().calculation.removeCalculation(performanceId)
     await this.getApplicationContext().judging.removeRawPoints(performanceId)

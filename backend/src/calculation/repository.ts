@@ -10,10 +10,10 @@ export async function insertCategoryPoint (categoryPoint: Omit<CategoryPoint_Ins
 }
 
 export async function insertOrUpdateCategoryPoint (categoryPoint: Omit<CategoryPoint_InsertParameters, 'id'>) {
-  const foundCategoryPoints = await getCategoryPointByPerformanceId(categoryPoint.performanceId)
+  const foundCategoryPoints = await getCategoryPointByPerformanceIdAndCategoryId(categoryPoint.performanceId, categoryPoint.categoryId)
   if (foundCategoryPoints) {
     const [updatedCategoryPoints] = await CategoryPoint(db).update(
-      { performanceId: categoryPoint.performanceId },
+      { performanceId: categoryPoint.performanceId, categoryId: categoryPoint.categoryId },
       { ...foundCategoryPoints, ...categoryPoint, updatedAt: new Date() })
     return updatedCategoryPoints
   }
@@ -33,8 +33,8 @@ export async function getCategoryPointById (id: string) {
   return await CategoryPoint(db).findOne({ id })
 }
 
-export async function getCategoryPointByPerformanceId (performanceId: string) {
-  return await CategoryPoint(db).findOne({ performanceId })
+export async function getCategoryPointByPerformanceIdAndCategoryId (performanceId: string, categoryId: string) {
+  return await CategoryPoint(db).findOne({ performanceId, categoryId })
 }
 
 export async function findCategoryPointByCategoryId (tournamentId: string, categoryId: string) {

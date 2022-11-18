@@ -139,6 +139,7 @@ export interface ITournamentContext extends IGetApplicationContext {
   getPerformance: (id: string) => Promise<(Performance & Id) | null>
   disqualifyPerformance: (id: string, disqualified: boolean) => Promise<(Performance & Id) | null>
   removePointsForPerformance: (id: string) => Promise<void>
+  removePointsForTournamentDANGER: (tournamentId: string) => Promise<void>
   addTournamentAthlete: (athlete: TournamentAthlete) => Promise<TournamentAthlete>
   getTournamentAthlete: (id: string) => Promise<(TournamentAthlete & Id) | null>
   listTournamentAthletes: (tournamentId: string) => Promise<TournamentAthlete[]>

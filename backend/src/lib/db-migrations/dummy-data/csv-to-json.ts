@@ -5,7 +5,8 @@ import { readFileSync, writeFileSync } from 'fs'
 // Example:
 //
 // cd src/lib/db-migrations/dummy-data
-// ts-node csv-to-json.ts tournament-complete.csv tournament-complete.json
+// ts-node csv-to-json.ts Tournament.csv Tournament.json
+// import via postman test
 
 const inputFile = process.argv[2]
 const outputFile = process.argv[3]

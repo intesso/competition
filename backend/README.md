@@ -20,8 +20,19 @@ npm install
 npm start
 ```
 
-- https://nodejs.org/en/download/
+## setup
 
+
+```sh
+# creates database schema, inserts masterdata, updates db
+npm run generate:dbddl
+# creates typescript types generated from db schema
+npm run generate:dbtypes
+# inserts test data (postman collection)
+npm run test:data
+# runs integration tests (postman collection)
+npm run test:integration
+```
 
 ## edit / test
 

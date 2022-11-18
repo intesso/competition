@@ -109,3 +109,6 @@ tournamentController
   .delete('/:tournamentId/performances/:id/points', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.removePointsForPerformance(ctx.params.id as string))
   })
+  .delete('/:tournamentId/points/DANGER', inputValidation.validate, async (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.removePointsForTournamentDANGER(ctx.params.tournamentId as string))
+  })

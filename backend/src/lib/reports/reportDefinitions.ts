@@ -143,7 +143,10 @@ export const categoryTitles: ReportLookup = {
   'team-u15-teamShow-teamShow-teamShow': 'SHOW U15 Show',
   'team-u12-teamShow-speed-doubleDutchRelay': 'SHOW U12 DD Relay',
   'team-u12-teamShow-speed-singleRopeRelay': 'SHOW U12 SR Relay',
-  'team-u12-teamShow-teamShow-teamShow': 'SHOW U12 Show'
+  'team-u12-teamShow-teamShow-teamShow': 'SHOW U12 Show',
+  'team-overall-teamShow-speed-singleRopeRelay': 'SHOW OVERALL SR RELAY',
+  'team-overall-teamShow-speed-doubleDutchRelay': 'SHOW OVERALL DD RELAY',
+  'team-overall-teamShow-teamShow-teamShow': 'SHOW OVERALL Show'
 }
 
 export function getCategoryName (key: string) {
@@ -204,7 +207,10 @@ export const categoryNames: ReportLookup = {
   'team-u15-teamShow-teamShow-teamShow': 'Show',
   'team-u12-teamShow-speed-doubleDutchRelay': 'DD Relay',
   'team-u12-teamShow-speed-singleRopeRelay': 'SR Relay',
-  'team-u12-teamShow-teamShow-teamShow': 'Show'
+  'team-u12-teamShow-teamShow-teamShow': 'Show',
+  'team-overall-teamShow-speed-singleRopeRelay': 'SR RELAY',
+  'team-overall-teamShow-speed-doubleDutchRelay': 'DD RELAY',
+  'team-overall-teamShow-teamShow-teamShow': 'Show'
 }
 
 export function getCombinationName (key: string) {
@@ -226,6 +232,7 @@ export const combinationNames: ReportLookup = {
   'team-erso': 'ERSO',
   'team-ü21-show': 'SHOW Ü21',
   'team-u21-show': 'SHOW U21',
+  'team-overall-show': 'SHOW OVERALL',
   'team-u15-show': 'SHOW U15',
   'team-u12-show': 'SHOW U12'
 }
@@ -746,6 +753,17 @@ export const combinationOrder: ReportOrder = {
     combinationRankPoints: 7,
     combinationRank: 8
   },
+  'team-overall-show': {
+    combinationName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    'team-overall-teamShow-speed-singleRopeRelay': 4,
+    'team-overall-teamShow-speed-doubleDutchRelay': 5,
+    'team-overall-teamShow-teamShow-teamShow': 6,
+    combinationRankPoints: 7,
+    combinationRank: 8
+  },
   'team-u15-show': {
     combinationName: 0,
     performerNumber: 1,
@@ -900,6 +918,10 @@ export const combinationPriority: ReportOrder = {
     'team-u21-teamShow-teamShow-teamShow': 0,
     'team-u21-teamShow-speed-singleRopeRelay': 1
   },
+  'team-overall-show': {
+    'team-overall-teamShow-teamShow-teamShow': 0,
+    'team-overall-teamShow-speed-singleRopeRelay': 1
+  },
   'team-u15-show': {
     'team-u15-teamShow-teamShow-teamShow': 0,
     'team-u15-teamShow-speed-singleRopeRelay': 1
@@ -951,15 +973,15 @@ export const combinationPriority: ReportOrder = {
 }
 
 export const combinationMixed: CombinationMixed = {
-  'Overall-winner-team-ü21-show-and-team-u21-show': {
-    'teamShow-speed-singleRopeRelay': [
+  'team-overall-show': {
+    'team-overall-teamShow-speed-singleRopeRelay': [
       'team-ü21-teamShow-speed-singleRopeRelay',
       'team-u21-teamShow-speed-singleRopeRelay'
     ],
-    'teamShow-speed-doubleDutchRelay': [
+    'team-overall-teamShow-speed-doubleDutchRelay': [
       'team-ü21-teamShow-speed-doubleDutchRelay',
       'team-u21-teamShow-speed-doubleDutchRelay'
     ],
-    'teamShow-teamShow-teamShow': ['team-ü21-teamShow-teamShow-teamShow', 'team-u21-teamShow-teamShow-teamShow']
+    'team-overall-teamShow-teamShow-teamShow': ['team-ü21-teamShow-teamShow-teamShow', 'team-u21-teamShow-teamShow-teamShow']
   }
 }

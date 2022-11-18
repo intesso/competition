@@ -9,6 +9,9 @@ export const judgingController = new Router()
 
 judgingController
   .use(bodyParser())
+  .post('/raw-points/import', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.judging.importRawPoints(ctx.request.body as unknown as RawPoint[]))
+  })
   .post('/raw-points', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.addRawPoint(ctx.request.body as RawPoint))
   })

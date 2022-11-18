@@ -274,10 +274,10 @@ CREATE TABLE "Criteria" (
 );
 CREATE TABLE "RawPoint" (
   id uuid NOT NULL,
-  -- tournamentId
-  -- tournamentName
-  -- performanceName
+  "tournamentId" uuid NOT NULL,
+  "tournamentName" text NOT NULL,
   "performanceId" uuid NOT NULL,
+  "performanceName" text NOT NULL,
   "tournamentJudgeId" uuid NULL,
   "criteriaId" uuid NOT NULL,
   "subCriteriaPoints" jsonb NULL,
@@ -312,7 +312,7 @@ CREATE TABLE "CategoryPoint" (
   "updatedAt" timestamp NULL,
   "updatedBy" text NULL,
   CONSTRAINT "CategoryPointPK" PRIMARY KEY (id),
-  CONSTRAINT "CategoryPointPerformanceIdUnique" UNIQUE ("performanceId"),
+  CONSTRAINT "CategoryPointPerformanceIdCategoryIdUnique" UNIQUE ("performanceId", "categoryId"),
   FOREIGN KEY ("tournamentId") REFERENCES "Tournament"(id),
   FOREIGN KEY ("performanceId") REFERENCES "Performance"(id),
   FOREIGN KEY ("performerId") REFERENCES "Performer"(id),
