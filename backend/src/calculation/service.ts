@@ -118,7 +118,7 @@ export class CalculationService implements ICalculationContext {
     // 1. calculate category rank based on category points for the given category and tournament
     let numberOfEqualPoints = 0
     let currentRank = 0
-    const categoryRanks = sortedCategoryPoints.map((categoryPoint, i) => {
+    const categoryRanks = sortedCategoryPoints.map((categoryPoint: any, i: number) => {
       // if disqualified do nothing
       if (categoryPoint.disqualified) {
         // handle equal points
@@ -265,7 +265,7 @@ export class CalculationService implements ICalculationContext {
         await findCategoryPointByCategoryId(input.tournamentId, category.categoryId),
         'id'
       )
-      const combinedRanks: CombinationRank[] = sortedCategoryRanks.map((rank) => {
+      const combinedRanks: CombinationRank[] = sortedCategoryRanks.map((rank: any) => {
         // get attributes used for output
         const performerId = sortedCategoryPoints[rank.categoryPointId].performerId
         const performanceId = sortedCategoryPoints[rank.categoryPointId].performanceId
@@ -416,9 +416,9 @@ export class CalculationService implements ICalculationContext {
   async getAllCombinationRanks (tournamentId: string): Promise<any | null> {
     const combinationRanks = await listCombinationRankByTournament(tournamentId)
     return combinationRanks
-      .filter((it) => it.combinationRanks?.summary?.length)
-      .map((it) => it.combinationRanks.summary)
-      .reduce((memo, it) => {
+      .filter((it: any) => it.combinationRanks?.summary?.length)
+      .map((it: any) => it.combinationRanks.summary)
+      .reduce((memo: any, it: any) => {
         memo[it[0].combinationName] = it
         return memo
       }, {})

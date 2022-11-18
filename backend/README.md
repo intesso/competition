@@ -38,6 +38,16 @@ npx localtunnel --subdomain intesso  --port 8080
 https://intesso.loca.lt/admin/overview
 ```
 
+# docker setup
+
+```sh
+# https://docs.docker.com/engine/install/ubuntu/
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+
 
 ## db setup
 
