@@ -2,6 +2,8 @@
 /* eslint-disable no-unused-vars */
 import { promises as fs } from 'fs'
 import { resolve } from 'path'
+import { getApplicationContext } from '../../../../applicationContext'
+import { RawPoint } from '../../db/__generated__'
 
 // cd src/lib/db-migrations/restore
 // ts-node restore-raw-points.ts ./backup
@@ -20,8 +22,8 @@ async function restore (backupDir: string) {
       if (fileName.endsWith('.json')) {
         const filePath = resolve(backupPath, fileName)
         console.log(`  read file: ${filePath}`)
-        const data: any = await readAndParseJsonFile(filePath)
-        // TODO insertOrUpdate rawPoints
+        const data: RawPoint = await readAndParseJsonFile(filePath)
+        await getApplicationContext().judging.importRawPoints([data])
       }
     }
   } catch (error) {
