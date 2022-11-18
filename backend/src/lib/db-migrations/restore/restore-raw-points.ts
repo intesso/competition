@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
+import '../../../../dotenv'
 import { promises as fs } from 'fs'
 import { resolve } from 'path'
 import { getApplicationContext } from '../../../../applicationContext'

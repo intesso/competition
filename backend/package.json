@@ -19,6 +19,7 @@
     "test:data": "ts-node test/integration-test-data.ts",
     "test:integration": "ts-node test/integration-test.ts",
     "test:unit": "jest --coverage=false",
+    "restore": "ts-node src/lib/db-migrations/restore/restore-raw-points.ts ./backup",
     "pm2": "pm2 start npm --name competition -- run start"
   },
   "author": "Andi Neck",
