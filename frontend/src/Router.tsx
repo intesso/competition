@@ -19,6 +19,7 @@ import { CategoryRanks } from './pages/admin/CategoryRanks'
 import { CombinationRanks } from './pages/admin/CombinationRanks'
 import { CalculationAdmin } from './pages/admin/CalculationAdmin'
 import { TournamentAdmin } from './pages/admin/TournamentAdmin'
+import { Reset } from './pages/judging/Reset'
 
 export const Router = () => (
   <Routes>
@@ -44,6 +45,7 @@ export const Router = () => (
 
       <Route path="/judging" element={<JudgingApp />}>
         <Route path="start" element={<Start />}/>
+        <Route path="reset" element={<Reset />}/>
         <Route path="select" element={<SelectRawPoint />}/>
         <Route path="nothing" element={<Nothing />} />
         <Route path="3x3" element={<RawPointInput layout="3x3" />} />

@@ -4,8 +4,9 @@ import { useContext, useEffect } from 'react'
 import { ApiContext } from '../../contexts/ApiContext'
 import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
+import { Button } from '@mui/material'
 
-export function Start () {
+export function Reset () {
   const { getTournamentByName } = useContext(ApiContext)
   const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
@@ -44,6 +45,16 @@ export function Start () {
       <Box sx={{ textAlign: 'center' }}>
         <h1>Start</h1>
         <h4>JudgeId: {judgeId}</h4>
+      </Box>
+      <Box sx={{ textAlign: 'center' }}>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            window.localStorage.clear()
+          }}
+        >
+          <h2>Reset Lokaler Zustand</h2>
+        </Button>
       </Box>
     </>
   )
