@@ -65,7 +65,8 @@ export function AddPerformance () {
       // TODO add slotNumber
       slotNumber: null,
       performanceNumber,
-      performanceStartTime: performanceStartTime.toISO()
+      performanceStartTime: performanceStartTime.toISO(),
+      disqualified: false
     })
       .then(() => enqueueSnackbar('Done', { variant: 'success' }))
       .catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
