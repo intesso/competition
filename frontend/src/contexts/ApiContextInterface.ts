@@ -114,6 +114,7 @@ export interface Performance {
   performanceName: string
   performanceNumber: number | null
   performanceStartTime: string | null
+  disqualified: boolean | null
 }
 
 export interface Performer {

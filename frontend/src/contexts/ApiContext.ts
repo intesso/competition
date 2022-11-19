@@ -47,11 +47,13 @@ export interface Api {
   addPerformance: (performance: Performance) => Promise<Performance>
   getPerformance: (tournamentId: string, id: string) => Promise<Performance | null>
   listPerformances: (tournamentId: string) => Promise<Performance[]>
+  disqualifyPerformance: (tournamentId: string, performanceId: string, disqualified: boolean) => Promise<Performance | null>
   getLocation: (tournamentId: string, id: string) => Promise<Location | null>
   listLocations: (tournamentName: string) => Promise<Location[]>
   addLocation: (location: Location) => Promise<Location>
   modifyLocation: (location: Location) => Promise<Location>
   removeLocation: (location: Location) => Promise<void>
+
   // judging
   listCategories: () => Promise<Category[]>
   getCategory: (id: string) => Promise<Category | null>
@@ -354,6 +356,16 @@ export function provideApiContext (): Api {
     ).data as Performance | null
   }
 
+  async function disqualifyPerformance (tournamentId: string, performanceId: string, disqualified: boolean) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/performances/${performanceId}/disqualified/${disqualified}`,
+        method: 'PUT'
+      })
+    ).data as Performance | null
+  }
+
   async function listTournamentPlan (tournamentId: string) {
     return (
       await axios({
@@ -546,6 +558,7 @@ export function provideApiContext (): Api {
     addPerformance,
     getPerformance,
     listPerformances,
+    disqualifyPerformance,
     listTournamentPlan,
     getCategory,
     listCategories,

@@ -21,6 +21,7 @@ export function CalculationAdmin () {
   const { listTournaments, calculateAllPoints, calculateAllCategoryRanks, calculateAllCombinationRanks, deleteAllCalculations } = useContext(ApiContext)
   const theme = useTheme()
   const { enqueueSnackbar } = useSnackbar()
+
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useLocalStorage('tournamentId', '')
 
@@ -53,7 +54,7 @@ export function CalculationAdmin () {
     <Container>
       <form>
         <Typography variant={'h4'} sx={{ marginTop: '22px', textAlign: 'center' }}>
-          Turnier Queue Dashboard
+          Wertungsrichter Dashboard
         </Typography>
 
         <FormControl fullWidth margin="normal">
@@ -118,6 +119,7 @@ export function CalculationAdmin () {
               <h2>DELETE all Calculations</h2>
             </Button>
           </Grid>
+
         </Grid>
 
         <Stack

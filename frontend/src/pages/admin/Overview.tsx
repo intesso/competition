@@ -23,7 +23,7 @@ export const pages = {
 
   '/admin/calculation': 'Kalkulation Admin',
 
-  '/admin/tournament-queue?admin=true': 'Turnier Queue Admin'
+  '/admin/tournament-queue?admin=true': 'Turnier Queue Admin Dashboard'
 }
 
 export const enhancedPages = {
