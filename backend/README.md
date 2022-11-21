@@ -2,10 +2,9 @@
 
 ## install
 
-prerequisites: 
 
 - install node.js LTS: https://nodejs.org/en/download/
-- v16.17.0
+- tested with: v16
 
 open a terminal at this directory and run:
 
@@ -20,7 +19,7 @@ npm install
 npm start
 ```
 
-## setup
+## setup system
 
 
 ```sh
@@ -38,6 +37,7 @@ npm run test:integration
 
 - node-red (engine) is running at: http://localhost:8082/red
 - backend at http://localhost:8080
+- frontend (see: frontend [README.md](../frontend/README.md) )
 - frontend in production modus: at http://localhost:8080/admin/overview
 - frontend in dev modus: at http://localhost:8081/admin/overview
 
@@ -85,7 +85,7 @@ ts-node src/lib/db-migrations/0003-insert-dummy-data.ts
 
 ## google sheet api
 
-used for reports:
+(reporting test, currently not in use)
 
 - how to: https://developers.google.com/sheets/api/quickstart/nodejs
 - create project: https://console.cloud.google.com/apis/dashboard?creatingProject=true&project=rope-skipping-swiss&supportedpurview=project

@@ -1,16 +1,13 @@
-# Theming with React and MUI
+# Competition Frontend
 
-This code is from the post [Theming with React and MUI](https://www.welcomedeveloper.com/react-mui-theme) from [WelcomeDeveloper.com](https://www.welcomedeveloper.com/).
-
-# Samsung Tablet Screen
-
-- 8,7 Zoll 
-- Resolution: 1340 x 800 (WXGA+)
-
+built with the main frameworks: react & MUI
 
 # Build & Run
 
 ## Development
+
+- in development mode, auto refresh of pages on changes and source-maps are enabled.
+- backend api calls are forwarded to the backend via proxy configuration [vite.config.ts](./vite.config.ts)
 
 run:
 
@@ -19,7 +16,7 @@ npm run dev
 ```
 
 - it starts the vite application at the port 8081
-- server: http://localhost:8081
+- `server` -> http://localhost:8081
 
 ## Production
 
@@ -31,7 +28,7 @@ npm run build
 
 - it builds the single page application (dist folder)
 - it will be served by the backend, therefore no need to start the frontend separately for production
-- server -> started via backend: http://localhost:8080
+- `server` -> started via backend: http://localhost:8080
 
 # Pages
 
@@ -39,7 +36,13 @@ npm run build
 
 <server>/admin/overview
 
+e.g. http://
+
 
 **Judging Section**
 
 <server>/admin/select-raw-point
+
+or :
+
+http://localhost:8080/judging/start?tournamentName=Team%20SM%202022&id=J1
