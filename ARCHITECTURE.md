@@ -1,5 +1,7 @@
 # System Architecture
 
+> communicated with diagrams
+
 ## Hardware Setup
 
 ![Hardware System Setup](./docs/diagrams/Hardware-System-Setup.drawio.svg)
