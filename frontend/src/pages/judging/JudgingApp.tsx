@@ -35,6 +35,7 @@ import TableRowsIcon from '@mui/icons-material/TableRows'
 import PlaceIcon from '@mui/icons-material/Place'
 import GavelIcon from '@mui/icons-material/Gavel'
 import TuneIcon from '@mui/icons-material/Tune'
+import { categoryTitles, criteriaNames } from '../../lib/reportDefinitions'
 
 export interface AppProps {
   children?: ReactNode
@@ -181,6 +182,14 @@ export function JudgingApp ({ children }: AppProps) {
     return (performance && performance?.slotNumber) || slotNumber
   }
 
+  function getCategoryTitle (categoryName = '') {
+    return categoryTitles[categoryName] || dedupe(snakeToPascal(categoryName))
+  }
+
+  function getCriteriaTitle (criteriaName = '') {
+    return criteriaNames[criteriaName] || snakeToPascal(criteriaName)
+  }
+
   function Infos () {
     return (
       <Stack sx={{ flexGrow: 1 }} direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 2, md: 2 }}>
@@ -210,13 +219,13 @@ export function JudgingApp ({ children }: AppProps) {
         )}
         <List sx={classes.list}>
           <ListItem sx={{ ...classes.listItem, minWidth: '160px' }}>
-            <ListItemText primary={<CategoryIcon />} secondary={dedupe(snakeToPascal(category?.categoryName || ''))} />
+            <ListItemText primary={<CategoryIcon />} secondary={getCategoryTitle(category?.categoryName)} />
           </ListItem>
         </List>
 
         <List sx={classes.list}>
           <ListItem sx={classes.listItem}>
-            <ListItemText primary={<WorkspacesIcon />} secondary={criteria?.criteriaName} />
+            <ListItemText primary={<WorkspacesIcon />} secondary={getCriteriaTitle(criteria?.criteriaName)} />
           </ListItem>
         </List>
         <List sx={classes.list}>

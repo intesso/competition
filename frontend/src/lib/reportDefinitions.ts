@@ -75,7 +75,7 @@ export const reportAttributes = {
   categoryPoint: 'Punkte'
 }
 
-export const criteriaNames = {
+export const criteriaNames: ReportLookup = {
   speed: 'Speed',
   difficulty: 'Level',
   variation: 'Variation',
