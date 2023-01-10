@@ -7,3 +7,4 @@ coverage
 backup
 .config.*
 __generated__
+dump*.*
