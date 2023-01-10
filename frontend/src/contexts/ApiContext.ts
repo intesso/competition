@@ -581,7 +581,6 @@ export const ApiContext = createContext<Api>({} as Api)
 export function getEnvVariables () {
   console.log('ENV', import.meta.env)
   const secure = import.meta.env.SHARED_SERVER_SECURE === 'true'
-  const serverAddress = import.meta.env.SHARED_SERVER_ADDRESS
-
+  const serverAddress = import.meta.env.SHARED_SERVER_ADDRESS || window.location.origin
   return { secure, serverAddress }
 }

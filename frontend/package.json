@@ -8,6 +8,7 @@
     "fix": "eslint . --fix",
     "start": "cd dist && live-server --entry-file=index.html --port=7777",
     "pm2": "pm2 start npm --name controller-web -- run start",
+    "pm2-localtunnel": "pm2 start ./localtunnel.sh --name localtunnel",
     "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview --host",
