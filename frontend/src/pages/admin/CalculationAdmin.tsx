@@ -57,21 +57,23 @@ export function CalculationAdmin () {
           Wertungsrichter Dashboard
         </Typography>
 
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="tournamentId">Wettkampf</InputLabel>
-          <Select
-            labelId="tournamentId"
-            value={tournamentId}
-            label="Wettkampf"
-            onChange={(e) => setTournamentId(e.target.value)}
-          >
-            {tournaments.map((tournament) => (
-              <MenuItem key={tournament.id} value={tournament.id}>
-                {tournament.tournamentName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        {tournaments.length > 0 &&
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="tournamentId">Wettkampf</InputLabel>
+            <Select
+              labelId="tournamentId"
+              value={tournamentId}
+              label="Wettkampf"
+              onChange={(e) => setTournamentId(e.target.value)}
+            >
+              {tournaments.map((tournament) => (
+                <MenuItem key={tournament.id} value={tournament.id}>
+                  {tournament.tournamentName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        }
 
         <Grid container spacing={4} sx={{ marginTop: '10px' }}>
           <Grid item xs={6}>
@@ -116,7 +118,11 @@ export function CalculationAdmin () {
               }}
               sx={{ color: theme.palette.warning.main }}
             >
+              <div>
               <h2>DELETE all Calculations</h2>
+              <h3> *** Raw Points are not touched ***</h3>
+              <h3>you can always recalculate the Results</h3>
+              </div>
             </Button>
           </Grid>
 

@@ -46,3 +46,7 @@ e.g. http://
 or :
 
 http://localhost:8080/judging/start?tournamentName=Team%20SM%202022&id=J1
+
+**Tournament Admin**
+
+<server>/admin/tournament?admin=true

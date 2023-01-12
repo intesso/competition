@@ -69,7 +69,7 @@ export function TournamentAdmin () {
       }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
-  }, [performanceId])
+  }, [performanceLookup, performanceId])
 
   const colHeight = 200
 
@@ -122,21 +122,23 @@ export function TournamentAdmin () {
           Turnier Admin Dashboard
         </Typography>
 
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="tournamentId">Wettkampf</InputLabel>
-          <Select
-            labelId="tournamentId"
-            value={tournamentId}
-            label="Wettkampf"
-            onChange={(e) => setTournamentId(e.target.value)}
-          >
-            {tournaments.map((tournament) => (
-              <MenuItem key={tournament.id} value={tournament.id}>
-                {tournament.tournamentName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        {tournaments.length > 0 &&
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="tournamentId">Wettkampf</InputLabel>
+            <Select
+              labelId="tournamentId"
+              value={tournamentId}
+              label="Wettkampf"
+              onChange={(e) => setTournamentId(e.target.value)}
+            >
+              {tournaments.map((tournament) => (
+                <MenuItem key={tournament.id} value={tournament.id}>
+                  {tournament.tournamentName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        }
 
         <Grid container spacing={4} sx={{ marginTop: '10px' }}>
           <Grid item xs={6}>
@@ -181,9 +183,14 @@ export function TournamentAdmin () {
               }}
               sx={{ color: theme.palette.warning.main }}
             >
+              <div>
               <h2>DELETE all Calculations</h2>
+              <h3> *** Raw Points are not touched ***</h3>
+              <h3>you can always recalculate the Results</h3>
+              </div>
             </Button>
           </Grid>
+
           {admin && (
             <Grid item xs={12}>
               <Button
@@ -194,8 +201,11 @@ export function TournamentAdmin () {
                 }}
                 sx={{ color: theme.palette.error.main }}
               >
+                <div>
                 <h2>DANGER DELETE all Points</h2>
+                <h3>!!! including the raw points !!!</h3>
                 <h3>!!! there is no way back !!!</h3>
+                </div>
               </Button>
             </Grid>
           )}
@@ -210,47 +220,59 @@ export function TournamentAdmin () {
                 }}
                 sx={{ color: theme.palette.error.main }}
               >
-                <h2>DANGER DELETE Tournament Queue</h2>
-                <h3>!!! there is no way back !!!</h3>
+                <div>
+                  <h2>DANGER DELETE Tournament Queue History</h2>
+                  <h3>basically resets the current queue</h3>
+                  <h3>!!! there is no way back !!!</h3>
+                </div>
+
               </Button>
             </Grid>
           )}
 
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="performanceId">Performance</InputLabel>
-            <Select
-              labelId="performanceId"
-              value={performanceId}
-              label="Performance"
-              onChange={(e) => setPerformanceId(e.target.value)}
-            >
-              {performances.map((performance) => (
-                <MenuItem key={performance.id} value={performance.id}>
-                  {performance.slotNumber} | {dedupe(snakeToPascal(performance.performanceName || ''))}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          {performanceLookup && Object.keys(performanceLookup).length && (
+            <Grid item xs={12}>
+              <FormControl fullWidth margin="normal">
+                <InputLabel id="performanceId">Performance</InputLabel>
+                <Select
+                  labelId="performanceId"
+                  value={performanceId}
+                  label="Performance"
+                  onChange={(e) => setPerformanceId(e.target.value)}
+                >
+                  {performances.map((performance) => (
+                    <MenuItem key={performance.id} value={performance.id}>
+                      {performance.slotNumber} | {dedupe(snakeToPascal(performance.performanceName || ''))}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+          )}
+
+          <Grid item xs={12}>
+            {performanceLookup && performanceLookup[performanceId] && (
+              <Stack
+                sx={{ marginBottom: '10px' }}
+                direction={{ xs: 'row', sm: 'row' }}
+                spacing={{ xs: 1, sm: 2, md: 4 }}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Box component='div'>
+                  Disqualifiziert
+                </Box>
+                <Switch
+                  checked={disqualified}
+                  onChange={(event) => handleDisqualified(event.target.checked)}
+                  inputProps={{ 'aria-label': 'inputType' }}
+                />
+              </Stack>
+            )}
+          </Grid>
+
         </Grid>
 
-        {performanceLookup && performanceLookup[performanceId] && (
-          <Stack
-            sx={{ marginBottom: '10px' }}
-            direction={{ xs: 'row', sm: 'row' }}
-            spacing={{ xs: 1, sm: 2, md: 4 }}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Box component='div'>
-              Disqualifiziert
-            </Box>
-            <Switch
-              checked={disqualified}
-              onChange={(event) => handleDisqualified(event.target.checked)}
-              inputProps={{ 'aria-label': 'inputType' }}
-            />
-          </Stack>
-        )}
       </form>
     </Container>
   )
