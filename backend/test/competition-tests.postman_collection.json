@@ -108,7 +108,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -118,7 +118,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -639,7 +639,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -649,7 +649,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -1170,7 +1170,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -1180,7 +1180,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -1701,7 +1701,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -1711,7 +1711,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -2232,7 +2232,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -2242,7 +2242,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -2763,7 +2763,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -2773,7 +2773,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -3294,7 +3294,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -3304,7 +3304,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -4212,7 +4212,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -4222,7 +4222,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -5130,7 +5130,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -5140,7 +5140,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -6048,7 +6048,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -6058,7 +6058,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -6578,7 +6578,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -6588,7 +6588,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -7108,7 +7108,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -7118,7 +7118,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -7638,7 +7638,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -7648,7 +7648,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -8168,7 +8168,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -8178,7 +8178,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -8698,7 +8698,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -8708,7 +8708,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -9228,7 +9228,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -9238,7 +9238,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -10146,7 +10146,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -10156,7 +10156,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -11064,7 +11064,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -11074,7 +11074,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -11982,7 +11982,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -11992,7 +11992,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -12900,7 +12900,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -12910,7 +12910,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -13818,7 +13818,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -13828,7 +13828,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -14736,7 +14736,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -14746,7 +14746,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -15611,7 +15611,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -15621,7 +15621,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -16486,7 +16486,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -16496,7 +16496,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}
@@ -17361,7 +17361,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments?tournamentName=Team SM 2022",
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Team",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -17371,7 +17371,7 @@
 							"query": [
 								{
 									"key": "tournamentName",
-									"value": "Team SM 2022"
+									"value": "Test SM Team"
 								}
 							]
 						}

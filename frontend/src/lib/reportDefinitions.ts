@@ -1215,7 +1215,7 @@ export const combinationMixed: CombinationMixed = {
       'team-u21-teamShow-speed-doubleDutchRelay'
     ],
     'team-overall-teamShow-teamShow-teamShow': [
-      'team-ü21-teamShow-teamShow-teamShow', 
+      'team-ü21-teamShow-teamShow-teamShow',
       'team-u21-teamShow-teamShow-teamShow'
     ]
   },
