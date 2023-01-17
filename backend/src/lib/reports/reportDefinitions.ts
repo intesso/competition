@@ -126,12 +126,12 @@ export const categoryTitles: ReportLookup = {
   'single-u12-advanced-speed-30sSingleRope': 'Advanced U12 Speed 30s',
   'single-u12-advanced-speed-120sSingleRope': 'Advanced U12 Speed 120s',
   'single-u12-advanced-freestyle-singleRope': 'Advanced U12 Freestyle',
-  'single-noAgeLimit-any-speed-tripleUnder': 'Triple Unders',
-  'team-noAgeLimit-erso-speed-doubleDutchRelay': 'ERSO DD Relay',
-  'team-noAgeLimit-erso-speed-singleRopeRelay': 'ERSO SR Relay',
-  'team-noAgeLimit-erso-freestyle-singleRopePair': 'ERSO SR Pair',
-  'team-noAgeLimit-erso-freestyle-singleRopeTeam': 'ERSO SR Team',
-  'team-noAgeLimit-erso-freestyle-doubleDutchSingle': 'ERSO DD Single',
+  'single-open-any-speed-tripleUnder': 'Triple Unders',
+  'team-open-erso-speed-doubleDutchRelay': 'ERSO DD Relay',
+  'team-open-erso-speed-singleRopeRelay': 'ERSO SR Relay',
+  'team-open-erso-freestyle-singleRopePair': 'ERSO SR Pair',
+  'team-open-erso-freestyle-singleRopeTeam': 'ERSO SR Team',
+  'team-open-erso-freestyle-doubleDutchSingle': 'ERSO DD Single',
   'team-ü21-teamShow-speed-doubleDutchRelay': 'SHOW Ü21 DD Relay',
   'team-ü21-teamShow-speed-singleRopeRelay': 'SHOW Ü21 SR Relay',
   'team-ü21-teamShow-teamShow-teamShow': 'SHOW Ü21 Show',
@@ -190,12 +190,12 @@ export const categoryNames: ReportLookup = {
   'single-u12-advanced-speed-30sSingleRope': 'Speed 30s',
   'single-u12-advanced-speed-120sSingleRope': 'Speed 120s',
   'single-u12-advanced-freestyle-singleRope': 'Freestyle',
-  'single-noAgeLimit-any-speed-tripleUnder': 'Triple Unders',
-  'team-noAgeLimit-erso-speed-doubleDutchRelay': 'DD Relay',
-  'team-noAgeLimit-erso-speed-singleRopeRelay': 'SR Relay',
-  'team-noAgeLimit-erso-freestyle-singleRopePair': 'SR Pair',
-  'team-noAgeLimit-erso-freestyle-singleRopeTeam': 'SR Team',
-  'team-noAgeLimit-erso-freestyle-doubleDutchSingle': 'DD Single',
+  'single-open-any-speed-tripleUnder': 'Triple Unders',
+  'team-open-erso-speed-doubleDutchRelay': 'DD Relay',
+  'team-open-erso-speed-singleRopeRelay': 'SR Relay',
+  'team-open-erso-freestyle-singleRopePair': 'SR Pair',
+  'team-open-erso-freestyle-singleRopeTeam': 'SR Team',
+  'team-open-erso-freestyle-doubleDutchSingle': 'DD Single',
   'team-ü21-teamShow-speed-doubleDutchRelay': 'DD Relay',
   'team-ü21-teamShow-speed-singleRopeRelay': 'SR Relay',
   'team-ü21-teamShow-teamShow-teamShow': 'Show',
@@ -238,7 +238,7 @@ export const combinationNames: ReportLookup = {
 }
 
 export const categoryOrder: ReportOrder = {
-  'team-noAgeLimit-erso-speed-singleRopeRelay': {
+  'team-open-erso-speed-singleRopeRelay': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -247,7 +247,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'team-noAgeLimit-erso-speed-doubleDutchRelay': {
+  'team-open-erso-speed-doubleDutchRelay': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -328,7 +328,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'team-noAgeLimit-erso-freestyle-singleRopePair': {
+  'team-open-erso-freestyle-singleRopePair': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -340,7 +340,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 8,
     categoryRank: 9
   },
-  'team-noAgeLimit-erso-freestyle-singleRopeTeam': {
+  'team-open-erso-freestyle-singleRopeTeam': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -352,7 +352,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 8,
     categoryRank: 9
   },
-  'team-noAgeLimit-erso-freestyle-doubleDutchSingle': {
+  'team-open-erso-freestyle-doubleDutchSingle': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -723,11 +723,11 @@ export const combinationOrder: ReportOrder = {
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
-    'team-noAgeLimit-erso-speed-singleRopeRelay': 4,
-    'team-noAgeLimit-erso-speed-doubleDutchRelay': 5,
-    'team-noAgeLimit-erso-freestyle-singleRopePair': 6,
-    'team-noAgeLimit-erso-freestyle-singleRopeTeam': 7,
-    'team-noAgeLimit-erso-freestyle-doubleDutchSingle': 8,
+    'team-open-erso-speed-singleRopeRelay': 4,
+    'team-open-erso-speed-doubleDutchRelay': 5,
+    'team-open-erso-freestyle-singleRopePair': 6,
+    'team-open-erso-freestyle-singleRopeTeam': 7,
+    'team-open-erso-freestyle-doubleDutchSingle': 8,
     combinationRankPoints: 9,
     combinationRank: 10
   },
@@ -907,8 +907,8 @@ export const combinationOrder: ReportOrder = {
 
 export const combinationPriority: ReportOrder = {
   'team-erso': {
-    'team-noAgeLimit-erso-freestyle-singleRopeTeam': 0,
-    'team-noAgeLimit-erso-freestyle-doubleDutchSingle': 1
+    'team-open-erso-freestyle-singleRopeTeam': 0,
+    'team-open-erso-freestyle-doubleDutchSingle': 1
   },
   'team-ü21-show': {
     'team-ü21-teamShow-teamShow-teamShow': 0,

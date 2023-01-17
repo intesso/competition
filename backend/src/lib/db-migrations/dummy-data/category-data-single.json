@@ -206,7 +206,7 @@
   {
     "categoryId": "11111111-0000-0000-0000-000000000036",
     "judgingRuleId": "11111111-0000-0000-0000-000000000005",
-    "categoryName": "single-noAgeLimit-any-speed-tripleUnder",
+    "categoryName": "single-open-any-speed-tripleUnder",
     "competition": "single"
   }
 ]

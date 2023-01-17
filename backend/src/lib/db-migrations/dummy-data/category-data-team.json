@@ -2,31 +2,31 @@
   {
     "categoryId": "11111111-0000-0000-0000-000000000037",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "team-noAgeLimit-erso-speed-doubleDutchRelay",
+    "categoryName": "team-open-erso-speed-doubleDutchRelay",
     "competition": "team"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000038",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "team-noAgeLimit-erso-speed-singleRopeRelay",
+    "categoryName": "team-open-erso-speed-singleRopeRelay",
     "competition": "team"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000039",
     "judgingRuleId": "11111111-0000-0000-0000-000000000006",
-    "categoryName": "team-noAgeLimit-erso-freestyle-singleRopePair",
+    "categoryName": "team-open-erso-freestyle-singleRopePair",
     "competition": "team"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000040",
     "judgingRuleId": "11111111-0000-0000-0000-000000000007",
-    "categoryName": "team-noAgeLimit-erso-freestyle-singleRopeTeam",
+    "categoryName": "team-open-erso-freestyle-singleRopeTeam",
     "competition": "team"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000041",
     "judgingRuleId": "11111111-0000-0000-0000-000000000008",
-    "categoryName": "team-noAgeLimit-erso-freestyle-doubleDutchSingle",
+    "categoryName": "team-open-erso-freestyle-doubleDutchSingle",
     "competition": "team"
   },
   {

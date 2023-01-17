@@ -6171,7 +6171,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-speed-singleRopeRelay-Barbamama",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-speed-singleRopeRelay-Barbamama",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -6183,7 +6183,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-speed-singleRopeRelay-Barbamama"
+									"value": "team-open-erso-speed-singleRopeRelay-Barbamama"
 								}
 							]
 						}
@@ -6701,7 +6701,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-speed-singleRopeRelay-Barbapapa",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-speed-singleRopeRelay-Barbapapa",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -6713,7 +6713,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-speed-singleRopeRelay-Barbapapa"
+									"value": "team-open-erso-speed-singleRopeRelay-Barbapapa"
 								}
 							]
 						}
@@ -7231,7 +7231,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-speed-singleRopeRelay-let's fätz",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-speed-singleRopeRelay-let's fätz",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -7243,7 +7243,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-speed-singleRopeRelay-let's fätz"
+									"value": "team-open-erso-speed-singleRopeRelay-let's fätz"
 								}
 							]
 						}
@@ -7761,7 +7761,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-speed-doubleDutchRelay-Barbamama",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-speed-doubleDutchRelay-Barbamama",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -7773,7 +7773,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-speed-doubleDutchRelay-Barbamama"
+									"value": "team-open-erso-speed-doubleDutchRelay-Barbamama"
 								}
 							]
 						}
@@ -8291,7 +8291,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-speed-doubleDutchRelay-Barbapapa",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-speed-doubleDutchRelay-Barbapapa",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -8303,7 +8303,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-speed-doubleDutchRelay-Barbapapa"
+									"value": "team-open-erso-speed-doubleDutchRelay-Barbapapa"
 								}
 							]
 						}
@@ -8821,7 +8821,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-speed-doubleDutchRelay-let's fätz",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-speed-doubleDutchRelay-let's fätz",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -8833,7 +8833,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-speed-doubleDutchRelay-let's fätz"
+									"value": "team-open-erso-speed-doubleDutchRelay-let's fätz"
 								}
 							]
 						}
@@ -9351,7 +9351,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-singleRopePair-Barbamama",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-singleRopePair-Barbamama",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -9363,7 +9363,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-singleRopePair-Barbamama"
+									"value": "team-open-erso-freestyle-singleRopePair-Barbamama"
 								}
 							]
 						}
@@ -10269,7 +10269,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-singleRopePair-Barbapapa",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-singleRopePair-Barbapapa",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -10281,7 +10281,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-singleRopePair-Barbapapa"
+									"value": "team-open-erso-freestyle-singleRopePair-Barbapapa"
 								}
 							]
 						}
@@ -11187,7 +11187,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-singleRopePair-let's fätz",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-singleRopePair-let's fätz",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -11199,7 +11199,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-singleRopePair-let's fätz"
+									"value": "team-open-erso-freestyle-singleRopePair-let's fätz"
 								}
 							]
 						}
@@ -12105,7 +12105,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-singleRopeTeam-Barbamama",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-singleRopeTeam-Barbamama",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -12117,7 +12117,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-singleRopeTeam-Barbamama"
+									"value": "team-open-erso-freestyle-singleRopeTeam-Barbamama"
 								}
 							]
 						}
@@ -13023,7 +13023,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-singleRopeTeam-Barbapapa",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-singleRopeTeam-Barbapapa",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -13035,7 +13035,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-singleRopeTeam-Barbapapa"
+									"value": "team-open-erso-freestyle-singleRopeTeam-Barbapapa"
 								}
 							]
 						}
@@ -13941,7 +13941,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-singleRopeTeam-let's fätz",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-singleRopeTeam-let's fätz",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -13953,7 +13953,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-singleRopeTeam-let's fätz"
+									"value": "team-open-erso-freestyle-singleRopeTeam-let's fätz"
 								}
 							]
 						}
@@ -14859,7 +14859,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-doubleDutchSingle-Barbamama",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-doubleDutchSingle-Barbamama",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -14871,7 +14871,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-doubleDutchSingle-Barbamama"
+									"value": "team-open-erso-freestyle-doubleDutchSingle-Barbamama"
 								}
 							]
 						}
@@ -15734,7 +15734,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-doubleDutchSingle-Barbapapa",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-doubleDutchSingle-Barbapapa",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -15746,7 +15746,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-doubleDutchSingle-Barbapapa"
+									"value": "team-open-erso-freestyle-doubleDutchSingle-Barbapapa"
 								}
 							]
 						}
@@ -16609,7 +16609,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-doubleDutchSingle-let's fätz",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-doubleDutchSingle-let's fätz",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -16621,7 +16621,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-doubleDutchSingle-let's fätz"
+									"value": "team-open-erso-freestyle-doubleDutchSingle-let's fätz"
 								}
 							]
 						}
@@ -17484,7 +17484,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-noAgeLimit-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -17496,7 +17496,7 @@
 							"query": [
 								{
 									"key": "performanceName",
-									"value": "team-noAgeLimit-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen"
+									"value": "team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen"
 								}
 							]
 						}
