@@ -83,8 +83,8 @@ export const criteriaNames = {
   deductions: 'Abzüge',
   difficultyAdvanced: 'Level',
   intermediate: 'Compulsory',
-  beginners: 'Compulsory',
-  tripleUnders: 'Triple Unders',
+  beginner: 'Compulsory',
+  tripleUnder: 'Triple Unders',
   presentationMusic: 'Präs. Musik',
   presentationCreativity: 'Präs. Kreativität'
 }
@@ -93,10 +93,10 @@ export const categoryTitles: ReportLookup = {
   'single-ü15-erso-speed-30sSingleRope': 'ERSO Speed 30s',
   'single-ü15-erso-speed-180sSingleRope': 'ERSO Speed 180s',
   'single-ü15-erso-freestyle-singleRope': 'ERSO Freestyle',
-  'single-ü15-beginners-speed-30sSingleRope': 'Beginners Ü15 Speed 30s',
-  'single-ü15-beginners-speed-60sSingleRope': 'Beginners Ü15 Speed 60s',
-  'single-ü15-beginners-speed-30sCrissCross': 'Beginners CrissCross 30s',
-  'single-ü15-beginners-compulsory-compulsory': 'Beginners Compulsory',
+  'single-ü15-beginner-speed-30sSingleRope': 'Beginner Ü15 Speed 30s',
+  'single-ü15-beginner-speed-60sSingleRope': 'Beginner Ü15 Speed 60s',
+  'single-ü15-beginner-speed-30sCrissCross': 'Beginner CrissCross 30s',
+  'single-ü15-beginner-compulsory-compulsory': 'Beginner Compulsory',
   'single-ü15-intermediate-speed-30sSingleRope': 'Intermediate Ü15 Speed 30s',
   'single-ü15-intermediate-speed-60sSingleRope': 'Intermediate Ü15 Speed 60s',
   'single-ü15-intermediate-speed-30sCrissCross': 'Intermediate Ü15 CrissCross 30s',
@@ -104,10 +104,10 @@ export const categoryTitles: ReportLookup = {
   'single-ü15-advanced-speed-30sSingleRope': 'Advanced Ü15 Speed 30s',
   'single-ü15-advanced-speed-120sSingleRope': 'Advanced Ü15 Speed 120s',
   'single-ü15-advanced-freestyle-singleRope': 'Advanced Ü15 Freestyle',
-  'single-u15-beginners-speed-30sSingleRope': 'Beginners U15 Speed 30s',
-  'single-u15-beginners-speed-60sSingleRope': 'Beginners U15 Speed 60s',
-  'single-u15-beginners-speed-30sCrissCross': 'Beginners U15 CrissCross 30s',
-  'single-u15-beginners-compulsory-compulsory': 'Beginners U15 Compulsory',
+  'single-u15-beginner-speed-30sSingleRope': 'Beginner U15 Speed 30s',
+  'single-u15-beginner-speed-60sSingleRope': 'Beginner U15 Speed 60s',
+  'single-u15-beginner-speed-30sCrissCross': 'Beginner U15 CrissCross 30s',
+  'single-u15-beginner-compulsory-compulsory': 'Beginner U15 Compulsory',
   'single-u15-intermediate-speed-30sSingleRope': 'Intermediate U15 Speed 30s',
   'single-u15-intermediate-speed-60sSingleRope': 'Intermediate U15 Speed 60s',
   'single-u15-intermediate-speed-30sCrissCross': 'Intermediate U15 CrissCross 30s',
@@ -115,10 +115,10 @@ export const categoryTitles: ReportLookup = {
   'single-u15-advanced-speed-30sSingleRope': 'Advanced U15 Speed 30s',
   'single-u15-advanced-speed-120sSingleRope': 'Advanced U15 Speed 120s',
   'single-u15-advanced-freestyle-singleRope': 'Advanced U15 Freestyle',
-  'single-u12-beginners-speed-30sSingleRope': 'Beginners U12 Speed 30s',
-  'single-u12-beginners-speed-60sSingleRope': 'Beginners U12 Speed 60s',
-  'single-u12-beginners-speed-30sCrissCross': 'Beginners U12 CrissCross 30s',
-  'single-u12-beginners-compulsory-compulsory': 'Beginners U12 Compulsory',
+  'single-u12-beginner-speed-30sSingleRope': 'Beginner U12 Speed 30s',
+  'single-u12-beginner-speed-60sSingleRope': 'Beginner U12 Speed 60s',
+  'single-u12-beginner-speed-30sCrissCross': 'Beginner U12 CrissCross 30s',
+  'single-u12-beginner-compulsory-compulsory': 'Beginner U12 Compulsory',
   'single-u12-intermediate-speed-30sSingleRope': 'Intermediate U12 Speed 30s',
   'single-u12-intermediate-speed-60sSingleRope': 'Intermediate U12 Speed 60s',
   'single-u12-intermediate-speed-30sCrissCross': 'Intermediate U12 CrissCross 30s',
@@ -157,10 +157,10 @@ export const categoryNames: ReportLookup = {
   'single-ü15-erso-speed-30sSingleRope': 'Speed 30s',
   'single-ü15-erso-speed-180sSingleRope': 'Speed 180s',
   'single-ü15-erso-freestyle-singleRope': 'Freestyle',
-  'single-ü15-beginners-speed-30sSingleRope': 'Speed 30s',
-  'single-ü15-beginners-speed-60sSingleRope': 'Speed 60s',
-  'single-ü15-beginners-speed-30sCrissCross': 'CrissCross 30s',
-  'single-ü15-beginners-compulsory-compulsory': 'Compulsory',
+  'single-ü15-beginner-speed-30sSingleRope': 'Speed 30s',
+  'single-ü15-beginner-speed-60sSingleRope': 'Speed 60s',
+  'single-ü15-beginner-speed-30sCrissCross': 'CrissCross 30s',
+  'single-ü15-beginner-compulsory-compulsory': 'Compulsory',
   'single-ü15-intermediate-speed-30sSingleRope': 'Speed 30s',
   'single-ü15-intermediate-speed-60sSingleRope': 'Speed 60s',
   'single-ü15-intermediate-speed-30sCrissCross': 'CrissCross 30s',
@@ -168,10 +168,10 @@ export const categoryNames: ReportLookup = {
   'single-ü15-advanced-speed-30sSingleRope': 'Speed 30s',
   'single-ü15-advanced-speed-120sSingleRope': 'Speed 120s',
   'single-ü15-advanced-freestyle-singleRope': 'Freestyle',
-  'single-u15-beginners-speed-30sSingleRope': 'Speed 30s',
-  'single-u15-beginners-speed-60sSingleRope': 'Speed 60s',
-  'single-u15-beginners-speed-30sCrissCross': 'CrissCross 30s',
-  'single-u15-beginners-compulsory-compulsory': 'Compulsory',
+  'single-u15-beginner-speed-30sSingleRope': 'Speed 30s',
+  'single-u15-beginner-speed-60sSingleRope': 'Speed 60s',
+  'single-u15-beginner-speed-30sCrissCross': 'CrissCross 30s',
+  'single-u15-beginner-compulsory-compulsory': 'Compulsory',
   'single-u15-intermediate-speed-30sSingleRope': 'Speed 30s',
   'single-u15-intermediate-speed-60sSingleRope': 'Speed 60s',
   'single-u15-intermediate-speed-30sCrissCross': 'CrissCross 30s',
@@ -179,10 +179,10 @@ export const categoryNames: ReportLookup = {
   'single-u15-advanced-speed-30sSingleRope': 'Speed 30s',
   'single-u15-advanced-speed-120sSingleRope': 'Speed 120s',
   'single-u15-advanced-freestyle-singleRope': 'Freestyle',
-  'single-u12-beginners-speed-30sSingleRope': 'Speed 30s',
-  'single-u12-beginners-speed-60sSingleRope': 'Speed 60s',
-  'single-u12-beginners-speed-30sCrissCross': 'CrissCross 30s',
-  'single-u12-beginners-compulsory-compulsory': 'Compulsory',
+  'single-u12-beginner-speed-30sSingleRope': 'Speed 30s',
+  'single-u12-beginner-speed-60sSingleRope': 'Speed 60s',
+  'single-u12-beginner-speed-30sCrissCross': 'CrissCross 30s',
+  'single-u12-beginner-compulsory-compulsory': 'Compulsory',
   'single-u12-intermediate-speed-30sSingleRope': 'Speed 30s',
   'single-u12-intermediate-speed-60sSingleRope': 'Speed 60s',
   'single-u12-intermediate-speed-30sCrissCross': 'CrissCross 30s',
@@ -219,13 +219,13 @@ export function getCombinationName (key: string) {
 
 export const combinationNames: ReportLookup = {
   'single-ü15-erso': 'ERSO',
-  'single-ü15-beginners': 'Beginners Ü15',
+  'single-ü15-beginner': 'Beginner Ü15',
   'single-ü15-intermediate': 'Intermediate Ü15',
   'single-ü15-advanced': 'Advanced Ü15',
-  'single-u15-beginners': 'Beginners U15',
+  'single-u15-beginner': 'Beginner U15',
   'single-u15-intermediate': 'Intermediate U15',
   'single-u15-advanced': 'Advanced U15',
-  'single-u12-beginners': 'Beginners U12',
+  'single-u12-beginner': 'Beginner U12',
   'single-u12-intermediate': 'Intermediate U12',
   'single-u12-advanced': 'Advanced U12',
   'single-tripleUnder': 'Triple Unders',
@@ -430,7 +430,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-ü15-beginners-speed-30sSingleRope': {
+  'single-ü15-beginner-speed-30sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -439,7 +439,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-ü15-beginners-speed-60sSingleRope': {
+  'single-ü15-beginner-speed-60sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -448,7 +448,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-ü15-beginners-speed-30sCrissCross': {
+  'single-ü15-beginner-speed-30sCrissCross': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -457,7 +457,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-u15-beginners-speed-30sSingleRope': {
+  'single-u15-beginner-speed-30sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -466,7 +466,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-u15-beginners-speed-60sSingleRope': {
+  'single-u15-beginner-speed-60sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -475,7 +475,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-u15-beginners-speed-30sCrissCross': {
+  'single-u15-beginner-speed-30sCrissCross': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -484,7 +484,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-u12-beginners-speed-30sSingleRope': {
+  'single-u12-beginner-speed-30sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -493,7 +493,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-U12-beginners-speed-60sSingleRope': {
+  'single-U12-beginner-speed-60sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -502,7 +502,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-u12-beginners-speed-30sCrissCross': {
+  'single-u12-beginner-speed-30sCrissCross': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -694,7 +694,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 8,
     categoryRank: 9
   },
-  'single-ü15-beginners-compulsory-compulsory': {
+  'single-ü15-beginner-compulsory-compulsory': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -798,39 +798,39 @@ export const combinationOrder: ReportOrder = {
     combinationRankPoints: 7,
     combinationRank: 8
   },
-  'single-ü15-beginners': {
+  'single-ü15-beginner': {
     combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
-    'single-ü15-beginners-speed-30sSingleRope': 4,
-    'single-ü15-beginners-speed-60sSingleRope': 5,
-    'single-ü15-beginners-speed-30sCrissCross': 6,
-    'single-ü15-beginners-compulsory-compulsory': 7,
+    'single-ü15-beginner-speed-30sSingleRope': 4,
+    'single-ü15-beginner-speed-60sSingleRope': 5,
+    'single-ü15-beginner-speed-30sCrissCross': 6,
+    'single-ü15-beginner-compulsory-compulsory': 7,
     combinationRankPoints: 8,
     combinationRank: 9
   },
-  'single-u15-beginners': {
+  'single-u15-beginner': {
     combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
-    'single-u15-beginners-speed-30sSingleRope': 4,
-    'single-u15-beginners-speed-60sSingleRope': 5,
-    'single-u15-beginners-speed-30sCrissCross': 6,
-    'single-u15-beginners-compulsory-compulsory': 7,
+    'single-u15-beginner-speed-30sSingleRope': 4,
+    'single-u15-beginner-speed-60sSingleRope': 5,
+    'single-u15-beginner-speed-30sCrissCross': 6,
+    'single-u15-beginner-compulsory-compulsory': 7,
     combinationRankPoints: 8,
     combinationRank: 9
   },
-  'single-u12-beginners': {
+  'single-u12-beginner': {
     combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
-    'single-u12-beginners-speed-30sSingleRope': 4,
-    'single-u12-beginners-speed-60sSingleRope': 5,
-    'single-u12-beginners-speed-30sCrissCross': 6,
-    'single-u12-beginners-compulsory-compulsory': 7,
+    'single-u12-beginner-speed-30sSingleRope': 4,
+    'single-u12-beginner-speed-60sSingleRope': 5,
+    'single-u12-beginner-speed-30sCrissCross': 6,
+    'single-u12-beginner-compulsory-compulsory': 7,
     combinationRankPoints: 8,
     combinationRank: 9
   },
@@ -934,17 +934,17 @@ export const combinationPriority: ReportOrder = {
     'single-ü15-erso-freestyle-singleRope': 0,
     'single-ü15-erso-speed-30sSingleRope': 1
   },
-  'single-ü15-beginners': {
-    'single-ü15-beginners-compulsory-compulsory': 0,
-    'single-ü15-beginners-speed-30sSingleRope': 1
+  'single-ü15-beginner': {
+    'single-ü15-beginner-compulsory-compulsory': 0,
+    'single-ü15-beginner-speed-30sSingleRope': 1
   },
-  'single-u15-beginners': {
-    'single-u15-beginners-compulsory-compulsory': 0,
-    'single-u15-beginners-speed-30sSingleRope': 1
+  'single-u15-beginner': {
+    'single-u15-beginner-compulsory-compulsory': 0,
+    'single-u15-beginner-speed-30sSingleRope': 1
   },
-  'single-u12-beginners': {
-    'single-u12-beginners-compulsory-compulsory': 0,
-    'single-u12-beginners-speed-30sSingleRope': 1
+  'single-u12-beginner': {
+    'single-u12-beginner-compulsory-compulsory': 0,
+    'single-u12-beginner-speed-30sSingleRope': 1
   },
   'single-ü15-intermediate': {
     'single-ü15-intermediate-compulsory-compulsory': 0,

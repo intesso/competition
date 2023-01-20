@@ -8,25 +8,25 @@
   {
     "categoryId": "11111111-0000-0000-0000-000000000003",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-ü15-beginners-speed-30sSingleRope",
+    "categoryName": "single-ü15-beginner-speed-30sSingleRope",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000004",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-ü15-beginners-speed-60sSingleRope",
+    "categoryName": "single-ü15-beginner-speed-60sSingleRope",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000005",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-ü15-beginners-speed-30sCrissCross",
+    "categoryName": "single-ü15-beginner-speed-30sCrissCross",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000006",
     "judgingRuleId": "11111111-0000-0000-0000-000000000004",
-    "categoryName": "single-ü15-beginners-compulsory-compulsory",
+    "categoryName": "single-ü15-beginner-compulsory-compulsory",
     "competition": "single"
   },
   {
@@ -74,25 +74,25 @@
   {
     "categoryId": "11111111-0000-0000-0000-000000000014",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-u15-beginners-speed-30sSingleRope",
+    "categoryName": "single-u15-beginner-speed-30sSingleRope",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000015",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-u15-beginners-speed-60sSingleRope",
+    "categoryName": "single-u15-beginner-speed-60sSingleRope",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000016",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-u15-beginners-speed-30sCrissCross",
+    "categoryName": "single-u15-beginner-speed-30sCrissCross",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000017",
     "judgingRuleId": "11111111-0000-0000-0000-000000000004",
-    "categoryName": "single-u15-beginners-compulsory-compulsory",
+    "categoryName": "single-u15-beginner-compulsory-compulsory",
     "competition": "single"
   },
   {
@@ -140,25 +140,25 @@
   {
     "categoryId": "11111111-0000-0000-0000-000000000025",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-u12-beginners-speed-30sSingleRope",
+    "categoryName": "single-u12-beginner-speed-30sSingleRope",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000026",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-u12-beginners-speed-60sSingleRope",
+    "categoryName": "single-u12-beginner-speed-60sSingleRope",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000027",
     "judgingRuleId": "11111111-0000-0000-0000-000000000000",
-    "categoryName": "single-u12-beginners-speed-30sCrissCross",
+    "categoryName": "single-u12-beginner-speed-30sCrissCross",
     "competition": "single"
   },
   {
     "categoryId": "11111111-0000-0000-0000-000000000028",
     "judgingRuleId": "11111111-0000-0000-0000-000000000004",
-    "categoryName": "single-u12-beginners-compulsory-compulsory",
+    "categoryName": "single-u12-beginner-compulsory-compulsory",
     "competition": "single"
   },
   {
