@@ -78,8 +78,10 @@ if needed first reset the existing db. check run the script: reset.db.test.sql
 npm run generate:dbddl
 # generate typescript db types
 npm run generate:dbtypes
-# insert dummy data manually:
-npm start # in another terminal
+# start the application
+npm start 
+
+# insert dummy data manually (if needed) in another terminal:
 ts-node src/lib/db-migrations/0003-insert-dummy-data.ts
 ```
 
