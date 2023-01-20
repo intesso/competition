@@ -1,10 +1,10 @@
 Id,judgingRuleId,judgingRuleName,criteriaName,criteriaDescription,criteriaWeight,subCriteriaName,subCriteriaDescription,subCriteriaWeight,subCriteriaValueType,subCriteriaRangeFrom,subCriteriaRangeTo,subCriteriaStep,criteriaUiLayout,subCriteriaUiPosition,Kontrollspalte
 11111111-0000-0000-0000-000000000000,11111111-0000-0000-0000-000000000000,speed,speed,Speed Disziplin,100,count,Anzahl Sprünge,100,integer,0,700,1,1-3x1,1,
 11111111-0000-0000-0000-000000000000,11111111-0000-0000-0000-000000000000,speed,speed,Speed Disziplin,100,falseStart,Frühstart,-500,integer,0,4,1,1-3x1,2,
-11111111-0000-0000-0000-000000000001,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,difficulty,Level ERSO,50,level2,Level 2,100,integer,0,10,1,3x3,3,
-11111111-0000-0000-0000-000000000001,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,difficulty,Level ERSO,50,level3,Level 3,160,integer,0,19,1,3x3,4,
-11111111-0000-0000-0000-000000000001,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,difficulty,Level ERSO,50,level4,Level 4,230,integer,0,13,1,3x3,6,
-11111111-0000-0000-0000-000000000001,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,difficulty,Level ERSO,50,level5,Level 5,350,integer,0,29,1,3x3,7,
+11111111-0000-0000-0000-000000000001,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,difficulty,Level ERSO,50,level2,Level 2,100,integer,0,10,1,3x3,3,1000
+11111111-0000-0000-0000-000000000001,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,difficulty,Level ERSO,50,level3,Level 3,160,integer,0,19,1,3x3,4,3040
+11111111-0000-0000-0000-000000000001,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,difficulty,Level ERSO,50,level4,Level 4,230,integer,0,13,1,3x3,6,2990
+11111111-0000-0000-0000-000000000001,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,difficulty,Level ERSO,50,level5,Level 5,350,integer,0,29,1,3x3,7,10150
 11111111-0000-0000-0000-000000000002,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,variation,Variation,15,setOfCrosses,Crosses (Vierer-Set),333.3333333,integer,0,8,1,3x3,1,2666.666667
 11111111-0000-0000-0000-000000000002,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,variation,Variation,15,setOfMultiples,Multiples (Vierer-Set),333.3333333,integer,0,8,1,3x3,4,2666.666667
 11111111-0000-0000-0000-000000000002,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,variation,Variation,15,setOfDirectionChanges,Direction Changes (Vierer-Set),333.3333333,integer,0,3,1,3x3,7,1000
@@ -19,7 +19,7 @@ Id,judgingRuleId,judgingRuleName,criteriaName,criteriaDescription,criteriaWeight
 11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,movementAcrossFloor,Ausnützung der Wettkampffläche,166.6666667,integer,0,5,1,3x3,5,833.3333333
 11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,entertainment,Präsentation nach Aussen (%),16.66666667,integer,0,100,5,3x3,6,1666.666667
 11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,overallImpression,Gesamteindruck (%),16.66666667,integer,0,100,5,3x3,9,1666.666667
-11111111-0000-0000-0000-000000000004,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,deductions,Abzüge,100,formAndExecution,Ausführung,-25,integer,0,50,1,3x3,2,
+11111111-0000-0000-0000-000000000004,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,deductions,Abzüge,100,formAndExecution,Ausführung,-8.75,integer,0,50,1,3x3,2,
 11111111-0000-0000-0000-000000000004,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,deductions,Abzüge,100,minorMistakes,Kleine Fehler,-50,integer,0,50,1,3x3,1,
 11111111-0000-0000-0000-000000000004,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,deductions,Abzüge,100,majorMistakes,Grosse Fehler,-100,integer,0,50,1,3x3,4,
 11111111-0000-0000-0000-000000000004,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,deductions,Abzüge,100,timeViolation,Zeitüberschreitung,-100,integer,0,1,1,3x3,6,
@@ -42,21 +42,21 @@ Id,judgingRuleId,judgingRuleName,criteriaName,criteriaDescription,criteriaWeight
 11111111-0000-0000-0000-000000000007,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,presentation,Präsentation,35,movementAcrossFloor,Ausnützung der Wettkampffläche,166.6666667,integer,0,5,1,3x3,5,833.3333333
 11111111-0000-0000-0000-000000000007,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,presentation,Präsentation,35,entertainment,Präsentation nach Aussen,16.66666667,integer,0,100,5,3x3,6,1666.666667
 11111111-0000-0000-0000-000000000007,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,presentation,Präsentation,35,overallImpression,Gesamteindruck,16.66666667,integer,0,100,5,3x3,9,1666.666667
-11111111-0000-0000-0000-000000000008,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,deductions,Abzüge,100,formAndExecution,Ausführung,-25,integer,0,50,1,3x3,2,
+11111111-0000-0000-0000-000000000008,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,deductions,Abzüge,100,formAndExecution,Ausführung,-8.75,integer,0,50,1,3x3,2,
 11111111-0000-0000-0000-000000000008,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,deductions,Abzüge,100,minorMistakes,Kleine Fehler,-50,integer,0,50,1,3x3,1,
 11111111-0000-0000-0000-000000000008,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,deductions,Abzüge,100,majorMistakes,Grosse Fehler,-100,integer,0,50,1,3x3,4,
 11111111-0000-0000-0000-000000000008,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,deductions,Abzüge,100,timeViolation,Zeitüberschreitung,-100,integer,0,1,1,3x3,6,
 11111111-0000-0000-0000-000000000008,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,deductions,Abzüge,100,spaceViolations,Überschreitung der Wettkampffläche,-100,integer,0,20,1,3x3,3,
-11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,maximumPoints,Maximale Punkte,100,integer,58,58,1,3x3,9,
-11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,excecutionDeduction,Ausführung (/),-100,integer,0,30,1,3x3,1,
-11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,mistake,Hänger (O),-100,integer,0,14,1,3x3,3,
-11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,rhythmDeduction,Musik,-100,integer,0,14,1,3x3,6,
-11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,bonus,Push-Up Bonus,100,integer,0,1,1,3x3,4,
-11111111-0000-0000-0000-000000000010,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginners,beginner,Beginner Compulsory,100,maximumPoints,Maximale Punkte,100,integer,20,20,1,3x2,9,
-11111111-0000-0000-0000-000000000010,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginners,beginner,Beginner Compulsory,100,executionDeduction,Ausführung,-100,integer,0,20,1,3x2,1,
-11111111-0000-0000-0000-000000000010,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginners,beginner,Beginner Compulsory,100,sequenceDeduction,Sprungfolge,-100,integer,0,25,1,3x2,3,
-11111111-0000-0000-0000-000000000011,11111111-0000-0000-0000-000000000005,singleTripleUnders,tripleUnder,Triple Unders,100,countFirstTry,1. Versuch,100,integer,0,550,1,3x2,1,
-11111111-0000-0000-0000-000000000011,11111111-0000-0000-0000-000000000005,singleTripleUnders,tripleUnder,Triple Unders,100,countSecondTry,2. Versuch,100,integer,0,550,1,3x2,3,
+11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,maximumPoints,Maximale Punkte,100,integer,58,58,1,3x3,9,5800
+11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,excecutionDeduction,Ausführung (/),-100,integer,0,30,1,3x3,1,-3000
+11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,mistake,Hänger (O) inkl. Musik,-200,integer,0,14,1,3x3,3,-2800
+11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,rhythmDeduction,Musik,-100,integer,0,14,1,3x3,6,-1400
+11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,intermediate,Intermediate Compulsory,100,bonus,Push-Up Bonus,100,integer,0,1,1,3x3,4,100
+11111111-0000-0000-0000-000000000010,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginner,beginner,Beginner Compulsory,100,maximumPoints,Maximale Punkte,100,integer,20,20,1,3x2,9,2000
+11111111-0000-0000-0000-000000000010,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginner,beginner,Beginner Compulsory,100,executionDeduction,Ausführung,-50,integer,0,20,1,3x2,1,-1000
+11111111-0000-0000-0000-000000000010,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginner,beginner,Beginner Compulsory,100,sequenceDeduction,Sprungfolge,-40,integer,0,25,1,3x2,3,-1000
+11111111-0000-0000-0000-000000000011,11111111-0000-0000-0000-000000000005,singleTripleUnder,tripleUnders,Triple Under,100,countFirstTry,1. Versuch,100,integer,0,550,1,3x2,1,
+11111111-0000-0000-0000-000000000011,11111111-0000-0000-0000-000000000005,singleTripleUnder,tripleUnders,Triple Under,100,countSecondTry,2. Versuch,100,integer,0,550,1,3x2,3,
 11111111-0000-0000-0000-000000000012,11111111-0000-0000-0000-000000000006,teamFreestyleSingleRopePairErso,difficulty,Level ERSO,50,level2,Level 2,100,integer,0,10,1,3x3,3,
 11111111-0000-0000-0000-000000000012,11111111-0000-0000-0000-000000000006,teamFreestyleSingleRopePairErso,difficulty,Level ERSO,50,level3,Level 3,160,integer,0,19,1,3x3,4,
 11111111-0000-0000-0000-000000000012,11111111-0000-0000-0000-000000000006,teamFreestyleSingleRopePairErso,difficulty,Level ERSO,50,level4,Level 4,230,integer,0,13,1,3x3,6,
