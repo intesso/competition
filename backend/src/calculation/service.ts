@@ -332,7 +332,6 @@ export class CalculationService implements ICalculationContext {
 
     // calculate weighted combinationRankPoints for every performer.
     // it is done in a special way: the weight is based on the rank, not the points, in order to be able to compare pears and apples ;-)
-    // note: the combinationByCategory is sorted and therefore the
     for (const ranks of Object.values(combinationByCategory)) {
       // before calculating the combinationRankPoints, remove the performances of performers that did NOT compete in all categories in the combination
       const filteredRanks = ranks.filter((it) => {
@@ -347,7 +346,6 @@ export class CalculationService implements ICalculationContext {
         return false
       })
 
-      let i = 1
       for (const it of filteredRanks) {
         performerWeightedRank[it.performerId] = performerWeightedRank[it.performerId] || {
           ...ranks,
@@ -355,7 +353,7 @@ export class CalculationService implements ICalculationContext {
         }
 
         performerWeightedRank[it.performerId].combinationRankPoints =
-          performerWeightedRank[it.performerId].combinationRankPoints + i++ * it.categoryWeight
+          performerWeightedRank[it.performerId].combinationRankPoints + ((it.categoryRank || 0) * it.categoryWeight)
         // add attributes used for output
         performerWeightedRank[it.performerId].categories = performerWeightedRank[it.performerId].categories || {}
         performerWeightedRank[it.performerId].categories[it.categoryName] = it.categoryRank
