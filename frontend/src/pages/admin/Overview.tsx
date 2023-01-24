@@ -18,7 +18,7 @@ export const pages = {
   '/admin/tournament-plan': 'Turnier Plan',
   '/admin/select-raw-point': 'Wertung Auswählen',
 
-  '/admin/category-ranks': 'Kagegorie Rangliste',
+  '/admin/category-ranks': 'Kategorie Rangliste',
   '/admin/combination-ranks': 'Kombination Rangliste',
 
   '/admin/calculation': 'Kalkulation Admin',
