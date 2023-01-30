@@ -194,6 +194,7 @@ export class CalculationService implements ICalculationContext {
         await this.calculateCombinationRanks({ tournamentId, combinationId: combination.combinationId })
       }
     } catch (error) {
+      console.error(error)
       return false
     }
     return true
@@ -408,12 +409,17 @@ export class CalculationService implements ICalculationContext {
       const attrs = performerWeightedRankValues[0]
       // console.log('combinationName', attrs.combinationName)
       const priorityLookup = combinationPriority[attrs.combinationName]
-      Object.keys(attrs).forEach((category) => {
-        const priority = priorityLookup[category]
-        if (priority >= 0) {
-          orderByAttributes[priority] = category
-        }
-      })
+      if (!priorityLookup) {
+        console.error(`ERROR: can't find "combinationPriority" in "reportDefinitions.ts" for combinationName ${attrs.combinationName}`)
+      } else {
+        Object.keys(attrs).forEach((category) => {
+          const priority = priorityLookup[category]
+          if (priority >= 0) {
+            orderByAttributes[priority] = category
+          }
+        })
+      }
+
       orderByAttributes.unshift('preliminaryCombinationRank')
       orderByAttributes = orderByAttributes.filter((it) => it)
       // console.log('filteredSortAttributes', orderByAttributes)
