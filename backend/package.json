@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "fix": "eslint . --fix",
+    "build": "mkdir -p build &&cp ../frontend/src/lib/reportDefinitions.ts build/",
     "generate": "concurrently 'npm:generate:*'",
     "generate:dbddl": "pg-migrations apply --database postgres://competition:comp1234@localhost:5432/competition --directory src/lib/db-migrations",
     "generate:dbtypes": "npx @databases/pg-schema-cli --database postgres://competition:comp1234@localhost:5432/competition --directory src/lib/db/__generated__",

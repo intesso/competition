@@ -75,7 +75,7 @@ export const reportAttributes = {
   categoryPoint: 'Punkte'
 }
 
-export const criteriaNames = {
+export const criteriaNames: ReportLookup = {
   speed: 'Speed',
   difficulty: 'Level',
   variation: 'Variation',
@@ -84,19 +84,34 @@ export const criteriaNames = {
   difficultyAdvanced: 'Level',
   intermediate: 'Compulsory',
   beginner: 'Compulsory',
-  tripleUnder: 'Triple Unders',
+  tripleUnder: 'Triple Under',
   presentationMusic: 'Präs. Musik',
   presentationCreativity: 'Präs. Kreativität'
 }
 
 export const categoryTitles: ReportLookup = {
-  'single-ü15-erso-speed-30sSingleRope': 'ERSO Speed 30s',
-  'single-ü15-erso-speed-180sSingleRope': 'ERSO Speed 180s',
-  'single-ü15-erso-freestyle-singleRope': 'ERSO Freestyle',
+  'single-men-erso-speed-30sSingleRope': 'ERSO Männer Speed 30s',
+  'single-men-erso-speed-180sSingleRope': 'ERSO Männer Speed 180s',
+  'single-men-erso-freestyle-singleRope': 'ERSO Männer Freestyle',
+  'single-women-erso-speed-30sSingleRope': 'ERSO Frauen Speed 30s',
+  'single-women-erso-speed-180sSingleRope': 'ERSO Frauen Speed 180s',
+  'single-women-erso-freestyle-singleRope': 'ERSO Frauen Freestyle',
+  'single-menEU-erso-speed-30sSingleRope': 'ERSO Männer EU Speed 30s',
+  'single-menEU-erso-speed-180sSingleRope': 'ERSO Männer EU Speed 180s',
+  'single-menEU-erso-freestyle-singleRope': 'ERSO Männer EU Freestyle',
+  'single-womenEU-erso-speed-30sSingleRope': 'ERSO Frauen EU Speed 30s',
+  'single-womenEU-erso-speed-180sSingleRope': 'ERSO Frauen EU Speed 180s',
+  'single-womenEU-erso-freestyle-singleRope': 'ERSO Frauen EU Freestyle',
+  'single-overallMen-erso-speed-30sSingleRope': 'ERSO Männer OVERALL Speed 30s',
+  'single-overallMen-erso-speed-180sSingleRope': 'ERSO Männer OVERALL Speed 180s',
+  'single-overallMen-erso-freestyle-singleRope': 'ERSO Männer OVERALL Freestyle',
+  'single-overallWomen-erso-speed-30sSingleRope': 'ERSO Frauen OVERALL Speed 30s',
+  'single-overallWomen-erso-speed-180sSingleRope': 'ERSO Frauen OVERALL Speed 180s',
+  'single-overallWomen-erso-freestyle-singleRope': 'ERSO Frauen OVERALL Freestyle',
   'single-ü15-beginner-speed-30sSingleRope': 'Beginner Ü15 Speed 30s',
   'single-ü15-beginner-speed-60sSingleRope': 'Beginner Ü15 Speed 60s',
-  'single-ü15-beginner-speed-30sCrissCross': 'Beginner CrissCross 30s',
-  'single-ü15-beginner-compulsory-compulsory': 'Beginner Compulsory',
+  'single-ü15-beginner-speed-30sCrissCross': 'Beginner Ü15 CrissCross 30s',
+  'single-ü15-beginner-compulsory-compulsory': 'Beginner Ü15 Compulsory',
   'single-ü15-intermediate-speed-30sSingleRope': 'Intermediate Ü15 Speed 30s',
   'single-ü15-intermediate-speed-60sSingleRope': 'Intermediate Ü15 Speed 60s',
   'single-ü15-intermediate-speed-30sCrissCross': 'Intermediate Ü15 CrissCross 30s',
@@ -126,7 +141,8 @@ export const categoryTitles: ReportLookup = {
   'single-u12-advanced-speed-30sSingleRope': 'Advanced U12 Speed 30s',
   'single-u12-advanced-speed-120sSingleRope': 'Advanced U12 Speed 120s',
   'single-u12-advanced-freestyle-singleRope': 'Advanced U12 Freestyle',
-  'single-open-any-speed-tripleUnder': 'Triple Unders',
+  'single-men-open-speed-tripleUnder': 'Triple Under Männer',
+  'single-women-open-speed-tripleUnder': 'Triple Under Frauen',
   'team-open-erso-speed-doubleDutchRelay': 'ERSO DD Relay',
   'team-open-erso-speed-singleRopeRelay': 'ERSO SR Relay',
   'team-open-erso-freestyle-singleRopePair': 'ERSO SR Pair',
@@ -154,9 +170,24 @@ export function getCategoryName (key: string) {
 }
 
 export const categoryNames: ReportLookup = {
-  'single-ü15-erso-speed-30sSingleRope': 'Speed 30s',
-  'single-ü15-erso-speed-180sSingleRope': 'Speed 180s',
-  'single-ü15-erso-freestyle-singleRope': 'Freestyle',
+  'single-men-erso-speed-30sSingleRope': 'Speed 30s',
+  'single-men-erso-speed-180sSingleRope': 'Speed 180s',
+  'single-men-erso-freestyle-singleRope': 'Freestyle',
+  'single-women-erso-speed-30sSingleRope': 'Speed 30s',
+  'single-women-erso-speed-180sSingleRope': 'Speed 180s',
+  'single-women-erso-freestyle-singleRope': 'Freestyle',
+  'single-menEU-erso-speed-30sSingleRope': 'Speed 30s',
+  'single-menEU-erso-speed-180sSingleRope': 'Speed 180s',
+  'single-menEU-erso-freestyle-singleRope': 'Freestyle',
+  'single-womenEU-erso-speed-30sSingleRope': 'Speed 30s',
+  'single-womenEU-erso-speed-180sSingleRope': 'Speed 180s',
+  'single-womenEU-erso-freestyle-singleRope': 'Freestyle',
+  'single-overallMen-erso-speed-30sSingleRope': 'Speed 30s',
+  'single-overallMen-erso-speed-180sSingleRope': 'Speed 180s',
+  'single-overallMen-erso-freestyle-singleRope': 'Freestyle',
+  'single-overallWomen-erso-speed-30sSingleRope': 'Speed 30s',
+  'single-overallWomen-erso-speed-180sSingleRope': 'Speed 180s',
+  'single-overallWomen-erso-freestyle-singleRope': 'Freestyle',
   'single-ü15-beginner-speed-30sSingleRope': 'Speed 30s',
   'single-ü15-beginner-speed-60sSingleRope': 'Speed 60s',
   'single-ü15-beginner-speed-30sCrissCross': 'CrissCross 30s',
@@ -190,7 +221,8 @@ export const categoryNames: ReportLookup = {
   'single-u12-advanced-speed-30sSingleRope': 'Speed 30s',
   'single-u12-advanced-speed-120sSingleRope': 'Speed 120s',
   'single-u12-advanced-freestyle-singleRope': 'Freestyle',
-  'single-open-any-speed-tripleUnder': 'Triple Unders',
+  'single-men-open-speed-tripleUnder': 'Triple Under',
+  'single-women-open-speed-tripleUnder': 'Triple Under',
   'team-open-erso-speed-doubleDutchRelay': 'DD Relay',
   'team-open-erso-speed-singleRopeRelay': 'SR Relay',
   'team-open-erso-freestyle-singleRopePair': 'SR Pair',
@@ -218,7 +250,12 @@ export function getCombinationName (key: string) {
 }
 
 export const combinationNames: ReportLookup = {
-  'single-ü15-erso': 'ERSO',
+  'single-men-erso': 'ERSO Männer',
+  'single-women-erso': 'ERSO Frauen',
+  'single-overallMen-erso': 'ERSO Männer OVERALL',
+  'single-overallWomen-erso': 'ERSO Frauen OVERALL',
+  'single-menEU-erso': 'ERSO Männer EU',
+  'single-womenEU-erso': 'ERSO Frauen EU',
   'single-ü15-beginner': 'Beginner Ü15',
   'single-ü15-intermediate': 'Intermediate Ü15',
   'single-ü15-advanced': 'Advanced Ü15',
@@ -228,7 +265,8 @@ export const combinationNames: ReportLookup = {
   'single-u12-beginner': 'Beginner U12',
   'single-u12-intermediate': 'Intermediate U12',
   'single-u12-advanced': 'Advanced U12',
-  'single-tripleUnder': 'Triple Unders',
+  'single-men-tripleUnder': 'Triple Under Männer',
+  'single-women-tripleUnder': 'Triple Under Frauen',
   'team-erso': 'ERSO',
   'team-ü21-show': 'SHOW Ü21',
   'team-u21-show': 'SHOW U21',
@@ -412,7 +450,7 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 8,
     categoryRank: 9
   },
-  'single-ü15-erso-speed-30sSingleRope': {
+  'single-men-erso-speed-30sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -421,7 +459,61 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-ü15-erso-speed-180sSingleRope': {
+  'single-men-erso-speed-180sSingleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    speed: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-women-erso-speed-30sSingleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    speed: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-women-erso-speed-180sSingleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    speed: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-menEU-erso-speed-30sSingleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    speed: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-menEU-erso-speed-180sSingleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    speed: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-womenEU-erso-speed-30sSingleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    speed: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-womenEU-erso-speed-180sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -646,7 +738,61 @@ export const categoryOrder: ReportOrder = {
     categoryPoint: 4,
     categoryRank: 5
   },
-  'single-ü15-erso-freestyle-singleRope': {
+  'single-men-open-speed-tripleUnder': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    tripleUnder: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-women-open-speed-tripleUnder': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    tripleUnder: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-men-erso-freestyle-singleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    presentation: 4,
+    variation: 5,
+    difficulty: 6,
+    deductions: 7,
+    categoryPoint: 8,
+    categoryRank: 9
+  },
+  'single-women-erso-freestyle-singleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    presentation: 4,
+    variation: 5,
+    difficulty: 6,
+    deductions: 7,
+    categoryPoint: 8,
+    categoryRank: 9
+  },
+  'single-menEU-erso-freestyle-singleRope': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    presentation: 4,
+    variation: 5,
+    difficulty: 6,
+    deductions: 7,
+    categoryPoint: 8,
+    categoryRank: 9
+  },
+  'single-womenEU-erso-freestyle-singleRope': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
@@ -665,7 +811,7 @@ export const categoryOrder: ReportOrder = {
     clubName: 3,
     presentation: 4,
     variation: 5,
-    difficulty: 6,
+    difficultyAdvanced: 6,
     deductions: 7,
     categoryPoint: 8,
     categoryRank: 9
@@ -677,7 +823,7 @@ export const categoryOrder: ReportOrder = {
     clubName: 3,
     presentation: 4,
     variation: 5,
-    difficulty: 6,
+    difficultyAdvanced: 6,
     deductions: 7,
     categoryPoint: 8,
     categoryRank: 9
@@ -689,7 +835,7 @@ export const categoryOrder: ReportOrder = {
     clubName: 3,
     presentation: 4,
     variation: 5,
-    difficulty: 6,
+    difficultyAdvanced: 6,
     deductions: 7,
     categoryPoint: 8,
     categoryRank: 9
@@ -699,19 +845,52 @@ export const categoryOrder: ReportOrder = {
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
-    presentation: 4,
-    variation: 5,
-    difficulty: 6,
-    deductions: 7,
-    categoryPoint: 8,
-    categoryRank: 9
+    beginner: -1,
+    categoryPoint: 4,
+    categoryRank: 5
   },
-  'End DUMMY': {
+  'single-u15-beginner-compulsory-compulsory': {
     categoryName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
-    speed: -1,
+    beginner: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-u12-beginner-compulsory-compulsory': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    beginner: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-ü15-intermediate-compulsory-compulsory': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    intermediate: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-u15-intermediate-compulsory-compulsory': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    intermediate: -1,
+    categoryPoint: 4,
+    categoryRank: 5
+  },
+  'single-u12-intermediate-compulsory-compulsory': {
+    categoryName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    intermediate: -1,
     categoryPoint: 4,
     categoryRank: 5
   }
@@ -786,15 +965,69 @@ export const combinationOrder: ReportOrder = {
     combinationRankPoints: 7,
     combinationRank: 8
   },
-
-  'single-ü15-erso': {
+  'single-men-erso': {
     combinationName: 0,
     performerNumber: 1,
     performerName: 2,
     clubName: 3,
-    'single-ü15-erso-speed-30sSingleRope': 4,
-    'single-ü15-erso-speed-180sSingleRope': 5,
-    'single-ü15-erso-freestyle-singleRope': 6,
+    'single-men-erso-speed-30sSingleRope': 4,
+    'single-men-erso-speed-180sSingleRope': 5,
+    'single-men-erso-freestyle-singleRope': 6,
+    combinationRankPoints: 7,
+    combinationRank: 8
+  },
+  'single-women-erso': {
+    combinationName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    'single-women-erso-speed-30sSingleRope': 4,
+    'single-women-erso-speed-180sSingleRope': 5,
+    'single-women-erso-freestyle-singleRope': 6,
+    combinationRankPoints: 7,
+    combinationRank: 8
+  },
+  'single-menEU-erso': {
+    combinationName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    'single-menEU-erso-speed-30sSingleRope': 4,
+    'single-menEU-erso-speed-180sSingleRope': 5,
+    'single-menEU-erso-freestyle-singleRope': 6,
+    combinationRankPoints: 7,
+    combinationRank: 8
+  },
+  'single-womenEU-erso': {
+    combinationName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    'single-womenEU-erso-speed-30sSingleRope': 4,
+    'single-womenEU-erso-speed-180sSingleRope': 5,
+    'single-womenEU-erso-freestyle-singleRope': 6,
+    combinationRankPoints: 7,
+    combinationRank: 8
+  },
+  'single-overallMen-erso': {
+    combinationName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    'single-overallMen-erso-speed-30sSingleRope': 4,
+    'single-overallMen-erso-speed-180sSingleRope': 5,
+    'single-overallMen-erso-freestyle-singleRope': 6,
+    combinationRankPoints: 7,
+    combinationRank: 8
+  },
+  'single-overallWomen-erso': {
+    combinationName: 0,
+    performerNumber: 1,
+    performerName: 2,
+    clubName: 3,
+    'single-overallWomen-erso-speed-30sSingleRope': 4,
+    'single-overallWomen-erso-speed-180sSingleRope': 5,
+    'single-overallWomen-erso-freestyle-singleRope': 6,
     combinationRankPoints: 7,
     combinationRank: 8
   },
@@ -930,9 +1163,29 @@ export const combinationPriority: ReportOrder = {
     'team-u12-teamShow-teamShow-teamShow': 0,
     'team-u12-teamShow-speed-singleRopeRelay': 1
   },
-  'single-ü15-erso': {
-    'single-ü15-erso-freestyle-singleRope': 0,
-    'single-ü15-erso-speed-30sSingleRope': 1
+  'single-men-erso': {
+    'single-men-erso-freestyle-singleRope': 0,
+    'single-men-erso-speed-30sSingleRope': 1
+  },
+  'single-women-erso': {
+    'single-women-erso-freestyle-singleRope': 0,
+    'single-women-erso-speed-30sSingleRope': 1
+  },
+  'single-menEU-erso': {
+    'single-menEU-erso-freestyle-singleRope': 0,
+    'single-menEU-erso-speed-30sSingleRope': 1
+  },
+  'single-womenEU-erso': {
+    'single-womenEU-erso-freestyle-singleRope': 0,
+    'single-womenEU-erso-speed-30sSingleRope': 1
+  },
+  'single-overallMen-erso': {
+    'single-overallMen-erso-freestyle-singleRope': 0,
+    'single-overallMen-erso-speed-30sSingleRope': 1
+  },
+  'single-overallWomen-erso': {
+    'single-overallWomen-erso-freestyle-singleRope': 0,
+    'single-overallWomen-erso-speed-30sSingleRope': 1
   },
   'single-ü15-beginner': {
     'single-ü15-beginner-compulsory-compulsory': 0,
@@ -982,6 +1235,37 @@ export const combinationMixed: CombinationMixed = {
       'team-ü21-teamShow-speed-doubleDutchRelay',
       'team-u21-teamShow-speed-doubleDutchRelay'
     ],
-    'team-overall-teamShow-teamShow-teamShow': ['team-ü21-teamShow-teamShow-teamShow', 'team-u21-teamShow-teamShow-teamShow']
+    'team-overall-teamShow-teamShow-teamShow': [
+      'team-ü21-teamShow-teamShow-teamShow',
+      'team-u21-teamShow-teamShow-teamShow'
+    ]
+  },
+  'single-overallMen-erso': {
+    'single-overallMen-erso-speed-30sSingleRope': [
+      'single-men-erso-speed-30sSingleRope',
+      'single-menEU-erso-speed-30sSingleRope'
+    ],
+    'single-overallMen-erso-speed-180sSingleRope': [
+      'single-men-erso-speed-180sSingleRope',
+      'single-menEU-erso-speed-180sSingleRope'
+    ],
+    'single-overallMen-erso-freestyle-singleRope': [
+      'single-men-erso-freestyle-singleRope',
+      'single-menEU-erso-freestyle-singleRope'
+    ]
+  },
+  'single-overallWomen-erso': {
+    'single-overallWomen-erso-speed-30sSingleRope': [
+      'single-women-erso-speed-30sSingleRope',
+      'single-womenEU-erso-speed-30sSingleRope'
+    ],
+    'single-overallWomen-erso-speed-180sSingleRope': [
+      'single-women-erso-speed-180sSingleRope',
+      'single-womenEU-erso-speed-180sSingleRope'
+    ],
+    'single-overallWomen-erso-freestyle-singleRope': [
+      'single-women-erso-freestyle-singleRope',
+      'single-womenEU-erso-freestyle-singleRope'
+    ]
   }
 }

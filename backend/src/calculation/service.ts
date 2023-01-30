@@ -2,9 +2,7 @@ import axios, { AxiosError } from 'axios'
 import { keyBy, orderBy, sortBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
 import { equalFloat, Id } from '../lib/common'
-import { generateCategoryReport } from '../lib/reports/category-report'
-import { generateCombinationReport } from '../lib/reports/combination-report'
-import { combinationMixed, combinationPriority } from '../lib/reports/reportDefinitions'
+import { combinationMixed, combinationPriority } from '../../build/reportDefinitions'
 import {
   CalculationPointsInput,
   ICalculationContext,
@@ -271,9 +269,9 @@ export class CalculationService implements ICalculationContext {
     }
   }
 
-  async generateCategoryRanksReport (tournamentId: string): Promise<any> {
-    const categoryRanks = await this.getAllCategoryRanksDetailed(tournamentId)
-    return await generateCategoryReport(categoryRanks as any)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async generateCategoryRanksReport (_tournamentId: string): Promise<any> {
+    throw new Error('not yet implemented')
   }
 
   async calculateCombinationRanks (input: CalculationCombinationRanksInput): Promise<CalculationCombinationRanksOutput> {
@@ -465,9 +463,9 @@ export class CalculationService implements ICalculationContext {
       }, {})
   }
 
-  async generateCombinationRanksReport (tournamentId: string): Promise<any> {
-    const combinationRanks = await this.getAllCombinationRanks(tournamentId)
-    return await generateCombinationReport(combinationRanks)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async generateCombinationRanksReport (_tournamentId: string): Promise<any> {
+    throw new Error('not yet implemented')
   }
 
   async getCombinationRanks (tournamentId: string, combinationId: string): Promise<any | null> {

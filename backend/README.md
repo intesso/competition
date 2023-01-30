@@ -16,6 +16,7 @@ npm install
 ## start application
 
 ```sh
+npm run build
 npm start
 ```
 
