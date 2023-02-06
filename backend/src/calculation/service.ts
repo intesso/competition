@@ -345,7 +345,10 @@ export class CalculationService implements ICalculationContext {
         return false
       })
 
-      for (const it of filteredRanks) {
+      // recalculate categoryRank (after filtering out performers that did not compete in all categories)
+      const sortedFilteredRanks = sortBy(filteredRanks, 'categoryRank').map((it, i) => ({ ...it, categoryRank: i + 1 }))
+
+      for (const it of sortedFilteredRanks) {
         performerWeightedRank[it.performerId] = performerWeightedRank[it.performerId] || {
           ...ranks,
           combinationRankPoints: 0
