@@ -115,9 +115,41 @@ export interface CalculationCombinationRanksInput {
   combinationId: string
 }
 
-// TODO create real interfaces
+export interface CombinationRankByCategory {
+  combinationName: string
+  clubName: string
+  performerName: string
+  performerNumber: number
+  categories: CategoryRankLookup
+  combinationRankPoints: number
+}
+
+export interface CategoryRankLookup {
+  [key: string]: number
+}
+
+export interface CombinationRankAttributes extends Omit<CombinationRankByCategory, 'categories'> {
+  preliminaryCombinationRank: number
+  combinationRank: number
+}
+
+export type CombinationRankSummary = CombinationRankAttributes & CategoryRankLookup
+
+export interface CombinationRankLookup {
+  [key: string]: CombinationRankByCategory[]
+}
+
+export interface CombinationRankDetails {
+  [key: string]: CombinationRank[]
+}
+
+export interface StoredCombinationRanks {
+  summary: CombinationRankSummary[]
+  details: CombinationRankDetails
+}
+
 export type CalculationCategoryRanksOutput = CategoryRank[];
-export type CalculationCombinationRanksOutput = CalculationCombinationRanksInput;
+export type CalculationCombinationRanksOutput = StoredCombinationRanks;
 
 export interface ICalculationContext extends IGetApplicationContext {
   getPoints: (performanceId: string) => Promise<CategoryPoint | null>

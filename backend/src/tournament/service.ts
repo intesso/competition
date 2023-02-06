@@ -19,7 +19,8 @@ import {
   PerformanceJudge,
   CurrentQueueUIResponse,
   QueueRun,
-  QueueRunPerformanceJudge
+  QueueRunPerformanceJudge,
+  CurrentTournamentQueue
 } from './interfaces'
 import {
   deleteLocation,
@@ -347,7 +348,7 @@ export class TournamentService implements ITournamentContext {
     return newRuns
   }
 
-  async getCurrentTournamentQueue (tournamentId: string): Promise<any | null> {
+  async getCurrentTournamentQueue (tournamentId: string): Promise<CurrentTournamentQueue | null> {
     try {
       // 0. check parameters
       if (!tournamentId) {

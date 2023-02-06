@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { keyBy, orderBy, sortBy } from 'lodash'
 import { IGetApplicationContext } from '../../applicationContext'
-import { equalFloat, Id } from '../lib/common'
+import { equalFloat } from '../lib/common'
 import { combinationMixed, combinationPriority } from '../../build/reportDefinitions'
 import {
   CalculationPointsInput,
@@ -10,15 +10,18 @@ import {
   CalculationCategoryRanksInput,
   CalculationCategoryRanksOutput,
   CalculationCombinationRanksInput,
-  CalculationCombinationRanksOutput,
-  CategoryRank,
   CombinationRank,
   CategoryPoint,
   CalculationJudgeCriteriaGroup,
   CategoryRanksSummary,
   CategoryRankDetails,
   CategoryRanksDetailsResult,
-  CategoryRanksDetailsAllResult
+  CategoryRanksDetailsAllResult,
+  CombinationRankLookup,
+  CombinationRankByCategory,
+  CombinationRankSummary,
+  StoredCombinationRanks,
+  CalculationCombinationRanksOutput
 } from './interfaces'
 import {
   deleteCategoryPointById,
@@ -148,12 +151,33 @@ export class CalculationService implements ICalculationContext {
   }
 
   async calculateCategoryRanks (input: CalculationCategoryRanksInput): Promise<CalculationCategoryRanksOutput> {
-    const sortedCategoryPoints = await findCategoryPointByCategoryId(input.tournamentId, input.categoryId)
+    // calculate category rank based on category points for the given category and tournament
+    const categoryPoints = await findCategoryPointByCategoryId(input.tournamentId, input.categoryId)
+    const calculatedRanks = this.calculateCategoryRanksFromCategoryPoints(categoryPoints)
+    const categoryRanks = calculatedRanks.map(it => ({
+      categoryId: it.categoryId,
+      tournamentId: it.tournamentId,
+      disqualified: it.disqualified,
+      categoryPointId: it.id,
+      categoryRank: it.categoryRank
+    }))
+    // store the calculated categoryRanks
+    try {
+      await insertOrUpdateCategoryRanks(categoryRanks)
+    } catch (error) {
+      console.error(error)
+    }
 
-    // 1. calculate category rank based on category points for the given category and tournament
+    return categoryRanks
+  }
+
+  calculateCategoryRanksFromCategoryPoints <T extends CategoryPoint> (categoryPoints: T[]): (T & {categoryRank: number})[] {
     let numberOfEqualPoints = 0
     let currentRank = 0
-    const categoryRanks = sortedCategoryPoints.map((categoryPoint: CategoryPoint & Id, i: number) => {
+    // make sure the categoryPoints are sorted
+    const sortedCategoryPoints = orderBy(categoryPoints, 'categoryPoint', 'desc')
+    // calculate the categoryRanks
+    const categoryRanks = sortedCategoryPoints.map((categoryPoint: T, i: number) => {
       // if disqualified do nothing
       if (categoryPoint.disqualified) {
         // handle equal points
@@ -165,23 +189,12 @@ export class CalculationService implements ICalculationContext {
         numberOfEqualPoints = 0
       }
 
-      const categoryRank: CategoryRank = {
-        categoryId: categoryPoint.categoryId,
-        tournamentId: categoryPoint.tournamentId,
-        disqualified: categoryPoint.disqualified,
-        categoryPointId: categoryPoint.id,
+      const categoryRank = {
+        ...categoryPoint,
         categoryRank: categoryPoint.disqualified ? -1 : currentRank
       }
       return categoryRank
     })
-
-    // 2. store categoryRanks
-    try {
-      await insertOrUpdateCategoryRanks(categoryRanks)
-    } catch (error) {
-      console.error(error)
-    }
-
     return categoryRanks
   }
 
@@ -269,7 +282,7 @@ export class CalculationService implements ICalculationContext {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   async generateCategoryRanksReport (_tournamentId: string): Promise<any> {
     throw new Error('not yet implemented')
   }
@@ -292,7 +305,7 @@ export class CalculationService implements ICalculationContext {
     // prepare and calculate the combination rank
     // only consider performers that competed in all categories for the combination
     const combinationPerformer: { [key: string]: number } = {} // key: performerId
-    const performerWeightedRank: { [key: string]: any } = {} // key: performerId
+    const performerWeightedRank: { [key: string]: CombinationRankByCategory } = {} // key: performerId
     const numberOfCategoriesInCombination = combination.categories.length
     for (const category of combination.categories) {
       // retrieve meta data from database
@@ -301,7 +314,7 @@ export class CalculationService implements ICalculationContext {
         await findCategoryPointByCategoryId(input.tournamentId, category.categoryId),
         'id'
       )
-      const combinedRanks: CombinationRank[] = sortedCategoryRanks.map((rank: any) => {
+      const combinedRanks: CombinationRank[] = sortedCategoryRanks.map((rank) => {
         // get attributes used for output
         const performerId = sortedCategoryPoints[rank.categoryPointId].performerId
         const performanceId = sortedCategoryPoints[rank.categoryPointId].performanceId
@@ -346,11 +359,10 @@ export class CalculationService implements ICalculationContext {
       })
 
       // recalculate categoryRank (after filtering out performers that did not compete in all categories)
-      const sortedFilteredRanks = sortBy(filteredRanks, 'categoryRank').map((it, i) => ({ ...it, categoryRank: i + 1 }))
+      const sortedFilteredRanks = this.calculateCategoryRanksFromCategoryPoints(filteredRanks)
 
       for (const it of sortedFilteredRanks) {
         performerWeightedRank[it.performerId] = performerWeightedRank[it.performerId] || {
-          ...ranks,
           combinationRankPoints: 0
         }
 
@@ -383,9 +395,9 @@ export class CalculationService implements ICalculationContext {
           performerNumber: it.performerNumber,
           ...it.categories,
           combinationRankPoints: parseFloat((it.combinationRankPoints / 100).toFixed(2)),
-          preliminaryCombinationRank: it.preliminaryCombinationRank,
+          preliminaryCombinationRank: 0,
           combinationRank: i + 1
-        }
+        } as CombinationRankSummary
       })
 
     for (const it of performerWeightedRankValues) {
@@ -426,6 +438,7 @@ export class CalculationService implements ICalculationContext {
       // console.log('filteredSortAttributes', orderByAttributes)
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const orderByOrder: any[] = orderByAttributes.map(() => 'asc')
 
     const calculatedCombinationRanks = orderBy(
@@ -439,39 +452,42 @@ export class CalculationService implements ICalculationContext {
       return {
         ...it,
         combinationRank: i + 1
-      }
+      } as CombinationRankSummary
     })
+
+    const combinationRanks: StoredCombinationRanks = {
+      summary: calculatedCombinationRanks,
+      details: combinationByCategory
+    }
 
     // store the combination rank
     await insertOrUpdateCombinationRank({
       tournamentId: input.tournamentId,
       combinationId: input.combinationId,
-      combinationRanks: {
-        summary: calculatedCombinationRanks,
-        details: combinationByCategory
-      }
+      combinationRanks
     })
 
-    return input
+    return combinationRanks
   }
 
-  async getAllCombinationRanks (tournamentId: string): Promise<any | null> {
+  async getAllCombinationRanks (tournamentId: string): Promise<CombinationRankLookup | null> {
     const combinationRanks = await listCombinationRankByTournament(tournamentId)
-    return combinationRanks
-      .filter((it: any) => it.combinationRanks?.summary?.length)
-      .map((it: any) => it.combinationRanks.summary)
-      .reduce((memo: any, it: any) => {
+    const combinationRankLookup = combinationRanks
+      .filter((it) => it.combinationRanks?.summary?.length)
+      .map((it) => it.combinationRanks.summary)
+      .reduce((memo: CombinationRankLookup, it: CombinationRankByCategory[]) => {
         memo[it[0].combinationName] = it
         return memo
       }, {})
+    return combinationRankLookup
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   async generateCombinationRanksReport (_tournamentId: string): Promise<any> {
     throw new Error('not yet implemented')
   }
 
-  async getCombinationRanks (tournamentId: string, combinationId: string): Promise<any | null> {
+  async getCombinationRanks (tournamentId: string, combinationId: string): Promise<StoredCombinationRanks | null> {
     const sortedCategoryRanks = await getCombinationRankByCombinationId(tournamentId, combinationId)
     return sortedCategoryRanks?.combinationRanks
   }

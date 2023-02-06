@@ -286,7 +286,6 @@ export class JudgingRuleService implements IJudgingRuleContext {
       judgingRulId: judgingRule.id,
       judgingRuleName: judgingRule.judgingRuleName,
       timestamp: inputTimestamp ? inputTimestamp.toISOString() : undefined,
-      // TODO group raw points by criteria
       judgeCriteria: groupedCriteria,
       complete: undefined,
       calculatedTimestamp: undefined,

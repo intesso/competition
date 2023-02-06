@@ -81,9 +81,7 @@ export interface CurrentQueueUIResponse {
 export interface QueueRun {
   slotNumber: number | null
   slotStart: string
-  status: {
-    [key: string]: QueueRunPerformanceJudge
-  }
+  status: QueueRunPerformanceJudge[] | null
 }
 
 export type TournamentName = { tournamentName: string };
@@ -112,6 +110,7 @@ export type Performer = Omit<PerformerDAO, 'id' | 'updatedAt' | 'updatedBy' | 'c
 export type Performance = Omit<PerformanceDAO, 'id' | 'updatedAt' | 'updatedBy' | 'createdAt' | 'createdBy'>;
 export type TournamentAthlete = Person & TournamentId;
 export type TournamentJudge = Person & TournamentId;
+export type CurrentTournamentQueue = TournamentQueue & { status: QueueRunPerformanceJudge[] }
 
 // Interfaces (Ports)
 export interface ITournamentContext extends IGetApplicationContext {
