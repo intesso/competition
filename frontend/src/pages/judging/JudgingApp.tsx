@@ -62,6 +62,7 @@ export function JudgingApp ({ children }: AppProps) {
   const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
+  const isAdmin = searchParams.get('admin') || ''
   const [inputType, setInputType] = useLocalStorage<InputType>('inputType', 'slider') // TODO change: 'slider' -> 'button'
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
   const performanceId = searchParams.get('performanceId')
@@ -98,31 +99,31 @@ export function JudgingApp ({ children }: AppProps) {
           const nothingPath = '/judging/nothing'
           if (!queue) {
             if (window.location.pathname !== nothingPath) {
+              const params = {
+                slotNumber: '',
+                locationName: '',
+                tournamentId: (tournamentId as string) || '',
+                categoryId: '',
+                criteriaId: '',
+                criteriaName: '',
+                tournamentJudgeId: '',
+                performanceId: '',
+                judgeId: getJudgeId(),
+                judgeName: ''
+              }
               navigate({
                 pathname: nothingPath,
-                search: `?${createSearchParams({
-                  slotNumber: '',
-                  locationName: '',
-                  tournamentId: (tournamentId as string) || '',
-                  categoryId: '',
-                  criteriaId: '',
-                  criteriaName: '',
-                  tournamentJudgeId: '',
-                  performanceId: '',
-                  judgeId: getJudgeId(),
-                  judgeName: ''
-                })}`
+                search: `?${createSearchParams(isAdmin ? { ...params, admin: 'true' } : params)}`
               })
             }
           } else {
             if (performanceId !== queue.query.performanceId) {
+              const params = Object.fromEntries(
+                Object.entries(queue.query).map(([key, value]) => [key, value !== null ? value.toString() : ''])
+              )
               navigate({
                 pathname: queue.path,
-                search: `?${createSearchParams(
-                  Object.fromEntries(
-                    Object.entries(queue.query).map(([key, value]) => [key, value !== null ? value.toString() : ''])
-                  )
-                )}`
+                search: `?${createSearchParams(isAdmin ? { ...params, admin: 'true' } : params)}`
               })
             }
           }

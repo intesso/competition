@@ -4,7 +4,7 @@ import { CalculationPointsInput, CalculationJudgeCriteriaGroup } from '../calcul
 import { Id, isNotNull, newRecordAttributes } from '../lib/common'
 import { Category as CategoryDAO } from '../lib/db/__generated__'
 import { IJudgingRuleContext, Criteria, RawPoint, JudgingRule, Category, Combination, WeightedCategory } from './interfaces'
-import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByCategoryIdAndName, deleteRawPointsForPerformance, deleteRawPoint, getRawPointById, backupRawPoint } from './repository'
+import { listCategories, getCategoryByCategoryName, getCategoryById, findCriteriaByCategoryId, findJudgingRuleByCategoryId, findJudgingRuleById, findRawPoints, getCriteriaById, insertCategory, insertCategoryCombination, insertCombination, insertCriteria, insertJudgingRule, insertOrUpdateRawPoint, listCriteria, listCombinations, listCategoryCombinations, getCriteriaByCategoryIdAndName, deleteRawPointsForPerformance, deleteRawPoint, getRawPointById, backupRawPoint, getRawPoint } from './repository'
 
 let _categoriesLookup: {[key: string]: (Category & Id)} | null = null
 let _criteriaLookup: {[key: string]: (Criteria & Id)} | null = null
@@ -221,6 +221,10 @@ export class JudgingRuleService implements IJudgingRuleContext {
 
   async getRawPoint (id: string) : Promise<(RawPoint & Id) | null> {
     return await getRawPointById(id)
+  }
+
+  async getRawPointForJudge (performanceId: string, judgeId: string, criteriaId: string) : Promise<(RawPoint & Id) | null> {
+    return await getRawPoint(performanceId, judgeId, criteriaId)
   }
 
   async listRawPoints (performanceId: string): Promise<(RawPoint & Id)[]> {

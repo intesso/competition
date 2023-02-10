@@ -83,6 +83,10 @@ export interface SubCriteriaValue {
   [subCriteriaName: string]: SubCriteriaValueProps
 }
 
+export interface UiPositionSubCriteriaValue {
+  [uiPosition: string]: SubCriteriaValueProps
+}
+
 export interface SubCriteriaProps {
   rangeEnd: number
   rangeStart: number

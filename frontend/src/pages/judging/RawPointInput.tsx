@@ -7,7 +7,8 @@ import {
   Performance,
   RawPoint,
   SubCriteriaValue,
-  TournamentPerson
+  TournamentPerson,
+  UiPositionSubCriteriaValue
 } from '../../contexts/ApiContextInterface'
 import { DateTime } from 'luxon'
 import { useSearchParams } from 'react-router-dom'
@@ -20,7 +21,7 @@ export interface RawPointInputProps {
 }
 
 export function RawPointInput ({ layout }: RawPointInputProps) {
-  const { getPerformance, getTournamentJudge, getCriteria, addRawPoint } =
+  const { getPerformance, getTournamentJudge, getCriteria, addRawPoint, getRawPointForJudge } =
     useContext(ApiContext)
   const { enqueueSnackbar } = useSnackbar()
 
@@ -29,6 +30,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
   const judgeName = searchParams.get('judgeName')
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
+  const admin = searchParams.get('admin')
   const [inputType] = useLocalStorage<InputType>('inputType', 'button')
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
   const performanceId = searchParams.get('performanceId')
@@ -67,6 +69,16 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
           }
         }
       }
+      // read rawpoints from server when admin
+      if (admin && performanceId && judgeId && criteriaId) {
+        const rawPoint = await getRawPointForJudge(performanceId, judgeId, criteriaId)
+        if (rawPoint && rawPoint.subCriteriaPoints) {
+          const subCriteriaPoints = rawPoint.subCriteriaPoints
+          if (subCriteriaPoints) {
+            setSubCriteria(subCriteriaToUiPositionSubCriteria(rawPoint.subCriteriaPoints))
+          }
+        }
+      }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [tournamentId, performanceId, criteriaId])
@@ -84,6 +96,13 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
       memo[value.uiPosition] = { ...value, value: value.rangeStart }
       return memo
     }, {} as SubCriteriaValue)
+  }
+
+  function subCriteriaToUiPositionSubCriteria (subCriteriaPoints: SubCriteriaValue) {
+    return Object.entries(subCriteriaPoints).reduce((memo, [, value]) => {
+      memo[value.uiPosition] = value
+      return memo
+    }, {} as UiPositionSubCriteriaValue)
   }
 
   function checkChangesAfterSubmit () {

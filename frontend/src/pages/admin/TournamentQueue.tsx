@@ -220,7 +220,7 @@ export function TournamentQueueDashboard () {
                   ? (
                   <Link
                     target={'_blank'}
-                    to={`/judging/start?tournamentName=${getTournamentName(tournamentId)}&id=${s.judgeId}`}
+                    to={`/judging/start?tournamentName=${getTournamentName(tournamentId)}&id=${s.judgeId}&admin=true`}
                     style={{ color: theme.palette.primary.contrastText, textDecoration: 'none' }}
                   >
                     {s.judgeId}

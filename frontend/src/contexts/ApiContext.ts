@@ -62,6 +62,7 @@ export interface Api {
   getJudgingRuleByCategoryId: (categoryId: string) => Promise<JudgingRule | null>
   getJudgingRule: (id: string) => Promise<JudgingRule | null>
   addRawPoint: (rawPoint: RawPoint) => Promise<RawPoint>
+  getRawPointForJudge: (performanceId: string, judgeId: string, criteriaId: string) => Promise<RawPoint>
   // ranks (calculatiom)
   getCategoryRanks: (tournamentId: string) => Promise<ReportFormat>
   getCombinationRanks: (tournamentId: string) => Promise<ReportFormat>
@@ -448,6 +449,17 @@ export function provideApiContext (): Api {
     ).data
   }
 
+  async function getRawPointForJudge (performanceId: string, judgeId: string, criteriaId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/judging/raw-points/judges`,
+        method: 'GET',
+        params: { performanceId, judgeId, criteriaId }
+      })
+    ).data
+  }
+
   async function moveQueueForward (tournamentId: string) {
     return (
       await axios({
@@ -567,6 +579,7 @@ export function provideApiContext (): Api {
     getJudgingRule,
     getJudgingRuleByCategoryId,
     addRawPoint,
+    getRawPointForJudge,
     getCategoryRanks,
     getCombinationRanks,
     calculateAllPoints,

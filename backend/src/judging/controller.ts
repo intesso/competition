@@ -15,11 +15,23 @@ judgingController
   .post('/raw-points', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.addRawPoint(ctx.request.body as RawPoint))
   })
+  .get('/raw-points/judges', inputValidation.validate, (ctx) => {
+    if (typeof ctx.query.performanceId !== 'string') {
+      return respondWithError(ctx, 'performanceId queryParameter must be provided')
+    }
+    if (typeof ctx.query.judgeId !== 'string') {
+      return respondWithError(ctx, 'judgeId queryParameter must be provided')
+    }
+    if (typeof ctx.query.criteriaId !== 'string') {
+      return respondWithError(ctx, 'criteriaId queryParameter must be provided')
+    }
+    return respondWith(ctx, () => applicationContext.judging.getRawPointForJudge(ctx.query.performanceId as string, ctx.query.judgeId as string, ctx.query.criteriaId as string))
+  })
   .get('/raw-points/:id', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.getRawPoint(ctx.params.id as string))
   })
   .get('/raw-points', inputValidation.validate, (ctx) => {
-    if (typeof ctx.request.query.performanceId !== 'string') {
+    if (typeof ctx.query.performanceId !== 'string') {
       return respondWithError(ctx, 'performanceId queryParameter must be provided')
     }
     return respondWith(ctx, () => applicationContext.judging.listRawPoints(ctx.query.performanceId as string))
@@ -40,14 +52,14 @@ judgingController
     return respondWith(ctx, () => applicationContext.judging.getCategory(ctx.params.id as string))
   })
   .get('/criteria', inputValidation.validate, (ctx) => {
-    if (typeof ctx.request.query.categoryId === 'string' && typeof ctx.request.query.criteriaName === 'string') {
+    if (typeof ctx.query.categoryId === 'string' && typeof ctx.query.criteriaName === 'string') {
       return respondWith(ctx, () =>
-        applicationContext.judging.getCriteriaByCategoryIdAndName(ctx.request.query.categoryId as string, ctx.request.query.criteriaName as string)
+        applicationContext.judging.getCriteriaByCategoryIdAndName(ctx.query.categoryId as string, ctx.query.criteriaName as string)
       )
     }
-    if (typeof ctx.request.query.categoryId === 'string') {
+    if (typeof ctx.query.categoryId === 'string') {
       return respondWith(ctx, () =>
-        applicationContext.judging.listCriteriaByCategoryId(ctx.request.query.categoryId as string)
+        applicationContext.judging.listCriteriaByCategoryId(ctx.query.categoryId as string)
       )
     }
     return respondWithError(ctx, 'categoryId queryParameter must be provided')
@@ -67,10 +79,10 @@ judgingController
     return respondWith(ctx, () => applicationContext.judging.getJudgingRule(ctx.params.id as string))
   })
   .get('/judging-rule', inputValidation.validate, (ctx) => {
-    if (typeof ctx.request.query.categoryId !== 'string') {
+    if (typeof ctx.query.categoryId !== 'string') {
       return respondWithError(ctx, 'categoryId queryParameter must be provided')
     }
     return respondWith(ctx, () =>
-      applicationContext.judging.getJudgingRuleByCategoryId(ctx.request.query.categoryId as string)
+      applicationContext.judging.getJudgingRuleByCategoryId(ctx.query.categoryId as string)
     )
   })

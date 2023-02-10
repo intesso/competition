@@ -13,26 +13,28 @@ export function Start () {
   const [searchParams] = useSearchParams()
   const judgeId = searchParams.get('judgeId') || searchParams.get('id') || ''
   const tournamentName = searchParams.get('tournamentName') || ''
+  const isAdmin = searchParams.get('admin') || ''
 
   useEffect(() => {
     const fetchData = async () => {
       if (tournamentName) {
         const tournament = await getTournamentByName(tournamentName)
         const nothingPath = '/judging/nothing'
+        const params = {
+          slotNumber: '',
+          locationName: '',
+          tournamentId: tournament?.id || '',
+          categoryId: '',
+          criteriaId: '',
+          criteriaName: '',
+          tournamentJudgeId: '',
+          performanceId: '',
+          judgeId,
+          judgeName: ''
+        }
         navigate({
           pathname: nothingPath,
-          search: `?${createSearchParams({
-            slotNumber: '',
-            locationName: '',
-            tournamentId: tournament?.id || '',
-            categoryId: '',
-            criteriaId: '',
-            criteriaName: '',
-            tournamentJudgeId: '',
-            performanceId: '',
-            judgeId,
-            judgeName: ''
-          })}`
+          search: `?${createSearchParams(isAdmin ? { ...params, admin: 'true' } : params)}`
         })
       }
     }
