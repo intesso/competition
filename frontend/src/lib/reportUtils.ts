@@ -1,11 +1,15 @@
-import { beautifyAttribute, beautifyReportItems, categoryNames, categoryOrder, categoryTitles, combinationNames, combinationOrder, ReportFormat } from './reportDefinitions'
+import { beautifyAttribute, beautifyReportItems, categoryNames, categoryOrder, categoryTitles, combinationNames, combinationOrder, criteriaNames, ReportFormat } from './reportDefinitions'
 
-export function getCategoryTitle (name: string) {
+export function getCategoryTitle (name = '') {
   return beautifyAttribute(name, categoryTitles)
 }
 
-export function getCombinationTitle (name: string) {
+export function getCombinationTitle (name = '') {
   return beautifyAttribute(name, combinationNames)
+}
+
+export function getCriteriaTitle (name = '') {
+  return beautifyAttribute(name, criteriaNames)
 }
 
 export function beautifyCategoryRank (input: ReportFormat): ReportFormat {

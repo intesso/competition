@@ -1,3 +1,5 @@
+import { dedupe, snakeToPascal } from './common'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ReportLookup {
   [key: string]: string
@@ -48,10 +50,6 @@ export function beautifyReportItems (name: string, items: ReportItemFormat[], or
   })
 }
 
-export function beautifyAttribute (key: string | number, attributeLookup: ReportLookup) {
-  return attributeLookup[key] || key
-}
-
 export function beautifyValue (key: string, value: string | number) {
   if (key === 'categoryName') {
     return beautifyAttribute(value, categoryNames)
@@ -60,6 +58,10 @@ export function beautifyValue (key: string, value: string | number) {
     return beautifyAttribute(value, combinationNames)
   }
   return value
+}
+
+export function beautifyAttribute (key: string | number, attributeLookup: ReportLookup) {
+  return attributeLookup[key] || dedupe(snakeToPascal(key.toString()))
 }
 
 export const reportAttributes = {

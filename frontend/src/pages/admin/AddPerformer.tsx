@@ -33,7 +33,7 @@ export function AddPerformer () {
   const [athletes, setAthletes] = useState([] as TorunamentAthlete[])
   const [selectedAthletes, setSelectedAthletes] = useState([] as (TorunamentAthlete | null)[])
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [editing, _setEditing] = useState(true)
+  const [editing] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {

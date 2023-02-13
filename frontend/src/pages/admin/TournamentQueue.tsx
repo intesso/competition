@@ -205,11 +205,16 @@ export function TournamentQueueDashboard () {
             justifyContent="center"
             alignItems="center"
           >
+            <div style={{
+              display: 'flex',
+              flexFlow: 'row wrap',
+              justifyContent: 'center'
+            }}>
             {judgeStatus?.map((s, i) => (
               <Box
                 key={i}
                 component="span"
-                sx={{ textAlign: 'center', justifyItems: 'center', minWidth: '40px', padding: '5px' }}
+                sx={{ textAlign: 'center', justifyItems: 'center', minWidth: '40px', padding: '5px', margin: '5px', whiteSpace: 'nowrap' }}
                 style={{
                   backgroundColor: s.sent ? theme.palette.success.main : theme.palette.primary.main,
                   color: theme.palette.primary.contrastText,
@@ -223,7 +228,7 @@ export function TournamentQueueDashboard () {
                     to={`/judging/start?tournamentName=${getTournamentName(tournamentId)}&id=${s.judgeId}&admin=true`}
                     style={{ color: theme.palette.primary.contrastText, textDecoration: 'none' }}
                   >
-                    {s.judgeId}
+                    {s.judgeId} {s.criteriaName}
                   </Link>
                     )
                   : (
@@ -231,6 +236,8 @@ export function TournamentQueueDashboard () {
                     )}
               </Box>
             ))}
+            </div>
+
           </Stack>
           <TournamentPlanItems items={plan.filter((p) => p.slotNumber === queue.slotNumber)} />
         </Box>

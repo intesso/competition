@@ -26,7 +26,7 @@ import {
   Typography
 } from '@mui/material'
 import Logo from '../../themes/default/assets/ropeskipping_swiss_logo.png'
-import { dedupe, parseError, snakeToPascal } from '../../lib/common'
+import { parseError } from '../../lib/common'
 import { useSnackbar } from 'notistack'
 import CategoryIcon from '@mui/icons-material/Category'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
@@ -35,7 +35,7 @@ import TableRowsIcon from '@mui/icons-material/TableRows'
 import PlaceIcon from '@mui/icons-material/Place'
 import GavelIcon from '@mui/icons-material/Gavel'
 import TuneIcon from '@mui/icons-material/Tune'
-import { categoryTitles, criteriaNames } from '../../lib/reportDefinitions'
+import { getCategoryTitle, getCriteriaTitle } from '../../lib/reportUtils'
 
 export interface AppProps {
   children?: ReactNode
@@ -181,14 +181,6 @@ export function JudgingApp ({ children }: AppProps) {
 
   function getSlotNumber () {
     return (performance && performance?.slotNumber) || slotNumber
-  }
-
-  function getCategoryTitle (categoryName = '') {
-    return categoryTitles[categoryName] || dedupe(snakeToPascal(categoryName))
-  }
-
-  function getCriteriaTitle (criteriaName = '') {
-    return criteriaNames[criteriaName] || snakeToPascal(criteriaName)
   }
 
   function Infos () {
