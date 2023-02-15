@@ -9,6 +9,9 @@ export const tournamentController = new Router()
 
 tournamentController
   .use(bodyParser())
+  .use('/current', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => ({ tournamentName: process.env.CURRENT_TOURNAMENT }))
+  })
   .post('/plan', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.planTournament(ctx.request.body as unknown as TournamentPlan[]))
   })

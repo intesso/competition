@@ -6,17 +6,20 @@ import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
 
 export function Start () {
-  const { getTournamentByName } = useContext(ApiContext)
+  const { getCurrentTournamentName, getTournamentByName } = useContext(ApiContext)
   const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
 
   const [searchParams] = useSearchParams()
   const judgeId = searchParams.get('judgeId') || searchParams.get('id') || ''
-  const tournamentName = searchParams.get('tournamentName') || ''
+  let tournamentName = searchParams.get('tournamentName') || ''
   const isAdmin = searchParams.get('admin') || ''
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!tournamentName) {
+        tournamentName = (await getCurrentTournamentName()).tournamentName
+      }
       if (tournamentName) {
         const tournament = await getTournamentByName(tournamentName)
         const nothingPath = '/judging/nothing'

@@ -171,6 +171,10 @@ export interface CurrentQueueUIResponse {
   }
 }
 
+export interface CurrentTournament {
+  tournamentName: string
+}
+
 export interface TournamentQueue {
   id: string
   tournamentId: string

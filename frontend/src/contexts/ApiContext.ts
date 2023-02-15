@@ -5,6 +5,7 @@ import {
   Club,
   Criteria,
   CurrentQueueUIResponse,
+  CurrentTournament,
   JudgingRule,
   Location,
   Performance,
@@ -25,6 +26,7 @@ export interface Api {
   addClub: (club: Club) => Promise<void>
   listClubs: () => Promise<Club[]>
   // tournament
+  getCurrentTournamentName: () => Promise<CurrentTournament>
   getTournamentQueue: (tournamentId: string) => Promise<TournamentQueue>
   setTournamentQueue: (tournamentId: string, slotNumber: number) => Promise<TournamentQueue>
   moveQueueForward: (tournamentId: string) => Promise<TournamentQueue>
@@ -99,6 +101,16 @@ export function provideApiContext (): Api {
         method: 'GET'
       })
     ).data as Club[]
+  }
+
+  async function getCurrentTournamentName () {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/current`,
+        method: 'GET'
+      })
+    ).data as CurrentTournament
   }
 
   async function addTournament (tournament: Tournament) {
@@ -544,6 +556,7 @@ export function provideApiContext (): Api {
     serverBaseUrl,
     addClub,
     listClubs,
+    getCurrentTournamentName,
     getTournamentQueue,
     setTournamentQueue,
     moveQueueForward,
