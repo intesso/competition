@@ -14,7 +14,7 @@ Id,judgingRuleId,judgingRuleName,criteriaName,criteriaDescription,criteriaWeight
 11111111-0000-0000-0000-000000000002,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,variation,Variation,15,wraps,Wraps,333.3333333,integer,0,2,1,3x3,6,666.6666667
 11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,onRhythm,Im richtigen Rhythmus (%),16.66666667,integer,0,100,5,3x3,1,1666.666667
 11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,useOfMusic,Gebrauch der Musikakzente,83.33333333,integer,0,20,1,3x3,4,1666.666667
-11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,uniqueSkills,Originelles und Spektakuläres,166.6666667,interger,0,10,1,3x3,3,1666.666667
+11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,uniqueSkills,Originelles und Spektakuläres,166.6666667,integer,0,10,1,3x3,3,1666.666667
 11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,movement,Bewegung (%),8.333333333,integer,0,100,5,3x3,2,833.3333333
 11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,movementAcrossFloor,Ausnützung der Wettkampffläche,166.6666667,integer,0,5,1,3x3,5,833.3333333
 11111111-0000-0000-0000-000000000003,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,presentation,Präsentation,35,entertainment,Präsentation nach Aussen (%),16.66666667,integer,0,100,5,3x3,6,1666.666667
@@ -24,10 +24,10 @@ Id,judgingRuleId,judgingRuleName,criteriaName,criteriaDescription,criteriaWeight
 11111111-0000-0000-0000-000000000004,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,deductions,Abzüge,100,majorMistakes,Grosse Fehler,-100,integer,0,50,1,3x3,4,
 11111111-0000-0000-0000-000000000004,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,deductions,Abzüge,100,timeViolation,Zeitüberschreitung,-100,integer,0,1,1,3x3,6,
 11111111-0000-0000-0000-000000000004,11111111-0000-0000-0000-000000000001,singleFreestyleSingleRopeErso,deductions,Abzüge,100,spaceViolations,Überschreitung der Wettkampffläche,-100,integer,0,20,1,3x3,3,
-11111111-0000-0000-0000-000000000005,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,difficultyAdvanced,Level Advanced,50,level1,Level 1,50,integer,0,15,1,3x3,1,750
-11111111-0000-0000-0000-000000000005,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,difficultyAdvanced,Level Advanced,50,level2,Level 2,100,integer,0,26,1,3x3,3,2600
-11111111-0000-0000-0000-000000000005,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,difficultyAdvanced,Level Advanced,50,level3,Level 3,160,integer,0,20,1,3x3,4,3200
-11111111-0000-0000-0000-000000000005,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,difficultyAdvanced,Level Advanced,50,level4,Level 4,230,integer,0,15,1,3x3,6,3450
+11111111-0000-0000-0000-000000000005,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,difficulty,Level,50,level1,Level 1,50,integer,0,15,1,3x3,1,750
+11111111-0000-0000-0000-000000000005,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,difficulty,Level,50,level2,Level 2,100,integer,0,26,1,3x3,3,2600
+11111111-0000-0000-0000-000000000005,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,difficulty,Level,50,level3,Level 3,160,integer,0,20,1,3x3,4,3200
+11111111-0000-0000-0000-000000000005,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,difficulty,Level,50,level4,Level 4,230,integer,0,15,1,3x3,6,3450
 11111111-0000-0000-0000-000000000006,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,variation,Variation,15,setOfCrosses,Crosses (Vierer-Set),333.3333333,integer,0,8,1,3x3,1,2666.666667
 11111111-0000-0000-0000-000000000006,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,variation,Variation,15,setOfMultiples,Multiples (Vierer-Set),333.3333333,integer,0,8,1,3x3,4,2666.666667
 11111111-0000-0000-0000-000000000006,11111111-0000-0000-0000-000000000002,singleFreestyleSingleRopeAdvanced,variation,Variation,15,setOfDirectionChanges,Direction Changes (Vierer-Set),333.3333333,integer,0,3,1,3x3,7,1000
