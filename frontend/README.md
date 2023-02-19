@@ -4,6 +4,12 @@ built with the main frameworks: react & MUI
 
 # Build & Run
 
+copy .env.localhost or .env.setup to .env
+
+```
+cp .env.setup .env
+```
+
 ## Development
 
 - in development mode, auto refresh of pages on changes and source-maps are enabled.
@@ -12,6 +18,7 @@ built with the main frameworks: react & MUI
 run:
 
 ```
+cp .env.localhost .env
 npm run dev
 ```
 
@@ -23,6 +30,7 @@ npm run dev
 run:
 
 ```sh
+cp .env.setup .env
 npm run build
 ```
 

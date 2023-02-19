@@ -8,3 +8,4 @@ backup
 .config.*
 __generated__
 dump*.*
+frontend/.env
