@@ -63,7 +63,7 @@ export function JudgingApp ({ children }: AppProps) {
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
   const isAdmin = searchParams.get('admin') || ''
-  const [inputType, setInputType] = useLocalStorage<InputType>('inputType', 'slider') // TODO change: 'slider' -> 'button'
+  const [inputType, setInputType] = useLocalStorage<InputType>(`${judgeId}-inputType`, 'button')
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
   const performanceId = searchParams.get('performanceId')
   const [performance, setPerformance] = useState(null as Performance | null)

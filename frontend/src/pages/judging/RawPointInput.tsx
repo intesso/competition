@@ -31,14 +31,14 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
   const tournamentId = searchParams.get('tournamentId')
   const tournamentJudgeId = searchParams.get('tournamentJudgeId')
   const admin = searchParams.get('admin')
-  const [inputType] = useLocalStorage<InputType>('inputType', 'button')
+  const [inputType] = useLocalStorage<InputType>(`${judgeId}-inputType`, 'button')
   const [tournamentJudge, setTournamentJudge] = useState(null as TournamentPerson | null)
   const performanceId = searchParams.get('performanceId')
   const [performance, setPerformance] = useState(null as Performance | null)
   const criteriaId = searchParams.get('criteriaId')
-  const subCriteriaKey = `subCriteria_${performanceId}_${criteriaId}`
+  const subCriteriaKey = `subCriteria_${judgeId}_${performanceId}_${criteriaId}`
   const [subCriteria, setSubCriteria] = useLocalStorage<SubCriteriaValue>(subCriteriaKey, {})
-  const finishedKey = `finished_${performanceId}_${criteriaId}`
+  const finishedKey = `finished_${judgeId}_${performanceId}_${criteriaId}`
   const [finished, setFinished] = useLocalStorage<string>(finishedKey, '')
   const [fns, setFns] = useState({} as SelectFn)
 
@@ -81,7 +81,7 @@ export function RawPointInput ({ layout }: RawPointInputProps) {
       }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
-  }, [tournamentId, performanceId, criteriaId])
+  }, [tournamentId, performanceId, criteriaId, judgeId, admin])
 
   useEffect(() => {
     const fetchData = async () => {
