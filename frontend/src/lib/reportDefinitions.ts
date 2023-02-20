@@ -63,7 +63,7 @@ export function beautifyReportItems (name: string, items: ReportItemFormat[], or
         }
       }
     })
-    console.log('orderedRankEntries', orderedRankEntries)
+    // console.log('orderedRankEntries', orderedRankEntries)
     return Object.fromEntries([
       ...orderedRankEntries.filter(it => it),
       ...missingEntries

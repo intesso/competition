@@ -49,16 +49,27 @@ function emptyRow () {
 }
 
 export function PointsReport ({ items }: PointsReportProps) {
+  const criteriaItems = Object.fromEntries(
+    Object.entries(items).map(([title, points]) => {
+      const criteria = points.reduce((memo, point) => {
+        const criteriaName = point.criteriaName || ''
+        memo[criteriaName] = memo[criteriaName] || []
+        memo[criteriaName].push(point)
+        return memo
+      }, {} as ReportFormat)
+      return [title, criteria]
+    })
+  )
   return (
     <>
-      {Object.entries(items) && Object.entries(items).length > 0 && (
+      {Object.entries(criteriaItems) && Object.entries(criteriaItems).length > 0 && (
         <table width="100%" style={classes.mainTable} border={0}>
           <tbody>
             {/* Placeholder for Image */}
             {emptyRow()}
             {emptyRow()}
             {emptyRow()}
-            {Object.entries(items).map(([title, points], i) => (
+            {Object.entries(criteriaItems).map(([title, points], i) => (
               <React.Fragment key={i}>
                 <tr>
                   <td colSpan={4}>
@@ -73,25 +84,43 @@ export function PointsReport ({ items }: PointsReportProps) {
                   <td></td>
                 </tr>
                 {/* title */}
-                <tr>
-                  {Object.keys(points).length > 0 &&
-                    Object.keys(points[0]).map((key, i) => (
-                      <th key={i} style={classes.tLeft}>
-                        {key}
-                      </th>
-                    ))}
+                {Object.entries(points).map(([criteriaName, point], i) => (
+                  <React.Fragment key={i}>
+                                   <tr>
+                  <td colSpan={4}>
+                    <em>{criteriaName}</em>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
-                {/* value rows */}
-                {points.map((rank, i) => (
-                  <tr key={i}>
-                    {Object.values(rank).map((value, i) => (
-                      <td key={i}>{value}</td>
+                    <tr>
+                    {Object.keys(point).length > 0 &&
+                     Object.keys(point[0]).map((val, j) => (
+                       <th key={j} style={classes.tLeft}>
+                         {val}
+                       </th>
+                     ))}
+
+                    </tr>
+                    {/* value rows */}
+                    {Object.values(point).map((point, i) => (
+                   <tr key={i}>
+                     {Object.values(point).map((value, i) => (
+                       <td key={i}>{value}</td>
+                     ))}
+                   </tr>
                     ))}
-                  </tr>
-                ))}
-                {emptyRow()}
-                {emptyRow()}
-                {emptyRow()}
+                 {emptyRow()}
+                 {emptyRow()}
+                 {emptyRow()}
+                 </React.Fragment>
+                ))
+                }
               </React.Fragment>
             ))}
           </tbody>
