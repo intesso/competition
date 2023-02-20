@@ -2,6 +2,7 @@ import axios from 'axios'
 import { createContext } from 'react'
 import {
   Category,
+  CategoryPointDetails,
   Club,
   Criteria,
   CurrentQueueUIResponse,
@@ -66,6 +67,7 @@ export interface Api {
   addRawPoint: (rawPoint: RawPoint) => Promise<RawPoint>
   getRawPointForJudge: (performanceId: string, judgeId: string, criteriaId: string) => Promise<RawPoint>
   // ranks (calculatiom)
+  getCategoryPoints: (tournamentId: string) => Promise<CategoryPointDetails>
   getCategoryRanks: (tournamentId: string) => Promise<ReportFormat>
   getCombinationRanks: (tournamentId: string) => Promise<ReportFormat>
   calculateAllPoints: (tournamentId: string) => Promise<void>
@@ -492,6 +494,16 @@ export function provideApiContext (): Api {
     ).data
   }
 
+  async function getCategoryPoints (tournamentId: string) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/calculations/${tournamentId}/points`,
+        method: 'GET'
+      })
+    ).data as CategoryPointDetails
+  }
+
   async function getCategoryRanks (tournamentId: string) {
     return (
       await axios({
@@ -593,6 +605,7 @@ export function provideApiContext (): Api {
     getJudgingRuleByCategoryId,
     addRawPoint,
     getRawPointForJudge,
+    getCategoryPoints,
     getCategoryRanks,
     getCombinationRanks,
     calculateAllPoints,

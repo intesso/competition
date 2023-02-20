@@ -87,6 +87,34 @@ export interface UiPositionSubCriteriaValue {
   [uiPosition: string]: SubCriteriaValueProps
 }
 
+export interface CategoryPointDetails {
+  [key: string]: CategoryPointDetail[]
+}
+
+export type CategoryPointDetail = CategoryPoint & {
+  criteriaPoints: CriteriaPoints
+  clubName: string | undefined
+  performerName: string | undefined
+  performanceName: string | undefined
+  performerNumber: number | null | undefined
+  slotNumber: number | string | null | undefined
+}
+
+interface CategoryPoint {
+  id: string
+  categoryId: Category['id']
+  categoryPoint: (number) | null
+  createdAt: (Date) | null
+  createdBy: (string) | null
+  criteriaPoints: CriteriaPoints | null
+  disqualified: (boolean) | null
+  performanceId: Performance['id']
+  performerId: Performer['id']
+  tournamentId: Tournament['id']
+  updatedAt: (Date) | null
+  updatedBy: (string) | null
+}
+
 export interface SubCriteriaProps {
   rangeEnd: number
   rangeStart: number
@@ -99,6 +127,31 @@ export interface SubCriteriaProps {
 }
 
 export type SubCriteriaValueProps = SubCriteriaProps & { value: number}
+
+export type SubCriteriaPoints = SubCriteriaValueProps & { calculatedPoints: number }
+
+export interface CriteriaPoints {
+  [key: string]: {
+    judges: JudgeCriteria[]
+    criteriaId: string
+    criteriaName: string
+    criteriaWeight: number
+    calculatedAggregationMethod: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    calculatedAggregatedCriteriaStats: any
+    calculatedAggregatedCriteriaPoints: number
+    calculatedAggregatedCriteriaPointsRaw: number
+  }
+}
+
+export interface JudgeCriteria {
+  judgeId: string
+  judgeName: string
+  subCriteriaPoints: {
+    [key: string]: SubCriteriaPoints
+  }
+  calculatedCriteriaPoints: number
+}
 
 export interface JudgingRule {
   id?: string

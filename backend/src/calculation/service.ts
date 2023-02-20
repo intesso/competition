@@ -21,7 +21,9 @@ import {
   CombinationRankByCategory,
   CombinationRankSummary,
   StoredCombinationRanks,
-  CalculationCombinationRanksOutput
+  CalculationCombinationRanksOutput,
+  CategoryPointDetails,
+  CategoryPointDetail
 } from './interfaces'
 import {
   deleteCategoryPointById,
@@ -108,6 +110,33 @@ export class CalculationService implements ICalculationContext {
       return null
     }
     return await getCategoryPointByPerformanceIdAndCategoryId(performanceId, performance.categoryId)
+  }
+
+  async getAllCategoryPointsDetailed (tournamentId: string): Promise<CategoryPointDetails | null> {
+    const categoryIds = await this.getApplicationContext().tournament.listTournamentCategories(tournamentId)
+    const pointsDetails: CategoryPointDetails = {}
+    for (const categoryId of categoryIds) {
+      const category = await this.getApplicationContext().judging.getCategory(categoryId)
+      const categoryPoints = await findCategoryPointByCategoryId(tournamentId, categoryId)
+      const enhancedCategoryPoints: CategoryPointDetail[] = []
+      for (const categoryPoint of categoryPoints) {
+        const performance = await this.getApplicationContext().tournament.getPerformance(categoryPoint.performanceId)
+        const club = await this.getApplicationContext().people.getClubById(performance?.clubId || '')
+        const performer = await this.getApplicationContext().tournament.getPerformer(categoryPoint.performerId)
+        enhancedCategoryPoints.push({
+          ...categoryPoint,
+          clubName: club?.clubName,
+          performanceName: performance?.performanceName,
+          slotNumber: performance?.slotNumber,
+          performerName: performer?.performerName,
+          performerNumber: performer?.performerNumber
+        })
+      }
+      if (category && categoryPoints && categoryPoints.length) {
+        pointsDetails[category.categoryName] = enhancedCategoryPoints
+      }
+    }
+    return pointsDetails
   }
 
   async copyMixedCategoryPoints (tournamentId: string) {

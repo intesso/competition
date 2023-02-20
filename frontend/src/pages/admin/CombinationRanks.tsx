@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
 import { useLocalStorage } from 'usehooks-ts'
 import { beautifyCombinationRank } from '../../lib/reportUtils'
-import { RanksReport } from '../../components/Report'
+import { RanksReport } from '../../components/RanksReport'
 import { useSearchParams } from 'react-router-dom'
 
 export function CombinationRanks () {

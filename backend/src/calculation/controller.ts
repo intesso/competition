@@ -25,6 +25,9 @@ calculationController
   .post('/:tournamentId/points', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.calculateAllPoints(ctx.params.tournamentId))
   })
+  .get('/:tournamentId/points', inputValidation.validate, async (ctx) => {
+    return respondWith(ctx, () => applicationContext.calculation.getAllCategoryPointsDetailed(ctx.params.tournamentId))
+  })
   .post('/:tournamentId/category-ranks/reports', inputValidation.validate, async (ctx) => {
     return respondWith(ctx, () => applicationContext.calculation.generateCategoryRanksReport(ctx.params.tournamentId))
   })

@@ -1,22 +1,22 @@
 import { Container, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import { ApiContext } from '../../contexts/ApiContext'
-import { ReportFormat, Tournament } from '../../contexts/ApiContextInterface'
+import { CategoryPointDetails, Tournament } from '../../contexts/ApiContextInterface'
 import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
 import { useLocalStorage } from 'usehooks-ts'
-import { beautifyCategoryRank } from '../../lib/reportUtils'
-import { RanksReport } from '../../components/RanksReport'
+import { beautifyCategoryPoint } from '../../lib/reportUtils'
 import { useSearchParams } from 'react-router-dom'
+import { PointsReport } from '../../components/PointsReport'
 
-export function CategoryRanks () {
-  const { listTournaments, getCategoryRanks } = useContext(ApiContext)
+export function CategoryPoints () {
+  const { listTournaments, getCategoryPoints } = useContext(ApiContext)
   const { enqueueSnackbar } = useSnackbar()
   const [searchParams] = useSearchParams()
   const json = searchParams.get('json')
   const [tournaments, setTournaments] = useState([] as Tournament[])
   const [tournamentId, setTournamentId] = useLocalStorage('tournamentId', '')
-  const [categoryRanks, setCategoryRanks] = useState({} as ReportFormat)
+  const [categoryPoints, setCategoryPoints] = useState({} as CategoryPointDetails)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,18 +29,18 @@ export function CategoryRanks () {
   useEffect(() => {
     const fetchData = async () => {
       if (tournamentId) {
-        const r = await getCategoryRanks(tournamentId)
-        setCategoryRanks(r)
+        const r = await getCategoryPoints(tournamentId)
+        setCategoryPoints(r)
       }
     }
     fetchData().catch((err) => enqueueSnackbar(parseError(err), { variant: 'error' }))
   }, [tournamentId])
 
   return (
-    <Container>
+    <Container maxWidth={false}>
       <form>
         <Typography variant={'h4'} sx={{ marginTop: '22px', textAlign: 'center' }}>
-          Kategorien Rangliste
+          Kategorie Punkte
         </Typography>
 
         <FormControl fullWidth margin="normal">
@@ -62,10 +62,10 @@ export function CategoryRanks () {
 
       {json
         ? (
-        <pre>{JSON.stringify(beautifyCategoryRank(categoryRanks), null, 2)}</pre>
+        <pre>{JSON.stringify(beautifyCategoryPoint(categoryPoints), null, 2)}</pre>
           )
         : (
-        <RanksReport items={beautifyCategoryRank(categoryRanks)} />
+        <PointsReport items={beautifyCategoryPoint(categoryPoints)} />
           )}
     </Container>
   )

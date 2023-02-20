@@ -28,12 +28,13 @@ export interface ReportItemFormat {
   [key: string]: string | number
 }
 
-export function beautifyReportItems (name: string, items: ReportItemFormat[], orderLookup: ReportOrder, itemKeyLookup: ReportLookup) {
+export function beautifyReportItems (name: string, items: ReportItemFormat[], orderLookup: ReportOrder, itemKeyLookup: ReportLookup, addMissing = false) {
   const foundOrderLookup = orderLookup[name]
   if (!foundOrderLookup) { return items }
 
   return items.map(item => {
     const orderedRankEntries: [string, string | number][] = []
+    const missingEntries: [string, string | number][] = []
     const entries = Object.entries(item)
     entries.forEach(([key, value]) => {
       const index = foundOrderLookup[key]
@@ -43,10 +44,35 @@ export function beautifyReportItems (name: string, items: ReportItemFormat[], or
       beautifiedKey = categoryNames[beautifiedKey] || beautifiedKey
       if (index >= 0) {
         orderedRankEntries[index] = [beautifiedKey, beautifyValue(key, value)]
+      } else if (addMissing) {
+        if (!['performanceName'].includes(key)) {
+          missingEntries.push([beautifiedKey, beautifyValue(key, value)])
+        }
       }
     })
     console.log('orderedRankEntries', orderedRankEntries)
-    return Object.fromEntries(orderedRankEntries.filter(it => it))
+    return Object.fromEntries([
+      ...orderedRankEntries.filter(it => it),
+      ...missingEntries
+    ])
+  })
+}
+
+export function beautifyCategoryPoints (name: string, items: ReportItemFormat[], orderLookup: ReportOrder, itemKeyLookup: ReportLookup) {
+  const foundOrderLookup = orderLookup[name]
+  if (!foundOrderLookup) { return items }
+
+  return items.map(item => {
+    const entries = Object.entries(item)
+    const filteredEntries = entries.filter(([key]) => {
+      const index = foundOrderLookup[key]
+      if (index < 0 || index === undefined) {
+        return true
+      }
+      return false
+    })
+    console.log('filteredEntries', filteredEntries)
+    return Object.fromEntries(filteredEntries)
   })
 }
 

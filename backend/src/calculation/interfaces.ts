@@ -75,6 +75,57 @@ export interface CalculationPointsOutput {
   }
 }
 
+export interface CategoryPointDetails {
+  [key: string]: CategoryPointDetail[]
+}
+
+export type CategoryPointDetail = CategoryPoint & {
+  criteriaPoints: CriteriaPoints
+  clubName: string | undefined
+  performerName: string | undefined
+  performanceName: string | undefined
+  performerNumber: number | null | undefined
+  slotNumber: number | string | null | undefined
+}
+
+export interface SubCriteriaProps {
+  rangeEnd: number
+  rangeStart: number
+  subCriteriaName: string
+  subCriteriaDescription: string
+  subCriteriaWeight: number
+  valueType: 'integer' | 'number' | 'float' | 'boolean'
+  step: number
+  uiPosition: string
+}
+
+export type SubCriteriaValueProps = SubCriteriaProps & { value: number}
+
+export type SubCriteriaPoints = SubCriteriaValueProps & { calculatedPoints: number }
+
+export interface CriteriaPoints {
+  [key: string]: {
+    judges: JudgeCriteria[]
+    criteriaId: string
+    criteriaName: string
+    criteriaWeight: number
+    calculatedAggregationMethod: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    calculatedAggregatedCriteriaStats: any
+    calculatedAggregatedCriteriaPoints: number
+    calculatedAggregatedCriteriaPointsRaw: number
+  }
+}
+
+export interface JudgeCriteria {
+  judgeId: string
+  judgeName: string
+  subCriteriaPoints: {
+    [key: string]: SubCriteriaPoints
+  }
+  calculatedCriteriaPoints: number
+}
+
 export interface CategoryRankDetails {
   id: string
   tournamentId: string
@@ -155,6 +206,7 @@ export interface ICalculationContext extends IGetApplicationContext {
   getPoints: (performanceId: string) => Promise<CategoryPoint | null>
   calculatePoints: (input: CalculationPointsInput) => Promise<CalculationPointsOutput | null>
   calculateAllPoints: (tournamentId: string) => Promise<boolean | null>
+  getAllCategoryPointsDetailed: (tournamentId: string) => Promise<CategoryPointDetails | null>
   getCategoryRanks: (tournamentId: string, categoryId: string) => Promise<CalculationCategoryRanksOutput | null>
   getCategoryRanksDetailed: (tournamentId: string, categoryId: string) => Promise<CategoryRanksDetailsResult | null>
   getAllCategoryRanksDetailed: (tournamentId: string) => Promise<CategoryRanksDetailsAllResult | null>

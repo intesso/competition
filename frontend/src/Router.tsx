@@ -20,6 +20,7 @@ import { CombinationRanks } from './pages/admin/CombinationRanks'
 import { CalculationAdmin } from './pages/admin/CalculationAdmin'
 import { TournamentAdmin } from './pages/admin/TournamentAdmin'
 import { Reset } from './pages/judging/Reset'
+import { CategoryPoints } from './pages/admin/CategoryPoints'
 
 export const Router = () => (
   <Routes>
@@ -30,6 +31,7 @@ export const Router = () => (
         <Route path="tournament-queue" element={<TournamentQueueDashboard />} />
         <Route path="tournament-plan" element={<TournamentPlanList />} />
         <Route path="select-raw-point" element={<SelectRawPoint />} />
+        <Route path="category-points" element={<CategoryPoints />} />
         <Route path="category-ranks" element={<CategoryRanks />} />
         <Route path="combination-ranks" element={<CombinationRanks />} />
         <Route path="calculation" element={<CalculationAdmin />} />
