@@ -1,0 +1,2504 @@
+{
+	"info": {
+		"_postman_id": "88367b81-53aa-45fd-8f91-15e30e1a4a81",
+		"name": "competition-tests-single_TripleUnder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9273620"
+	},
+	"item": [
+		{
+			"name": "TripleUnder M",
+			"item": [
+				{
+					"name": "listTournaments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData[jsonData.length - 1].id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentByTournamentName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Single",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							],
+							"query": [
+								{
+									"key": "tournamentName",
+									"value": "Test SM Single"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentPlan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament plan should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/plan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"plan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPerformanceByPerformanceName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"performanceId\", jsonData.id);",
+									"    pm.expect(jsonData.categoryId).to.exist",
+									"    pm.environment.set(\"categoryId\", jsonData.categoryId);",
+									"    if (jsonData.judges && jsonData.judges.length) {",
+									"        pm.environment.set(\"judgeId\", jsonData.judges[0].judgeId);",
+									"        pm.environment.set(\"judgeName\", jsonData.judges[0].judgeName);",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=single-men-open-speed-tripleUnder-AthleteM",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances"
+							],
+							"query": [
+								{
+									"key": "performanceName",
+									"value": "single-men-open-speed-tripleUnder-AthleteM"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCriteriaByCategoryId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/criteria?categoryId={{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"criteria"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "{{categoryId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePointsforPerformance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code should be correct\", function () {",
+									"    pm.expect(pm.response.code).to.be.equal(204)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances/{{performanceId}}/points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances",
+								"{{performanceId}}",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J13",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J13\",\n    \"judgeName\": \"Judge13\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 29\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 15\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J14",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J14\",\n    \"judgeName\": \"Judge14\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 29\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 15\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J15",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J15\",\n    \"judgeName\": \"Judge15\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 29\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 15\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoryPoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"categoryPoint should be correct\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"categoryPointId\", jsonData.id)",
+									"    pm.expect(jsonData.categoryPoint).to.exist",
+									"    pm.expect(jsonData.categoryPoint).to.equal(29)",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/points/{{performanceId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"points",
+								"{{performanceId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TripleUnder S",
+			"item": [
+				{
+					"name": "listTournaments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData[jsonData.length - 1].id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentByTournamentName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Single",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							],
+							"query": [
+								{
+									"key": "tournamentName",
+									"value": "Test SM Single"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentPlan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament plan should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/plan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"plan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPerformanceByPerformanceName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"performanceId\", jsonData.id);",
+									"    pm.expect(jsonData.categoryId).to.exist",
+									"    pm.environment.set(\"categoryId\", jsonData.categoryId);",
+									"    if (jsonData.judges && jsonData.judges.length) {",
+									"        pm.environment.set(\"judgeId\", jsonData.judges[0].judgeId);",
+									"        pm.environment.set(\"judgeName\", jsonData.judges[0].judgeName);",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=single-men-open-speed-tripleUnder-AthleteS",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances"
+							],
+							"query": [
+								{
+									"key": "performanceName",
+									"value": "single-men-open-speed-tripleUnder-AthleteS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCriteriaByCategoryId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/criteria?categoryId={{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"criteria"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "{{categoryId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePointsforPerformance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code should be correct\", function () {",
+									"    pm.expect(pm.response.code).to.be.equal(204)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances/{{performanceId}}/points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances",
+								"{{performanceId}}",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J16",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J16\",\n    \"judgeName\": \"Judge16\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 25\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 33\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J17",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J17\",\n    \"judgeName\": \"Judge17\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 25\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 33\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J18",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J18\",\n    \"judgeName\": \"Judge18\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 25\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 33\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoryPoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"categoryPoint should be correct\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"categoryPointId\", jsonData.id)",
+									"    pm.expect(jsonData.categoryPoint).to.exist",
+									"    pm.expect(jsonData.categoryPoint).to.equal(33)",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/points/{{performanceId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"points",
+								"{{performanceId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TripleUnder T",
+			"item": [
+				{
+					"name": "listTournaments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData[jsonData.length - 1].id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentByTournamentName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Single",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							],
+							"query": [
+								{
+									"key": "tournamentName",
+									"value": "Test SM Single"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentPlan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament plan should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/plan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"plan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPerformanceByPerformanceName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"performanceId\", jsonData.id);",
+									"    pm.expect(jsonData.categoryId).to.exist",
+									"    pm.environment.set(\"categoryId\", jsonData.categoryId);",
+									"    if (jsonData.judges && jsonData.judges.length) {",
+									"        pm.environment.set(\"judgeId\", jsonData.judges[0].judgeId);",
+									"        pm.environment.set(\"judgeName\", jsonData.judges[0].judgeName);",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=single-men-open-speed-tripleUnder-AthleteT",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances"
+							],
+							"query": [
+								{
+									"key": "performanceName",
+									"value": "single-men-open-speed-tripleUnder-AthleteT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCriteriaByCategoryId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/criteria?categoryId={{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"criteria"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "{{categoryId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePointsforPerformance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code should be correct\", function () {",
+									"    pm.expect(pm.response.code).to.be.equal(204)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances/{{performanceId}}/points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances",
+								"{{performanceId}}",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J19",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J19\",\n    \"judgeName\": \"Judge19\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 121\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 0\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J20",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J20\",\n    \"judgeName\": \"Judge20\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 122\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 0\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoryPoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"categoryPoint should be correct\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"categoryPointId\", jsonData.id)",
+									"    pm.expect(jsonData.categoryPoint).to.exist",
+									"    pm.expect(jsonData.categoryPoint).to.equal(122)",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/points/{{performanceId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"points",
+								"{{performanceId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TripleUnder Y",
+			"item": [
+				{
+					"name": "listTournaments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData[jsonData.length - 1].id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentByTournamentName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Single",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							],
+							"query": [
+								{
+									"key": "tournamentName",
+									"value": "Test SM Single"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentPlan",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament plan should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/plan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"plan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPerformanceByPerformanceName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"performanceId\", jsonData.id);",
+									"    pm.expect(jsonData.categoryId).to.exist",
+									"    pm.environment.set(\"categoryId\", jsonData.categoryId);",
+									"    if (jsonData.judges && jsonData.judges.length) {",
+									"        pm.environment.set(\"judgeId\", jsonData.judges[0].judgeId);",
+									"        pm.environment.set(\"judgeName\", jsonData.judges[0].judgeName);",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances?performanceName=single-men-open-speed-tripleUnder-AthleteY",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances"
+							],
+							"query": [
+								{
+									"key": "performanceName",
+									"value": "single-men-open-speed-tripleUnder-AthleteY"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCriteriaByCategoryId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"performance should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/criteria?categoryId={{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"criteria"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "{{categoryId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePointsforPerformance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code should be correct\", function () {",
+									"    pm.expect(pm.response.code).to.be.equal(204)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments/{{tournamentId}}/performances/{{performanceId}}/points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments",
+								"{{tournamentId}}",
+								"performances",
+								"{{performanceId}}",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J22",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J22\",\n    \"judgeName\": \"Judge22\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 150\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 0\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J23",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J23\",\n    \"judgeName\": \"Judge23\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 148\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 0\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addRawPoints J24",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"rawPoint should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"rawPointId\", jsonData.id)",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"performanceId\": \"{{performanceId}}\",\n    \"judgeId\": \"J24\",\n    \"judgeName\": \"Judge24\",\n    \"criteriaId\": \"11111111-0000-0000-0000-000000000011\",\n    \"subCriteriaPoints\": {\n        \"countFirstTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"1\",\n                \"subCriteriaName\": \"countFirstTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"1. Versuch\",\n                \"value\": 149\n            },\n            \"countSecondTry\": {\n                \"step\": 1,\n                \"rangeEnd\": 550,\n                \"valueType\": \"integer\",\n                \"rangeStart\": 0,\n                \"uiPosition\": \"3\",\n                \"subCriteriaName\": \"countSecondTry\",\n                \"subCriteriaWeight\": 100,\n                \"subCriteriaDescription\": \"2. Versuch\",\n                \"value\": 0\n            }\n    },\n    \"timestamp\": \"2022-11-09T21:38:07.057+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/raw-points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"raw-points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoryPoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"categoryPoint should be correct\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"categoryPointId\", jsonData.id)",
+									"    pm.expect(jsonData.categoryPoint).to.exist",
+									"    pm.expect(jsonData.categoryPoint).to.equal(149)",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/points/{{performanceId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"points",
+								"{{performanceId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Check Ranks",
+			"item": [
+				{
+					"name": "listTournaments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData[jsonData.length - 1].id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTournamentByTournamentName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.id).to.exist",
+									"    pm.environment.set(\"tournamentId\", jsonData.id);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tournaments?tournamentName=Test SM Single",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tournaments"
+							],
+							"query": [
+								{
+									"key": "tournamentName",
+									"value": "Test SM Single"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calculateAllPoints",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/points",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"points"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calculateAllCategoryRanks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/category-ranks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"category-ranks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "calculateAllCombinationRanks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/combination-ranks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"combination-ranks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listCategories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"categories should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"    if (jsonData.length) {",
+									"    pm.expect(jsonData[0].id).to.exist",
+									"        pm.environment.set(\"categoryId\", jsonData[0].id);",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listWeightedCombinations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"tournament athlete should exist\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(jsonData.length).to.exist",
+									"    pm.environment.set(\"combinationId\", jsonData[0].combinationId);",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const rand = Math.floor(Math.random() * 900) + 100",
+									"pm.environment.set(\"rand\", rand);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/judging/combinations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"judging",
+								"combinations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCategoryRankDetails",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"categoryRank should be correct\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(Object.keys(jsonData).length).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/category-ranks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"category-ranks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCombinationRanks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"combinationRank should be correct\", function () {",
+									"    var jsonData = pm.response.json()",
+									"    pm.expect(Object.keys(jsonData)).to.exist",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calculations/{{tournamentId}}/combination-ranks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calculations",
+								"{{tournamentId}}",
+								"combination-ranks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
