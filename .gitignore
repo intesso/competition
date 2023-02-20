@@ -9,3 +9,4 @@ backup
 __generated__
 dump*.*
 frontend/.env
+build
