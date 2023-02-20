@@ -104,7 +104,6 @@ export const criteriaNames: ReportLookup = {
   variation: 'Variation',
   presentation: 'Präsentation',
   deductions: 'Abzüge',
-  difficultyAdvanced: 'Level',
   intermediate: 'Compulsory',
   beginner: 'Compulsory',
   tripleUnder: 'Triple Under',
@@ -834,7 +833,7 @@ export const categoryOrder: ReportOrder = {
     clubName: 3,
     presentation: 4,
     variation: 5,
-    difficultyAdvanced: 6,
+    difficulty: 6,
     deductions: 7,
     categoryPoint: 8,
     categoryRank: 9
@@ -846,7 +845,7 @@ export const categoryOrder: ReportOrder = {
     clubName: 3,
     presentation: 4,
     variation: 5,
-    difficultyAdvanced: 6,
+    difficulty: 6,
     deductions: 7,
     categoryPoint: 8,
     categoryRank: 9
@@ -858,7 +857,7 @@ export const categoryOrder: ReportOrder = {
     clubName: 3,
     presentation: 4,
     variation: 5,
-    difficultyAdvanced: 6,
+    difficulty: 6,
     deductions: 7,
     categoryPoint: 8,
     categoryRank: 9
