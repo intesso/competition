@@ -1,4 +1,17 @@
-import { dedupe, snakeToPascal } from './common'
+import { toLower, upperFirst } from 'lodash'
+
+export function snakeToPascal (text: string) {
+  return text.split('-').map(str => upperFirst(toLower(str))).join(' ')
+}
+
+export function dedupe (text: string) {
+  let memo = ''
+  return text.split(' ').filter(it => {
+    const keep = it !== memo
+    memo = it
+    return keep
+  }).join(' ')
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ReportLookup {
@@ -55,24 +68,6 @@ export function beautifyReportItems (name: string, items: ReportItemFormat[], or
       ...orderedRankEntries.filter(it => it),
       ...missingEntries
     ])
-  })
-}
-
-export function beautifyCategoryPoints (name: string, items: ReportItemFormat[], orderLookup: ReportOrder, itemKeyLookup: ReportLookup) {
-  const foundOrderLookup = orderLookup[name]
-  if (!foundOrderLookup) { return items }
-
-  return items.map(item => {
-    const entries = Object.entries(item)
-    const filteredEntries = entries.filter(([key]) => {
-      const index = foundOrderLookup[key]
-      if (index < 0 || index === undefined) {
-        return true
-      }
-      return false
-    })
-    console.log('filteredEntries', filteredEntries)
-    return Object.fromEntries(filteredEntries)
   })
 }
 

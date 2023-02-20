@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import { CategoryPointDetails } from '../contexts/ApiContextInterface'
+import { ReportFormat } from '../contexts/ApiContextInterface'
 
 export interface PointsReportProps {
-  items: CategoryPointDetails
+  items: ReportFormat
 }
 
 const classes = {

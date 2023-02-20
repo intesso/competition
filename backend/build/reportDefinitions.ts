@@ -1,3 +1,18 @@
+import { toLower, upperFirst } from 'lodash'
+
+export function snakeToPascal (text: string) {
+  return text.split('-').map(str => upperFirst(toLower(str))).join(' ')
+}
+
+export function dedupe (text: string) {
+  let memo = ''
+  return text.split(' ').filter(it => {
+    const keep = it !== memo
+    memo = it
+    return keep
+  }).join(' ')
+}
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ReportLookup {
   [key: string]: string
@@ -26,12 +41,13 @@ export interface ReportItemFormat {
   [key: string]: string | number
 }
 
-export function beautifyReportItems (name: string, items: ReportItemFormat[], orderLookup: ReportOrder, itemKeyLookup: ReportLookup) {
+export function beautifyReportItems (name: string, items: ReportItemFormat[], orderLookup: ReportOrder, itemKeyLookup: ReportLookup, addMissing = false) {
   const foundOrderLookup = orderLookup[name]
   if (!foundOrderLookup) { return items }
 
   return items.map(item => {
     const orderedRankEntries: [string, string | number][] = []
+    const missingEntries: [string, string | number][] = []
     const entries = Object.entries(item)
     entries.forEach(([key, value]) => {
       const index = foundOrderLookup[key]
@@ -41,15 +57,18 @@ export function beautifyReportItems (name: string, items: ReportItemFormat[], or
       beautifiedKey = categoryNames[beautifiedKey] || beautifiedKey
       if (index >= 0) {
         orderedRankEntries[index] = [beautifiedKey, beautifyValue(key, value)]
+      } else if (addMissing) {
+        if (!['performanceName'].includes(key)) {
+          missingEntries.push([beautifiedKey, beautifyValue(key, value)])
+        }
       }
     })
     console.log('orderedRankEntries', orderedRankEntries)
-    return Object.fromEntries(orderedRankEntries.filter(it => it))
+    return Object.fromEntries([
+      ...orderedRankEntries.filter(it => it),
+      ...missingEntries
+    ])
   })
-}
-
-export function beautifyAttribute (key: string | number, attributeLookup: ReportLookup) {
-  return attributeLookup[key] || key
 }
 
 export function beautifyValue (key: string, value: string | number) {
@@ -60,6 +79,10 @@ export function beautifyValue (key: string, value: string | number) {
     return beautifyAttribute(value, combinationNames)
   }
   return value
+}
+
+export function beautifyAttribute (key: string | number, attributeLookup: ReportLookup) {
+  return attributeLookup[key] || dedupe(snakeToPascal(key.toString()))
 }
 
 export const reportAttributes = {
