@@ -110,7 +110,8 @@ export type Performer = Omit<PerformerDAO, 'id' | 'updatedAt' | 'updatedBy' | 'c
 export type Performance = Omit<PerformanceDAO, 'id' | 'updatedAt' | 'updatedBy' | 'createdAt' | 'createdBy'>;
 export type TournamentAthlete = Person & TournamentId;
 export type TournamentJudge = Person & TournamentId;
-export type CurrentTournamentQueue = TournamentQueue & { status: QueueRunPerformanceJudge[] }
+export type CurrentTournamentQueue = TournamentQueue & { status: QueueRunPerformanceJudge[], mode: TournamentQueueMode }
+export type TournamentQueueMode = 'normal' | 'reset' | 'pause' | 'message'
 
 // Interfaces (Ports)
 export interface ITournamentContext extends IGetApplicationContext {
@@ -145,6 +146,7 @@ export interface ITournamentContext extends IGetApplicationContext {
   addTournamentJudge: (judge: TournamentJudge) => Promise<TournamentJudge>
   getTournamentJudge: (id: string) => Promise<(TournamentJudge & Id) | null>
   listTournamentJudges: (tournamentId: string) => Promise<TournamentJudge[]>
+  setTournamentQueueMode: (tournamentId: string, mode: TournamentQueueMode) => Promise<TournamentQueue | null>
   setTournamentQueueSlot: (tournamentId: string, slotNumber: number) => Promise<TournamentQueue | null>
   moveTournamentQueueToNextSlot: (tournamentId: string) => Promise<TournamentQueue | null>
   moveTournamentQueueToPreviousSlot: (tournamentId: string) => Promise<TournamentQueue | null>

@@ -18,7 +18,8 @@ import {
   Tournament,
   TournamentPerson,
   TournamentPlanDetails,
-  TournamentQueue
+  TournamentQueue,
+  TournamentQueueMode
 } from './ApiContextInterface'
 
 export interface Api {
@@ -30,6 +31,7 @@ export interface Api {
   getCurrentTournamentName: () => Promise<CurrentTournament>
   getTournamentQueue: (tournamentId: string) => Promise<TournamentQueue>
   setTournamentQueue: (tournamentId: string, slotNumber: number) => Promise<TournamentQueue>
+  setTournamentQueueMode: (tournamentId: string, mode: TournamentQueueMode) => Promise<TournamentQueue>
   moveQueueForward: (tournamentId: string) => Promise<TournamentQueue>
   moveQueueBackward: (tournamentId: string) => Promise<TournamentQueue>
   listTournamentPlan: (tournamentId: string) => Promise<TournamentPlanDetails[]>
@@ -174,7 +176,7 @@ export function provideApiContext (): Api {
         url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue`,
         method: 'GET'
       })
-    ).data
+    ).data as TournamentQueue
   }
 
   async function setTournamentQueue (tournamentId: string, slotNumber: number) {
@@ -184,7 +186,17 @@ export function provideApiContext (): Api {
         url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue/${slotNumber}`,
         method: 'PUT'
       })
-    ).data
+    ).data as TournamentQueue
+  }
+
+  async function setTournamentQueueMode (tournamentId: string, mode: TournamentQueueMode) {
+    return (
+      await axios({
+        headers,
+        url: `${serverBaseUrl}/api/tournaments/${tournamentId}/queue/mode/${mode}`,
+        method: 'PUT'
+      })
+    ).data as TournamentQueue
   }
 
   async function getTournamentAthlete (tournamentId: string, id: string) {
@@ -571,6 +583,7 @@ export function provideApiContext (): Api {
     getCurrentTournamentName,
     getTournamentQueue,
     setTournamentQueue,
+    setTournamentQueueMode,
     moveQueueForward,
     moveQueueBackward,
     addTournament,

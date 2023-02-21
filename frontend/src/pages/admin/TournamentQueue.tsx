@@ -19,6 +19,7 @@ import {
   Tournament,
   TournamentPlanDetails,
   TournamentQueue,
+  TournamentQueueMode,
   TournamentQueueStatus
 } from '../../contexts/ApiContextInterface'
 import { useSnackbar } from 'notistack'
@@ -37,6 +38,7 @@ export function TournamentQueueDashboard () {
     moveQueueBackward,
     moveQueueForward,
     setTournamentQueue,
+    setTournamentQueueMode,
     getTournamentQueue
   } = useContext(ApiContext)
   const theme = useTheme()
@@ -109,6 +111,13 @@ export function TournamentQueueDashboard () {
     storeQueueAndSlotNumber(tournamentId)
   }
 
+  async function changeMode (mode: TournamentQueueMode) {
+    const q = await setTournamentQueueMode(tournamentId, mode)
+    if (q) {
+      storeQueue({ ...queue, mode })
+    }
+  }
+
   async function storeQueueAndSlotNumber (tournamentId: string) {
     const q = await getTournamentQueue(tournamentId)
     storeQueue({ ...q })
@@ -124,6 +133,12 @@ export function TournamentQueueDashboard () {
 
   const classes = {
     queueElements: { p: 2, border: '1px dashed grey', borderRadius: 1 }
+  }
+
+  const modes = {
+    normal: 'Normal',
+    pause: 'Pause für Alle',
+    reset: 'Zeige Reset Screen'
   }
 
   return (
@@ -192,6 +207,47 @@ export function TournamentQueueDashboard () {
             </List>
           </Box>
         </Stack>
+
+        {admin &&
+          <Box
+            component="div"
+            sx={{ ...classes.queueElements, marginBottom: '10px' }}
+          >
+            <h2>Modus</h2>
+            <Stack
+              sx={{ marginBottom: '10px' }}
+              direction={{ xs: 'row', sm: 'row' }}
+              spacing={{ xs: 1, sm: 2, md: 4 }}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <div style={{
+                display: 'flex',
+                flexFlow: 'row wrap',
+                justifyContent: 'center'
+              }}>
+              {Object.entries(modes)?.map(([mode, modeText], i) => (
+                <Box
+                  key={i}
+                  component="span"
+                  sx={{ textAlign: 'center', justifyItems: 'center', minWidth: '40px', padding: '5px', margin: '5px', whiteSpace: 'nowrap' }}
+                  style={{
+                    backgroundColor: mode === queue.mode ? theme.palette.success.main : theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                    ...classes.queueElements
+                  }}
+                >
+                  <div onClick={() => changeMode(mode as TournamentQueueMode)}>
+                    {modeText}
+                  </div>
+
+                </Box>
+              ))}
+              </div>
+
+            </Stack>
+          </Box>
+        }
 
         <Box
           component="div"

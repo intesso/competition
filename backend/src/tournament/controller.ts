@@ -3,7 +3,7 @@ import bodyParser from 'koa-bodyparser'
 import { inputValidation } from '../../api/inputValidation'
 import { applicationContext } from '../../applicationContext'
 import { respondWith } from '../lib/common'
-import { Location, Performance, Performer, TournamentAndAddress, TournamentAthlete, TournamentJudge, TournamentPlan } from './interfaces'
+import { Location, Performance, Performer, TournamentAndAddress, TournamentAthlete, TournamentJudge, TournamentPlan, TournamentQueueMode } from './interfaces'
 
 export const tournamentController = new Router()
 
@@ -35,6 +35,9 @@ tournamentController
   })
   .put('/:tournamentId/queue/:slotNumber', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.setTournamentQueueSlot(ctx.params.tournamentId as string, parseInt(ctx.params.slotNumber)))
+  })
+  .put('/:tournamentId/queue/mode/:mode', inputValidation.validate, (ctx) => {
+    return respondWith(ctx, () => applicationContext.tournament.setTournamentQueueMode(ctx.params.tournamentId as string, ctx.params.mode as TournamentQueueMode))
   })
   .post('/:tournamentId/athletes', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.tournament.addTournamentAthlete(ctx.request.body as TournamentAthlete))

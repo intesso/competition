@@ -117,7 +117,7 @@ export function JudgingApp ({ children }: AppProps) {
               })
             }
           } else {
-            if (performanceId !== queue.query.performanceId) {
+            if (window.location.pathname !== queue.path || performanceId !== queue.query.performanceId) {
               const params = Object.fromEntries(
                 Object.entries(queue.query).map(([key, value]) => [key, value !== null ? value.toString() : ''])
               )

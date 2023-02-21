@@ -20,7 +20,8 @@ import {
   CurrentQueueUIResponse,
   QueueRun,
   QueueRunPerformanceJudge,
-  CurrentTournamentQueue
+  CurrentTournamentQueue,
+  TournamentQueueMode
 } from './interfaces'
 import {
   deleteLocation,
@@ -62,6 +63,7 @@ import {
 } from './repository'
 
 export class TournamentService implements ITournamentContext {
+  tournamentQueueMode: TournamentQueueMode = 'normal'
   getApplicationContext
   constructor (getApplicationContext: IGetApplicationContext['getApplicationContext']) {
     this.getApplicationContext = getApplicationContext
@@ -303,6 +305,17 @@ export class TournamentService implements ITournamentContext {
     return tournamentPlan
   }
 
+  async setTournamentQueueMode (tournamentId: string, mode: TournamentQueueMode) {
+    try {
+      this.tournamentQueueMode = mode
+      const tournamentQueue = (await getTournamentQueueByTournamentId(tournamentId)) || { tournamentId } as TournamentQueue
+      return tournamentQueue
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
+
   async setTournamentQueueSlot (tournamentId: string, slotNumber: number) {
     try {
       const tournamentQueue = (await getTournamentQueueByTournamentId(tournamentId)) || { tournamentId } as TournamentQueue
@@ -381,7 +394,7 @@ export class TournamentService implements ITournamentContext {
         })
       }
 
-      return { ...tournamentQueue, status: Object.values(judgesPlanned) }
+      return { ...tournamentQueue, status: Object.values(judgesPlanned), mode: this.tournamentQueueMode }
     } catch (error) {
       console.error(error)
       return null
@@ -423,7 +436,7 @@ export class TournamentService implements ITournamentContext {
       }
       // 4. return queryParams for UI
       const uiResponse: CurrentQueueUIResponse = {
-        path: `/judging/${criteria?.criteriaUiLayout || 'nothing'}`,
+        path: this.getQueuePath(criteria?.criteriaUiLayout),
         query: {
           slotNumber: performance.slotNumber,
           tournamentId,
@@ -440,6 +453,19 @@ export class TournamentService implements ITournamentContext {
     } catch (error) {
       console.error(error)
       return null
+    }
+  }
+
+  getQueuePath (layout: string | null) {
+    switch (this.tournamentQueueMode) {
+      case 'pause':
+        return '/judging/nothing'
+      case 'reset':
+        return '/judging/reset'
+      case 'normal':
+        return `/judging/${layout || 'nothing'}`
+      default:
+        return '/judging/nothing'
     }
   }
 

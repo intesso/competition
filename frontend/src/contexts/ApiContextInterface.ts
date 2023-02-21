@@ -234,13 +234,16 @@ export interface TournamentQueue {
   slotNumber: number
   status?: TournamentQueueStatus[]
   runs: TournamentQueueRun[]
+  mode: TournamentQueueMode
 }
 
+export type TournamentQueueMode = 'normal' | 'reset' | 'pause' | 'message'
+
 export interface TournamentQueueStatus {
-      judgeId: string
-      judgeName: string
-      criteriaName: string
-      sent: string| null
+  judgeId: string
+  judgeName: string
+  criteriaName: string
+  sent: string| null
 }
 
 export interface TournamentQueueRun {
