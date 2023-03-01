@@ -1,14 +1,13 @@
 import Router from 'koa-router'
-import bodyParser from 'koa-bodyparser'
 import { inputValidation } from '../../api/inputValidation'
 import { applicationContext } from '../../applicationContext'
-import { respondWith } from '../lib/common'
+import { getBodyParser, respondWith } from '../lib/common'
 import { Location, Performance, Performer, TournamentAndAddress, TournamentAthlete, TournamentJudge, TournamentPlan, TournamentQueueMode } from './interfaces'
 
 export const tournamentController = new Router()
 
 tournamentController
-  .use(bodyParser())
+  .use(getBodyParser())
   .use('/current', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => ({ tournamentName: process.env.CURRENT_TOURNAMENT }))
   })

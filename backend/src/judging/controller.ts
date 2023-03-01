@@ -1,14 +1,13 @@
 import Router from 'koa-router'
-import bodyParser from 'koa-bodyparser'
 import { inputValidation } from '../../api/inputValidation'
 import { applicationContext } from '../../applicationContext'
-import { respondWith, respondWithError } from '../lib/common'
+import { getBodyParser, respondWith, respondWithError } from '../lib/common'
 import { RawPoint } from './interfaces'
 
 export const judgingController = new Router()
 
 judgingController
-  .use(bodyParser())
+  .use(getBodyParser())
   .post('/raw-points/import', inputValidation.validate, (ctx) => {
     return respondWith(ctx, () => applicationContext.judging.importRawPoints(ctx.request.body as unknown as RawPoint[]))
   })

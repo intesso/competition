@@ -1,13 +1,12 @@
 import Router from 'koa-router'
-import bodyParser from 'koa-bodyparser'
 import { inputValidation } from '../../api/inputValidation'
 import { applicationContext } from '../../applicationContext'
 import { CalculationCategoryRanksInput, CalculationPointsInput } from './interfaces'
-import { respondWith } from '../lib/common'
+import { getBodyParser, respondWith } from '../lib/common'
 
 export const calculationController = new Router()
 
-calculationController.use(bodyParser())
+calculationController.use(getBodyParser())
 
 calculationController
   .post('/:tournamentId/points/:performanceId', inputValidation.validate, async (ctx) => {

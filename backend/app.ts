@@ -4,13 +4,13 @@ import serve from 'koa-static'
 import { resolve } from 'path'
 import Router from 'koa-router'
 import cors from '@koa/cors'
-import bodyParser from 'koa-bodyparser'
 import './applicationContext'
 import { inputValidation } from './api/inputValidation'
 import { calculationController } from './src/calculation/controller'
 import { judgingController } from './src/judging/controller'
 import { peopleController } from './src/people/controller'
 import { tournamentController } from './src/tournament/controller'
+import { getBodyParser } from './src/lib/common'
 
 const router = new Router()
   .use('/api/people', peopleController.routes())
@@ -28,7 +28,7 @@ app
 
 // backend api routes
 app
-  .use(bodyParser())
+  .use(getBodyParser())
   .use(cors())
   .use(async (ctx, next) => {
     try {

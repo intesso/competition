@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios'
 import { ParameterizedContext } from 'koa'
 import Router from 'koa-router'
+import bodyParser from 'koa-bodyparser'
 import { v4 as uuidv4 } from 'uuid'
 
 import { spawn, SpawnOptionsWithoutStdio } from 'child_process'
@@ -57,6 +58,12 @@ export function isDefined<T> (argument: T | undefined): argument is T {
 
 export function isNotNull<T> (argument: T | null): argument is T {
   return argument !== null
+}
+
+export function getBodyParser () {
+  return bodyParser({
+    jsonLimit: '5mb'
+  })
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
