@@ -20,6 +20,7 @@
 - [technology](./TECHNOLOGY.md)
 - [backend](./backend/README.md)
 - [frontend](./frontend/README.md)
+- [data management (input data)](./DATA_MANAGEMENT.md)
 
 
 ## impressions
