@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "fix": "eslint . --fix",
-    "build": "mkdir -p build &&cp ../frontend/src/lib/reportDefinitions.ts build/",
+    "build": "mkdir -p build && cp ../frontend/src/lib/reportDefinitions.ts build/",
     "generate": "concurrently 'npm:generate:*'",
     "generate:dbddl": "pg-migrations apply --database postgres://competition:comp1234@localhost:5432/competition --directory src/lib/db-migrations",
     "generate:dbtypes": "npx @databases/pg-schema-cli --database postgres://competition:comp1234@localhost:5432/competition --directory src/lib/db/__generated__",
@@ -20,6 +20,8 @@
     "test:data": "ts-node test/integration-test-data.ts",
     "test:integration": "ts-node test/integration-test.ts",
     "test:unit": "jest --coverage=false",
+    "import:tournament": "cd src/lib/db-migrations/dummy-data && ts-node csv-to-json.ts Tournament.csv Tournament.json",
+    "import:tournament:test": "cd src/lib/db-migrations/dummy-data && ts-node csv-to-json.ts Tournament_SingleTest.csv Tournament_SingleTest.json && ts-node csv-to-json.ts Tournament_TeamTest.csv Tournament_TeamTest.json",
     "restore": "ts-node src/lib/db-tools/restore-raw-points/restore-raw-points.ts ./backup",
     "pm2": "pm2 start npm --name competition -- run start"
   },

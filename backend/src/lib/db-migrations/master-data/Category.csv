@@ -23,7 +23,7 @@ id,judgingRuleId,judgingRuleName,competition,group,level,type,discipline,categor
 11111111-0000-0000-0000-000000000006,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginner,single,ü15,beginner,compulsory,compulsory,single-ü15-beginner-compulsory-compulsory
 11111111-0000-0000-0000-000000000007,11111111-0000-0000-0000-000000000000,speed,single,ü15,intermediate,speed,30sSingleRope,single-ü15-intermediate-speed-30sSingleRope
 11111111-0000-0000-0000-000000000008,11111111-0000-0000-0000-000000000000,speed,single,ü15,intermediate,speed,60sSingleRope,single-ü15-intermediate-speed-60sSingleRope
-11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000000,speed,single,ü15,intermediate,speed,30sCrissCross,single-ü15-intermediate-speed-30sCrissCross
+11111111-0000-0000-0000-000000000009,11111111-0000-0000-0000-000000000000,speed,single,ü15,intermediate,speed,30sDoubleUnder,single-ü15-intermediate-speed-30sDoubleUnder
 11111111-0000-0000-0000-000000000010,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,single,ü15,intermediate,compulsory,compulsory,single-ü15-intermediate-compulsory-compulsory
 11111111-0000-0000-0000-000000000011,11111111-0000-0000-0000-000000000000,speed,single,ü15,advanced,speed,30sSingleRope,single-ü15-advanced-speed-30sSingleRope
 11111111-0000-0000-0000-000000000012,11111111-0000-0000-0000-000000000000,speed,single,ü15,advanced,speed,120sSingleRope,single-ü15-advanced-speed-120sSingleRope
@@ -34,7 +34,7 @@ id,judgingRuleId,judgingRuleName,competition,group,level,type,discipline,categor
 11111111-0000-0000-0000-000000000017,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginner,single,u15,beginner,compulsory,compulsory,single-u15-beginner-compulsory-compulsory
 11111111-0000-0000-0000-000000000018,11111111-0000-0000-0000-000000000000,speed,single,u15,intermediate,speed,30sSingleRope,single-u15-intermediate-speed-30sSingleRope
 11111111-0000-0000-0000-000000000019,11111111-0000-0000-0000-000000000000,speed,single,u15,intermediate,speed,60sSingleRope,single-u15-intermediate-speed-60sSingleRope
-11111111-0000-0000-0000-000000000020,11111111-0000-0000-0000-000000000000,speed,single,u15,intermediate,speed,30sCrissCross,single-u15-intermediate-speed-30sCrissCross
+11111111-0000-0000-0000-000000000020,11111111-0000-0000-0000-000000000000,speed,single,u15,intermediate,speed,30sDoubleUnder,single-u15-intermediate-speed-30sDoubleUnder
 11111111-0000-0000-0000-000000000021,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,single,u15,intermediate,compulsory,compulsory,single-u15-intermediate-compulsory-compulsory
 11111111-0000-0000-0000-000000000022,11111111-0000-0000-0000-000000000000,speed,single,u15,advanced,speed,30sSingleRope,single-u15-advanced-speed-30sSingleRope
 11111111-0000-0000-0000-000000000023,11111111-0000-0000-0000-000000000000,speed,single,u15,advanced,speed,120sSingleRope,single-u15-advanced-speed-120sSingleRope
@@ -45,7 +45,7 @@ id,judgingRuleId,judgingRuleName,competition,group,level,type,discipline,categor
 11111111-0000-0000-0000-000000000028,11111111-0000-0000-0000-000000000004,singleCompulsoryBeginner,single,u12,beginner,compulsory,compulsory,single-u12-beginner-compulsory-compulsory
 11111111-0000-0000-0000-000000000029,11111111-0000-0000-0000-000000000000,speed,single,u12,intermediate,speed,30sSingleRope,single-u12-intermediate-speed-30sSingleRope
 11111111-0000-0000-0000-000000000030,11111111-0000-0000-0000-000000000000,speed,single,u12,intermediate,speed,60sSingleRope,single-u12-intermediate-speed-60sSingleRope
-11111111-0000-0000-0000-000000000031,11111111-0000-0000-0000-000000000000,speed,single,u12,intermediate,speed,30sCrissCross,single-u12-intermediate-speed-30sCrissCross
+11111111-0000-0000-0000-000000000031,11111111-0000-0000-0000-000000000000,speed,single,u12,intermediate,speed,30sDoubleUnder,single-u12-intermediate-speed-30sDoubleUnder
 11111111-0000-0000-0000-000000000032,11111111-0000-0000-0000-000000000003,singleCompulsoryIntermediate,single,u12,intermediate,compulsory,compulsory,single-u12-intermediate-compulsory-compulsory
 11111111-0000-0000-0000-000000000033,11111111-0000-0000-0000-000000000000,speed,single,u12,advanced,speed,30sSingleRope,single-u12-advanced-speed-30sSingleRope
 11111111-0000-0000-0000-000000000034,11111111-0000-0000-0000-000000000000,speed,single,u12,advanced,speed,120sSingleRope,single-u12-advanced-speed-120sSingleRope
@@ -57,6 +57,16 @@ id,judgingRuleId,judgingRuleName,competition,group,level,type,discipline,categor
 11111111-0000-0000-0000-000000000039,11111111-0000-0000-0000-000000000006,teamFreestyleSingleRopePairErso,team,open,erso,freestyle,singleRopePair,team-open-erso-freestyle-singleRopePair
 11111111-0000-0000-0000-000000000040,11111111-0000-0000-0000-000000000007,teamFreestyleSingleRopeTeamErso,team,open,erso,freestyle,singleRopeTeam,team-open-erso-freestyle-singleRopeTeam
 11111111-0000-0000-0000-000000000041,11111111-0000-0000-0000-000000000008,teamFreestyleDoubleDutchSingleErso,team,open,erso,freestyle,doubleDutchSingle,team-open-erso-freestyle-doubleDutchSingle
+11111111-0000-0000-0000-000000000137,11111111-0000-0000-0000-000000000000,speed,team,openEU,erso,speed,doubleDutchRelay,team-openEU-erso-speed-doubleDutchRelay
+11111111-0000-0000-0000-000000000138,11111111-0000-0000-0000-000000000000,speed,team,openEU,erso,speed,singleRopeRelay,team-openEU-erso-speed-singleRopeRelay
+11111111-0000-0000-0000-000000000139,11111111-0000-0000-0000-000000000006,teamFreestyleSingleRopePairErso,team,openEU,erso,freestyle,singleRopePair,team-openEU-erso-freestyle-singleRopePair
+11111111-0000-0000-0000-000000000140,11111111-0000-0000-0000-000000000007,teamFreestyleSingleRopeTeamErso,team,openEU,erso,freestyle,singleRopeTeam,team-openEU-erso-freestyle-singleRopeTeam
+11111111-0000-0000-0000-000000000141,11111111-0000-0000-0000-000000000008,teamFreestyleDoubleDutchSingleErso,team,openEU,erso,freestyle,doubleDutchSingle,team-openEU-erso-freestyle-doubleDutchSingle
+11111111-0000-0000-0000-000000000142,11111111-0000-0000-0000-000000000000,speed,team,overall,erso,speed,doubleDutchRelay,team-overall-erso-speed-doubleDutchRelay
+11111111-0000-0000-0000-000000000143,11111111-0000-0000-0000-000000000000,speed,team,overall,erso,speed,singleRopeRelay,team-overall-erso-speed-singleRopeRelay
+11111111-0000-0000-0000-000000000144,11111111-0000-0000-0000-000000000006,teamFreestyleSingleRopePairErso,team,overall,erso,freestyle,singleRopePair,team-overall-erso-freestyle-singleRopePair
+11111111-0000-0000-0000-000000000145,11111111-0000-0000-0000-000000000007,teamFreestyleSingleRopeTeamErso,team,overall,erso,freestyle,singleRopeTeam,team-overall-erso-freestyle-singleRopeTeam
+11111111-0000-0000-0000-000000000146,11111111-0000-0000-0000-000000000008,teamFreestyleDoubleDutchSingleErso,team,overall,erso,freestyle,doubleDutchSingle,team-overall-erso-freestyle-doubleDutchSingle
 11111111-0000-0000-0000-000000000042,11111111-0000-0000-0000-000000000000,speed,team,ü21,teamShow,speed,doubleDutchRelay,team-ü21-teamShow-speed-doubleDutchRelay
 11111111-0000-0000-0000-000000000043,11111111-0000-0000-0000-000000000000,speed,team,ü21,teamShow,speed,singleRopeRelay,team-ü21-teamShow-speed-singleRopeRelay
 11111111-0000-0000-0000-000000000044,11111111-0000-0000-0000-000000000009,teamShow,team,ü21,teamShow,teamShow,teamShow,team-ü21-teamShow-teamShow-teamShow
@@ -72,3 +82,7 @@ id,judgingRuleId,judgingRuleName,competition,group,level,type,discipline,categor
 11111111-0000-0000-0000-000000000054,11111111-0000-0000-0000-000000000000,speed,team,overall,teamShow,speed,singleRopeRelay,team-overall-teamShow-speed-singleRopeRelay
 11111111-0000-0000-0000-000000000055,11111111-0000-0000-0000-000000000000,speed,team,overall,teamShow,speed,doubleDutchRelay,team-overall-teamShow-speed-doubleDutchRelay
 11111111-0000-0000-0000-000000000056,11111111-0000-0000-0000-000000000009,teamShow,team,overall,teamShow,teamShow,teamShow,team-overall-teamShow-teamShow-teamShow
+11111111-0000-0000-0000-000000000057,11111111-0000-0000-0000-000000000000,speed,team,ü21,doubleUnder,speed,doubleUnderRelay,team-ü21-doubleUnder-speed-doubleUnderRelay
+11111111-0000-0000-0000-000000000058,11111111-0000-0000-0000-000000000000,speed,team,u21,doubleUnder,speed,doubleUnderRelay,team-u21-doubleUnder-speed-doubleUnderRelay
+11111111-0000-0000-0000-000000000059,11111111-0000-0000-0000-000000000000,speed,team,u15,doubleUnder,speed,doubleUnderRelay,team-u15-doubleUnder-speed-doubleUnderRelay
+11111111-0000-0000-0000-000000000060,11111111-0000-0000-0000-000000000000,speed,team,u12,doubleUnder,speed,doubleUnderRelay,team-u12-doubleUnder-speed-doubleUnderRelay

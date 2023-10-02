@@ -70,6 +70,8 @@
     ```sh
     cd backend
     npm run build
+    cd ../frontend
+    npm run build
     ```
 5. generate the db schema/tables and data types:
 
@@ -95,6 +97,8 @@
     ts-node csv-to-json.ts Tournament.csv Tournament.json
     ```
 4. upload the Tournament:
+
+Note: the application must be running!
 
     ```sh
     # import Tournament.json data via postman test (-> POST body)

@@ -198,7 +198,7 @@ export const categoryTitles: ReportLookup = {
   'team-ü21-doubleUnder-speed-doubleUnderRelay': 'Ü21 DU Relay',
   'team-u21-doubleUnder-speed-doubleUnderRelay': 'U21 DU Relay',
   'team-u15-doubleUnder-speed-doubleUnderRelay': 'U15 DU Relay',
-  'team-u12-doubleUnder-speed-doubleUnderRelay': 'U12 DU Relay',
+  'team-u12-doubleUnder-speed-doubleUnderRelay': 'U12 DU Relay'
 }
 
 export function getCategoryName (key: string) {
@@ -292,7 +292,7 @@ export const categoryNames: ReportLookup = {
   'team-ü21-doubleUnder-speed-doubleUnderRelay': 'DU Relay',
   'team-u21-doubleUnder-speed-doubleUnderRelay': 'DU Relay',
   'team-u15-doubleUnder-speed-doubleUnderRelay': 'DU Relay',
-  'team-u12-doubleUnder-speed-doubleUnderRelay': 'DU Relay',
+  'team-u12-doubleUnder-speed-doubleUnderRelay': 'DU Relay'
 
 }
 
@@ -572,7 +572,7 @@ export const categoryOrder: ReportOrder = {
     speed: -1,
     categoryPoint: 4,
     categoryRank: 5
-},
+  },
   'team-u15-doubleUnder-speed-doubleUnderRelay': {
     categoryName: 0,
     performerNumber: 1,
@@ -581,7 +581,7 @@ export const categoryOrder: ReportOrder = {
     speed: -1,
     categoryPoint: 4,
     categoryRank: 5
-},
+  },
   'team-u12-doubleUnder-speed-doubleUnderRelay': {
     categoryName: 0,
     performerNumber: 1,
@@ -590,7 +590,7 @@ export const categoryOrder: ReportOrder = {
     speed: -1,
     categoryPoint: 4,
     categoryRank: 5
-},
+  },
   'single-men-erso-speed-30sSingleRope': {
     categoryName: 0,
     performerNumber: 1,
@@ -1034,8 +1034,7 @@ export const categoryOrder: ReportOrder = {
     intermediate: -1,
     categoryPoint: 4,
     categoryRank: 5
-  },
-
+  }
 }
 
 export const combinationOrder: ReportOrder = {
@@ -1412,13 +1411,7 @@ export const combinationMixed: CombinationMixed = {
       'team-u21-teamShow-speed-doubleDutchRelay'
     ],
     'team-overall-teamShow-teamShow-teamShow': [
-      'team-ü21-teamShow-teamShow-teamShow',
-      'team-u21-teamShow-teamShow-teamShow'
-    ]
-  },
-  'team-overall-erso': {
-    'team-overall-erso-speed-singleRopeRelay': [
-      'team-open-erso-speed-singleRopeRelay',
+      'team-ü}m-open-erso-speed-singleRopeRelay',
       'team-openEU-erso-speed-singleRopeRelay'
     ],
     'team-overall-erso-speed-doubleDutchRelay': [

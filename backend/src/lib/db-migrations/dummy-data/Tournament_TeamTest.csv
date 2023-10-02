@@ -1,0 +1,442 @@
+tournamentName,slotNumber,locationName,categoryName,performerName,performerNumber,clubName,performanceName,judgeDevice,judgeName,criteriaName
+Test SM Team,1,F1,team-open-erso-speed-singleRopeRelay,Barbamama,1,Jump Rope Steffisburg,team-open-erso-speed-singleRopeRelay-Barbamama,J1,Adrian Wenger,speed
+Test SM Team,1,F1,team-open-erso-speed-singleRopeRelay,Barbamama,1,Jump Rope Steffisburg,team-open-erso-speed-singleRopeRelay-Barbamama,J2,Mirjam Schlatter,speed
+Test SM Team,1,F1,team-open-erso-speed-singleRopeRelay,Barbamama,1,Jump Rope Steffisburg,team-open-erso-speed-singleRopeRelay-Barbamama,J3,Carmela Meier,speed
+Test SM Team,1,F2,team-open-erso-speed-singleRopeRelay,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-speed-singleRopeRelay-Barbapapa,J4,Matthias Zedi,speed
+Test SM Team,1,F2,team-open-erso-speed-singleRopeRelay,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-speed-singleRopeRelay-Barbapapa,J5,Gina Eichenberger,speed
+Test SM Team,1,F2,team-open-erso-speed-singleRopeRelay,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-speed-singleRopeRelay-Barbapapa,J6,Marcel Soland,speed
+Test SM Team,1,F3,team-open-erso-speed-singleRopeRelay,let's fätz,3,Satus Kriens,team-open-erso-speed-singleRopeRelay-let's fätz,J7,Sandra Haas,speed
+Test SM Team,1,F3,team-open-erso-speed-singleRopeRelay,let's fätz,3,Satus Kriens,team-open-erso-speed-singleRopeRelay-let's fätz,J8,Melanie Peier,speed
+Test SM Team,1,F3,team-open-erso-speed-singleRopeRelay,let's fätz,3,Satus Kriens,team-open-erso-speed-singleRopeRelay-let's fätz,J9,Ramona Schär,speed
+Test SM Team,2,F2,team-openEU-erso-speed-singleRopeRelay,EU1,4,Austria,team-openEU-erso-speed-singleRopeRelay-EU1,J4,Matthias Zedi,speed
+Test SM Team,2,F2,team-openEU-erso-speed-singleRopeRelay,EU1,4,Austria,team-openEU-erso-speed-singleRopeRelay-EU1,J5,Gina Eichenberger,speed
+Test SM Team,2,F2,team-openEU-erso-speed-singleRopeRelay,EU1,4,Austria,team-openEU-erso-speed-singleRopeRelay-EU1,J6,Marcel Soland,speed
+Test SM Team,2,F3,team-openEU-erso-speed-singleRopeRelay,EU2,5,Austria,team-openEU-erso-speed-singleRopeRelay-EU2,J7,Sandra Haas,speed
+Test SM Team,2,F3,team-openEU-erso-speed-singleRopeRelay,EU2,5,Austria,team-openEU-erso-speed-singleRopeRelay-EU2,J8,Melanie Peier,speed
+Test SM Team,2,F3,team-openEU-erso-speed-singleRopeRelay,EU2,5,Austria,team-openEU-erso-speed-singleRopeRelay-EU2,J9,Ramona Schär,speed
+Test SM Team,3,F1,team-u12-teamShow-speed-singleRopeRelay,Team Magic,401,Satus Dachsen,team-u12-teamShow-speed-singleRopeRelay-Team Magic,J1,Adrian Wenger,speed
+Test SM Team,3,F1,team-u12-teamShow-speed-singleRopeRelay,Team Magic,401,Satus Dachsen,team-u12-teamShow-speed-singleRopeRelay-Team Magic,J2,Mirjam Schlatter,speed
+Test SM Team,3,F1,team-u12-teamShow-speed-singleRopeRelay,Team Magic,401,Satus Dachsen,team-u12-teamShow-speed-singleRopeRelay-Team Magic,J3,Carmela Meier,speed
+Test SM Team,3,F2,team-u12-teamShow-speed-singleRopeRelay,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-speed-singleRopeRelay-Jumpsweeties,J4,Matthias Zedi,speed
+Test SM Team,3,F2,team-u12-teamShow-speed-singleRopeRelay,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-speed-singleRopeRelay-Jumpsweeties,J5,Gina Eichenberger,speed
+Test SM Team,3,F2,team-u12-teamShow-speed-singleRopeRelay,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-speed-singleRopeRelay-Jumpsweeties,J6,Marcel Soland,speed
+Test SM Team,5,F3,team-u15-teamShow-speed-singleRopeRelay,The Celebrations,303,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-The Celebrations,J7,Sandra Haas,speed
+Test SM Team,5,F3,team-u15-teamShow-speed-singleRopeRelay,The Celebrations,303,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-The Celebrations,J8,Melanie Peier,speed
+Test SM Team,5,F3,team-u15-teamShow-speed-singleRopeRelay,The Celebrations,303,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-The Celebrations,J9,Ramona Schär,speed
+Test SM Team,5,F4,team-u15-teamShow-speed-singleRopeRelay,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-Tohuwabohu,J10,Angelika Nobbe,speed
+Test SM Team,5,F4,team-u15-teamShow-speed-singleRopeRelay,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-Tohuwabohu,J11,Lena Münger,speed
+Test SM Team,5,F4,team-u15-teamShow-speed-singleRopeRelay,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-Tohuwabohu,J12,Rahel Weber,speed
+Test SM Team,6,F1,team-u15-teamShow-speed-singleRopeRelay,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-MarioKart4Deluxe,J1,Adrian Wenger,speed
+Test SM Team,6,F1,team-u15-teamShow-speed-singleRopeRelay,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-MarioKart4Deluxe,J2,Mirjam Schlatter,speed
+Test SM Team,6,F1,team-u15-teamShow-speed-singleRopeRelay,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-speed-singleRopeRelay-MarioKart4Deluxe,J3,Carmela Meier,speed
+Test SM Team,8,F1,team-u21-teamShow-speed-singleRopeRelay,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-speed-singleRopeRelay-The Baskets,J1,Adrian Wenger,speed
+Test SM Team,8,F1,team-u21-teamShow-speed-singleRopeRelay,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-speed-singleRopeRelay-The Baskets,J2,Mirjam Schlatter,speed
+Test SM Team,8,F1,team-u21-teamShow-speed-singleRopeRelay,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-speed-singleRopeRelay-The Baskets,J3,Carmela Meier,speed
+Test SM Team,8,F2,team-u21-teamShow-speed-singleRopeRelay,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-speed-singleRopeRelay-crazy chicks,J4,Matthias Zedi,speed
+Test SM Team,8,F2,team-u21-teamShow-speed-singleRopeRelay,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-speed-singleRopeRelay-crazy chicks,J5,Gina Eichenberger,speed
+Test SM Team,8,F2,team-u21-teamShow-speed-singleRopeRelay,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-speed-singleRopeRelay-crazy chicks,J6,Marcel Soland,speed
+Test SM Team,8,F4,team-u21-teamShow-speed-singleRopeRelay,Baar 4,203,TV Baar,team-u21-teamShow-speed-singleRopeRelay-Baar 4,J10,Sandra Haas,speed
+Test SM Team,8,F4,team-u21-teamShow-speed-singleRopeRelay,Baar 4,203,TV Baar,team-u21-teamShow-speed-singleRopeRelay-Baar 4,J11,Melanie Peier,speed
+Test SM Team,8,F4,team-u21-teamShow-speed-singleRopeRelay,Baar 4,203,TV Baar,team-u21-teamShow-speed-singleRopeRelay-Baar 4,J12,Ramona Schär,speed
+Test SM Team,10,F1,team-ü21-teamShow-speed-singleRopeRelay,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-speed-singleRopeRelay-Jumpions,J1,Adrian Wenger,speed
+Test SM Team,10,F1,team-ü21-teamShow-speed-singleRopeRelay,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-speed-singleRopeRelay-Jumpions,J2,Mirjam Schlatter,speed
+Test SM Team,10,F1,team-ü21-teamShow-speed-singleRopeRelay,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-speed-singleRopeRelay-Jumpions,J3,Carmela Meier,speed
+Test SM Team,10,F2,team-ü21-teamShow-speed-singleRopeRelay,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-speed-singleRopeRelay-Trick or Treat,J4,Matthias Zedi,speed
+Test SM Team,10,F2,team-ü21-teamShow-speed-singleRopeRelay,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-speed-singleRopeRelay-Trick or Treat,J5,Gina Eichenberger,speed
+Test SM Team,10,F2,team-ü21-teamShow-speed-singleRopeRelay,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-speed-singleRopeRelay-Trick or Treat,J6,Marcel Soland,speed
+Test SM Team,10,F3,team-ü21-teamShow-speed-singleRopeRelay,Baar 2,103,TV Baar,team-ü21-teamShow-speed-singleRopeRelay-Baar 2,J7,Sandra Haas,speed
+Test SM Team,10,F3,team-ü21-teamShow-speed-singleRopeRelay,Baar 2,103,TV Baar,team-ü21-teamShow-speed-singleRopeRelay-Baar 2,J8,Melanie Peier,speed
+Test SM Team,10,F3,team-ü21-teamShow-speed-singleRopeRelay,Baar 2,103,TV Baar,team-ü21-teamShow-speed-singleRopeRelay-Baar 2,J9,Ramona Schär,speed
+Test SM Team,11,F2,team-open-erso-speed-doubleDutchRelay,Barbamama,1,Jump Rope Steffisburg,team-open-erso-speed-doubleDutchRelay-Barbamama,J4,Matthias Zedi,speed
+Test SM Team,11,F2,team-open-erso-speed-doubleDutchRelay,Barbamama,1,Jump Rope Steffisburg,team-open-erso-speed-doubleDutchRelay-Barbamama,J5,Gina Eichenberger,speed
+Test SM Team,11,F2,team-open-erso-speed-doubleDutchRelay,Barbamama,1,Jump Rope Steffisburg,team-open-erso-speed-doubleDutchRelay-Barbamama,J6,Marcel Soland,speed
+Test SM Team,11,F3,team-open-erso-speed-doubleDutchRelay,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-speed-doubleDutchRelay-Barbapapa,J7,Sandra Haas,speed
+Test SM Team,11,F3,team-open-erso-speed-doubleDutchRelay,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-speed-doubleDutchRelay-Barbapapa,J8,Melanie Peier,speed
+Test SM Team,11,F3,team-open-erso-speed-doubleDutchRelay,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-speed-doubleDutchRelay-Barbapapa,J9,Ramona Schär,speed
+Test SM Team,11,F4,team-open-erso-speed-doubleDutchRelay,let's fätz,3,Satus Kriens,team-open-erso-speed-doubleDutchRelay-let's fätz,J10,Angelika Nobbe,speed
+Test SM Team,11,F4,team-open-erso-speed-doubleDutchRelay,let's fätz,3,Satus Kriens,team-open-erso-speed-doubleDutchRelay-let's fätz,J11,Lena Münger,speed
+Test SM Team,11,F4,team-open-erso-speed-doubleDutchRelay,let's fätz,3,Satus Kriens,team-open-erso-speed-doubleDutchRelay-let's fätz,J12,Rahel Weber,speed
+Test SM Team,12,F1,team-openEU-erso-speed-doubleDutchRelay,EU1,6,Austria,team-openEU-erso-speed-doubleDutchRelay-EU1,J1,Adrian Wenger,speed
+Test SM Team,12,F1,team-openEU-erso-speed-doubleDutchRelay,EU1,6,Austria,team-openEU-erso-speed-doubleDutchRelay-EU1,J2,Mirjam Schlatter,speed
+Test SM Team,12,F1,team-openEU-erso-speed-doubleDutchRelay,EU1,6,Austria,team-openEU-erso-speed-doubleDutchRelay-EU1,J3,Carmela Meier,speed
+Test SM Team,12,F3,team-openEU-erso-speed-doubleDutchRelay,EU2,4,Austria,team-openEU-erso-speed-doubleDutchRelay-EU2,J7,Sandra Haas,speed
+Test SM Team,12,F3,team-openEU-erso-speed-doubleDutchRelay,EU2,4,Austria,team-openEU-erso-speed-doubleDutchRelay-EU2,J8,Melanie Peier,speed
+Test SM Team,12,F3,team-openEU-erso-speed-doubleDutchRelay,EU2,4,Austria,team-openEU-erso-speed-doubleDutchRelay-EU2,J9,Ramona Schär,speed
+Test SM Team,13,F2,team-u12-teamShow-speed-doubleDutchRelay,Team Magic,401,Satus Dachsen,team-u12-teamShow-speed-doubleDutchRelay-Team Magic,J4,Matthias Zedi,speed
+Test SM Team,13,F2,team-u12-teamShow-speed-doubleDutchRelay,Team Magic,401,Satus Dachsen,team-u12-teamShow-speed-doubleDutchRelay-Team Magic,J5,Gina Eichenberger,speed
+Test SM Team,13,F2,team-u12-teamShow-speed-doubleDutchRelay,Team Magic,401,Satus Dachsen,team-u12-teamShow-speed-doubleDutchRelay-Team Magic,J6,Marcel Soland,speed
+Test SM Team,13,F3,team-u12-teamShow-speed-doubleDutchRelay,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-speed-doubleDutchRelay-Jumpsweeties,J7,Sandra Haas,speed
+Test SM Team,13,F3,team-u12-teamShow-speed-doubleDutchRelay,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-speed-doubleDutchRelay-Jumpsweeties,J8,Melanie Peier,speed
+Test SM Team,13,F3,team-u12-teamShow-speed-doubleDutchRelay,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-speed-doubleDutchRelay-Jumpsweeties,J9,Ramona Schär,speed
+Test SM Team,15,F1,team-u15-teamShow-speed-doubleDutchRelay,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-Tohuwabohu,J1,Adrian Wenger,speed
+Test SM Team,15,F1,team-u15-teamShow-speed-doubleDutchRelay,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-Tohuwabohu,J2,Mirjam Schlatter,speed
+Test SM Team,15,F1,team-u15-teamShow-speed-doubleDutchRelay,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-Tohuwabohu,J3,Carmela Meier,speed
+Test SM Team,15,F4,team-u15-teamShow-speed-doubleDutchRelay,The Celebrations,303,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-The Celebrations,J10,Angelika Nobbe,speed
+Test SM Team,15,F4,team-u15-teamShow-speed-doubleDutchRelay,The Celebrations,303,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-The Celebrations,J11,Lena Münger,speed
+Test SM Team,15,F4,team-u15-teamShow-speed-doubleDutchRelay,The Celebrations,303,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-The Celebrations,J12,Rahel Weber,speed
+Test SM Team,16,F2,team-u15-teamShow-speed-doubleDutchRelay,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-MarioKart4Deluxe,J4,Matthias Zedi,speed
+Test SM Team,16,F2,team-u15-teamShow-speed-doubleDutchRelay,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-MarioKart4Deluxe,J5,Gina Eichenberger,speed
+Test SM Team,16,F2,team-u15-teamShow-speed-doubleDutchRelay,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-speed-doubleDutchRelay-MarioKart4Deluxe,J6,Marcel Soland,speed
+Test SM Team,18,F1,team-u21-teamShow-speed-doubleDutchRelay,Baar 4,203,TV Baar,team-u21-teamShow-speed-doubleDutchRelay-Baar 4,J1,Adrian Wenger,speed
+Test SM Team,18,F1,team-u21-teamShow-speed-doubleDutchRelay,Baar 4,203,TV Baar,team-u21-teamShow-speed-doubleDutchRelay-Baar 4,J2,Mirjam Schlatter,speed
+Test SM Team,18,F1,team-u21-teamShow-speed-doubleDutchRelay,Baar 4,203,TV Baar,team-u21-teamShow-speed-doubleDutchRelay-Baar 4,J3,Carmela Meier,speed
+Test SM Team,18,F2,team-u21-teamShow-speed-doubleDutchRelay,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-speed-doubleDutchRelay-The Baskets,J4,Matthias Zedi,speed
+Test SM Team,18,F2,team-u21-teamShow-speed-doubleDutchRelay,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-speed-doubleDutchRelay-The Baskets,J5,Gina Eichenberger,speed
+Test SM Team,18,F2,team-u21-teamShow-speed-doubleDutchRelay,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-speed-doubleDutchRelay-The Baskets,J6,Marcel Soland,speed
+Test SM Team,18,F3,team-u21-teamShow-speed-doubleDutchRelay,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-speed-doubleDutchRelay-crazy chicks,J7,Sandra Haas,speed
+Test SM Team,18,F3,team-u21-teamShow-speed-doubleDutchRelay,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-speed-doubleDutchRelay-crazy chicks,J8,Melanie Peier,speed
+Test SM Team,18,F3,team-u21-teamShow-speed-doubleDutchRelay,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-speed-doubleDutchRelay-crazy chicks,J9,Ramona Schär,speed
+Test SM Team,20,F2,team-ü21-teamShow-speed-doubleDutchRelay,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-speed-doubleDutchRelay-Jumpions,J4,Matthias Zedi,speed
+Test SM Team,20,F2,team-ü21-teamShow-speed-doubleDutchRelay,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-speed-doubleDutchRelay-Jumpions,J5,Gina Eichenberger,speed
+Test SM Team,20,F2,team-ü21-teamShow-speed-doubleDutchRelay,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-speed-doubleDutchRelay-Jumpions,J6,Marcel Soland,speed
+Test SM Team,20,F3,team-ü21-teamShow-speed-doubleDutchRelay,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-speed-doubleDutchRelay-Trick or Treat,J7,Sandra Haas,speed
+Test SM Team,20,F3,team-ü21-teamShow-speed-doubleDutchRelay,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-speed-doubleDutchRelay-Trick or Treat,J8,Melanie Peier,speed
+Test SM Team,20,F3,team-ü21-teamShow-speed-doubleDutchRelay,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-speed-doubleDutchRelay-Trick or Treat,J9,Ramona Schär,speed
+Test SM Team,20,F4,team-ü21-teamShow-speed-doubleDutchRelay,Baar 2,103,TV Baar,team-ü21-teamShow-speed-doubleDutchRelay-Baar 2,J10,Angelika Nobbe,speed
+Test SM Team,20,F4,team-ü21-teamShow-speed-doubleDutchRelay,Baar 2,103,TV Baar,team-ü21-teamShow-speed-doubleDutchRelay-Baar 2,J11,Lena Münger,speed
+Test SM Team,20,F4,team-ü21-teamShow-speed-doubleDutchRelay,Baar 2,103,TV Baar,team-ü21-teamShow-speed-doubleDutchRelay-Baar 2,J12,Rahel Weber,speed
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J1,Emma Synak,presentation
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J2,Melanie Peier,presentation
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J3,Martin Angst,presentation
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J4,Jessica Lehmann,variation
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J5,Lena Münger,variation
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J6,Mirjam Schlatter,variation
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J7,Matthias Zedi,difficulty
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J8,Luana Betschart,difficulty
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J9,Stefanie Schneider,difficulty
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J10,Ramona Schär,deductions
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J11,Rahel Stöckli,deductions
+Test SM Team,21,F1,team-open-erso-freestyle-singleRopePair,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbamama,J12,Rahel Weber,deductions
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J1,Emma Synak,presentation
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J2,Melanie Peier,presentation
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J3,Martin Angst,presentation
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J4,Jessica Lehmann,variation
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J5,Lena Münger,variation
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J6,Mirjam Schlatter,variation
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J7,Matthias Zedi,difficulty
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J8,Luana Betschart,difficulty
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J9,Stefanie Schneider,difficulty
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J10,Ramona Schär,deductions
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J11,Rahel Stöckli,deductions
+Test SM Team,22,F1,team-open-erso-freestyle-singleRopePair,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopePair-Barbapapa,J12,Rahel Weber,deductions
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J1,Emma Synak,presentation
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J2,Melanie Peier,presentation
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J3,Martin Angst,presentation
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J4,Jessica Lehmann,variation
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J5,Lena Münger,variation
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J6,Mirjam Schlatter,variation
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J7,Matthias Zedi,difficulty
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J8,Luana Betschart,difficulty
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J9,Stefanie Schneider,difficulty
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J10,Ramona Schär,deductions
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J11,Rahel Stöckli,deductions
+Test SM Team,23,F1,team-open-erso-freestyle-singleRopePair,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopePair-let's fätz,J12,Rahel Weber,deductions
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J1,Emma Synak,presentation
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J2,Melanie Peier,presentation
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J3,Martin Angst,presentation
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J4,Jessica Lehmann,variation
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J5,Lena Münger,variation
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J6,Mirjam Schlatter,variation
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J7,Matthias Zedi,difficulty
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J8,Luana Betschart,difficulty
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J9,Stefanie Schneider,difficulty
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J10,Ramona Schär,deductions
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J11,Rahel Stöckli,deductions
+Test SM Team,24,F1,team-openEU-erso-freestyle-singleRopePair,EU1,4,Austria,team-openEU-erso-freestyle-singleRopePair-EU1,J12,Rahel Weber,deductions
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J1,Emma Synak,presentation
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J2,Melanie Peier,presentation
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J3,Martin Angst,presentation
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J4,Jessica Lehmann,variation
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J5,Lena Münger,variation
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J6,Mirjam Schlatter,variation
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J7,Matthias Zedi,difficulty
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J8,Luana Betschart,difficulty
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J9,Stefanie Schneider,difficulty
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J10,Ramona Schär,deductions
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J11,Rahel Stöckli,deductions
+Test SM Team,25,F1,team-openEU-erso-freestyle-singleRopePair,EU2,5,Austria,team-openEU-erso-freestyle-singleRopePair-EU2,J12,Rahel Weber,deductions
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J1,Emma Synak,presentation
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J2,Melanie Peier,presentation
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J3,Martin Angst,presentation
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J4,Jessica Lehmann,variation
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J5,Lena Münger,variation
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J6,Mirjam Schlatter,variation
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J7,Matthias Zedi,difficulty
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J8,Luana Betschart,difficulty
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J9,Stefanie Schneider,difficulty
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J10,Ramona Schär,deductions
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J11,Rahel Stöckli,deductions
+Test SM Team,26,F1,team-open-erso-freestyle-singleRopeTeam,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbamama,J12,Rahel Weber,deductions
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J1,Emma Synak,presentation
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J2,Melanie Peier,presentation
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J3,Martin Angst,presentation
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J4,Jessica Lehmann,variation
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J5,Lena Münger,variation
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J6,Mirjam Schlatter,variation
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J7,Matthias Zedi,difficulty
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J8,Luana Betschart,difficulty
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J9,Stefanie Schneider,difficulty
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J10,Ramona Schär,deductions
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J11,Rahel Stöckli,deductions
+Test SM Team,27,F1,team-open-erso-freestyle-singleRopeTeam,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-singleRopeTeam-Barbapapa,J12,Rahel Weber,deductions
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J1,Emma Synak,presentation
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J2,Melanie Peier,presentation
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J3,Martin Angst,presentation
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J4,Jessica Lehmann,variation
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J5,Lena Münger,variation
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J6,Mirjam Schlatter,variation
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J7,Matthias Zedi,difficulty
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J8,Luana Betschart,difficulty
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J9,Stefanie Schneider,difficulty
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J10,Ramona Schär,deductions
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J11,Rahel Stöckli,deductions
+Test SM Team,28,F1,team-open-erso-freestyle-singleRopeTeam,let's fätz,3,Satus Kriens,team-open-erso-freestyle-singleRopeTeam-let's fätz,J12,Rahel Weber,deductions
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J1,Emma Synak,presentation
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J2,Melanie Peier,presentation
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J3,Martin Angst,presentation
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J4,Jessica Lehmann,variation
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J5,Lena Münger,variation
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J6,Mirjam Schlatter,variation
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J7,Matthias Zedi,difficulty
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J8,Luana Betschart,difficulty
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J9,Stefanie Schneider,difficulty
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J10,Ramona Schär,deductions
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J11,Rahel Stöckli,deductions
+Test SM Team,29,F1,team-openEU-erso-freestyle-singleRopeTeam,EU1,4,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU1,J12,Rahel Weber,deductions
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J1,Emma Synak,presentation
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J2,Melanie Peier,presentation
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J3,Martin Angst,presentation
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J4,Jessica Lehmann,variation
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J5,Lena Münger,variation
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J6,Mirjam Schlatter,variation
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J7,Matthias Zedi,difficulty
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J8,Luana Betschart,difficulty
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J9,Stefanie Schneider,difficulty
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J10,Ramona Schär,deductions
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J11,Rahel Stöckli,deductions
+Test SM Team,30,F1,team-openEU-erso-freestyle-singleRopeTeam,EU2,5,Austria,team-openEU-erso-freestyle-singleRopeTeam-EU2,J12,Rahel Weber,deductions
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J3,Lena Münger,presentationCreativity
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J4,Marina Schneider,presentationMusic
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J5,Sandra Angst,presentationMusic
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J6,Gina Eichenberger,presentationMusic
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J7,Sandra Haas,difficulty
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J8,Lara Zedi,difficulty
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J9,Matthias Zedi,difficulty
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J10,Lena Emmenegger,deductions
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J11,Nadja Bühlmann,deductions
+Test SM Team,31,F1,team-u12-teamShow-teamShow-teamShow,Team Magic,401,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Team Magic,J12,Carmela Meier,deductions
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J3,Lena Münger,presentationCreativity
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J4,Marina Schneider,presentationMusic
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J5,Sandra Angst,presentationMusic
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J6,Gina Eichenberger,presentationMusic
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J7,Sandra Haas,difficulty
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J8,Lara Zedi,difficulty
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J9,Matthias Zedi,difficulty
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J10,Lena Emmenegger,deductions
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J11,Nadja Bühlmann,deductions
+Test SM Team,32,F1,team-u12-teamShow-teamShow-teamShow,Jumpsweeties,402,Satus Dachsen,team-u12-teamShow-teamShow-teamShow-Jumpsweeties,J12,Carmela Meier,deductions
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J3,Lena Münger,presentationCreativity
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J4,Marina Schneider,presentationMusic
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J5,Sandra Angst,presentationMusic
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J6,Gina Eichenberger,presentationMusic
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J7,Sandra Haas,difficulty
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J8,Lara Zedi,difficulty
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J9,Matthias Zedi,difficulty
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J10,Lena Emmenegger,deductions
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J11,Nadja Bühlmann,deductions
+Test SM Team,40,F1,team-u15-teamShow-teamShow-teamShow,The Celebrations,303,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-The Celebrations,J12,Carmela Meier,deductions
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J3,Lena Münger,presentationCreativity
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J4,Marina Schneider,presentationMusic
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J5,Sandra Angst,presentationMusic
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J6,Gina Eichenberger,presentationMusic
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J7,Sandra Haas,difficulty
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J8,Lara Zedi,difficulty
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J9,Matthias Zedi,difficulty
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J10,Lena Emmenegger,deductions
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J11,Nadja Bühlmann,deductions
+Test SM Team,41,F1,team-u15-teamShow-teamShow-teamShow,Tohuwabohu,304,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-Tohuwabohu,J12,Carmela Meier,deductions
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J3,Lena Münger,presentationCreativity
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J4,Marina Schneider,presentationMusic
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J5,Sandra Angst,presentationMusic
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J6,Gina Eichenberger,presentationMusic
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J7,Sandra Haas,difficulty
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J8,Lara Zedi,difficulty
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J9,Matthias Zedi,difficulty
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J10,Lena Emmenegger,deductions
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J11,Nadja Bühlmann,deductions
+Test SM Team,42,F1,team-u15-teamShow-teamShow-teamShow,MarioKart4Deluxe,305,Satus Dachsen,team-u15-teamShow-teamShow-teamShow-MarioKart4Deluxe,J12,Carmela Meier,deductions
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J3,Lena Münger,presentationCreativity
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J4,Marina Schneider,presentationMusic
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J5,Sandra Angst,presentationMusic
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J6,Gina Eichenberger,presentationMusic
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J7,Sandra Haas,difficulty
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J8,Lara Zedi,difficulty
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J9,Matthias Zedi,difficulty
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J10,Lena Emmenegger,deductions
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J11,Nadja Bühlmann,deductions
+Test SM Team,49,F1,team-u21-teamShow-teamShow-teamShow,The Baskets,201,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-The Baskets,J12,Carmela Meier,deductions
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J3,Lena Münger,presentationCreativity
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J4,Marina Schneider,presentationMusic
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J5,Sandra Angst,presentationMusic
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J6,Gina Eichenberger,presentationMusic
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J7,Sandra Haas,difficulty
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J8,Lara Zedi,difficulty
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J9,Matthias Zedi,difficulty
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J10,Lena Emmenegger,deductions
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J11,Nadja Bühlmann,deductions
+Test SM Team,50,F1,team-u21-teamShow-teamShow-teamShow,crazy chicks,202,Jump Rope Steffisburg,team-u21-teamShow-teamShow-teamShow-crazy chicks,J12,Carmela Meier,deductions
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J3,Lena Münger,presentationCreativity
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J4,Marina Schneider,presentationMusic
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J5,Sandra Angst,presentationMusic
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J6,Gina Eichenberger,presentationMusic
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J7,Sandra Haas,difficulty
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J8,Lara Zedi,difficulty
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J9,Matthias Zedi,difficulty
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J10,Lena Emmenegger,deductions
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J11,Nadja Bühlmann,deductions
+Test SM Team,51,F1,team-u21-teamShow-teamShow-teamShow,Baar 4,203,TV Baar,team-u21-teamShow-teamShow-teamShow-Baar 4,J12,Carmela Meier,deductions
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J3,Lena Münger,presentationCreativity
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J4,Marina Schneider,presentationMusic
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J5,Sandra Angst,presentationMusic
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J6,Gina Eichenberger,presentationMusic
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J7,Sandra Haas,difficulty
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J8,Lara Zedi,difficulty
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J9,Matthias Zedi,difficulty
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J10,Lena Emmenegger,deductions
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J11,Nadja Bühlmann,deductions
+Test SM Team,55,F1,team-ü21-teamShow-teamShow-teamShow,Jumpions,101,Jump Rope Steffisburg,team-ü21-teamShow-teamShow-teamShow-Jumpions,J12,Carmela Meier,deductions
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J3,Lena Münger,presentationCreativity
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J4,Marina Schneider,presentationMusic
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J5,Sandra Angst,presentationMusic
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J6,Gina Eichenberger,presentationMusic
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J7,Sandra Haas,difficulty
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J8,Lara Zedi,difficulty
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J9,Matthias Zedi,difficulty
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J10,Lena Emmenegger,deductions
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J11,Nadja Bühlmann,deductions
+Test SM Team,56,F1,team-ü21-teamShow-teamShow-teamShow,Trick or Treat,102,Satus Dachsen,team-ü21-teamShow-teamShow-teamShow-Trick or Treat,J12,Carmela Meier,deductions
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J1,Jessica Lehmann,presentationCreativity
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J2,Angelika Nobbe,presentationCreativity
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J3,Lena Münger,presentationCreativity
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J4,Marina Schneider,presentationMusic
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J5,Sandra Angst,presentationMusic
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J6,Gina Eichenberger,presentationMusic
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J7,Sandra Haas,difficulty
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J8,Lara Zedi,difficulty
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J9,Matthias Zedi,difficulty
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J10,Lena Emmenegger,deductions
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J11,Nadja Bühlmann,deductions
+Test SM Team,57,F1,team-ü21-teamShow-teamShow-teamShow,Baar 2,103,TV Baar,team-ü21-teamShow-teamShow-teamShow-Baar 2,J12,Carmela Meier,deductions
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J1,Emma Synak,presentation
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J2,Melanie Peier,presentation
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J3,Martin Angst,presentation
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J4,Jessica Lehmann,variation
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J5,Lena Münger,variation
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J6,Mirjam Schlatter,variation
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J7,Matthias Zedi,difficulty
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J8,Luana Betschart,difficulty
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J10,Ramona Schär,deductions
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J11,Rahel Stöckli,deductions
+Test SM Team,58,F1,team-open-erso-freestyle-doubleDutchSingle,Barbamama,1,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbamama,J12,Rahel Weber,deductions
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J1,Emma Synak,presentation
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J2,Melanie Peier,presentation
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J3,Martin Angst,presentation
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J4,Jessica Lehmann,variation
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J5,Lena Münger,variation
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J6,Mirjam Schlatter,variation
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J7,Matthias Zedi,difficulty
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J8,Luana Betschart,difficulty
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J10,Ramona Schär,deductions
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J11,Rahel Stöckli,deductions
+Test SM Team,59,F1,team-open-erso-freestyle-doubleDutchSingle,Barbapapa,2,Jump Rope Steffisburg,team-open-erso-freestyle-doubleDutchSingle-Barbapapa,J12,Rahel Weber,deductions
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J1,Emma Synak,presentation
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J2,Melanie Peier,presentation
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J3,Martin Angst,presentation
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J4,Jessica Lehmann,variation
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J5,Lena Münger,variation
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J6,Mirjam Schlatter,variation
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J7,Matthias Zedi,difficulty
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J8,Luana Betschart,difficulty
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J10,Ramona Schär,deductions
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J11,Rahel Stöckli,deductions
+Test SM Team,60,F1,team-open-erso-freestyle-doubleDutchSingle,let's fätz,3,Satus Kriens,team-open-erso-freestyle-doubleDutchSingle-let's fätz,J12,Rahel Weber,deductions
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J1,Emma Synak,presentation
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J2,Melanie Peier,presentation
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J3,Martin Angst,presentation
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J4,Jessica Lehmann,variation
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J5,Lena Münger,variation
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J6,Mirjam Schlatter,variation
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J7,Matthias Zedi,difficulty
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J8,Luana Betschart,difficulty
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J10,Ramona Schär,deductions
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J11,Rahel Stöckli,deductions
+Test SM Team,61,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU1,4,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU1,J12,Rahel Weber,deductions
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J1,Emma Synak,presentation
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J2,Melanie Peier,presentation
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J3,Martin Angst,presentation
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J4,Jessica Lehmann,variation
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J5,Lena Münger,variation
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J6,Mirjam Schlatter,variation
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J7,Matthias Zedi,difficulty
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J8,Luana Betschart,difficulty
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J10,Ramona Schär,deductions
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J11,Rahel Stöckli,deductions
+Test SM Team,62,F1,team-openEU-erso-freestyle-doubleDutchSingle,EU2,5,Austria,team-openEU-erso-freestyle-doubleDutchSingle-EU2,J12,Rahel Weber,deductions
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J1,Emma Synak,presentation
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J2,Melanie Peier,presentation
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J3,Martin Angst,presentation
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J4,Jessica Lehmann,variation
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J5,Lena Münger,variation
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J6,Mirjam Schlatter,variation
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J7,Matthias Zedi,difficulty
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J8,Luana Betschart,difficulty
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J10,Ramona Schär,deductions
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J11,Rahel Stöckli,deductions
+Test SM Team,63,F1,team-open-erso-freestyle-doubleDutchSingle,"Un, dos, tres Dachsen",8,Satus Dachsen,"team-open-erso-freestyle-doubleDutchSingle-Un, dos, tres Dachsen",J12,Rahel Weber,deductions
+Test SM Team,64,F1,team-ü21-doubleUnder-speed-doubleUnderRelay,DU1,501,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU1,J1,Adrian Wenger,speed
+Test SM Team,64,F1,team-ü21-doubleUnder-speed-doubleUnderRelay,DU1,501,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU1,J2,Mirjam Schlatter,speed
+Test SM Team,64,F1,team-ü21-doubleUnder-speed-doubleUnderRelay,DU1,501,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU1,J3,Carmela Meier,speed
+Test SM Team,65,F2,team-ü21-doubleUnder-speed-doubleUnderRelay,DU2,502,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU2,J4,Matthias Zedi,speed
+Test SM Team,65,F2,team-ü21-doubleUnder-speed-doubleUnderRelay,DU2,502,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU2,J5,Gina Eichenberger,speed
+Test SM Team,65,F2,team-ü21-doubleUnder-speed-doubleUnderRelay,DU2,502,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU2,J6,Marcel Soland,speed
+Test SM Team,66,F3,team-ü21-doubleUnder-speed-doubleUnderRelay,DU3,503,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU3,J7,Sandra Haas,speed
+Test SM Team,66,F3,team-ü21-doubleUnder-speed-doubleUnderRelay,DU3,503,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU3,J8,Melanie Peier,speed
+Test SM Team,66,F3,team-ü21-doubleUnder-speed-doubleUnderRelay,DU3,503,JR Testisburg,team-ü21-doubleUnder-speed-doubleUnderRelay-DU3,J9,Ramona Schär,speed
+Test SM Team,67,F4,team-u21-doubleUnder-speed-doubleUnderRelay,DU4,504,JR Testisburg,team-u21-doubleUnder-speed-doubleUnderRelay-DU4,J10,Angelika Nobbe,speed
+Test SM Team,67,F4,team-u21-doubleUnder-speed-doubleUnderRelay,DU4,504,JR Testisburg,team-u21-doubleUnder-speed-doubleUnderRelay-DU4,J11,Lena Münger,speed
+Test SM Team,67,F4,team-u21-doubleUnder-speed-doubleUnderRelay,DU4,504,JR Testisburg,team-u21-doubleUnder-speed-doubleUnderRelay-DU4,J12,Rahel Weber,speed
+Test SM Team,68,F1,team-u21-doubleUnder-speed-doubleUnderRelay,DU5,505,JR Testisburg,team-u21-doubleUnder-speed-doubleUnderRelay-DU5,J1,Adrian Wenger,speed
+Test SM Team,68,F1,team-u21-doubleUnder-speed-doubleUnderRelay,DU5,505,JR Testisburg,team-u21-doubleUnder-speed-doubleUnderRelay-DU5,J2,Mirjam Schlatter,speed
+Test SM Team,68,F1,team-u21-doubleUnder-speed-doubleUnderRelay,DU5,505,JR Testisburg,team-u21-doubleUnder-speed-doubleUnderRelay-DU5,J3,Carmela Meier,speed
+Test SM Team,69,F2,team-u15-doubleUnder-speed-doubleUnderRelay,DU6,506,JR Testisburg,team-u15-doubleUnder-speed-doubleUnderRelay-DU6,J4,Matthias Zedi,speed
+Test SM Team,69,F2,team-u15-doubleUnder-speed-doubleUnderRelay,DU6,506,JR Testisburg,team-u15-doubleUnder-speed-doubleUnderRelay-DU6,J5,Gina Eichenberger,speed
+Test SM Team,69,F2,team-u15-doubleUnder-speed-doubleUnderRelay,DU6,506,JR Testisburg,team-u15-doubleUnder-speed-doubleUnderRelay-DU6,J6,Marcel Soland,speed
+Test SM Team,70,F3,team-u15-doubleUnder-speed-doubleUnderRelay,DU7,507,JR Testisburg,team-u15-doubleUnder-speed-doubleUnderRelay-DU7,J7,Sandra Haas,speed
+Test SM Team,70,F3,team-u15-doubleUnder-speed-doubleUnderRelay,DU7,507,JR Testisburg,team-u15-doubleUnder-speed-doubleUnderRelay-DU7,J8,Melanie Peier,speed
+Test SM Team,70,F3,team-u15-doubleUnder-speed-doubleUnderRelay,DU7,507,JR Testisburg,team-u15-doubleUnder-speed-doubleUnderRelay-DU7,J9,Ramona Schär,speed
+Test SM Team,71,F4,team-u12-doubleUnder-speed-doubleUnderRelay,DU8,508,JR Testisburg,team-u12-doubleUnder-speed-doubleUnderRelay-DU8,J10,Angelika Nobbe,speed
+Test SM Team,71,F4,team-u12-doubleUnder-speed-doubleUnderRelay,DU8,508,JR Testisburg,team-u12-doubleUnder-speed-doubleUnderRelay-DU8,J11,Lena Münger,speed
+Test SM Team,71,F4,team-u12-doubleUnder-speed-doubleUnderRelay,DU8,508,JR Testisburg,team-u12-doubleUnder-speed-doubleUnderRelay-DU8,J12,Rahel Weber,speed
+Test SM Team,72,F1,team-u12-doubleUnder-speed-doubleUnderRelay,DU9,509,JR Testisburg,team-u12-doubleUnder-speed-doubleUnderRelay-DU9,J1,Adrian Wenger,speed
+Test SM Team,72,F1,team-u12-doubleUnder-speed-doubleUnderRelay,DU9,509,JR Testisburg,team-u12-doubleUnder-speed-doubleUnderRelay-DU9,J2,Mirjam Schlatter,speed
+Test SM Team,72,F1,team-u12-doubleUnder-speed-doubleUnderRelay,DU9,509,JR Testisburg,team-u12-doubleUnder-speed-doubleUnderRelay-DU9,J3,Carmela Meier,speed
