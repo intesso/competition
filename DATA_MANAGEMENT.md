@@ -42,6 +42,16 @@
 
 2. empty the backup folder (delete all json files, but leave the empty folder): [backend/backup](backend/backup)
 
+3. delete all "runtime data from db": http://localhost:8080/admin/tournament?admin=true 
+   - DELETE ALL CALCULATIONS
+   - DELETE ALL POINTS
+   - DANGER DELETE TOURNAMENT QUEUE HISTORY
+
+4. delete state on tablets: http://localhost:8080/admin/tournament-queue?admin=true
+   - Zeige Reset Screen
+   - -> auf allen Tablets "RESET" drücken
+
+
 **after the tournament**
 
 1. copy the RawData backup data -> follow: backup RawPoints
