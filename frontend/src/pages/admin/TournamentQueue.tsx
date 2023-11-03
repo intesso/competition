@@ -266,7 +266,7 @@ export function TournamentQueueDashboard () {
               flexFlow: 'row wrap',
               justifyContent: 'center'
             }}>
-            {judgeStatus?.map((s, i) => (
+            {judgeStatus && sortBy(judgeStatus, 'judgeId').map((s, i) => (
               <Box
                 key={i}
                 component="span"
