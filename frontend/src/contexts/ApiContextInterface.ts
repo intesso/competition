@@ -98,6 +98,11 @@ export type CategoryPointDetail = CategoryPoint & {
   performanceName: string | undefined
   performerNumber: number | null | undefined
   slotNumber: number | string | null | undefined
+  locationName: string | null | undefined
+}
+
+export interface CategoryNamePointDetail extends CategoryPointDetail {
+  categoryName: string
 }
 
 interface CategoryPoint {

@@ -61,7 +61,7 @@ export function RanksReport ({ items }: RanksReportProps) {
             {Object.entries(items).map(([title, ranks], i) => (
               <React.Fragment key={i}>
                 <tr>
-                  <td colSpan={4}>
+                  <td colSpan={8}>
                     <h1>{title}</h1>
                   </td>
                   <td></td>

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { ReportFormat } from '../contexts/ApiContextInterface'
+import { startCase } from 'lodash'
 
 export interface PointsReportProps {
   items: ReportFormat
@@ -16,16 +17,19 @@ const classes = {
     paddingTop: '10px',
     paddingBottom: '10px'
   } as any,
-
-  tLeft: {
-    textAlign: 'left'
+  tLeftBottom: {
+    textAlign: 'left',
+    verticalAlign: 'bottom'
   } as any,
   tCenter: {
     textAlign: 'center'
   } as any,
-
   tRight: {
     textAlign: 'right'
+  } as any,
+  verticalTitle: {
+    writingMode: 'sideways-lr',
+    textAlign: 'left'
   } as any
 }
 
@@ -72,7 +76,7 @@ export function PointsReport ({ items }: PointsReportProps) {
             {Object.entries(criteriaItems).map(([title, points], i) => (
               <React.Fragment key={i}>
                 <tr>
-                  <td colSpan={4}>
+                  <td colSpan={8}>
                     <h1>{title}</h1>
                   </td>
                   <td></td>
@@ -87,7 +91,7 @@ export function PointsReport ({ items }: PointsReportProps) {
                 {Object.entries(points).map(([criteriaName, point], i) => (
                   <React.Fragment key={i}>
                                    <tr>
-                  <td colSpan={4}>
+                  <td colSpan={8}>
                     <em>{criteriaName}</em>
                   </td>
                   <td></td>
@@ -101,8 +105,8 @@ export function PointsReport ({ items }: PointsReportProps) {
                     <tr>
                     {Object.keys(point).length > 0 &&
                      Object.keys(point[0]).map((val, j) => (
-                       <th key={j} style={classes.tLeft}>
-                         {val}
+                       <th key={j} style={classes.tLeftBottom}>
+                         <span style={classes.verticalTitle}>{startCase(val)}</span>
                        </th>
                      ))}
 

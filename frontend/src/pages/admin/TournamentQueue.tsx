@@ -27,7 +27,7 @@ import { parseError } from '../../lib/common'
 import { useInterval, useLocalStorage } from 'usehooks-ts'
 import ArrowBackIosRounded from '@mui/icons-material/ArrowBackIosRounded'
 import ArrowForwardIosRounded from '@mui/icons-material/ArrowForwardIosRounded'
-import { sortBy } from 'lodash-es'
+import { sortBy } from 'lodash'
 import { TournamentPlanItems } from '../../components/TournamentPlanItems'
 import { Link, useSearchParams } from 'react-router-dom'
 

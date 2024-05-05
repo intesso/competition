@@ -121,6 +121,7 @@ export class CalculationService implements ICalculationContext {
       const enhancedCategoryPoints: CategoryPointDetail[] = []
       for (const categoryPoint of categoryPoints) {
         const performance = await this.getApplicationContext().tournament.getPerformance(categoryPoint.performanceId)
+        const location = await this.getApplicationContext().tournament.getLocation(performance?.locationId || '')
         const club = await this.getApplicationContext().people.getClubById(performance?.clubId || '')
         const performer = await this.getApplicationContext().tournament.getPerformer(categoryPoint.performerId)
         enhancedCategoryPoints.push({
@@ -128,6 +129,7 @@ export class CalculationService implements ICalculationContext {
           clubName: club?.clubName,
           performanceName: performance?.performanceName,
           slotNumber: performance?.slotNumber,
+          locationName: location?.locationName,
           performerName: performer?.performerName,
           performerNumber: performer?.performerNumber
         })
