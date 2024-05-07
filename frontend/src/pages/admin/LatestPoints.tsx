@@ -5,7 +5,7 @@ import { CategoryPointDetails, Tournament } from '../../contexts/ApiContextInter
 import { useSnackbar } from 'notistack'
 import { parseError } from '../../lib/common'
 import { useLocalStorage } from 'usehooks-ts'
-import { beautifyCategoryPointFlat, beautifyCategoryPointSlot } from '../../lib/reportUtils'
+import { beautifyCategoryPointFlat } from '../../lib/reportUtils'
 import { useSearchParams } from 'react-router-dom'
 import { LatestPointsReport } from '../../components/LatestPointsReport'
 
@@ -59,14 +59,14 @@ export function LatestPoints () {
           </Select>
         </FormControl>
       </form>
-
       {json
         ? (
-        <pre>{JSON.stringify(beautifyCategoryPointSlot(categoryPoints), null, 2)}</pre>
+          <pre>{JSON.stringify(beautifyCategoryPointFlat(categoryPoints), null, 2)}</pre>
           )
         : (
-        <LatestPointsReport items={beautifyCategoryPointFlat(categoryPoints)} />
-          )}
+          <LatestPointsReport items={beautifyCategoryPointFlat(categoryPoints)} />
+          )
+      }
     </Container>
   )
 }

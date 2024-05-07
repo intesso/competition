@@ -6,6 +6,8 @@ export interface LatestPointsReportProps {
   items: ReportItemFormat[]
 }
 
+const cols = 20
+
 const classes = {
   mainTable: {
     backgroundColor: 'white',
@@ -29,65 +31,30 @@ const classes = {
   } as any
 }
 
-function emptyRow () {
-  return (
-    <tr className={classes.emptyCell}>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  )
-}
-
 export function LatestPointsReport ({ items }: LatestPointsReportProps) {
   return (
     <>
-      {items && items.length > 0 && (
-        <table width="100%" style={classes.mainTable} border={0}>
-          <tbody>
-            {/* Placeholder for Image */}
-            {emptyRow()}
-            {emptyRow()}
-            {emptyRow()}
+      <table width="100%" style={classes.mainTable} border={0}>
+        <thead>
+          <tr>
+            {[...Array(cols).keys()].map((_, j) => (
+              <th key={j} style={classes.tLeft}>{' '}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
 
-                {/* title */}
-                {items.map((point, i) => (
-                  <React.Fragment key={i}>
-                    <tr>
-                    {Object.keys(point).length > 0 &&
-                     Object.keys(point[0]).map((val, j) => (
-                       <th key={j} style={classes.tLeft}>
-                         {val}
-                       </th>
-                     ))}
+          {items && items.length > 0 && items.map((item, i) => (
 
-                    </tr>
-                    {/* value rows */}
-                    {Object.values(point).map((point, i) => (
-                   <tr key={i}>
-                     {Object.values(point).map((value, i) => (
-                       <td key={i}>{value}</td>
-                     ))}
-                   </tr>
-                    ))}
-                 {emptyRow()}
-                 {emptyRow()}
-                 {emptyRow()}
-                 </React.Fragment>
-                ))}
-          </tbody>
-        </table>
-      )}
+            <tr key={i}>
+              {Object.entries(item).map(([key, value], j) => (
+                <td key={j}><em style={{ color: 'gray' }}>{key}</em><br />{value}</td>
+              ))}
+            </tr>
+
+          ))}
+        </tbody>
+      </table>
     </>
   )
 }

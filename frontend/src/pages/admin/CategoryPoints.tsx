@@ -62,10 +62,10 @@ export function CategoryPoints () {
 
       {json
         ? (
-        <pre>{JSON.stringify(beautifyCategoryPoint(categoryPoints), null, 2)}</pre>
+          <pre>{JSON.stringify(beautifyCategoryPoint(categoryPoints), null, 2)}</pre>
           )
         : (
-        <PointsReport items={beautifyCategoryPoint(categoryPoints)} />
+          <PointsReport items={beautifyCategoryPoint(categoryPoints)} />
           )}
     </Container>
   )

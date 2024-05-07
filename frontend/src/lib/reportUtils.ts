@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash-es'
+import { omit, orderBy } from 'lodash-es'
 import { CategoryPointDetail, CategoryPointDetails } from '../contexts/ApiContextInterface'
 import { beautifyAttribute, beautifyReportItems, categoryNames, categoryOrder, categoryTitles, combinationNames, combinationOrder, criteriaNames, ReportFormat, ReportItemFormat } from './reportDefinitions'
 
@@ -16,14 +16,9 @@ export function getCriteriaTitle (name = '') {
 
 export function beautifyCategoryPointFlat (input: CategoryPointDetails): ReportItemFormat[] {
   const beautifiedPoints = beautifyCategoryPoint(input)
-  return flattenReportFormat(beautifiedPoints)
-}
-
-export function beautifyCategoryPointSlot (input: CategoryPointDetails) {
-  const beautifiedPoints = beautifyCategoryPoint(input)
   const flatPoints = flattenReportFormat(beautifiedPoints)
-  const groupedPoints = groupBy(flatPoints, 'slotNumber')
-  return Object.fromEntries(Object.entries(groupedPoints).sort(keySortDesc))
+  const orderedPoints = orderBy(flatPoints, ['slotNumber', 'performerName', 'discipline'], ['desc', 'asc', 'asc'])
+  return orderedPoints.map((item) => omit(item, ['Kategorie']))
 }
 
 export function flattenReportFormat (reportFormat: ReportFormat) {

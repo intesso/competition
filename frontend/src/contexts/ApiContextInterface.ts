@@ -101,10 +101,6 @@ export type CategoryPointDetail = CategoryPoint & {
   locationName: string | null | undefined
 }
 
-export interface CategoryNamePointDetail extends CategoryPointDetail {
-  categoryName: string
-}
-
 interface CategoryPoint {
   id: string
   categoryId: Category['id']
