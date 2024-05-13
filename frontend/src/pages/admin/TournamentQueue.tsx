@@ -23,7 +23,7 @@ import {
   TournamentQueueStatus
 } from '../../contexts/ApiContextInterface'
 import { useSnackbar } from 'notistack'
-import { parseError } from '../../lib/common'
+import { compareNatural, parseError, toNumber } from '../../lib/common'
 import { useInterval, useLocalStorage } from 'usehooks-ts'
 import ArrowBackIosRounded from '@mui/icons-material/ArrowBackIosRounded'
 import ArrowForwardIosRounded from '@mui/icons-material/ArrowForwardIosRounded'
@@ -266,7 +266,7 @@ export function TournamentQueueDashboard () {
               flexFlow: 'row wrap',
               justifyContent: 'center'
             }}>
-            {judgeStatus && sortBy(judgeStatus, 'judgeId').map((s, i) => (
+            {judgeStatus && judgeStatus.sort((a, b) => compareNatural(a.judgeId, b.judgeId)).map((s, i) => (
               <Box
                 key={i}
                 component="span"
@@ -301,7 +301,7 @@ export function TournamentQueueDashboard () {
         <Box component="div" sx={{ ...classes.queueElements, marginBottom: '10px' }}>
           <h2>Nächste</h2>
           <TournamentPlanItems
-            items={plan.filter((p) => p.slotNumber >= queue.slotNumber + 1 && p.slotNumber <= queue.slotNumber + 5)}
+            items={plan.filter((p) => toNumber(p.slotNumber) >= queue.slotNumber + 1 && toNumber(p.slotNumber) <= queue.slotNumber + 5)}
           />
         </Box>
       </form>
