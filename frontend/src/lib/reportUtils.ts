@@ -1,6 +1,7 @@
 import { omit, orderBy } from 'lodash-es'
 import { CategoryPointDetail, CategoryPointDetails } from '../contexts/ApiContextInterface'
 import { beautifyAttribute, beautifyReportItems, categoryNames, categoryOrder, categoryTitles, combinationNames, combinationOrder, criteriaNames, ReportFormat, ReportItemFormat } from './reportDefinitions'
+import { compareNatural, compareNumbersDescending, orderByCustomFn, SortFunction } from './common'
 
 export function getCategoryTitle (name = '') {
   return beautifyAttribute(name, categoryTitles)
@@ -41,10 +42,15 @@ export function beautifyCategoryPoint (input: CategoryPointDetails): ReportForma
   const entries = Object.entries(input)
     .map(([categoryName, categoryPoints]) => {
       const reportItems = categoryPointToReport(categoryName, categoryPoints)
-      return [getCategoryTitle(categoryName), beautifyReportItems(categoryName, reportItems, categoryOrder, categoryNames, true)] as [string, ReportItemFormat[]]
+      const sortedReportItems = sortCategoryPointsByCategoryPointAndJudgeId(reportItems)
+      return [getCategoryTitle(categoryName), beautifyReportItems(categoryName, sortedReportItems, categoryOrder, categoryNames, true)] as [string, ReportItemFormat[]]
     })
     .sort(keySort)
   return Object.fromEntries(entries)
+}
+
+export function sortCategoryPointsByCategoryPointAndJudgeId (items: ReportItemFormat[]) {
+  return orderByCustomFn(items, ['categoryPoint', 'judgeId'], [compareNumbersDescending as SortFunction, compareNatural])
 }
 
 export function categoryPointToReport (categoryName: string, categoryPoints: CategoryPointDetail[]) : ReportItemFormat[] {
@@ -125,5 +131,6 @@ export function lexicograficSort (a: NullableKey, b: NullableKey, desc?: boolean
   if (typeof a === 'number' && typeof b === 'number') {
     return (a - b) * (desc ? -1 : 1)
   }
+  // FIXME localCompare does not sort Umlaute correctly, it works if it is the first letter, but not correct when the Umlaut is inside the word.
   return ((String(a)).localeCompare(String(b)) * (desc ? -1 : 1))
 }

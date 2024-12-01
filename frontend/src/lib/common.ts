@@ -90,6 +90,24 @@ export const compareNatural = (an: Compareable, bn: Compareable) => {
   return b?.charCodeAt(i) ? -1 : 0
 }
 
+export function compareNumbers (a: number, b: number) {
+  if (a < b) {
+    return -1
+  } else if (a > b) {
+    return 1
+  }
+  return 0
+}
+
+export function compareNumbersDescending (a: number, b: number) {
+  if (a < b) {
+    return 1
+  } else if (a > b) {
+    return -1
+  }
+  return 0
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function sortObjectByKey (object: Record<string, any>) {
   return Object.fromEntries(Object.entries(object).sort((a, b) => compareNatural(a[0], b[0])))
@@ -98,4 +116,50 @@ export function sortObjectByKey (object: Record<string, any>) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function sortObjectByKeyCaseInsensitive (object: Record<string, any>) {
   return Object.fromEntries(Object.entries(object).sort((a, b) => compareNatural((a[0] ?? '').toLowerCase(), (b[0] ?? '').toLowerCase())))
+}
+
+export type SortFunction = (a: Compareable, b: Compareable) => number
+export function sortCombined (sortA: SortFunction, sortB: SortFunction) {
+  if (!sortA || !sortB) {
+    return 0
+  }
+
+  return function sort (a: Compareable, b: Compareable) {
+    const sortResultA = sortA(a, b)
+
+    if (sortResultA === 0) {
+      return sortB(a, b)
+    }
+    return sortResultA
+  }
+}
+
+/**
+ * orderBy function like lodash orderBy, but instead of orders array with ['asc', 'desc'] etc. you provide sort functions.
+ *
+ * @param items {T extends Record<string, any>} Array containing Record items
+ * @param keys {string[]} Record keys Array to sort after
+ * @param sortFunctions {SortFunction[]} sort functions Array
+ * @returns sorted items
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function orderByCustomFn<T extends Record<string, any>> (items: T[], keys: string[], sortFunctions: SortFunction[]) {
+  if (!items) {
+    return []
+  }
+  if (!keys || !keys.length || !sortFunctions || !sortFunctions.length) {
+    return items
+  }
+
+  return items.sort((a, b) => {
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i]
+      const sortFn = sortFunctions[i] ?? function noopSort () { return 0 }
+      const sortResult = sortFn(a[key] as Compareable, b[key] as Compareable)
+      if (sortResult === -1 || sortResult === 1 || i === (keys.length - 1)) {
+        return sortResult
+      }
+    }
+    return 0
+  })
 }
