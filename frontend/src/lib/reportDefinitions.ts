@@ -1411,8 +1411,8 @@ export const combinationMixed: CombinationMixed = {
       'team-u21-teamShow-speed-doubleDutchRelay'
     ],
     'team-overall-teamShow-teamShow-teamShow': [
-      'team-ü}m-open-erso-speed-singleRopeRelay',
-      'team-openEU-erso-speed-singleRopeRelay'
+      'team-u21-teamShow-teamShow-teamShow',
+      'team-ü21-teamShow-teamShow-teamShow'
     ],
     'team-overall-erso-speed-doubleDutchRelay': [
       'team-open-erso-speed-doubleDutchRelay',
